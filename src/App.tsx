@@ -112,11 +112,10 @@ export default function App() {
       {/* Footer */}
       <Footer />
 
-      {/* Mobile Bottom Navigation Bar (Ergonómico para pulgar con Urgencias 24/7 central) */}
+      {/* Mobile Bottom Navigation Bar (5 secciones idénticas al Header) */}
       <MobileBottomNav
         activeSection={activeSection}
         setActiveSection={setActiveSection}
-        onOpenEmergency={handleOpenEmergency}
       />
 
       {/* Desktop Persistent Floating WhatsApp Button */}
