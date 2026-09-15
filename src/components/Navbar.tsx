@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Logo } from './Logo';
-import { ChevronDown, Sparkles, Smile, ShieldCheck, Activity, Droplets, Zap, HeartHandshake, Menu, X, Calendar } from 'lucide-react';
-import { SPECIALTIES_DATA, CLINIC_PHONE_DISPLAY, createWhatsAppLink, EMERGENCY_WA_MESSAGE } from '../data/clinicData';
-import { WhatsAppIcon } from './OfficialSocialLogos';
+import { ChevronDown, Sparkles, Smile, ShieldCheck, Activity, Droplets, Zap, HeartHandshake } from 'lucide-react';
+import { SPECIALTIES_DATA } from '../data/clinicData';
 
 interface NavbarProps {
   activeSection: string;
@@ -17,7 +16,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,7 +28,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   const handleNavClick = (sectionId: string) => {
     setActiveSection(sectionId);
     setIsDropdownOpen(false);
-    setIsMobileMenuOpen(false);
 
     const element = document.getElementById(sectionId);
     if (element) {
@@ -193,105 +190,17 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
         </div>
 
-        {/* Mobile Header Controls: Agendar + Menu Toggle (<lg) */}
-        <div className="flex lg:hidden items-center space-x-2">
+        {/* Mobile Header CTA (<lg) */}
+        <div className="flex lg:hidden items-center">
           <button
             onClick={onOpenBooking}
-            className="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-[#005A9C] to-[#00BFFF] text-white font-bold text-xs shadow-xs active:scale-95 cursor-pointer"
+            className="px-4 py-2 rounded-full bg-gradient-to-r from-[#005A9C] to-[#00BFFF] text-white font-bold text-xs uppercase tracking-wider shadow-md shadow-cyan-500/20 active:scale-95 cursor-pointer"
           >
             Agendar
-          </button>
-
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 rounded-full bg-slate-100 hover:bg-cyan-50 text-slate-700 hover:text-[#005A9C] transition-colors cursor-pointer"
-            aria-label="Abrir menú de navegación"
-          >
-            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
 
       </div>
-
-      {/* Mobile Drawer / Slide-down Menu (<lg) */}
-      {isMobileMenuOpen && (
-        <div className="lg:hidden bg-white/98 backdrop-blur-2xl border-b border-cyan-100 shadow-2xl px-5 py-6 space-y-4 animate-in slide-in-from-top-4 duration-300">
-          <div className="grid gap-2">
-            <button
-              onClick={() => handleNavClick('inicio')}
-              className={`w-full text-left px-5 py-3 rounded-full text-sm font-bold transition-all cursor-pointer ${
-                activeSection === 'inicio' ? 'bg-[#005A9C] text-white shadow-md' : 'text-slate-700 hover:bg-cyan-50'
-              }`}
-            >
-              1. Inicio
-            </button>
-
-            <button
-              onClick={() => handleNavClick('especialidades')}
-              className={`w-full text-left px-5 py-3 rounded-full text-sm font-bold transition-all cursor-pointer ${
-                activeSection === 'especialidades' ? 'bg-[#005A9C] text-white shadow-md' : 'text-slate-700 hover:bg-cyan-50'
-              }`}
-            >
-              2. Especialidades & Tratamientos 3D
-            </button>
-
-            <button
-              onClick={() => handleNavClick('nosotros')}
-              className={`w-full text-left px-5 py-3 rounded-full text-sm font-bold transition-all cursor-pointer ${
-                activeSection === 'nosotros' ? 'bg-[#005A9C] text-white shadow-md' : 'text-slate-700 hover:bg-cyan-50'
-              }`}
-            >
-              3. Nosotros (Dr. Gabriel Miranda)
-            </button>
-
-            <button
-              onClick={() => handleNavClick('casos-reales')}
-              className={`w-full text-left px-5 py-3 rounded-full text-sm font-bold transition-all cursor-pointer ${
-                activeSection === 'casos-reales' ? 'bg-[#005A9C] text-white shadow-md' : 'text-slate-700 hover:bg-cyan-50'
-              }`}
-            >
-              4. Casos Reales (Antes & Después)
-            </button>
-
-            <button
-              onClick={() => handleNavClick('contacto')}
-              className={`w-full text-left px-5 py-3 rounded-full text-sm font-bold transition-all cursor-pointer ${
-                activeSection === 'contacto' ? 'bg-[#005A9C] text-white shadow-md' : 'text-slate-700 hover:bg-cyan-50'
-              }`}
-            >
-              5. Redes Oficiales & Agendamiento
-            </button>
-          </div>
-
-          {/* Quick Direct Actions in Mobile Header Drawer */}
-          <div className="pt-4 border-t border-slate-100 flex flex-col gap-2.5">
-            <button
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                onOpenBooking();
-              }}
-              className="w-full py-3 rounded-full bg-gradient-to-r from-[#005A9C] to-[#00BFFF] text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-md cursor-pointer"
-            >
-              <Calendar className="w-4 h-4 text-cyan-200" />
-              <span>Agendar Cita en Línea</span>
-            </button>
-
-            <a
-              href={createWhatsAppLink(EMERGENCY_WA_MESSAGE)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full py-3 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 border border-emerald-300 cursor-pointer"
-            >
-              <WhatsAppIcon className="w-4 h-4 text-[#25D366]" />
-              <span>Urgencia Dental WhatsApp 24/7</span>
-            </a>
-
-            <p className="text-center text-[11px] text-slate-500 pt-1">
-              Atención directa: <span className="font-bold text-[#005A9C]">{CLINIC_PHONE_DISPLAY}</span>
-            </p>
-          </div>
-        </div>
-      )}
     </header>
   );
 };
