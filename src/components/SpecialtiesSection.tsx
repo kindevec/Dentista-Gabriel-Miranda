@@ -158,13 +158,13 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-6 sm:mb-12 space-y-2.5"
+          className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 space-y-2.5"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0A2540] tracking-tight">
-            Odontología integral con tecnología de vanguardia
+            Especialidades <span className="text-[#005A9C]">Digitales</span>
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 text-justify">
-            Cada procedimiento en el consultorio del {DOCTOR_NAME} es personalizado, empleando planificación digital computarizada, materiales de grado biomédico y protocolos de esterilización hospitalaria.
+          <p className="text-sm sm:text-base text-slate-600 max-w-xl mx-auto">
+            Selecciona una especialidad para ver su tecnología y plan clínico.
           </p>
         </motion.div>
 
@@ -175,16 +175,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
           {/* ========================================================================= */}
           <div className="hidden lg:grid grid-cols-12 gap-8 xl:gap-12 items-center min-h-[620px] py-4">
             {/* Left Column: Interactive Wheel of Specialties sobre el lienzo */}
-            <div className="col-span-5 relative z-20 flex flex-col justify-center space-y-4">
-              {/* Panel Top Title */}
-              <div>
-                <h3 className="text-2xl lg:text-3xl font-black text-[#0A2540] tracking-tight leading-tight">
-                  Especialidades <span className="text-[#005A9C]">Digitales</span>
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-500 mt-1">
-                  Selecciona una especialidad para ver su tecnología y plan clínico.
-                </p>
-              </div>
+            <div className="col-span-5 relative z-20 flex flex-col justify-center my-auto">
 
               {/* Desktop Vertical Spring Wheel sobre fondo claro */}
               <div className="relative w-full h-[420px] flex items-center justify-start overflow-hidden my-auto">
