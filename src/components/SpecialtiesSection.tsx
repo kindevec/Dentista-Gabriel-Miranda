@@ -11,7 +11,9 @@ import {
   Check,
   ArrowRight,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  ChevronUp,
+  ChevronDown,
 } from 'lucide-react';
 import { WhatsAppIcon } from './OfficialSocialLogos';
 import { SPECIALTIES_DATA, createWhatsAppLink, DOCTOR_NAME } from '../data/clinicData';
@@ -24,6 +26,7 @@ interface SpecialtiesSectionProps {
 }
 
 const ITEM_HEIGHT = 68;
+const VIRTUAL_OFFSETS = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5];
 
 const SPECIALTY_SHORT_TITLES: Record<string, string> = {
   ortodoncia: 'Ortodoncia 3D',
@@ -41,6 +44,8 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
   const [step, setStep] = useState(0);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
+  const touchStartYTrack = useRef<number | null>(null);
+  const wheelCooldownRef = useRef<boolean>(false);
   const mobilePillsRef = useRef<HTMLDivElement>(null);
 
   const totalItems = SPECIALTIES_DATA.length;
@@ -68,9 +73,47 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
     setStep((prev) => prev - 1);
   }, []);
 
+  // Shortest signed difference to rotate directly to target item
   const handleChipClick = (index: number) => {
-    const diff = (index - currentIndex + totalItems) % totalItems;
+    let diff = index - currentIndex;
+    if (diff > totalItems / 2) diff -= totalItems;
+    if (diff < -totalItems / 2) diff += totalItems;
     if (diff !== 0) setStep((s) => s + diff);
+  };
+
+  // Mouse wheel listener with cooldown to step through infinite loop smoothly
+  const handleWheel = (e: React.WheelEvent) => {
+    e.stopPropagation();
+    if (wheelCooldownRef.current) return;
+    if (Math.abs(e.deltaY) < 16) return;
+
+    wheelCooldownRef.current = true;
+    setTimeout(() => {
+      wheelCooldownRef.current = false;
+    }, 180);
+
+    if (e.deltaY > 0) {
+      setStep((s) => s + 1);
+    } else {
+      setStep((s) => s - 1);
+    }
+  };
+
+  // Touch Swipe Handlers for vertical wheel track
+  const handleTouchStartTrack = (e: React.TouchEvent) => {
+    touchStartYTrack.current = e.targetTouches[0].clientY;
+  };
+
+  const handleTouchEndTrack = (e: React.TouchEvent) => {
+    if (touchStartYTrack.current === null) return;
+    const endY = e.changedTouches[0].clientY;
+    const diff = touchStartYTrack.current - endY;
+    if (diff > 35) {
+      setStep((s) => s + 1);
+    } else if (diff < -35) {
+      setStep((s) => s - 1);
+    }
+    touchStartYTrack.current = null;
   };
 
   const getCardStatus = (index: number) => {
@@ -172,52 +215,98 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
             {/* Left Column: Interactive Wheel of Specialties sobre el lienzo */}
             <div className="col-span-5 relative z-20 flex flex-col justify-center my-auto">
 
-              {/* Desktop Vertical Frontal Track con tonalidad azulita */}
-              <div className="relative w-full h-[440px] flex items-center justify-start overflow-hidden my-auto select-none">
+              {/* Desktop Infinite Loop Wheel con marcada presencia azulada */}
+              <div
+                onWheel={handleWheel}
+                onTouchStart={handleTouchStartTrack}
+                onTouchEnd={handleTouchEndTrack}
+                className="relative w-full h-[460px] flex items-center justify-start overflow-hidden rounded-[2.5rem] bg-gradient-to-b from-sky-100/75 via-blue-50/50 to-sky-100/75 border border-sky-200/90 shadow-xl shadow-[#005A9C]/8 backdrop-blur-md p-3 select-none my-auto"
+              >
                 {/* Top fade gradient */}
-                <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#F8FAFC] via-[#F8FAFC]/80 to-transparent z-30 pointer-events-none" />
+                <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-sky-100 via-sky-100/80 to-transparent z-30 pointer-events-none rounded-t-[2.5rem]" />
                 {/* Bottom fade gradient */}
-                <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#F8FAFC] via-[#F8FAFC]/80 to-transparent z-30 pointer-events-none" />
+                <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-sky-100 via-sky-100/80 to-transparent z-30 pointer-events-none rounded-b-[2.5rem]" />
 
-                {/* Unified Frontal Track (sin capas de fondo ni elementos que se crucen por detrás) */}
+                {/* Quick Infinite Navigation Chevrons */}
+                <div className="absolute right-3.5 top-3.5 z-40 flex flex-col gap-1.5">
+                  <button
+                    type="button"
+                    onClick={prevStep}
+                    aria-label="Especialidad anterior"
+                    className="w-8 h-8 rounded-full bg-white/95 hover:bg-[#005A9C] text-[#005A9C] hover:text-white border border-sky-200 shadow-sm flex items-center justify-center transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95"
+                  >
+                    <ChevronUp className="w-4 h-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={nextStep}
+                    aria-label="Siguiente especialidad"
+                    className="w-8 h-8 rounded-full bg-white/95 hover:bg-[#005A9C] text-[#005A9C] hover:text-white border border-sky-200 shadow-sm flex items-center justify-center transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95"
+                  >
+                    <ChevronDown className="w-4 h-4" />
+                  </button>
+                </div>
+
+                {/* Loop Scroll Hint */}
+                <div className="absolute bottom-3 left-6 z-40 flex items-center gap-1.5 text-[10.5px] font-semibold text-[#005A9C]/75 tracking-tight pointer-events-none">
+                  <Activity className="w-3 h-3 text-[#0084DE] animate-pulse" />
+                  <span>Rueda infinita 3D · Gira o haz clic para explorar</span>
+                </div>
+
+                {/* Infinite Continuous Virtual Track */}
                 <motion.div
-                  animate={{ y: 186 - currentIndex * ITEM_HEIGHT }}
+                  animate={{ y: 196 - step * ITEM_HEIGHT }}
                   transition={{
                     type: 'spring',
                     stiffness: 220,
                     damping: 26,
                     mass: 0.8,
                   }}
-                  className="flex flex-col w-full pr-3 relative z-20"
+                  className="relative w-full h-full z-20"
                 >
-                  {SPECIALTIES_DATA.map((spec, index) => {
-                    const isActive = index === currentIndex;
-                    const distance = Math.abs(index - currentIndex);
+                  {VIRTUAL_OFFSETS.map((offset) => {
+                    const absIndex = step + offset;
+                    const specIndex = ((absIndex % totalItems) + totalItems) % totalItems;
+                    const spec = SPECIALTIES_DATA[specIndex];
+                    const isActive = offset === 0;
+                    const distance = Math.abs(offset);
 
                     return (
                       <div
-                        key={spec.id}
-                        style={{ height: ITEM_HEIGHT }}
-                        className="flex items-center justify-start w-full py-1"
+                        key={absIndex}
+                        style={{
+                          position: 'absolute',
+                          top: absIndex * ITEM_HEIGHT,
+                          left: 0,
+                          right: 0,
+                          height: ITEM_HEIGHT,
+                        }}
+                        className="flex items-center justify-start w-full py-1 pr-14 pl-1"
                       >
                         <button
-                          onClick={() => handleChipClick(index)}
+                          type="button"
+                          onClick={() => {
+                            if (offset !== 0) {
+                              setStep((s) => s + offset);
+                            }
+                          }}
                           className={cn(
-                            'relative flex items-center gap-3.5 w-full h-full px-5 py-3 rounded-2xl transition-all duration-300 text-left group border cursor-pointer select-none',
+                            'relative flex items-center gap-3.5 w-full h-full px-4 sm:px-5 py-3 rounded-2xl transition-all duration-300 text-left group border cursor-pointer select-none',
                             isActive
-                              ? 'bg-gradient-to-r from-[#005A9C] via-[#0070BA] to-[#0A2540] text-white shadow-xl shadow-[#005A9C]/25 border-cyan-400/80 ring-2 ring-[#00BFFF]/40 scale-[1.02] z-10'
-                              : 'bg-gradient-to-r from-sky-50/90 via-cyan-50/60 to-white/90 hover:from-sky-100 hover:via-cyan-100/70 hover:to-sky-50 text-[#005A9C] border-sky-200/80 hover:border-cyan-400/70 shadow-2xs'
+                              ? 'bg-gradient-to-r from-[#005A9C] via-[#0070BA] to-[#0A2540] text-white shadow-xl shadow-[#005A9C]/35 border-cyan-300 ring-2 ring-[#00BFFF]/50 scale-[1.02] z-20'
+                              : 'bg-gradient-to-r from-sky-100/95 via-blue-100/80 to-cyan-50/90 hover:from-sky-200 hover:via-blue-100 hover:to-cyan-100 text-[#005A9C] border-sky-300/90 hover:border-[#0084DE] shadow-xs hover:shadow-md hover:shadow-[#005A9C]/15'
                           )}
                           style={{
-                            opacity: isActive ? 1 : Math.max(0.4, 1 - distance * 0.22),
+                            opacity: isActive ? 1 : Math.max(0.35, 1 - distance * 0.18),
+                            transform: isActive ? 'scale(1.02)' : `scale(${Math.max(0.92, 1 - distance * 0.025)})`,
                           }}
                         >
                           <div
                             className={cn(
                               'w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 shrink-0 shadow-xs',
                               isActive
-                                ? 'bg-white/20 text-white border border-white/30'
-                                : 'bg-white text-[#005A9C] border border-cyan-200/60 group-hover:bg-[#005A9C] group-hover:text-white'
+                                ? 'bg-white/20 text-white border border-white/35 backdrop-blur-sm'
+                                : 'bg-white text-[#005A9C] border border-sky-300 group-hover:bg-[#005A9C] group-hover:text-white group-hover:border-[#005A9C]'
                             )}
                           >
                             {getSpecialtyIcon(spec.iconName, isActive ? 'w-5 h-5 text-white' : 'w-5 h-5 text-[#005A9C] group-hover:text-white transition-colors')}
@@ -226,24 +315,31 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                           <div className="flex flex-col min-w-0">
                             <span
                               className={cn(
-                                'font-bold text-sm tracking-tight truncate',
-                                isActive ? 'text-white' : 'text-[#0A2540] group-hover:text-[#005A9C]'
+                                'font-extrabold text-sm tracking-tight truncate transition-colors',
+                                isActive ? 'text-white' : 'text-[#004B87] group-hover:text-[#002D54]'
                               )}
                             >
                               {spec.title}
                             </span>
                             <span
                               className={cn(
-                                'text-[11px] truncate font-medium',
-                                isActive ? 'text-cyan-200' : 'text-cyan-700/80'
+                                'text-[11px] truncate font-semibold transition-colors',
+                                isActive ? 'text-cyan-200' : 'text-[#0070BA]'
                               )}
                             >
                               {spec.estimatedTime || 'Evaluación 3D'}
                             </span>
                           </div>
 
-                          {isActive && (
-                            <span className="ml-auto w-2.5 h-2.5 rounded-full bg-[#00BFFF] shadow-[0_0_10px_#00BFFF] shrink-0" />
+                          {isActive ? (
+                            <span className="ml-auto flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-cyan-400/20 border border-cyan-300/40 shrink-0">
+                              <span className="w-2 h-2 rounded-full bg-[#00BFFF] shadow-[0_0_8px_#00BFFF] animate-pulse" />
+                              <span className="text-[10px] font-bold text-cyan-100 uppercase tracking-wider">Activo</span>
+                            </span>
+                          ) : (
+                            <span className="ml-auto opacity-0 group-hover:opacity-100 text-[#0084DE] transition-opacity shrink-0">
+                              <ArrowRight className="w-3.5 h-3.5" />
+                            </span>
                           )}
                         </button>
                       </div>
@@ -432,7 +528,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                       'flex items-center gap-2 px-3.5 py-2 rounded-full text-xs font-bold shrink-0 transition-all duration-300 border cursor-pointer select-none active:scale-95',
                       isActive
                         ? 'bg-gradient-to-r from-[#005A9C] via-[#0066B3] to-[#0A2540] text-white border-cyan-400/60 shadow-md shadow-[#005A9C]/25 ring-2 ring-cyan-400/25'
-                        : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300 shadow-2xs'
+                        : 'bg-sky-100/80 text-[#005A9C] border-sky-200 hover:bg-sky-200/90 shadow-2xs'
                     )}
                   >
                     <span className={cn(
