@@ -15,6 +15,7 @@ export function createWhatsAppLink(message: string): string {
 }
 
 export const GENERAL_WA_MESSAGE = `Hola ${DOCTOR_NAME}, deseo agendar una cita de evaluación y diagnóstico dental en su consultorio.`;
+export const BOOKING_WA_MESSAGE = `Hola ${DOCTOR_NAME}, deseo agendar una cita dental en su consultorio. ¿Me podría indicar qué días y horarios tiene disponibilidad? Muchas gracias.`;
 export const EMERGENCY_WA_MESSAGE = `¡URGENCIA DENTAL! Hola ${DOCTOR_NAME}, presento dolor agudo o una emergencia dental y requiero atención prioritaria inmediata.`;
 
 export const CLINIC_STATS: ClinicStat[] = [

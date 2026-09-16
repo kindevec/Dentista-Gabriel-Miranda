@@ -10,14 +10,12 @@ import { FaqSection } from './components/FaqSection';
 import { SocialAndContactSection } from './components/SocialAndContactSection';
 import { Footer } from './components/Footer';
 import { MobileBottomNav } from './components/MobileBottomNav';
-import { AppointmentModal } from './components/AppointmentModal';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { DentalMaskDefinitions } from './components/DentalMaskDefinitions';
 import { createWhatsAppLink, EMERGENCY_WA_MESSAGE } from './data/clinicData';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState<string>('inicio');
-  const [isBookingOpen, setIsBookingOpen] = useState<boolean>(false);
   const [preselectedSpecialty, setPreselectedSpecialty] = useState<string>('ortodoncia');
 
   // Automated ScrollSpy to keep both Header and Mobile Bottom Nav synchronized with real-time scrolling
@@ -55,7 +53,6 @@ export default function App() {
 
   const handleOpenBookingWithSpecialty = (specId: string) => {
     setPreselectedSpecialty(specId);
-    setIsBookingOpen(true);
   };
 
   const handleOpenEmergency = () => {
@@ -71,14 +68,12 @@ export default function App() {
       <Navbar
         activeSection={activeSection}
         setActiveSection={setActiveSection}
-        onOpenBooking={() => setIsBookingOpen(true)}
       />
 
       {/* Main Content Sections with Intercalated Backgrounds & Animations */}
       <main>
         {/* 1. Hero Section (Fondo fotográfico clínico HD + Cintas orgánicas 3D + Doctor) */}
         <HeroSection
-          onOpenBooking={() => setIsBookingOpen(true)}
           onOpenEmergency={handleOpenEmergency}
         />
 
@@ -121,13 +116,6 @@ export default function App() {
 
       {/* Desktop Persistent Floating WhatsApp Button */}
       <FloatingWhatsApp />
-
-      {/* Booking Modal */}
-      <AppointmentModal
-        isOpen={isBookingOpen}
-        onClose={() => setIsBookingOpen(false)}
-        preselectedSpecialtyId={preselectedSpecialty}
-      />
     </div>
   );
 }

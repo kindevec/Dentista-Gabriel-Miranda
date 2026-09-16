@@ -10,18 +10,19 @@ import {
 } from 'lucide-react';
 import {
   createWhatsAppLink,
+  BOOKING_WA_MESSAGE,
   EMERGENCY_WA_MESSAGE
 } from '../data/clinicData';
 import { OrganicDentalRibbon } from './OrganicDentalRibbon';
 import { CurvedSectionDivider } from './CurvedSectionDivider';
 
 interface HeroSectionProps {
-  onOpenBooking: () => void;
+  onOpenBooking?: () => void;
   onOpenEmergency: () => void;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
-  onOpenBooking,
+  onOpenBooking: _onOpenBooking,
   onOpenEmergency,
 }) => {
   // 3D Parallax Tilt Physics using Motion Values
@@ -147,16 +148,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2"
             >
               {/* Primary CTA */}
-              <motion.button
+              <motion.a
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={onOpenBooking}
+                href={createWhatsAppLink(BOOKING_WA_MESSAGE)}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-[#005A9C] via-[#0084DE] to-[#00BFFF] hover:from-[#00477b] hover:to-[#009cd1] text-white font-black text-xs uppercase tracking-wider shadow-xl shadow-[#005A9C]/25 flex items-center justify-center gap-2.5 group cursor-pointer transition-all duration-300"
               >
                 <Calendar className="w-4 h-4 text-cyan-200 group-hover:scale-110 transition-transform" />
                 <span>Agendar Cita Dental</span>
                 <ArrowRight className="w-3.5 h-3.5 text-cyan-200 group-hover:translate-x-1 transition-transform" />
-              </motion.button>
+              </motion.a>
 
               {/* Secondary CTA: Urgencias 24/7 */}
               <motion.a

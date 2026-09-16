@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Logo } from './Logo';
 import { ChevronDown, Layers, Smile, ShieldCheck, Activity, Droplets, Zap, HeartHandshake } from 'lucide-react';
-import { SPECIALTIES_DATA } from '../data/clinicData';
+import { SPECIALTIES_DATA, createWhatsAppLink, BOOKING_WA_MESSAGE } from '../data/clinicData';
 
 interface NavbarProps {
   activeSection: string;
   setActiveSection: (section: string) => void;
-  onOpenBooking: () => void;
+  onOpenBooking?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   activeSection,
   setActiveSection,
-  onOpenBooking,
+  onOpenBooking: _onOpenBooking,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -198,22 +198,26 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Action Buttons Right (Desktop) */}
         <div className="hidden sm:flex items-center space-x-3">
-          <button
-            onClick={onOpenBooking}
-            className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#005A9C] via-[#0084DE] to-[#00BFFF] hover:from-[#00477b] hover:to-[#009cd1] text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-md shadow-cyan-500/20 hover:scale-[1.02] active:scale-98 cursor-pointer"
+          <a
+            href={createWhatsAppLink(BOOKING_WA_MESSAGE)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#005A9C] via-[#0084DE] to-[#00BFFF] hover:from-[#00477b] hover:to-[#009cd1] text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-md shadow-cyan-500/20 hover:scale-[1.02] active:scale-98 cursor-pointer inline-flex items-center justify-center"
           >
             Agendar Cita
-          </button>
+          </a>
         </div>
 
         {/* Mobile Header CTA (<lg) */}
         <div className="flex lg:hidden items-center">
-          <button
-            onClick={onOpenBooking}
-            className="px-4 py-2 rounded-full bg-gradient-to-r from-[#005A9C] to-[#00BFFF] text-white font-bold text-xs uppercase tracking-wider shadow-md shadow-cyan-500/20 active:scale-95 cursor-pointer"
+          <a
+            href={createWhatsAppLink(BOOKING_WA_MESSAGE)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 py-2 rounded-full bg-gradient-to-r from-[#005A9C] to-[#00BFFF] text-white font-bold text-xs uppercase tracking-wider shadow-md shadow-cyan-500/20 active:scale-95 cursor-pointer inline-flex items-center justify-center"
           >
             Agendar
-          </button>
+          </a>
         </div>
 
       </div>
