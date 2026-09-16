@@ -12,8 +12,6 @@ import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
-  ChevronUp,
-  ChevronDown,
 } from 'lucide-react';
 import { WhatsAppIcon } from './OfficialSocialLogos';
 import { SPECIALTIES_DATA, createWhatsAppLink, DOCTOR_NAME } from '../data/clinicData';
@@ -211,46 +209,20 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
           {/* DESKTOP EXPERIENCE (lg:grid) — SOBRE EL LIENZO DIRECTAMENTE (SIN BOX-IN-BOX) */}
           {/* ========================================================================= */}
           <div className="hidden lg:grid grid-cols-12 gap-8 xl:gap-12 items-center min-h-[620px] py-4">
-            {/* Left Column: Interactive Wheel of Specialties sobre el lienzo */}
+            {/* Left Column: Interactive Wheel of Specialties sobre el lienzo (Sin contenedor box-in-box) */}
             <div className="col-span-5 relative z-20 flex flex-col justify-center my-auto">
 
-              {/* Desktop Infinite Loop Wheel con marcada presencia azulada */}
+              {/* Desktop Infinite Loop Wheel sobre el lienzo */}
               <div
                 onWheel={handleWheel}
                 onTouchStart={handleTouchStartTrack}
                 onTouchEnd={handleTouchEndTrack}
-                className="relative w-full h-[460px] flex items-center justify-start overflow-hidden rounded-[2.5rem] bg-gradient-to-b from-sky-100/75 via-blue-50/50 to-sky-100/75 border border-sky-200/90 shadow-xl shadow-[#005A9C]/8 backdrop-blur-md p-3 select-none my-auto"
+                className="relative w-full h-[460px] flex items-center justify-start overflow-hidden select-none my-auto"
               >
-                {/* Top fade gradient */}
-                <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-sky-100 via-sky-100/80 to-transparent z-30 pointer-events-none rounded-t-[2.5rem]" />
-                {/* Bottom fade gradient */}
-                <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-sky-100 via-sky-100/80 to-transparent z-30 pointer-events-none rounded-b-[2.5rem]" />
-
-                {/* Quick Infinite Navigation Chevrons */}
-                <div className="absolute right-3.5 top-3.5 z-40 flex flex-col gap-1.5">
-                  <button
-                    type="button"
-                    onClick={prevStep}
-                    aria-label="Especialidad anterior"
-                    className="w-8 h-8 rounded-full bg-white/95 hover:bg-[#005A9C] text-[#005A9C] hover:text-white border border-sky-200 shadow-sm flex items-center justify-center transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95"
-                  >
-                    <ChevronUp className="w-4 h-4" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={nextStep}
-                    aria-label="Siguiente especialidad"
-                    className="w-8 h-8 rounded-full bg-white/95 hover:bg-[#005A9C] text-[#005A9C] hover:text-white border border-sky-200 shadow-sm flex items-center justify-center transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95"
-                  >
-                    <ChevronDown className="w-4 h-4" />
-                  </button>
-                </div>
-
-                {/* Loop Scroll Hint */}
-                <div className="absolute bottom-3 left-6 z-40 flex items-center gap-1.5 text-[10.5px] font-semibold text-[#005A9C]/75 tracking-tight pointer-events-none">
-                  <Activity className="w-3 h-3 text-[#0084DE] animate-pulse" />
-                  <span>Rueda infinita 3D · Gira o haz clic para explorar</span>
-                </div>
+                {/* Top fade gradient seamlessly blending into section canvas */}
+                <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[#F8FAFC] via-[#F8FAFC]/80 to-transparent z-30 pointer-events-none" />
+                {/* Bottom fade gradient seamlessly blending into section canvas */}
+                <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#F8FAFC] via-[#F8FAFC]/80 to-transparent z-30 pointer-events-none" />
 
                 {/* Infinite Continuous Virtual Track */}
                 <motion.div
@@ -280,7 +252,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                           right: 0,
                           height: ITEM_HEIGHT,
                         }}
-                        className="flex items-center justify-start w-full py-1 pr-14 pl-1"
+                        className="flex items-center justify-start w-full py-1 pr-3"
                       >
                         <button
                           type="button"
