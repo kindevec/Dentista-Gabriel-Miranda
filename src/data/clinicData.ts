@@ -1,4 +1,4 @@
-import { Specialty, DoctorProfile, BeforeAfterCase, SocialNetwork, FaqItem, ClinicStat } from '../types';
+import { Specialty, DoctorProfile, BeforeAfterCase, SocialNetwork, FaqItem } from '../types';
 
 export const CLINIC_NAME = "Odontología Gabriel Miranda";
 export const DOCTOR_NAME = "Dr. Gabriel Miranda";
@@ -17,33 +17,6 @@ export function createWhatsAppLink(message: string): string {
 export const GENERAL_WA_MESSAGE = `Hola ${DOCTOR_NAME}, deseo agendar una cita de evaluación y diagnóstico dental en su consultorio.`;
 export const BOOKING_WA_MESSAGE = `Hola ${DOCTOR_NAME}, deseo agendar una cita dental en su consultorio. ¿Me podría indicar qué días y horarios tiene disponibilidad? Muchas gracias.`;
 export const EMERGENCY_WA_MESSAGE = `¡URGENCIA DENTAL! Hola ${DOCTOR_NAME}, presento dolor agudo o una emergencia dental y requiero atención prioritaria inmediata.`;
-
-export const CLINIC_STATS: ClinicStat[] = [
-  {
-    value: "100%",
-    label: "Diagnóstico Digital 3D",
-    sublabel: "Planificación milimétrica computarizada",
-    iconName: "Cpu",
-  },
-  {
-    value: "24/7",
-    label: "Atención Prioritaria",
-    sublabel: "Respuesta inmediata ante emergencias",
-    iconName: "ShieldCheck",
-  },
-  {
-    value: "99.4%",
-    label: "Satisfacción Clínica",
-    sublabel: "Recomendaciones y reseñas 5 estrellas",
-    iconName: "Star",
-  },
-  {
-    value: "100%",
-    label: "Tratamientos Indoloros",
-    sublabel: "Anestesia guiada por computadora",
-    iconName: "ShieldCheck",
-  },
-];
 
 export const SPECIALTIES_DATA: Specialty[] = [
   {

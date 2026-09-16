@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
-import { TrustCounters } from './components/TrustCounters';
 import { SpecialtiesSection } from './components/SpecialtiesSection';
 import { BeforeAfterSection } from './components/BeforeAfterSection';
 import { EmergencyBannerSection } from './components/EmergencyBannerSection';
@@ -27,7 +26,6 @@ export default function App() {
       { id: 'urgencias', navKey: 'casos-reales' },
       { id: 'nosotros', navKey: 'nosotros' },
       { id: 'preguntas', navKey: 'nosotros' },
-      { id: 'confianza', navKey: 'contacto' },
       { id: 'contacto', navKey: 'contacto' },
     ];
 
@@ -96,10 +94,7 @@ export default function App() {
         {/* 6. Preguntas Frecuentes Interactivas */}
         <FaqSection />
 
-        {/* 7. Respaldo Clínico, Métricas y Garantías de Confianza (TrustCounters al final) */}
-        <TrustCounters />
-
-        {/* 8. Canales Oficiales, Formulario de Agendamiento y Ubicación en Quito */}
+        {/* 7. Canales Oficiales, Formulario de Agendamiento y Ubicación en Quito */}
         <SocialAndContactSection
           preselectedSpecialty={preselectedSpecialty}
         />
