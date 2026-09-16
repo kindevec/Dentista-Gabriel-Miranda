@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Zap, ShieldCheck, Clock, ArrowRight, PhoneCall } from 'lucide-react';
-import { DOCTOR_NAME, CLINIC_PHONE_DISPLAY, createWhatsAppLink, EMERGENCY_WA_MESSAGE } from '../data/clinicData';
+import { Zap, ShieldCheck, Clock } from 'lucide-react';
+import { DOCTOR_NAME, createWhatsAppLink, EMERGENCY_WA_MESSAGE } from '../data/clinicData';
 import { WhatsAppIcon } from './OfficialSocialLogos';
 import { OrganicDentalRibbon } from './OrganicDentalRibbon';
 import { CurvedSectionDivider } from './CurvedSectionDivider';
@@ -110,8 +110,8 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
               </motion.div>
             </motion.div>
 
-            {/* Direct Action Emergency Buttons */}
-            <motion.div variants={itemVariants} className="pt-2 flex flex-col sm:flex-row gap-3 sm:gap-4">
+            {/* Direct Action Emergency Button */}
+            <motion.div variants={itemVariants} className="pt-2 flex justify-center lg:justify-start">
               <motion.a
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
@@ -119,21 +119,10 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={onOpenEmergency}
-                className="w-full sm:w-auto px-5 sm:px-8 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-red-500 via-rose-600 to-red-600 hover:from-red-600 hover:to-rose-700 text-white font-black text-[11px] sm:text-xs uppercase tracking-wider transition-all duration-300 shadow-xl shadow-red-600/30 flex items-center justify-center gap-2.5 sm:gap-3 cursor-pointer animate-halo-emergency"
+                className="w-full sm:w-auto px-6 py-2.5 sm:py-3 rounded-full bg-gradient-to-r from-red-500 via-rose-600 to-red-600 hover:from-red-600 hover:to-rose-700 text-white font-extrabold text-xs uppercase tracking-wider transition-all duration-300 shadow-lg shadow-red-600/30 flex items-center justify-center gap-2.5 cursor-pointer animate-halo-emergency"
               >
-                <WhatsAppIcon className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0" />
-                <span className="text-center">Solicitar Urgencia Dental por WhatsApp</span>
-                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-              </motion.a>
-
-              <motion.a
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                href={`tel:${CLINIC_PHONE_DISPLAY.replace(/\s+/g, '')}`}
-                className="w-full sm:w-auto px-5 sm:px-7 py-3 sm:py-4 rounded-full bg-white/15 hover:bg-white/25 backdrop-blur-md text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <PhoneCall className="w-4 h-4 text-cyan-300 shrink-0" />
-                <span>Llamar: {CLINIC_PHONE_DISPLAY}</span>
+                <WhatsAppIcon className="w-5 h-5 sm:w-6 sm:h-6 text-white shrink-0" />
+                <span>Solicitar urgencia dental</span>
               </motion.a>
             </motion.div>
 
