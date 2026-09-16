@@ -20,8 +20,9 @@ export default function App() {
   useEffect(() => {
     const sectionMap = [
       { id: 'inicio', navKey: 'inicio' },
+      { id: 'servicios', navKey: 'servicios' },
       { id: 'especialidades', navKey: 'especialidades' },
-      { id: 'urgencias', navKey: 'especialidades' },
+      { id: 'urgencias', navKey: 'servicios' },
       { id: 'nosotros', navKey: 'nosotros' },
       { id: 'preguntas', navKey: 'nosotros' },
       { id: 'contacto', navKey: 'contacto' },
@@ -33,7 +34,7 @@ export default function App() {
         const item = sectionMap[i];
         const element = document.getElementById(item.id);
         if (element) {
-          const top = element.offsetTop;
+          const top = element.getBoundingClientRect().top + window.scrollY;
           if (scrollPosition >= top) {
             setActiveSection(item.navKey);
             break;

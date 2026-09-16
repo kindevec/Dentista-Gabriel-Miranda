@@ -42,27 +42,27 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2 text-xs text-slate-300">
               <li>
                 <a href="#inicio" className="hover:text-[#00BFFF] transition-colors">
-                  Inicio & Portada
+                  Inicio
+                </a>
+              </li>
+              <li>
+                <a href="#servicios" className="hover:text-[#00BFFF] transition-colors">
+                  Servicios
                 </a>
               </li>
               <li>
                 <a href="#especialidades" className="hover:text-[#00BFFF] transition-colors">
-                  Especialidades & Tratamientos
+                  Especialidades
                 </a>
               </li>
               <li>
                 <a href="#nosotros" className="hover:text-[#00BFFF] transition-colors">
-                  Dr. Gabriel Miranda & Instalaciones
-                </a>
-              </li>
-              <li>
-                <a href="#preguntas" className="hover:text-[#00BFFF] transition-colors">
-                  Preguntas Frecuentes
+                  Nosotros
                 </a>
               </li>
               <li>
                 <a href="#contacto" className="hover:text-[#00BFFF] transition-colors">
-                  Agendamiento & Ubicación
+                  Contacto
                 </a>
               </li>
             </ul>

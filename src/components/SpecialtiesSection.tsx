@@ -136,7 +136,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
   };
 
   return (
-    <section id="especialidades" className="py-14 sm:py-20 relative overflow-hidden bg-slate-50/70">
+    <section id="servicios" className="py-14 sm:py-20 relative overflow-hidden bg-slate-50/70">
       {/* 1. Intercalated High-Definition Background Texture */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img
@@ -169,7 +169,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
         </motion.div>
 
         {/* 3. Luxury 3D Feature Carousel Showcase */}
-        <div className="w-full max-w-6xl mx-auto">
+        <div id="especialidades" className="w-full max-w-6xl mx-auto scroll-mt-24">
           {/* ========================================================= */}
           {/* DESKTOP EXPERIENCE (lg:flex) — 100% PRESERVED 3D WHEEL   */}
           {/* ========================================================= */}

@@ -59,63 +59,32 @@ export const Navbar: React.FC<NavbarProps> = ({
           <Logo size="md" />
         </div>
 
-        {/* Desktop Navigation Links (5 Secciones Exactas) */}
+        {/* Desktop Navigation Links (5 Secciones Exactas: Inicio, Servicios, Especialidades, Nosotros, Contacto) */}
         <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2">
-          {/* Section 1: Inicio */}
-          <button
-            onClick={() => handleNavClick('inicio')}
-            className={`px-4 py-2 rounded-full text-xs xl:text-sm font-semibold transition-all duration-200 cursor-pointer ${
-              activeSection === 'inicio'
-                ? isScrolled
-                  ? 'text-[#005A9C] bg-cyan-50 font-bold shadow-xs'
-                  : 'text-[#005A9C] bg-white/70 backdrop-blur-xs font-bold shadow-xs border border-cyan-100/60'
-                : 'text-slate-600 hover:text-[#005A9C] hover:bg-white/60'
-            }`}
-          >
-            Inicio
-          </button>
-
-          {/* Section 2: Especialidades */}
-          <button
-            onClick={() => handleNavClick('especialidades')}
-            className={`px-4 py-2 rounded-full text-xs xl:text-sm font-semibold transition-all duration-200 cursor-pointer ${
-              activeSection === 'especialidades'
-                ? isScrolled
-                  ? 'text-[#005A9C] bg-cyan-50 font-bold shadow-xs'
-                  : 'text-[#005A9C] bg-white/70 backdrop-blur-xs font-bold shadow-xs border border-cyan-100/60'
-                : 'text-slate-600 hover:text-[#005A9C] hover:bg-white/60'
-            }`}
-          >
-            Especialidades
-          </button>
-
-          {/* Section 3: Nosotros */}
-          <button
-            onClick={() => handleNavClick('nosotros')}
-            className={`px-4 py-2 rounded-full text-xs xl:text-sm font-semibold transition-all duration-200 cursor-pointer ${
-              activeSection === 'nosotros'
-                ? isScrolled
-                  ? 'text-[#005A9C] bg-cyan-50 font-bold'
-                  : 'text-[#005A9C] bg-white/70 backdrop-blur-xs font-bold shadow-xs border border-cyan-100/60'
-                : 'text-slate-600 hover:text-[#005A9C] hover:bg-white/60'
-            }`}
-          >
-            Nosotros
-          </button>
-
-          {/* Section 4: Redes & Contacto */}
-          <button
-            onClick={() => handleNavClick('contacto')}
-            className={`px-4 py-2 rounded-full text-xs xl:text-sm font-semibold transition-all duration-200 cursor-pointer ${
-              activeSection === 'contacto'
-                ? isScrolled
-                  ? 'text-[#005A9C] bg-cyan-50 font-bold'
-                  : 'text-[#005A9C] bg-white/70 backdrop-blur-xs font-bold shadow-xs border border-cyan-100/60'
-                : 'text-slate-600 hover:text-[#005A9C] hover:bg-white/60'
-            }`}
-          >
-            Redes & Contacto
-          </button>
+          {[
+            { id: 'inicio', label: 'Inicio' },
+            { id: 'servicios', label: 'Servicios' },
+            { id: 'especialidades', label: 'Especialidades' },
+            { id: 'nosotros', label: 'Nosotros' },
+            { id: 'contacto', label: 'Contacto' },
+          ].map((item) => {
+            const isActive = activeSection === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => handleNavClick(item.id)}
+                className={`px-3.5 xl:px-4 py-2 rounded-full text-xs xl:text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                  isActive
+                    ? isScrolled
+                      ? 'text-[#005A9C] bg-cyan-50 font-bold shadow-xs'
+                      : 'text-[#005A9C] bg-white/70 backdrop-blur-xs font-bold shadow-xs border border-cyan-100/60'
+                    : 'text-slate-600 hover:text-[#005A9C] hover:bg-white/60'
+                }`}
+              >
+                {item.label}
+              </button>
+            );
+          })}
         </nav>
 
         {/* Action Buttons Right (Desktop) */}
