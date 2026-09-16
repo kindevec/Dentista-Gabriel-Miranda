@@ -23,7 +23,7 @@ interface SpecialtiesSectionProps {
   onSelectSpecialtyForBooking?: (specialtyId: string) => void;
 }
 
-const ITEM_HEIGHT = 70;
+const ITEM_HEIGHT = 68;
 
 const SPECIALTY_SHORT_TITLES: Record<string, string> = {
   ortodoncia: 'Ortodoncia 3D',
@@ -33,11 +33,6 @@ const SPECIALTY_SHORT_TITLES: Record<string, string> = {
   'limpieza-profilaxis': 'Limpieza Ultrasónica',
   blanqueamiento: 'Blanqueamiento Láser',
   odontopediatria: 'Odontopediatría',
-};
-
-const wrap = (min: number, max: number, v: number) => {
-  const rangeSize = max - min;
-  return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
 };
 
 export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
@@ -177,73 +172,70 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
             {/* Left Column: Interactive Wheel of Specialties sobre el lienzo */}
             <div className="col-span-5 relative z-20 flex flex-col justify-center my-auto">
 
-              {/* Desktop Vertical Spring Wheel sobre fondo claro */}
-              <div className="relative w-full h-[420px] flex items-center justify-start overflow-hidden my-auto">
-                <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-slate-50 via-slate-50/80 to-transparent z-40 pointer-events-none" />
-                <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-50 via-slate-50/80 to-transparent z-40 pointer-events-none" />
+              {/* Desktop Vertical Frontal Track con tonalidad azulita */}
+              <div className="relative w-full h-[440px] flex items-center justify-start overflow-hidden my-auto select-none">
+                {/* Top fade gradient */}
+                <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#F8FAFC] via-[#F8FAFC]/80 to-transparent z-30 pointer-events-none" />
+                {/* Bottom fade gradient */}
+                <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#F8FAFC] via-[#F8FAFC]/80 to-transparent z-30 pointer-events-none" />
 
-                <div className="relative w-full h-full flex items-center justify-start z-20">
+                {/* Unified Frontal Track (sin capas de fondo ni elementos que se crucen por detrás) */}
+                <motion.div
+                  animate={{ y: 186 - currentIndex * ITEM_HEIGHT }}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 220,
+                    damping: 26,
+                    mass: 0.8,
+                  }}
+                  className="flex flex-col w-full pr-3 relative z-20"
+                >
                   {SPECIALTIES_DATA.map((spec, index) => {
                     const isActive = index === currentIndex;
-                    const distance = index - currentIndex;
-                    const wrappedDistance = wrap(
-                      -(SPECIALTIES_DATA.length / 2),
-                      SPECIALTIES_DATA.length / 2,
-                      distance
-                    );
+                    const distance = Math.abs(index - currentIndex);
 
                     return (
-                      <motion.div
+                      <div
                         key={spec.id}
-                        style={{
-                          height: ITEM_HEIGHT,
-                          width: '100%',
-                        }}
-                        animate={{
-                          y: wrappedDistance * ITEM_HEIGHT,
-                          opacity: 1 - Math.abs(wrappedDistance) * 0.28,
-                        }}
-                        transition={{
-                          type: 'spring',
-                          stiffness: 90,
-                          damping: 22,
-                          mass: 1,
-                        }}
-                        className="absolute flex items-center justify-start w-full pr-4"
+                        style={{ height: ITEM_HEIGHT }}
+                        className="flex items-center justify-start w-full py-1"
                       >
                         <button
                           onClick={() => handleChipClick(index)}
                           className={cn(
-                            'relative flex items-center gap-3.5 w-full px-5 py-3.5 rounded-2xl transition-all duration-300 text-left group border cursor-pointer',
+                            'relative flex items-center gap-3.5 w-full h-full px-5 py-3 rounded-2xl transition-all duration-300 text-left group border cursor-pointer select-none',
                             isActive
-                              ? 'bg-white text-[#0A2540] shadow-xl shadow-[#005A9C]/15 border-cyan-300 ring-2 ring-[#00BFFF]/30 z-10 scale-[1.02]'
-                              : 'bg-white/70 hover:bg-white text-slate-600 hover:text-[#0A2540] border-slate-200/70 hover:border-cyan-200 shadow-2xs'
+                              ? 'bg-gradient-to-r from-[#005A9C] via-[#0070BA] to-[#0A2540] text-white shadow-xl shadow-[#005A9C]/25 border-cyan-400/80 ring-2 ring-[#00BFFF]/40 scale-[1.02] z-10'
+                              : 'bg-gradient-to-r from-sky-50/90 via-cyan-50/60 to-white/90 hover:from-sky-100 hover:via-cyan-100/70 hover:to-sky-50 text-[#005A9C] border-sky-200/80 hover:border-cyan-400/70 shadow-2xs'
                           )}
+                          style={{
+                            opacity: isActive ? 1 : Math.max(0.4, 1 - distance * 0.22),
+                          }}
                         >
                           <div
                             className={cn(
-                              'w-9 h-9 rounded-xl flex items-center justify-center transition-colors duration-300 shrink-0 shadow-xs',
+                              'w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 shrink-0 shadow-xs',
                               isActive
-                                ? 'bg-gradient-to-br from-[#005A9C] to-[#0084DE] text-white shadow-cyan-500/20'
-                                : 'bg-slate-100 text-slate-500 group-hover:bg-cyan-50 group-hover:text-[#005A9C]'
+                                ? 'bg-white/20 text-white border border-white/30'
+                                : 'bg-white text-[#005A9C] border border-cyan-200/60 group-hover:bg-[#005A9C] group-hover:text-white'
                             )}
                           >
-                            {getSpecialtyIcon(spec.iconName, isActive ? 'w-5 h-5 text-white' : 'w-5 h-5 text-cyan-600')}
+                            {getSpecialtyIcon(spec.iconName, isActive ? 'w-5 h-5 text-white' : 'w-5 h-5 text-[#005A9C] group-hover:text-white transition-colors')}
                           </div>
 
                           <div className="flex flex-col min-w-0">
                             <span
                               className={cn(
                                 'font-bold text-sm tracking-tight truncate',
-                                isActive ? 'text-[#0A2540]' : 'text-slate-700 group-hover:text-[#005A9C]'
+                                isActive ? 'text-white' : 'text-[#0A2540] group-hover:text-[#005A9C]'
                               )}
                             >
                               {spec.title}
                             </span>
                             <span
                               className={cn(
-                                'text-[11px] truncate',
-                                isActive ? 'text-[#005A9C] font-semibold' : 'text-slate-400'
+                                'text-[11px] truncate font-medium',
+                                isActive ? 'text-cyan-200' : 'text-cyan-700/80'
                               )}
                             >
                               {spec.estimatedTime || 'Evaluación 3D'}
@@ -251,13 +243,13 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                           </div>
 
                           {isActive && (
-                            <span className="ml-auto w-2 h-2 rounded-full bg-[#00BFFF] shadow-[0_0_8px_#00BFFF]" />
+                            <span className="ml-auto w-2.5 h-2.5 rounded-full bg-[#00BFFF] shadow-[0_0_10px_#00BFFF] shrink-0" />
                           )}
                         </button>
-                      </motion.div>
+                      </div>
                     );
                   })}
-                </div>
+                </motion.div>
               </div>
             </div>
 
