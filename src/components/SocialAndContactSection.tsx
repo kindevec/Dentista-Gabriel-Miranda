@@ -80,38 +80,6 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
     setIsSubmitted(true);
   };
 
-  const getSocialIcon = (iconType: string) => {
-    switch (iconType) {
-      case 'whatsapp':
-        return <OfficialWhatsAppLogo className="w-12 h-12" />;
-      case 'instagram':
-        return <OfficialInstagramLogo className="w-12 h-12" />;
-      case 'facebook':
-        return <OfficialFacebookLogo className="w-12 h-12" />;
-      default:
-        return <OfficialWhatsAppLogo className="w-12 h-12" />;
-    }
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: "easeOut" as const },
-    },
-  };
-
   return (
     <section id="contacto" className="py-14 sm:py-16 relative overflow-hidden bg-[#F8FAFC]">
       <div id="redes-contacto" className="absolute -top-24 pointer-events-none" aria-hidden="true" />
@@ -145,58 +113,6 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
           <p className="text-sm sm:text-base text-slate-600 text-justify">
             Estamos a tu disposición a través de nuestros canales oficiales verificados. Reserva tu cita médica en línea o escríbenos directamente a WhatsApp.
           </p>
-        </motion.div>
-
-        {/* 1. Official Social Media Cards Grid - Soft Rounded Surfaces [2.5rem] */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.15 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 sm:mb-12"
-        >
-          {SOCIAL_NETWORKS.map((social) => (
-            <motion.div
-              key={social.id}
-              variants={itemVariants}
-              whileHover={{ y: -6, scale: 1.02 }}
-              className="bg-white/95 backdrop-blur-xl rounded-[2.2rem] sm:rounded-[2.5rem] p-6 sm:p-8 shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300 flex flex-col justify-between group border border-white"
-            >
-              <div>
-                <div className="mb-5">
-                  <div className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center p-2.5 group-hover:scale-105 transition-transform duration-300">
-                    {getSocialIcon(social.iconType)}
-                  </div>
-                </div>
-
-                <h3 className="text-xl font-black text-[#0A2540] group-hover:text-[#005A9C] transition-colors">
-                  {social.name}
-                </h3>
-                <p className="text-xs font-bold text-[#00BFFF] mb-3">{social.handle}</p>
-                <p className="text-xs text-slate-600 leading-relaxed mb-6 text-justify">
-                  {social.description}
-                </p>
-              </div>
-
-              <motion.a
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`w-full py-3.5 px-5 rounded-full text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md ${
-                  social.id === 'whatsapp'
-                    ? 'bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white hover:brightness-105 animate-halo-whatsapp'
-                    : social.id === 'instagram'
-                    ? 'bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F77737] text-white hover:brightness-105'
-                    : 'bg-[#1877F2] text-white hover:bg-[#166fe5]'
-                }`}
-              >
-                <span>{social.actionText}</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </motion.a>
-            </motion.div>
-          ))}
         </motion.div>
 
         {/* 2. Split Layout: Interactive Booking Form + Clinic Location Details */}
@@ -367,6 +283,36 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
                 )}
               </AnimatePresence>
             </form>
+
+            {/* Canales y Redes Sociales Oficiales */}
+            <div className="pt-6 mt-6 border-t border-slate-100">
+              <p className="text-xs font-bold text-[#0A2540] uppercase tracking-wider mb-3 pl-1">
+                O conéctate en nuestras redes oficiales:
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                {SOCIAL_NETWORKS.map((social) => (
+                  <a
+                    key={social.id}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Abrir ${social.name}`}
+                    className={`flex items-center justify-center gap-2.5 px-3.5 py-3 rounded-full border text-xs font-bold transition-all shadow-2xs hover:shadow-sm active:scale-95 cursor-pointer ${
+                      social.id === 'whatsapp'
+                        ? 'bg-emerald-50 hover:bg-emerald-100 border-emerald-200 text-emerald-800'
+                        : social.id === 'instagram'
+                        ? 'bg-pink-50 hover:bg-pink-100 border-pink-200 text-[#E4405F]'
+                        : 'bg-blue-50 hover:bg-blue-100 border-blue-200 text-[#1877F2]'
+                    }`}
+                  >
+                    {social.id === 'whatsapp' && <OfficialWhatsAppLogo className="w-5 h-5 shrink-0" />}
+                    {social.id === 'instagram' && <OfficialInstagramLogo className="w-5 h-5 shrink-0" />}
+                    {social.id === 'facebook' && <OfficialFacebookLogo className="w-5 h-5 shrink-0" />}
+                    <span className="truncate">{social.id === 'whatsapp' ? 'WhatsApp' : social.id === 'instagram' ? 'Instagram' : 'Facebook'}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
           </motion.div>
 
           {/* Right Column (5 cols): Location Info & Medical Amenities */}
