@@ -30,6 +30,7 @@ export default function App() {
       { id: 'urgencias', navKey: 'casos-reales' },
       { id: 'nosotros', navKey: 'nosotros' },
       { id: 'preguntas', navKey: 'nosotros' },
+      { id: 'confianza', navKey: 'contacto' },
       { id: 'contacto', navKey: 'contacto' },
     ];
 
@@ -85,27 +86,27 @@ export default function App() {
           onOpenEmergency={handleOpenEmergency}
         />
 
-        {/* 2. Central Trust Counters (Píldoras y métricas clínicas de precisión) */}
-        <TrustCounters />
-
-        {/* 3. Especialidades Clínicas (Fondo médico perla intercalado con textura de laboratorio 3D) */}
+        {/* 2. Especialidades Clínicas (Fondo médico perla intercalado con textura de laboratorio 3D) */}
         <SpecialtiesSection
           onSelectSpecialtyForBooking={handleOpenBookingWithSpecialty}
         />
 
-        {/* 4. Casos Reales Antes y Después (Fondo de alto contraste azul médico profundo con slider y ribbons) */}
+        {/* 3. Casos Reales Antes y Después (Fondo de alto contraste azul médico profundo con slider y ribbons) */}
         <BeforeAfterSection />
 
-        {/* 5. Sección de Urgencias Odontológicas 24/7 (Inspirada en "We will help in Emergency" de Medigo) */}
+        {/* 4. Sección de Urgencias Odontológicas 24/7 (Inspirada en "We will help in Emergency" de Medigo) */}
         <EmergencyBannerSection
           onOpenEmergency={handleOpenEmergency}
         />
 
-        {/* 6. Perfil del Dr. Gabriel Miranda, Infraestructura y Bioseguridad */}
+        {/* 5. Perfil del Dr. Gabriel Miranda, Infraestructura y Bioseguridad */}
         <DoctorProfileSection />
 
-        {/* 7. Preguntas Frecuentes Interactivas */}
+        {/* 6. Preguntas Frecuentes Interactivas */}
         <FaqSection />
+
+        {/* 7. Respaldo Clínico, Métricas y Garantías de Confianza (TrustCounters al final) */}
+        <TrustCounters />
 
         {/* 8. Canales Oficiales, Formulario de Agendamiento y Ubicación en Quito */}
         <SocialAndContactSection
