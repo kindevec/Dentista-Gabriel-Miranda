@@ -24,7 +24,6 @@ interface SpecialtiesSectionProps {
   onSelectSpecialtyForBooking?: (specialtyId: string) => void;
 }
 
-const AUTO_PLAY_INTERVAL = 4200;
 const ITEM_HEIGHT = 70;
 
 const SPECIALTY_SHORT_TITLES: Record<string, string> = {
@@ -46,7 +45,6 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
   onSelectSpecialtyForBooking: _onSelectSpecialtyForBooking,
 }) => {
   const [step, setStep] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
   const mobilePillsRef = useRef<HTMLDivElement>(null);
@@ -80,12 +78,6 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
     const diff = (index - currentIndex + totalItems) % totalItems;
     if (diff !== 0) setStep((s) => s + diff);
   };
-
-  useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(nextStep, AUTO_PLAY_INTERVAL);
-    return () => clearInterval(interval);
-  }, [nextStep, isPaused]);
 
   const getCardStatus = (index: number) => {
     const diff = index - currentIndex;
@@ -182,11 +174,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
         </motion.div>
 
         {/* 3. Luxury 3D Feature Carousel Showcase */}
-        <div
-          className="w-full max-w-6xl mx-auto"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
+        <div className="w-full max-w-6xl mx-auto">
           {/* ========================================================= */}
           {/* DESKTOP EXPERIENCE (lg:flex) — 100% PRESERVED 3D WHEEL   */}
           {/* ========================================================= */}
@@ -208,7 +196,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
               </div>
 
               {/* Desktop Vertical Spring Wheel */}
-              <div className="relative w-full h-[380px] flex items-center justify-start overflow-hidden my-auto">
+              <div className="relative w-full h-[420px] flex items-center justify-start overflow-hidden my-auto">
                 <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#005A9C] via-[#005A9C]/80 to-transparent z-40 pointer-events-none" />
                 <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0A2540] via-[#0A2540]/80 to-transparent z-40 pointer-events-none" />
 
@@ -287,45 +275,6 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                       </motion.div>
                     );
                   })}
-                </div>
-              </div>
-
-              {/* Left Panel Footer: Index, Controls & Auto-Play Progress */}
-              <div className="flex flex-col gap-3 pt-4 border-t border-white/15">
-                <div className="flex items-center justify-between text-xs text-white/70">
-                  <div className="flex items-center gap-2 font-mono">
-                    <span className="text-cyan-300 font-bold text-base">{String(currentIndex + 1).padStart(2, '0')}</span>
-                    <span className="text-white/30">/</span>
-                    <span className="text-white/40">{String(totalItems).padStart(2, '0')}</span>
-                  </div>
-
-                  <div className="flex items-center gap-1.5">
-                    <button
-                      onClick={prevStep}
-                      aria-label="Especialidad anterior"
-                      className="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all cursor-pointer active:scale-90 border border-white/10 hover:border-white/25"
-                    >
-                      <ChevronLeft className="w-4 h-4" />
-                    </button>
-                    <button
-                      onClick={nextStep}
-                      aria-label="Especialidad siguiente"
-                      className="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all cursor-pointer active:scale-90 border border-white/10 hover:border-white/25"
-                    >
-                      <ChevronRight className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
-
-                {/* Auto-Play Progress Bar */}
-                <div className="w-full h-1 rounded-full bg-white/10 overflow-hidden">
-                  <motion.div
-                    key={step}
-                    initial={{ width: '0%' }}
-                    animate={{ width: isPaused ? undefined : '100%' }}
-                    transition={{ duration: AUTO_PLAY_INTERVAL / 1000, ease: 'linear' }}
-                    className="h-full rounded-full bg-gradient-to-r from-[#00BFFF] to-cyan-400"
-                  />
                 </div>
               </div>
             </div>
@@ -690,17 +639,6 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                 <div className="text-[11px] text-slate-400">
                   Desliza para explorar
                 </div>
-              </div>
-
-              {/* Auto-play progress bar */}
-              <div className="w-full h-1 rounded-full bg-slate-200/80 overflow-hidden">
-                <motion.div
-                  key={step}
-                  initial={{ width: '0%' }}
-                  animate={{ width: isPaused ? undefined : '100%' }}
-                  transition={{ duration: AUTO_PLAY_INTERVAL / 1000, ease: 'linear' }}
-                  className="h-full rounded-full bg-gradient-to-r from-[#005A9C] to-cyan-400"
-                />
               </div>
             </div>
           </div>
