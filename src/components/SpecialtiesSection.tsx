@@ -18,7 +18,6 @@ import {
 import { WhatsAppIcon } from './OfficialSocialLogos';
 import { SPECIALTIES_DATA, createWhatsAppLink, DOCTOR_NAME } from '../data/clinicData';
 import { OrganicDentalRibbon } from './OrganicDentalRibbon';
-import { CurvedSectionDivider } from './CurvedSectionDivider';
 import { cn } from '../lib/utils';
 
 interface SpecialtiesSectionProps {
@@ -681,11 +680,6 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Organic Curved Wave Transition into Urgencias 24/7 */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
-        <CurvedSectionDivider position="bottom" fillColor="#07192C" variant="wave1" />
       </div>
     </section>
   );

@@ -32,7 +32,12 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
   };
 
   return (
-    <section id="urgencias" className="relative overflow-hidden py-14 sm:py-16 text-white bg-[#07192C]">
+    <section id="urgencias" className="relative overflow-hidden py-16 sm:py-20 lg:py-24 text-white bg-[#07192C]">
+      {/* Top Organic Wave Transition from Specialties Section (Masks background & photo) */}
+      <div className="absolute top-0 left-0 right-0 z-20 pointer-events-none">
+        <CurvedSectionDivider position="top" fillColor="#F8FAFC" variant="wave1" />
+      </div>
+
       {/* 1. Split Atmospheric Background: Right-side Full Bleed Medical Photo */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Base dark medical canvas */}
@@ -144,9 +149,9 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
         </motion.div>
       </div>
 
-      {/* Organic Curved Wave Transition into Doctor Profile Section */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
-        <CurvedSectionDivider position="bottom" fillColor="#F8FAFC" variant="smoothCurve" />
+      {/* Bottom Organic Curved Wave Transition into Doctor Profile Section (Masks background & photo) */}
+      <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none">
+        <CurvedSectionDivider position="bottom" fillColor="#F8FAFC" variant="wave1" />
       </div>
     </section>
   );

@@ -16,6 +16,20 @@ export const CurvedSectionDivider: React.FC<CurvedSectionDividerProps> = ({
   const isTop = position === 'top';
 
   const renderPath = () => {
+    if (isTop) {
+      switch (variant) {
+        case 'wave1':
+          return 'M0,0 L0,32 C360,96 720,-16 1080,48 C1260,80 1380,64 1440,48 L1440,0 Z';
+        case 'wave2':
+          return 'M0,0 L0,48 C320,12 640,84 960,36 C1200,-4 1360,56 1440,32 L1440,0 Z';
+        case 'deepCurve':
+          return 'M0,0 L0,0 C480,96 960,96 1440,0 L1440,0 Z';
+        case 'smoothCurve':
+        default:
+          return 'M0,0 L0,24 C480,88 960,88 1440,24 L1440,0 Z';
+      }
+    }
+
     switch (variant) {
       case 'wave1':
         return 'M0,32 C360,96 720,-16 1080,48 C1260,80 1380,64 1440,48 L1440,96 L0,96 Z';
@@ -32,7 +46,7 @@ export const CurvedSectionDivider: React.FC<CurvedSectionDividerProps> = ({
   return (
     <div
       className={`w-full overflow-hidden leading-none pointer-events-none select-none ${
-        isTop ? 'rotate-180 -mb-[1px]' : '-mt-[1px]'
+        isTop ? '-mt-[1px]' : '-mb-[1px]'
       } ${className}`}
       aria-hidden="true"
     >
