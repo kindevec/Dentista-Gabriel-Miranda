@@ -26,7 +26,7 @@ export const DoctorProfileSection: React.FC = () => {
   };
 
   return (
-    <section id="nosotros" className="py-14 sm:py-16 relative overflow-hidden bg-[#F8FAFC]">
+    <section id="nosotros" className="py-10 sm:py-12 relative overflow-hidden bg-[#F8FAFC]">
       {/* 1. Intercalated Background Photo Texture */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img
@@ -41,7 +41,7 @@ export const DoctorProfileSection: React.FC = () => {
       {/* 2. Floating 3D Curved Ribbon */}
       <OrganicDentalRibbon className="top-1/4 -left-16 w-96 md:w-[32rem] opacity-50" variant="cyan" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-4 sm:pb-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-2 sm:pb-3">
         
         {/* Section Header with Animation */}
         <motion.div
@@ -49,7 +49,7 @@ export const DoctorProfileSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-8 sm:mb-10 space-y-2.5"
+          className="text-center max-w-3xl mx-auto mb-5 sm:mb-7 space-y-2.5"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0A2540] tracking-tight">
             Conoce al {DOCTOR_NAME} y su Filosofía de Atención

@@ -81,7 +81,7 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
   };
 
   return (
-    <section id="contacto" className="py-14 sm:py-16 relative overflow-hidden bg-[#F8FAFC]">
+    <section id="contacto" className="py-10 sm:py-12 relative overflow-hidden bg-[#F8FAFC]">
       <div id="redes-contacto" className="absolute -top-24 pointer-events-none" aria-hidden="true" />
       {/* 1. Intercalated High-Definition Photographic Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -97,7 +97,7 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
       {/* 2. Floating 3D Curved Ribbon */}
       <OrganicDentalRibbon className="top-1/3 -right-20 w-[30rem] opacity-40" variant="cyan" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-6 sm:pb-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-4 sm:pb-5">
         
         {/* Section Header with Animation */}
         <motion.div
@@ -105,7 +105,7 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-8 sm:mb-10 space-y-2.5"
+          className="text-center max-w-3xl mx-auto mb-5 sm:mb-7 space-y-2.5"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0A2540] tracking-tight">
             Agenda tu Consulta o Conéctate con Nosotros

@@ -171,7 +171,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
   };
 
   return (
-    <section id="servicios" className="py-14 sm:py-20 relative overflow-hidden bg-slate-50/70">
+    <section id="servicios" className="py-10 sm:py-14 relative overflow-hidden bg-slate-50/70">
       {/* 1. Intercalated High-Definition Background Texture */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img
@@ -186,14 +186,14 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
       {/* 2. Floating 3D Curved Ribbon */}
       <OrganicDentalRibbon className="top-12 -right-16 w-96 md:w-[32rem] opacity-40" variant="blue" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-4 sm:pb-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-2 sm:pb-4">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 space-y-2.5"
+          className="text-center max-w-3xl mx-auto mb-5 sm:mb-8 space-y-2.5"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0A2540] tracking-tight">
             Especialidades <span className="text-[#005A9C]">Digitales</span>

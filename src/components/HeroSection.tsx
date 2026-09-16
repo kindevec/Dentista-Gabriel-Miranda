@@ -78,7 +78,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   return (
     <section
       id="inicio"
-      className="relative overflow-hidden pt-24 pb-10 sm:pt-28 sm:pb-14 bg-gradient-to-b from-sky-50/60 via-white to-[#F8FAFC]"
+      className="relative overflow-hidden pt-20 pb-8 sm:pt-24 sm:pb-10 bg-gradient-to-b from-sky-50/60 via-white to-[#F8FAFC]"
     >
       {/* Subtle Organic Dental Ribbons for Atmospheric Depth */}
       <OrganicDentalRibbon className="-top-12 -left-16 w-[36rem] opacity-35" variant="cyan" />

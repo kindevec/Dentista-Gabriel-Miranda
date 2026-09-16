@@ -32,7 +32,7 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
   };
 
   return (
-    <section id="urgencias" className="relative overflow-hidden py-16 sm:py-20 lg:py-24 text-white bg-[#07192C]">
+    <section id="urgencias" className="relative overflow-hidden py-12 sm:py-14 lg:py-16 text-white bg-[#07192C]">
       {/* Top Organic Wave Transition from Specialties Section (Masks background & photo) */}
       <div className="absolute top-0 left-0 right-0 z-20 pointer-events-none">
         <CurvedSectionDivider position="top" fillColor="#F8FAFC" variant="wave1" />
@@ -65,7 +65,7 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
       {/* 2. Floating 3D Curved Dental Ribbon (Left side only) */}
       <OrganicDentalRibbon className="-top-12 -left-16 w-96 md:w-[32rem] opacity-70" variant="cyan" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-2 sm:pb-3">
         <motion.div
           variants={containerVariants}
           initial="hidden"

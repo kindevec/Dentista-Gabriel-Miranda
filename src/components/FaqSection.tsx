@@ -33,11 +33,11 @@ export const FaqSection: React.FC = () => {
   };
 
   return (
-    <section id="preguntas" className="py-14 sm:py-16 bg-white relative overflow-hidden">
+    <section id="preguntas" className="py-10 sm:py-12 bg-white relative overflow-hidden">
       {/* Subtle organic ribbon accent */}
       <OrganicDentalRibbon className="-top-10 -right-20 w-96 opacity-30" variant="cyan" />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-4 sm:pb-6">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-2 sm:pb-3">
         
         {/* Header with Animation */}
         <motion.div
@@ -45,7 +45,7 @@ export const FaqSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-8 sm:mb-10 space-y-2"
+          className="text-center mb-5 sm:mb-7 space-y-2"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0A2540] tracking-tight">
             Resolvemos tus Dudas sobre Tratamientos y Consultas
@@ -116,13 +116,13 @@ export const FaqSection: React.FC = () => {
           })}
         </motion.div>
 
-        {/* FAQ WhatsApp Direct Link */}
+        {/* FAQ WhatsApp Direct Link - Direct on canvas (Zero Box-in-Box) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-8 sm:mt-10 text-center p-5 sm:p-7 rounded-[2rem] sm:rounded-[2.5rem] bg-slate-50"
+          className="mt-6 sm:mt-8 text-center"
         >
           <p className="text-sm font-semibold text-[#0A2540] mb-3">
             ¿Tienes alguna consulta médica adicional que no esté en esta lista?
