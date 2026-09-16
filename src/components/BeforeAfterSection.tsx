@@ -7,8 +7,6 @@ import {
   Quote,
   CheckCircle2,
   Info,
-  ShieldCheck,
-  Activity,
   ChevronLeft,
   ChevronRight,
   Clock
@@ -246,45 +244,6 @@ export const BeforeAfterSection: React.FC = () => {
           <p className="text-sm sm:text-base text-slate-300 leading-relaxed text-justify">
             Descubre transformaciones estéticas y funcionales reales realizadas por el {DOCTOR_NAME}. Arrastra el deslizador interactivo para apreciar cada detalle con precisión microscópica.
           </p>
-        </motion.div>
-
-        {/* Clinical Precision Metrics Bars */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto mb-8"
-        >
-          <div className="p-5 rounded-[2rem] bg-white/10 backdrop-blur-xl text-center shadow-lg border border-white/10">
-            <div className="flex items-center justify-between text-xs font-bold text-cyan-300 mb-2">
-              <span className="flex items-center gap-1.5"><ShieldCheck className="w-4 h-4" /> Precisión Oclusal 3D</span>
-              <span>99.4%</span>
-            </div>
-            <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
-              <div className="bg-gradient-to-r from-[#00BFFF] to-[#005A9C] h-2 rounded-full w-[99.4%]" />
-            </div>
-          </div>
-
-          <div className="p-5 rounded-[2rem] bg-white/10 backdrop-blur-xl text-center shadow-lg border border-white/10">
-            <div className="flex items-center justify-between text-xs font-bold text-emerald-300 mb-2">
-              <span className="flex items-center gap-1.5"><Activity className="w-4 h-4" /> Procedimientos Sin Dolor</span>
-              <span>100%</span>
-            </div>
-            <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
-              <div className="bg-gradient-to-r from-emerald-400 to-teal-500 h-2 rounded-full w-full" />
-            </div>
-          </div>
-
-          <div className="p-5 rounded-[2rem] bg-white/10 backdrop-blur-xl text-center shadow-lg border border-white/10">
-            <div className="flex items-center justify-between text-xs font-bold text-amber-300 mb-2">
-              <span className="flex items-center gap-1.5"><Star className="w-4 h-4" /> Satisfacción del Paciente</span>
-              <span>99.8%</span>
-            </div>
-            <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
-              <div className="bg-gradient-to-r from-amber-300 to-yellow-500 h-2 rounded-full w-[99.8%]" />
-            </div>
-          </div>
         </motion.div>
 
         {/* Category Filter Buttons */}
