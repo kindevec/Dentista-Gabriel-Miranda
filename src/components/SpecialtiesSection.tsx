@@ -161,10 +161,6 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-6 sm:mb-12 space-y-2.5"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-100/70 text-[#005A9C] text-xs font-bold mb-1">
-            <span className="w-2 h-2 rounded-full bg-[#00BFFF]" />
-            <span>Tratamientos Odontológicos Avanzados</span>
-          </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0A2540] tracking-tight">
             Odontología integral con tecnología de vanguardia
           </h2>
@@ -183,10 +179,6 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
             <div className="w-[40%] relative z-30 flex flex-col justify-between overflow-hidden bg-gradient-to-br from-[#005A9C] via-[#0A2540] to-[#003B66] p-8 lg:p-10 border-r border-cyan-400/20">
               {/* Panel Top Title */}
               <div className="relative z-40">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-cyan-300 text-xs font-semibold mb-2">
-                  <span className="w-2 h-2 rounded-full bg-[#00BFFF] animate-pulse" />
-                  <span>Navegación 3D</span>
-                </div>
                 <h3 className="text-2xl lg:text-3xl font-black text-white tracking-tight leading-tight">
                   Especialidades <span className="text-[#00BFFF]">Digitales</span>
                 </h3>
@@ -371,10 +363,6 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                               exit={{ opacity: 0, y: -10 }}
                               transition={{ duration: 0.35 }}
                             >
-                              <div className="inline-block bg-cyan-400/20 text-cyan-300 border border-cyan-400/40 px-3 py-1 rounded-full text-[10.5px] font-bold uppercase tracking-wider mb-2 backdrop-blur-md">
-                                Especialidad {index + 1} de {totalItems}
-                              </div>
-
                               <h3 className="text-2xl font-black text-white leading-tight mb-2">
                                 {spec.title}
                               </h3>
@@ -559,10 +547,6 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
 
                       {/* Card Bottom Content */}
                       <div className="relative z-20 p-4 sm:p-5 pt-0 flex flex-col justify-end">
-                        <div className="inline-block bg-cyan-400/20 text-cyan-300 border border-cyan-400/40 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider mb-1.5 backdrop-blur-md w-fit">
-                          Especialidad {currentIndex + 1} de {totalItems}
-                        </div>
-
                         <h3 className="text-lg sm:text-xl font-black text-white leading-snug mb-1.5">
                           {spec.title}
                         </h3>
