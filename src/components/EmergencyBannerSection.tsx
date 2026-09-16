@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Zap, ShieldCheck, Clock } from 'lucide-react';
+import { Clock, Bandage, Syringe } from 'lucide-react';
 import { DOCTOR_NAME, createWhatsAppLink, EMERGENCY_WA_MESSAGE } from '../data/clinicData';
 import { WhatsAppIcon } from './OfficialSocialLogos';
 import { OrganicDentalRibbon } from './OrganicDentalRibbon';
@@ -92,19 +92,19 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
             {/* 3 Steps Triage - Directamente sobre el lienzo sin contenedores */}
             <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 pt-3">
               <div className="text-left space-y-2">
-                <Zap className="w-7 h-7 text-cyan-300 drop-shadow-[0_0_10px_rgba(103,232,249,0.5)]" />
+                <Clock className="w-7 h-7 text-cyan-300 drop-shadow-[0_0_10px_rgba(103,232,249,0.5)]" />
                 <h3 className="text-xs sm:text-sm font-black text-white uppercase tracking-wider">1. Contacto 24/7</h3>
                 <p className="text-[11.5px] sm:text-xs text-cyan-100/80 leading-relaxed text-justify">Escríbenos o llámanos; te atenderemos sin demoras.</p>
               </div>
 
               <div className="text-left space-y-2">
-                <ShieldCheck className="w-7 h-7 text-emerald-300 drop-shadow-[0_0_10px_rgba(110,231,183,0.5)]" />
+                <Bandage className="w-7 h-7 text-emerald-300 drop-shadow-[0_0_10px_rgba(110,231,183,0.5)]" />
                 <h3 className="text-xs sm:text-sm font-black text-white uppercase tracking-wider">2. Alivio Inmediato</h3>
                 <p className="text-[11.5px] sm:text-xs text-cyan-100/80 leading-relaxed text-justify">Anestesia guiada para suprimir el dolor de inmediato.</p>
               </div>
 
               <div className="text-left space-y-2">
-                <Clock className="w-7 h-7 text-amber-300 drop-shadow-[0_0_10px_rgba(252,211,77,0.5)]" />
+                <Syringe className="w-7 h-7 text-amber-300 drop-shadow-[0_0_10px_rgba(252,211,77,0.5)]" />
                 <h3 className="text-xs sm:text-sm font-black text-white uppercase tracking-wider">3. Tratamiento</h3>
                 <p className="text-[11.5px] sm:text-xs text-cyan-100/80 leading-relaxed text-justify">Diagnóstico digital 3D y solución definitiva hoy mismo.</p>
               </div>
