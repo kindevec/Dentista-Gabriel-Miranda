@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Layers,
@@ -285,29 +285,42 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                 })}
               </div>
 
-              {/* Left Panel Footer: Index and Controls */}
-              <div className="flex items-center justify-between pt-4 border-t border-white/15 text-xs text-white/70">
-                <div className="flex items-center gap-2 font-mono">
-                  <span className="text-cyan-300 font-bold">0{currentIndex + 1}</span>
-                  <span className="text-white/40">/</span>
-                  <span className="text-white/50">0{totalItems}</span>
+              {/* Left Panel Footer: Index, Controls & Auto-Play Progress */}
+              <div className="flex flex-col gap-3 pt-4 border-t border-white/15">
+                <div className="flex items-center justify-between text-xs text-white/70">
+                  <div className="flex items-center gap-2 font-mono">
+                    <span className="text-cyan-300 font-bold text-base">{String(currentIndex + 1).padStart(2, '0')}</span>
+                    <span className="text-white/30">/</span>
+                    <span className="text-white/40">{String(totalItems).padStart(2, '0')}</span>
+                  </div>
+
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      onClick={prevStep}
+                      aria-label="Especialidad anterior"
+                      className="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all cursor-pointer active:scale-90 border border-white/10 hover:border-white/25"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={nextStep}
+                      aria-label="Especialidad siguiente"
+                      className="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all cursor-pointer active:scale-90 border border-white/10 hover:border-white/25"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={prevStep}
-                    aria-label="Especialidad anterior"
-                    className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-all cursor-pointer active:scale-95"
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={nextStep}
-                    aria-label="Especialidad siguiente"
-                    className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-all cursor-pointer active:scale-95"
-                  >
-                    <ChevronRight className="w-4 h-4" />
-                  </button>
+                {/* Auto-Play Progress Bar */}
+                <div className="w-full h-1 rounded-full bg-white/10 overflow-hidden">
+                  <motion.div
+                    key={step}
+                    initial={{ width: '0%' }}
+                    animate={{ width: isPaused ? undefined : '100%' }}
+                    transition={{ duration: AUTO_PLAY_INTERVAL / 1000, ease: 'linear' }}
+                    className="h-full rounded-full bg-gradient-to-r from-[#00BFFF] to-cyan-400"
+                  />
                 </div>
               </div>
             </div>
@@ -320,6 +333,16 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
               onTouchEnd={handleTouchEnd}
             >
               <div className="relative w-full max-w-[480px] h-[520px] sm:h-[560px] flex items-center justify-center">
+                {/* Dynamic Ambient Glow behind Active Card */}
+                <motion.div
+                  key={`glow-${currentIndex}`}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6 }}
+                  className="absolute inset-0 z-0 pointer-events-none"
+                >
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[60%] bg-[#00BFFF]/8 rounded-full blur-[80px]" />
+                </motion.div>
                 {SPECIALTIES_DATA.map((spec, index) => {
                   const status = getCardStatus(index);
                   const isActive = status === 'active';
@@ -410,20 +433,41 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                                 {spec.shortDesc}
                               </p>
 
-                              {/* Highlights Bullet Points */}
-                              <div className="space-y-1.5 mb-5">
+                              {/* Highlights Bullet Points with Staggered Animation */}
+                              <div className="space-y-1.5 mb-4">
                                 {spec.features.slice(0, 3).map((feat, fIdx) => (
-                                  <div key={fIdx} className="flex items-center gap-2 text-[11px] sm:text-xs text-slate-100 font-medium">
+                                  <motion.div
+                                    key={fIdx}
+                                    initial={{ opacity: 0, x: -12 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.15 + fIdx * 0.1, duration: 0.3 }}
+                                    className="flex items-center gap-2 text-[11px] sm:text-xs text-slate-100 font-medium"
+                                  >
                                     <div className="w-4 h-4 rounded-full bg-cyan-400/20 border border-cyan-400/50 text-cyan-300 flex items-center justify-center shrink-0 shadow-2xs">
                                       <Check className="w-2.5 h-2.5 stroke-[3]" />
                                     </div>
                                     <span className="truncate">{feat}</span>
-                                  </div>
+                                  </motion.div>
                                 ))}
                               </div>
 
+                              {/* Suitable For Context Line */}
+                              {spec.suitableFor && (
+                                <motion.p
+                                  initial={{ opacity: 0 }}
+                                  animate={{ opacity: 1 }}
+                                  transition={{ delay: 0.45, duration: 0.3 }}
+                                  className="text-[10.5px] sm:text-[11px] text-cyan-200/70 italic mb-4 line-clamp-1"
+                                >
+                                  Ideal para: {spec.suitableFor}
+                                </motion.p>
+                              )}
+
                               {/* Direct WhatsApp CTA */}
                               <motion.a
+                                initial={{ opacity: 0, y: 8 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.5, duration: 0.3 }}
                                 whileHover={{ scale: 1.02, y: -2 }}
                                 whileTap={{ scale: 0.98 }}
                                 href={createWhatsAppLink(spec.waMessage || `Hola ${DOCTOR_NAME}, deseo información y solicitar una cita sobre el tratamiento de ${spec.title}.`)}
@@ -442,6 +486,23 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                     </motion.div>
                   );
                 })}
+              </div>
+
+              {/* Dot Position Indicators */}
+              <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5">
+                {SPECIALTIES_DATA.map((_, dotIdx) => (
+                  <button
+                    key={dotIdx}
+                    onClick={() => handleChipClick(dotIdx)}
+                    aria-label={`Ir a especialidad ${dotIdx + 1}`}
+                    className={cn(
+                      'rounded-full transition-all duration-400 cursor-pointer',
+                      dotIdx === currentIndex
+                        ? 'w-6 h-2 bg-gradient-to-r from-[#00BFFF] to-cyan-400 shadow-[0_0_8px_rgba(0,191,255,0.5)]'
+                        : 'w-2 h-2 bg-white/30 hover:bg-white/50'
+                    )}
+                  />
+                ))}
               </div>
             </div>
           </div>
