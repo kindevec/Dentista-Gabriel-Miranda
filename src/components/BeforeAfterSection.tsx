@@ -68,27 +68,26 @@ const InteractiveBeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
   };
 
   return (
-    <div className="p-1 rounded-[2.6rem] bg-gradient-to-b from-cyan-400/35 via-sky-300/10 to-transparent shadow-[0_20px_50px_-15px_rgba(0,191,255,0.25)] relative group">
-      <div
-        ref={containerRef}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
-        onPointerCancel={handlePointerUp}
-        className="relative w-full h-[280px] sm:h-[340px] rounded-[2.3rem] overflow-hidden select-none cursor-ew-resize shadow-2xl bg-slate-950 touch-none"
-        style={{ userSelect: 'none', WebkitUserSelect: 'none' }}
-      >
-        {/* Background After Image */}
-        <img
-          src={afterImage}
-          alt={`${title} - Después`}
-          referrerPolicy="no-referrer"
-          draggable={false}
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none group-hover:scale-103 transition-transform duration-700"
-        />
+    <div
+      ref={containerRef}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onPointerCancel={handlePointerUp}
+      className="relative w-full h-[300px] sm:h-[380px] overflow-hidden select-none cursor-ew-resize bg-slate-950 touch-none group"
+      style={{ userSelect: 'none', WebkitUserSelect: 'none' }}
+    >
+      {/* Background After Image */}
+      <img
+        src={afterImage}
+        alt={`${title} - Después`}
+        referrerPolicy="no-referrer"
+        draggable={false}
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none group-hover:scale-103 transition-transform duration-700"
+      />
 
       {/* After Badge */}
-      <div className="absolute top-3 right-3 bg-[#005A9C]/90 text-white text-[10px] sm:text-[11px] font-extrabold px-3.5 py-1 rounded-full backdrop-blur-md shadow-md z-10 flex items-center gap-1 border border-white/20 pointer-events-none">
+      <div className="absolute top-4 right-4 bg-[#005A9C]/90 text-white text-[10px] sm:text-[11px] font-extrabold px-3.5 py-1 rounded-full backdrop-blur-md shadow-md z-10 flex items-center gap-1 border border-white/20 pointer-events-none">
         <Sparkles className="w-3 h-3 text-[#00BFFF]" />
         <span>DESPUÉS</span>
       </div>
@@ -111,14 +110,14 @@ const InteractiveBeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
         />
 
         {/* Before Badge */}
-        <div className="absolute top-3 left-3 bg-slate-900/90 text-slate-200 text-[10px] sm:text-[11px] font-extrabold px-3.5 py-1 rounded-full backdrop-blur-md shadow-md z-10 border border-white/10 pointer-events-none">
+        <div className="absolute top-4 left-4 bg-slate-900/90 text-slate-200 text-[10px] sm:text-[11px] font-extrabold px-3.5 py-1 rounded-full backdrop-blur-md shadow-md z-10 border border-white/10 pointer-events-none">
           <span>ANTES</span>
         </div>
       </div>
 
       {/* Slider Divider Line */}
       <div
-        className="absolute top-0 bottom-0 w-1 bg-cyan-300 shadow-[0_0_12px_rgba(0,191,255,0.8)] pointer-events-none z-20"
+        className="absolute top-0 bottom-0 w-1 bg-cyan-300 shadow-[0_0_14px_rgba(0,191,255,0.9)] pointer-events-none z-20"
         style={{ left: `${sliderPosition}%` }}
       >
         {/* Handle Knob with Pulsing Light */}
@@ -134,8 +133,7 @@ const InteractiveBeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
         </span>
       </div>
     </div>
-  </div>
-);
+  );
 };
 
 export const BeforeAfterSection: React.FC = () => {
@@ -370,18 +368,18 @@ export const BeforeAfterSection: React.FC = () => {
                   >
                     <motion.div
                       whileHover={{ y: -6 }}
-                      className="h-full bg-white/10 backdrop-blur-2xl rounded-[2.5rem] p-7 shadow-2xl transition-all duration-300 flex flex-col justify-between border border-white/10"
+                      className="h-full bg-white/10 backdrop-blur-2xl rounded-[2.5rem] overflow-hidden shadow-2xl transition-all duration-300 flex flex-col justify-between border border-white/15"
                     >
                       <div>
-                        {/* Interactive Slider */}
+                        {/* Interactive Slider - Ocupa todo el borde del contenedor */}
                         <InteractiveBeforeAfterSlider
                           beforeImage={c.beforeImage}
                           afterImage={c.afterImage}
                           title={c.title}
                         />
 
-                        {/* Case Meta Details */}
-                        <div className="mt-6 space-y-3.5 text-left">
+                        {/* Case Meta Details con padding interno limpio */}
+                        <div className="p-6 sm:p-7 space-y-4 text-left">
                           <div className="flex items-center justify-between">
                             <span className="text-[11px] font-bold uppercase tracking-wider text-cyan-200 bg-cyan-500/20 px-3.5 py-1 rounded-full">
                               {c.duration}
@@ -393,8 +391,8 @@ export const BeforeAfterSection: React.FC = () => {
                             </div>
                           </div>
 
-                          <h3 className="text-lg font-bold text-white leading-snug">{c.title}</h3>
-                          <p className="text-xs text-slate-300 leading-relaxed">{c.description}</p>
+                          <h3 className="text-lg sm:text-xl font-bold text-white leading-snug">{c.title}</h3>
+                          <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">{c.description}</p>
 
                           {/* Testimonial */}
                           <div className="pt-2 pl-2 relative">
@@ -410,19 +408,21 @@ export const BeforeAfterSection: React.FC = () => {
                         </div>
                       </div>
 
-                      {/* Consultation CTA Button */}
-                      <div className="mt-6 pt-4 border-t border-white/10">
-                        <motion.a
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                          href={createWhatsAppLink(`Hola ${DOCTOR_NAME}, vi el caso de ${c.title} en su web y quisiera consultar si mi caso califica para un tratamiento similar.`)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-full py-3.5 rounded-full bg-gradient-to-r from-[#005A9C] to-[#0084DE] hover:from-[#004b83] hover:to-[#0070bc] text-white font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-lg shadow-cyan-950/40 cursor-pointer"
-                        >
-                          <WhatsAppIcon className="w-4 h-4 text-[#25D366]" />
-                          <span>Consultar por este resultado</span>
-                        </motion.a>
+                      {/* Consultation CTA Button con padding interno */}
+                      <div className="px-6 pb-6 sm:px-7 sm:pb-7 pt-0">
+                        <div className="pt-4 border-t border-white/10">
+                          <motion.a
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            href={createWhatsAppLink(`Hola ${DOCTOR_NAME}, vi el caso de ${c.title} en su web y quisiera consultar si mi caso califica para un tratamiento similar.`)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full py-3.5 rounded-full bg-gradient-to-r from-[#005A9C] to-[#0084DE] hover:from-[#004b83] hover:to-[#0070bc] text-white font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-lg shadow-cyan-950/40 cursor-pointer"
+                          >
+                            <WhatsAppIcon className="w-4 h-4 text-[#25D366]" />
+                            <span>Consultar por este resultado</span>
+                          </motion.a>
+                        </div>
                       </div>
                     </motion.div>
                   </div>
