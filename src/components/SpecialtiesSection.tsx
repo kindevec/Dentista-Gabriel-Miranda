@@ -262,22 +262,22 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                             }
                           }}
                           className={cn(
-                            'relative flex items-center gap-3.5 w-full h-full px-4 sm:px-5 py-3 rounded-2xl transition-all duration-300 text-left group border cursor-pointer select-none',
+                            'relative flex items-center gap-3.5 w-full h-full px-4 sm:px-5 py-3 rounded-2xl transition-all duration-300 text-left group cursor-pointer select-none',
                             isActive
-                              ? 'bg-gradient-to-r from-[#005A9C] via-[#0070BA] to-[#0A2540] text-white shadow-xl shadow-[#005A9C]/35 border-cyan-300 ring-2 ring-[#00BFFF]/50 scale-[1.02] z-20'
-                              : 'bg-gradient-to-r from-sky-100/95 via-blue-100/80 to-cyan-50/90 hover:from-sky-200 hover:via-blue-100 hover:to-cyan-100 text-[#005A9C] border-sky-300/90 hover:border-[#0084DE] shadow-xs hover:shadow-md hover:shadow-[#005A9C]/15'
+                              ? 'bg-gradient-to-br from-[#005A9C] via-[#0070BA] to-[#0A2540] text-white border border-cyan-300/80 ring-2 ring-[#00BFFF]/40 scale-[1.02] z-20 shadow-[-3px_-3px_9px_rgba(255,255,255,0.7),5px_5px_16px_rgba(0,90,156,0.35),inset_1px_1px_2px_rgba(255,255,255,0.35)]'
+                              : 'bg-gradient-to-br from-[#EEF7FE] via-[#E5F2FC] to-[#DBEEFA] hover:from-[#E5F2FC] hover:to-[#D4EAF8] text-[#005A9C] border border-white/90 hover:border-sky-300/80 shadow-[-4px_-4px_9px_rgba(255,255,255,0.95),4px_4px_12px_rgba(0,90,156,0.11),inset_1px_1px_1px_rgba(255,255,255,0.8)] hover:shadow-[-5px_-5px_12px_rgba(255,255,255,1),5px_5px_15px_rgba(0,90,156,0.16)]'
                           )}
                           style={{
-                            opacity: isActive ? 1 : Math.max(0.35, 1 - distance * 0.18),
+                            opacity: isActive ? 1 : Math.max(0.4, 1 - distance * 0.16),
                             transform: isActive ? 'scale(1.02)' : `scale(${Math.max(0.92, 1 - distance * 0.025)})`,
                           }}
                         >
                           <div
                             className={cn(
-                              'w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 shrink-0 shadow-xs',
+                              'w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 shrink-0',
                               isActive
-                                ? 'bg-white/20 text-white border border-white/35 backdrop-blur-sm'
-                                : 'bg-white text-[#005A9C] border border-sky-300 group-hover:bg-[#005A9C] group-hover:text-white group-hover:border-[#005A9C]'
+                                ? 'bg-white/20 text-white border border-white/30 shadow-[inset_1px_1px_3px_rgba(255,255,255,0.3),inset_-1px_-1px_3px_rgba(0,0,0,0.25)]'
+                                : 'bg-[#E0EFFC] text-[#005A9C] border border-sky-200/60 shadow-[inset_2px_2px_4px_rgba(0,90,156,0.12),inset_-2px_-2px_4px_rgba(255,255,255,0.9)] group-hover:bg-[#005A9C] group-hover:text-white group-hover:shadow-none group-hover:border-[#005A9C]'
                             )}
                           >
                             {getSpecialtyIcon(spec.iconName, isActive ? 'w-5 h-5 text-white' : 'w-5 h-5 text-[#005A9C] group-hover:text-white transition-colors')}
@@ -303,9 +303,9 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                           </div>
 
                           {isActive ? (
-                            <span className="ml-auto flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-cyan-400/20 border border-cyan-300/40 shrink-0">
+                            <span className="ml-auto flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-cyan-400/25 border border-cyan-200/50 shadow-[inset_1px_1px_2px_rgba(255,255,255,0.4),0_0_8px_rgba(0,191,255,0.3)] shrink-0">
                               <span className="w-2 h-2 rounded-full bg-[#00BFFF] shadow-[0_0_8px_#00BFFF] animate-pulse" />
-                              <span className="text-[10px] font-bold text-cyan-100 uppercase tracking-wider">Activo</span>
+                              <span className="text-[10px] font-black text-white uppercase tracking-wider">Activo</span>
                             </span>
                           ) : (
                             <span className="ml-auto opacity-0 group-hover:opacity-100 text-[#0084DE] transition-opacity shrink-0">
@@ -499,7 +499,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                       'flex items-center gap-2 px-3.5 py-2 rounded-full text-xs font-bold shrink-0 transition-all duration-300 border cursor-pointer select-none active:scale-95',
                       isActive
                         ? 'bg-gradient-to-r from-[#005A9C] via-[#0066B3] to-[#0A2540] text-white border-cyan-400/60 shadow-md shadow-[#005A9C]/25 ring-2 ring-cyan-400/25'
-                        : 'bg-sky-100/80 text-[#005A9C] border-sky-200 hover:bg-sky-200/90 shadow-2xs'
+                        : 'bg-gradient-to-br from-[#EEF7FE] to-[#DBEEFA] text-[#005A9C] border border-white/80 hover:border-sky-300 shadow-[-2px_-2px_5px_rgba(255,255,255,0.9),2px_2px_5px_rgba(0,90,156,0.08)]'
                     )}
                   >
                     <span className={cn(
