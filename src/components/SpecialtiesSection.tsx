@@ -174,16 +174,8 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
 
   return (
     <section id="servicios" className="py-10 sm:py-14 relative overflow-hidden bg-gradient-to-b from-[#F8FAFC] via-[#EDF4FA] to-[#EDF4FA]">
-      {/* 1. Intercalated High-Definition Background Texture */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <img
-          src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=1920&auto=format&fit=crop"
-          alt="Tecnología dental Odontología Gabriel Miranda"
-          referrerPolicy="no-referrer"
-          className="w-full h-full object-cover object-center opacity-[0.025] filter grayscale"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#F8FAFC] via-[#EDF4FA]/60 to-[#EDF4FA]" />
-      </div>
+      {/* Fondo puro sin texturas fotográficas oscuras que generen sombras espurias */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#F8FAFC] via-[#EDF4FA] to-[#EDF4FA] pointer-events-none" />
 
       {/* 2. Floating 3D Curved Ribbon */}
       <OrganicDentalRibbon className="top-12 -right-16 w-96 md:w-[32rem] opacity-40" variant="blue" />
@@ -214,14 +206,10 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
             {/* Left Column: Interactive Wheel of Specialties sobre el lienzo (Sin contenedor box-in-box) */}
             <div className="col-span-5 relative z-20 flex flex-col justify-center my-auto">
 
-              {/* Desktop Infinite Loop Wheel sobre el lienzo (Cero Contenedor, Solo Botones Flotando) */}
+              {/* Desktop Infinite Loop Wheel sobre el lienzo (Cero Contenedor, Cero Sombras de Máscara) */}
               <div
                 onWheel={handleWheel}
                 className="relative w-full h-[470px] flex items-center justify-start overflow-hidden select-none my-auto cursor-grab active:cursor-grabbing"
-                style={{
-                  maskImage: 'linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)',
-                  WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)',
-                }}
               >
                 {/* Infinite Continuous Virtual Track con Arrastre Físico e Inercia */}
                 <motion.div
@@ -286,8 +274,8 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                           className={cn(
                             'relative flex items-center gap-3.5 w-full h-full px-5 py-3 rounded-2xl transition-all duration-300 text-left group cursor-pointer select-none border-0',
                             isActive
-                              ? 'bg-gradient-to-br from-[#FFFFFF] via-[#EDF4FA] to-[#DFECF7] shadow-[-11px_-11px_26px_#FFFFFF,11px_11px_30px_rgba(0,90,156,0.22),inset_0_0_0_2px_rgba(0,191,255,0.55)] scale-[1.03] z-20'
-                              : 'bg-gradient-to-br from-[#FFFFFF] via-[#EDF4FA] to-[#DFECF7] hover:from-[#FFFFFF] hover:to-[#D8E7F5] shadow-[-9px_-9px_22px_#FFFFFF,9px_9px_25px_rgba(13,39,80,0.15)] hover:shadow-[-11px_-11px_26px_#FFFFFF,11px_11px_28px_rgba(13,39,80,0.20)]'
+                              ? 'bg-gradient-to-br from-[#FFFFFF] via-[#EDF4FA] to-[#E5EFF8] shadow-[-5px_-5px_12px_rgba(255,255,255,0.95),4px_4px_12px_rgba(0,90,156,0.08),inset_0_0_0_1.5px_rgba(0,191,255,0.45)] scale-[1.02] z-20'
+                              : 'bg-gradient-to-br from-[#FFFFFF] via-[#EDF4FA] to-[#E5EFF8] hover:from-[#FFFFFF] hover:to-[#DEECF8] shadow-[-4px_-4px_10px_rgba(255,255,255,0.9),3px_3px_10px_rgba(0,75,135,0.05)] hover:shadow-[-6px_-6px_14px_rgba(255,255,255,1),4px_4px_12px_rgba(0,75,135,0.08)]'
                           )}
                           style={{
                             opacity,
@@ -522,8 +510,8 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                     className={cn(
                       'flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold shrink-0 transition-all duration-300 border-0 cursor-pointer select-none active:scale-95',
                       isActive
-                        ? 'bg-gradient-to-br from-[#FFFFFF] via-[#EDF4FA] to-[#DFECF7] text-[#003B66] shadow-[-6px_-6px_14px_#FFFFFF,6px_6px_16px_rgba(0,90,156,0.22),inset_0_0_0_2px_rgba(0,191,255,0.6)]'
-                        : 'bg-gradient-to-br from-[#FFFFFF] via-[#EDF4FA] to-[#DFECF7] text-[#005A9C] shadow-[-5px_-5px_12px_#FFFFFF,5px_5px_14px_rgba(13,39,80,0.14)]'
+                        ? 'bg-gradient-to-br from-[#FFFFFF] via-[#EDF4FA] to-[#E5EFF8] text-[#003B66] shadow-[-4px_-4px_10px_rgba(255,255,255,0.9),3px_3px_10px_rgba(0,90,156,0.10),inset_0_0_0_1.5px_rgba(0,191,255,0.5)]'
+                        : 'bg-gradient-to-br from-[#FFFFFF] via-[#EDF4FA] to-[#E5EFF8] text-[#005A9C] shadow-[-3px_-3px_8px_rgba(255,255,255,0.9),2px_2px_8px_rgba(0,75,135,0.05)]'
                     )}
                   >
                     <span className={cn(
