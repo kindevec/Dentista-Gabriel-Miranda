@@ -178,9 +178,9 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
   };
 
   return (
-    <section id="servicios" className="py-10 sm:py-14 relative overflow-hidden bg-gradient-to-b from-[#F8FAFC] via-[#EDF4FA] to-[#EDF4FA]">
-      {/* Fondo puro sin texturas fotográficas oscuras que generen sombras espurias */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#F8FAFC] via-[#EDF4FA] to-[#EDF4FA] pointer-events-none" />
+    <section id="servicios" className="py-10 sm:py-14 relative overflow-hidden bg-gradient-to-b from-[#EBF2F9] via-[#E2EDF7] to-[#E2EDF7]">
+      {/* Fondo clínico azul cielo suave para máximo contraste de luces especulares y sombras neumórficas */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#EBF2F9] via-[#E2EDF7] to-[#E2EDF7] pointer-events-none" />
 
       {/* 2. Floating 3D Curved Ribbon */}
       <OrganicDentalRibbon className="top-12 -right-16 w-96 md:w-[32rem] opacity-40" variant="blue" />
@@ -242,13 +242,13 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                     const opacity = isActive
                       ? 1
                       : distance === 1
-                      ? 0.88
+                      ? 0.92
                       : distance === 2
-                      ? 0.45
-                      : 0.12;
+                      ? 0.58
+                      : 0.18;
 
                     const scale = isActive
-                      ? 1.02
+                      ? 1.03
                       : distance === 1
                       ? 0.98
                       : distance === 2
@@ -277,8 +277,8 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                           className={cn(
                             'relative flex items-center gap-3.5 w-full h-full px-5 py-3 rounded-2xl transition-[background-color,box-shadow] duration-200 text-left group cursor-pointer select-none border-0',
                             isActive
-                              ? 'bg-gradient-to-br from-[#FFFFFF] via-[#EDF4FA] to-[#E5EFF8] shadow-[-5px_-5px_12px_rgba(255,255,255,0.95),4px_4px_12px_rgba(0,90,156,0.08),inset_0_0_0_1.5px_rgba(0,191,255,0.45)] scale-[1.02] z-20'
-                              : 'bg-gradient-to-br from-[#FFFFFF] via-[#EDF4FA] to-[#E5EFF8] hover:from-[#FFFFFF] hover:to-[#DEECF8] shadow-[-4px_-4px_10px_rgba(255,255,255,0.9),3px_3px_10px_rgba(0,75,135,0.05)] hover:shadow-[-6px_-6px_14px_rgba(255,255,255,1),4px_4px_12px_rgba(0,75,135,0.08)]'
+                              ? 'bg-gradient-to-br from-[#FFFFFF] via-[#E8F2FA] to-[#D8E7F5] shadow-[-10px_-10px_24px_#FFFFFF,10px_10px_26px_rgba(13,39,80,0.25),inset_2px_2px_4px_#FFFFFF,inset_-2px_-2px_4px_rgba(13,39,80,0.16),inset_0_0_0_2px_rgba(0,191,255,0.65)] scale-[1.03] z-20'
+                              : 'bg-gradient-to-br from-[#FFFFFF] via-[#EDF4FA] to-[#DFECF7] hover:from-[#FFFFFF] hover:to-[#D8E7F5] shadow-[-8px_-8px_20px_#FFFFFF,8px_8px_22px_rgba(13,39,80,0.16),inset_1.5px_1.5px_3px_#FFFFFF,inset_-1.5px_-1.5px_3px_rgba(13,39,80,0.08)] hover:shadow-[-10px_-10px_24px_#FFFFFF,10px_10px_26px_rgba(13,39,80,0.22),inset_2px_2px_4px_#FFFFFF,inset_-2px_-2px_4px_rgba(13,39,80,0.12)]'
                           )}
                           style={{
                             opacity,
@@ -292,8 +292,8 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                             className={cn(
                               'w-9 h-9 rounded-xl flex items-center justify-center transition-[background-color,box-shadow,color] duration-200 shrink-0 border-0',
                               isActive
-                                ? 'bg-gradient-to-br from-[#005A9C] via-[#0070BA] to-[#0A2540] text-white shadow-[0_3px_10px_rgba(0,90,156,0.4),inset_1px_1px_2px_rgba(255,255,255,0.4)]'
-                                : 'bg-[#E2EDF8] text-[#005A9C] shadow-[inset_4px_4px_8px_rgba(13,39,80,0.14),inset_-4px_-4px_8px_#FFFFFF] group-hover:bg-[#005A9C] group-hover:text-white group-hover:shadow-[0_4px_14px_rgba(0,90,156,0.35)]'
+                                ? 'bg-gradient-to-br from-[#005A9C] via-[#0070BA] to-[#0A2540] text-white shadow-[0_4px_12px_rgba(0,90,156,0.45),inset_1.5px_1.5px_3px_rgba(255,255,255,0.4)]'
+                                : 'bg-[#E2EDF8] text-[#005A9C] shadow-[inset_3.5px_3.5px_7px_rgba(13,39,80,0.16),inset_-3.5px_-3.5px_7px_#FFFFFF] group-hover:bg-[#005A9C] group-hover:text-white group-hover:shadow-[0_4px_14px_rgba(0,90,156,0.35)]'
                             )}
                           >
                             {getSpecialtyIcon(spec.iconName, isActive ? 'w-5 h-5 text-white' : 'w-5 h-5 text-[#005A9C] group-hover:text-white transition-colors')}
@@ -528,8 +528,8 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                     className={cn(
                       'flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold shrink-0 transition-[background-color,box-shadow,color] duration-200 border-0 cursor-pointer select-none active:scale-95',
                       isActive
-                        ? 'bg-gradient-to-br from-[#FFFFFF] via-[#EDF4FA] to-[#E5EFF8] text-[#003B66] shadow-[-4px_-4px_10px_rgba(255,255,255,0.9),3px_3px_10px_rgba(0,90,156,0.10),inset_0_0_0_1.5px_rgba(0,191,255,0.5)]'
-                        : 'bg-gradient-to-br from-[#FFFFFF] via-[#EDF4FA] to-[#E5EFF8] text-[#005A9C] shadow-[-3px_-3px_8px_rgba(255,255,255,0.9),2px_2px_8px_rgba(0,75,135,0.05)]'
+                        ? 'bg-gradient-to-br from-[#FFFFFF] via-[#E8F2FA] to-[#D8E7F5] text-[#003B66] shadow-[-6px_-6px_16px_#FFFFFF,6px_6px_18px_rgba(13,39,80,0.22),inset_1.5px_1.5px_3px_#FFFFFF,inset_-1.5px_-1.5px_3px_rgba(13,39,80,0.14),inset_0_0_0_1.5px_rgba(0,191,255,0.65)]'
+                        : 'bg-gradient-to-br from-[#FFFFFF] via-[#EDF4FA] to-[#DFECF7] text-[#005A9C] shadow-[-4px_-4px_12px_#FFFFFF,4px_4px_14px_rgba(13,39,80,0.14),inset_1px_1px_2px_#FFFFFF,inset_-1px_-1px_2px_rgba(13,39,80,0.06)]'
                     )}
                   >
                     <span className={cn(

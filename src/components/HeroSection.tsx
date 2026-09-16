@@ -323,7 +323,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
       {/* Organic Curved Wave Transition into Specialties */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
-        <CurvedSectionDivider position="bottom" fillColor="#F8FAFC" variant="smoothCurve" />
+        <CurvedSectionDivider position="bottom" fillColor="#EBF2F9" variant="smoothCurve" />
       </div>
     </section>
   );
