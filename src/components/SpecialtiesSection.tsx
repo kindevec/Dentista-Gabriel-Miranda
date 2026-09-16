@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, type PanInfo } from 'motion/react';
 import {
   Layers,
   Smile,
@@ -41,8 +41,6 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
   const [step, setStep] = useState(0);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
-  const touchStartYTrack = useRef<number | null>(null);
-  const wheelCooldownRef = useRef<boolean>(false);
   const mobilePillsRef = useRef<HTMLDivElement>(null);
 
   const totalItems = SPECIALTIES_DATA.length;
@@ -78,39 +76,43 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
     if (diff !== 0) setStep((s) => s + diff);
   };
 
-  // Mouse wheel listener with cooldown to step through infinite loop smoothly
+  const wheelAccumulatorRef = useRef<number>(0);
+  const wheelTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Deslizamiento fluido y continuo por rueda de ratón (sensación de arrastre real)
   const handleWheel = (e: React.WheelEvent) => {
     e.stopPropagation();
-    if (wheelCooldownRef.current) return;
-    if (Math.abs(e.deltaY) < 16) return;
+    wheelAccumulatorRef.current += e.deltaY;
 
-    wheelCooldownRef.current = true;
-    setTimeout(() => {
-      wheelCooldownRef.current = false;
-    }, 180);
-
-    if (e.deltaY > 0) {
-      setStep((s) => s + 1);
-    } else {
-      setStep((s) => s - 1);
+    if (wheelTimerRef.current) {
+      clearTimeout(wheelTimerRef.current);
     }
+
+    const threshold = 36;
+    if (Math.abs(wheelAccumulatorRef.current) >= threshold) {
+      const direction = wheelAccumulatorRef.current > 0 ? 1 : -1;
+      setStep((s) => s + direction);
+      wheelAccumulatorRef.current = 0;
+    }
+
+    wheelTimerRef.current = setTimeout(() => {
+      wheelAccumulatorRef.current = 0;
+    }, 140);
   };
 
-  // Touch Swipe Handlers for vertical wheel track
-  const handleTouchStartTrack = (e: React.TouchEvent) => {
-    touchStartYTrack.current = e.targetTouches[0].clientY;
-  };
-
-  const handleTouchEndTrack = (e: React.TouchEvent) => {
-    if (touchStartYTrack.current === null) return;
-    const endY = e.changedTouches[0].clientY;
-    const diff = touchStartYTrack.current - endY;
-    if (diff > 35) {
-      setStep((s) => s + 1);
-    } else if (diff < -35) {
-      setStep((s) => s - 1);
+  // Arrastre físico táctil interactivo con mouse o touch
+  const handleTrackDragEnd = (
+    _event: MouseEvent | TouchEvent | PointerEvent,
+    info: PanInfo
+  ) => {
+    const deltaY = info.offset.y;
+    const velocityY = info.velocity.y;
+    // Calcula cuántos pasos se desplaza en función de la distancia arrastrada y la velocidad de inercia
+    const projectedDistance = deltaY + velocityY * 0.16;
+    const stepsMoved = -Math.round(projectedDistance / ITEM_HEIGHT);
+    if (stepsMoved !== 0) {
+      setStep((s) => s + stepsMoved);
     }
-    touchStartYTrack.current = null;
   };
 
   const getCardStatus = (index: number) => {
@@ -171,16 +173,16 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
   };
 
   return (
-    <section id="servicios" className="py-10 sm:py-14 relative overflow-hidden bg-slate-50/70">
+    <section id="servicios" className="py-10 sm:py-14 relative overflow-hidden bg-gradient-to-b from-[#F8FAFC] via-[#EDF4FA] to-[#EDF4FA]">
       {/* 1. Intercalated High-Definition Background Texture */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img
           src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=1920&auto=format&fit=crop"
           alt="Tecnología dental Odontología Gabriel Miranda"
           referrerPolicy="no-referrer"
-          className="w-full h-full object-cover object-center opacity-[0.035] filter grayscale"
+          className="w-full h-full object-cover object-center opacity-[0.025] filter grayscale"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#F8FAFC] via-transparent to-[#F8FAFC]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#F8FAFC] via-[#EDF4FA]/60 to-[#EDF4FA]" />
       </div>
 
       {/* 2. Floating 3D Curved Ribbon */}
@@ -215,22 +217,24 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
               {/* Desktop Infinite Loop Wheel sobre el lienzo (Cero Contenedor, Solo Botones Flotando) */}
               <div
                 onWheel={handleWheel}
-                onTouchStart={handleTouchStartTrack}
-                onTouchEnd={handleTouchEndTrack}
-                className="relative w-full h-[470px] flex items-center justify-start overflow-hidden select-none my-auto"
+                className="relative w-full h-[470px] flex items-center justify-start overflow-hidden select-none my-auto cursor-grab active:cursor-grabbing"
                 style={{
                   maskImage: 'linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)',
                   WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)',
                 }}
               >
-                {/* Infinite Continuous Virtual Track */}
+                {/* Infinite Continuous Virtual Track con Arrastre Físico e Inercia */}
                 <motion.div
+                  drag="y"
+                  dragConstraints={{ top: 0, bottom: 0 }}
+                  dragElastic={0.25}
+                  onDragEnd={handleTrackDragEnd}
                   animate={{ y: 201 - step * ITEM_HEIGHT }}
                   transition={{
                     type: 'spring',
-                    stiffness: 220,
+                    stiffness: 260,
                     damping: 26,
-                    mass: 0.8,
+                    mass: 0.7,
                   }}
                   className="relative w-full h-full z-20"
                 >
@@ -270,7 +274,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                           right: 0,
                           height: ITEM_HEIGHT,
                         }}
-                        className="flex items-center justify-start w-full py-1.5 px-3.5"
+                        className="flex items-center justify-start w-full py-1.5 px-4"
                       >
                         <button
                           type="button"
@@ -280,10 +284,10 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                             }
                           }}
                           className={cn(
-                            'relative flex items-center gap-3.5 w-full h-full px-4 sm:px-5 py-3 rounded-2xl transition-all duration-300 text-left group cursor-pointer select-none',
+                            'relative flex items-center gap-3.5 w-full h-full px-5 py-3 rounded-2xl transition-all duration-300 text-left group cursor-pointer select-none border-0',
                             isActive
-                              ? 'bg-gradient-to-r from-[#005A9C] via-[#0070BA] to-[#0A2540] text-white border border-cyan-300/90 ring-2 ring-[#00BFFF]/45 z-20 shadow-[-5px_-5px_14px_rgba(255,255,255,0.85),6px_6px_20px_rgba(0,90,156,0.42),inset_1px_1px_2px_rgba(255,255,255,0.4)]'
-                              : 'bg-gradient-to-br from-[#FFFFFF] via-[#F8FAFC] to-[#EEF5FB] hover:from-[#FFFFFF] hover:to-[#E5F1FA] text-[#005A9C] border border-white/90 hover:border-sky-200/90 shadow-[-6px_-6px_14px_rgba(255,255,255,1),6px_6px_18px_rgba(0,90,156,0.15),inset_1px_1px_1.5px_rgba(255,255,255,0.95),inset_-1px_-1px_2px_rgba(0,90,156,0.04)] hover:shadow-[-8px_-8px_18px_rgba(255,255,255,1),8px_8px_22px_rgba(0,90,156,0.22),inset_1px_1px_2px_rgba(255,255,255,1)]'
+                              ? 'bg-gradient-to-r from-[#005A9C] via-[#0070BA] to-[#0A2540] text-white ring-2 ring-[#00BFFF]/50 shadow-[-8px_-8px_20px_rgba(255,255,255,0.9),8px_8px_26px_rgba(13,39,80,0.38)] z-20'
+                              : 'bg-gradient-to-br from-[#FFFFFF] via-[#EDF4FA] to-[#DFECF7] hover:from-[#FFFFFF] hover:to-[#D8E7F5] text-[#005A9C] shadow-[-9px_-9px_22px_#FFFFFF,9px_9px_25px_rgba(13,39,80,0.15)] hover:shadow-[-11px_-11px_26px_#FFFFFF,11px_11px_28px_rgba(13,39,80,0.20)]'
                           )}
                           style={{
                             opacity,
@@ -291,12 +295,13 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                             pointerEvents: distance <= 2 ? 'auto' : 'none',
                           }}
                         >
+                          {/* Pozo de Icono Neumórfico Hundido (Exacto a Imágenes de Referencia #0D2750 + #FFFFFF) */}
                           <div
                             className={cn(
-                              'w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 shrink-0',
+                              'w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 shrink-0 border-0',
                               isActive
-                                ? 'bg-white/20 text-white border border-white/35 shadow-[inset_1.5px_1.5px_3px_rgba(255,255,255,0.35),inset_-1.5px_-1.5px_3px_rgba(0,0,0,0.25)]'
-                                : 'bg-[#EDF5FC] text-[#005A9C] border border-sky-200/50 shadow-[inset_2.5px_2.5px_5px_rgba(0,90,156,0.14),inset_-2.5px_-2.5px_5px_rgba(255,255,255,1)] group-hover:bg-[#005A9C] group-hover:text-white group-hover:shadow-[0_4px_12px_rgba(0,90,156,0.35)] group-hover:border-[#005A9C]'
+                                ? 'bg-white/20 text-white shadow-[inset_2px_2px_4px_rgba(255,255,255,0.4),inset_-2px_-2px_4px_rgba(0,0,0,0.25)]'
+                                : 'bg-[#E2EDF8] text-[#005A9C] shadow-[inset_4px_4px_8px_rgba(13,39,80,0.14),inset_-4px_-4px_8px_#FFFFFF] group-hover:bg-[#005A9C] group-hover:text-white group-hover:shadow-[0_4px_14px_rgba(0,90,156,0.35)]'
                             )}
                           >
                             {getSpecialtyIcon(spec.iconName, isActive ? 'w-5 h-5 text-white' : 'w-5 h-5 text-[#005A9C] group-hover:text-white transition-colors')}
@@ -306,7 +311,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                             <span
                               className={cn(
                                 'font-extrabold text-sm tracking-tight truncate transition-colors',
-                                isActive ? 'text-white' : 'text-[#004B87] group-hover:text-[#002D54]'
+                                isActive ? 'text-white' : 'text-[#0A2540] group-hover:text-[#005A9C]'
                               )}
                             >
                               {spec.title}
@@ -322,7 +327,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                           </div>
 
                           {isActive ? (
-                            <span className="ml-auto flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-cyan-400/25 border border-cyan-200/50 shadow-[inset_1px_1px_2px_rgba(255,255,255,0.4),0_0_8px_rgba(0,191,255,0.3)] shrink-0">
+                            <span className="ml-auto flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-cyan-400/25 border border-cyan-200/50 shadow-[0_0_10px_rgba(0,191,255,0.35)] shrink-0">
                               <span className="w-2 h-2 rounded-full bg-[#00BFFF] shadow-[0_0_8px_#00BFFF] animate-pulse" />
                               <span className="text-[10px] font-black text-white uppercase tracking-wider">Activo</span>
                             </span>
@@ -515,10 +520,10 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                     data-pill-index={index}
                     onClick={() => handleChipClick(index)}
                     className={cn(
-                      'flex items-center gap-2 px-3.5 py-2 rounded-full text-xs font-bold shrink-0 transition-all duration-300 border cursor-pointer select-none active:scale-95',
+                      'flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold shrink-0 transition-all duration-300 border-0 cursor-pointer select-none active:scale-95',
                       isActive
-                        ? 'bg-gradient-to-r from-[#005A9C] via-[#0066B3] to-[#0A2540] text-white border-cyan-400/60 shadow-md shadow-[#005A9C]/25 ring-2 ring-cyan-400/25'
-                        : 'bg-gradient-to-br from-[#FFFFFF] via-[#F8FAFC] to-[#EEF5FB] text-[#005A9C] border border-white/90 hover:border-sky-300 shadow-[-3px_-3px_8px_rgba(255,255,255,1),3px_3px_8px_rgba(0,90,156,0.14),inset_1px_1px_1px_rgba(255,255,255,0.9)]'
+                        ? 'bg-gradient-to-r from-[#005A9C] via-[#0066B3] to-[#0A2540] text-white ring-2 ring-cyan-400/30 shadow-[-4px_-4px_10px_rgba(255,255,255,0.8),4px_4px_12px_rgba(13,39,80,0.3)]'
+                        : 'bg-gradient-to-br from-[#FFFFFF] via-[#EDF4FA] to-[#DFECF7] text-[#005A9C] shadow-[-5px_-5px_12px_#FFFFFF,5px_5px_14px_rgba(13,39,80,0.14)]'
                     )}
                   >
                     <span className={cn(

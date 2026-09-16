@@ -35,7 +35,7 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
     <section id="urgencias" className="relative overflow-hidden py-12 sm:py-14 lg:py-16 text-white bg-[#07192C]">
       {/* Top Organic Wave Transition from Specialties Section (Masks background & photo) */}
       <div className="absolute top-0 left-0 right-0 z-20 pointer-events-none">
-        <CurvedSectionDivider position="top" fillColor="#F8FAFC" variant="wave1" />
+        <CurvedSectionDivider position="top" fillColor="#EDF4FA" variant="wave1" />
       </div>
 
       {/* 1. Split Atmospheric Background: Right-side Full Bleed Medical Photo */}
