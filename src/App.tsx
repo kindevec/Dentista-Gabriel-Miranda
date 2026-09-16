@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { SpecialtiesSection } from './components/SpecialtiesSection';
-import { BeforeAfterSection } from './components/BeforeAfterSection';
 import { EmergencyBannerSection } from './components/EmergencyBannerSection';
 import { DoctorProfileSection } from './components/DoctorProfileSection';
 import { FaqSection } from './components/FaqSection';
@@ -22,8 +21,7 @@ export default function App() {
     const sectionMap = [
       { id: 'inicio', navKey: 'inicio' },
       { id: 'especialidades', navKey: 'especialidades' },
-      { id: 'casos-reales', navKey: 'casos-reales' },
-      { id: 'urgencias', navKey: 'casos-reales' },
+      { id: 'urgencias', navKey: 'especialidades' },
       { id: 'nosotros', navKey: 'nosotros' },
       { id: 'preguntas', navKey: 'nosotros' },
       { id: 'contacto', navKey: 'contacto' },
@@ -80,10 +78,7 @@ export default function App() {
           onSelectSpecialtyForBooking={handleOpenBookingWithSpecialty}
         />
 
-        {/* 3. Casos Reales Antes y Después (Fondo de alto contraste azul médico profundo con slider y ribbons) */}
-        <BeforeAfterSection />
-
-        {/* 4. Sección de Urgencias Odontológicas 24/7 (Inspirada en "We will help in Emergency" de Medigo) */}
+        {/* 3. Sección de Urgencias Odontológicas 24/7 (Inspirada en "We will help in Emergency" de Medigo) */}
         <EmergencyBannerSection
           onOpenEmergency={handleOpenEmergency}
         />

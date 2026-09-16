@@ -629,9 +629,9 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
         </div>
       </div>
 
-      {/* Organic Curved Wave Transition into Casos Reales */}
+      {/* Organic Curved Wave Transition into Urgencias 24/7 */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
-        <CurvedSectionDivider position="bottom" fillColor="#07182B" variant="wave1" />
+        <CurvedSectionDivider position="bottom" fillColor="#07192C" variant="wave1" />
       </div>
     </section>
   );

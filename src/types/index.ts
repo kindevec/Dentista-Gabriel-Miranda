@@ -26,20 +26,6 @@ export interface DoctorProfile {
   schedule: string;
 }
 
-export interface BeforeAfterCase {
-  id: string;
-  title: string;
-  category: 'ortodoncia' | 'implantes' | 'estetica' | 'blanqueamiento';
-  description: string;
-  beforeImage: string;
-  afterImage: string;
-  duration: string;
-  patientName: string;
-  treatmentType: string;
-  testimonial: string;
-  stars: number;
-}
-
 export interface SocialNetwork {
   id: string;
   name: string;

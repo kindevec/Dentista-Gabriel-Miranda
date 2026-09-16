@@ -1,4 +1,4 @@
-import { Specialty, DoctorProfile, BeforeAfterCase, SocialNetwork, FaqItem } from '../types';
+import { Specialty, DoctorProfile, SocialNetwork, FaqItem } from '../types';
 
 export const CLINIC_NAME = "Odontología Gabriel Miranda";
 export const DOCTOR_NAME = "Dr. Gabriel Miranda";
@@ -164,61 +164,6 @@ export const DOCTOR_PROFILE: DoctorProfile = {
   philosophy: "«Cada paciente es único. Mi mayor satisfacción es ver cómo una sonrisa saludable y armónica transforma la seguridad y la calidad de vida de una persona, sin que el proceso cause temor ni dolor.»",
   schedule: "Lunes a Viernes: 08:30 AM - 19:00 PM | Sábados: 09:00 AM - 15:00 PM"
 };
-
-export const BEFORE_AFTER_CASES: BeforeAfterCase[] = [
-  {
-    id: "caso-ortodoncia-1",
-    title: "Alineación de Apiñamiento Severo y Mordida Cruzada",
-    category: "ortodoncia",
-    treatmentType: "Ortodoncia Invisible 3D",
-    description: "Paciente de 26 años con apiñamiento anterior y rotaciones dentales. Planificación digital 3D sin extracciones de premolares.",
-    beforeImage: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=800&auto=format&fit=crop",
-    afterImage: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=800&auto=format&fit=crop",
-    duration: "10 Meses",
-    patientName: "Valeria M.",
-    testimonial: "Tenía mucho complejo con mis dientes pero no quería usar brackets metálicos por mi carrera. El Dr. Gabriel Miranda me recomendó los alineadores y en solo 10 meses el cambio fue radical. ¡El trato es de 10!",
-    stars: 5
-  },
-  {
-    id: "caso-implante-2",
-    title: "Rehabilitación Fija con Implante Guiado en 3D",
-    category: "implantes",
-    treatmentType: "Implante Guiado de Titanio + Corona Circonio",
-    description: "Reemplazo de pieza dental ausente por traumatismo con cirugía guiada milimétrica y corona de circonio de alta traslucidez.",
-    beforeImage: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop",
-    afterImage: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=800&auto=format&fit=crop",
-    duration: "2 Sesiones",
-    patientName: "Carlos E.",
-    testimonial: "La precisión del Dr. Gabriel me dejó asombrado: no sentí dolor durante la cirugía ni después. Hoy puedo comer y sonreír con total normalidad, se ve idéntico a mis dientes naturales.",
-    stars: 5
-  },
-  {
-    id: "caso-estetica-3",
-    title: "Diseño de Sonrisa con Carillas Cerámicas Ultrafinas",
-    category: "estetica",
-    treatmentType: "8 Carillas de Porcelana E-Max",
-    description: "Armonización estética de borde incisal, color y cierre de diastemas centrales en paciente con desgaste severo por bruxismo.",
-    beforeImage: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=800&auto=format&fit=crop",
-    afterImage: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=800&auto=format&fit=crop",
-    duration: "3 Citas",
-    patientName: "Diana P.",
-    testimonial: "El Dr. Miranda me hizo un mock-up antes de colocar las carillas definitivas. Pude ver y aprobar mi sonrisa antes de empezar. El resultado superó todas mis expectativas.",
-    stars: 5
-  },
-  {
-    id: "caso-blanqueamiento-4",
-    title: "Aclaramiento Dental Clínico Fotoactivado LED",
-    category: "blanqueamiento",
-    treatmentType: "Blanqueamiento LED en Consultorio",
-    description: "Tratamiento de aclaramiento dental de 5 tonos para eliminar manchas crónicas por café y té en esmalte intacto.",
-    beforeImage: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop",
-    afterImage: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=800&auto=format&fit=crop",
-    duration: "1 Sesión (45 min)",
-    patientName: "Santiago G.",
-    testimonial: "Rápido y sin sensibilidad dental. En una sola visita salí con los dientes varios tonos más blancos. Altamente recomendado.",
-    stars: 5
-  }
-];
 
 export const FAQ_DATA: FaqItem[] = [
   {

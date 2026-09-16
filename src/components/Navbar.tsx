@@ -103,21 +103,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             Nosotros
           </button>
 
-          {/* Section 4: Casos Reales */}
-          <button
-            onClick={() => handleNavClick('casos-reales')}
-            className={`px-4 py-2 rounded-full text-xs xl:text-sm font-semibold transition-all duration-200 cursor-pointer ${
-              activeSection === 'casos-reales'
-                ? isScrolled
-                  ? 'text-[#005A9C] bg-cyan-50 font-bold'
-                  : 'text-[#005A9C] bg-white/70 backdrop-blur-xs font-bold shadow-xs border border-cyan-100/60'
-                : 'text-slate-600 hover:text-[#005A9C] hover:bg-white/60'
-            }`}
-          >
-            Casos Reales
-          </button>
-
-          {/* Section 5: Redes & Contacto */}
+          {/* Section 4: Redes & Contacto */}
           <button
             onClick={() => handleNavClick('contacto')}
             className={`px-4 py-2 rounded-full text-xs xl:text-sm font-semibold transition-all duration-200 cursor-pointer ${

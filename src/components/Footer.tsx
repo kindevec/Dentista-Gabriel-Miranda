@@ -51,11 +51,6 @@ export const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="#casos-reales" className="hover:text-[#00BFFF] transition-colors">
-                  Galería Antes y Después
-                </a>
-              </li>
-              <li>
                 <a href="#nosotros" className="hover:text-[#00BFFF] transition-colors">
                   Dr. Gabriel Miranda & Instalaciones
                 </a>
