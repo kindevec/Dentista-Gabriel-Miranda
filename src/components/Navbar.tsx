@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Logo } from './Logo';
-import { ChevronDown, Layers, Smile, ShieldCheck, Activity, Droplets, Zap, HeartHandshake } from 'lucide-react';
-import { SPECIALTIES_DATA, createWhatsAppLink, BOOKING_WA_MESSAGE } from '../data/clinicData';
+import { createWhatsAppLink, BOOKING_WA_MESSAGE } from '../data/clinicData';
 
 interface NavbarProps {
   activeSection: string;
@@ -15,7 +14,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenBooking: _onOpenBooking,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,7 +26,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const handleNavClick = (sectionId: string) => {
     setActiveSection(sectionId);
-    setIsDropdownOpen(false);
 
     if (sectionId === 'inicio') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -44,27 +41,6 @@ export const Navbar: React.FC<NavbarProps> = ({
         top: offsetPosition,
         behavior: 'smooth',
       });
-    }
-  };
-
-  const getSpecialtyIcon = (iconName: string) => {
-    switch (iconName) {
-      case 'Layers':
-        return <Layers className="w-4 h-4 text-[#00BFFF]" />;
-      case 'Smile':
-        return <Smile className="w-4 h-4 text-[#00BFFF]" />;
-      case 'ShieldCheck':
-        return <ShieldCheck className="w-4 h-4 text-[#00BFFF]" />;
-      case 'Activity':
-        return <Activity className="w-4 h-4 text-[#00BFFF]" />;
-      case 'Droplets':
-        return <Droplets className="w-4 h-4 text-[#00BFFF]" />;
-      case 'Zap':
-        return <Zap className="w-4 h-4 text-[#00BFFF]" />;
-      case 'HeartHandshake':
-        return <HeartHandshake className="w-4 h-4 text-[#00BFFF]" />;
-      default:
-        return <Layers className="w-4 h-4 text-[#00BFFF]" />;
     }
   };
 
@@ -99,59 +75,19 @@ export const Navbar: React.FC<NavbarProps> = ({
             Inicio
           </button>
 
-          {/* Section 2: Especialidades (con Dropdown) */}
-          <div
-            className="relative"
-            onMouseEnter={() => setIsDropdownOpen(true)}
-            onMouseLeave={() => setIsDropdownOpen(false)}
+          {/* Section 2: Especialidades */}
+          <button
+            onClick={() => handleNavClick('especialidades')}
+            className={`px-4 py-2 rounded-full text-xs xl:text-sm font-semibold transition-all duration-200 cursor-pointer ${
+              activeSection === 'especialidades'
+                ? isScrolled
+                  ? 'text-[#005A9C] bg-cyan-50 font-bold shadow-xs'
+                  : 'text-[#005A9C] bg-white/70 backdrop-blur-xs font-bold shadow-xs border border-cyan-100/60'
+                : 'text-slate-600 hover:text-[#005A9C] hover:bg-white/60'
+            }`}
           >
-            <button
-              onClick={() => handleNavClick('especialidades')}
-              className={`px-4 py-2 rounded-full text-xs xl:text-sm font-semibold flex items-center gap-1.5 transition-all duration-200 cursor-pointer ${
-                activeSection === 'especialidades'
-                  ? isScrolled
-                    ? 'text-[#005A9C] bg-cyan-50 font-bold'
-                    : 'text-[#005A9C] bg-white/70 backdrop-blur-xs font-bold shadow-xs border border-cyan-100/60'
-                  : 'text-slate-600 hover:text-[#005A9C] hover:bg-white/60'
-              }`}
-            >
-              <span>Especialidades</span>
-              <ChevronDown
-                className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                  isDropdownOpen ? 'rotate-180 text-[#00BFFF]' : 'text-slate-400'
-                }`}
-              />
-            </button>
-
-            {/* Dropdown Menu con Curvas Suaves */}
-            {isDropdownOpen && (
-              <div className="absolute top-full left-0 w-88 bg-white/95 backdrop-blur-xl rounded-[2rem] shadow-2xl border border-cyan-100/80 p-3 mt-1.5 grid gap-1 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-                <div className="px-3.5 py-2 border-b border-slate-100 mb-1">
-                  <p className="text-xs font-bold text-[#005A9C] uppercase tracking-wider">
-                    Tratamientos Odontológicos
-                  </p>
-                  <p className="text-[11px] text-slate-500">Tecnología 3D & Mínima Invasión</p>
-                </div>
-                {SPECIALTIES_DATA.map((spec) => (
-                  <button
-                    key={spec.id}
-                    onClick={() => handleNavClick('especialidades')}
-                    className="flex items-start gap-2.5 p-2.5 rounded-2xl hover:bg-cyan-50/70 transition-colors text-left group cursor-pointer"
-                  >
-                    <div className="p-1.5 rounded-full bg-cyan-50 group-hover:bg-[#005A9C] group-hover:text-white transition-colors shrink-0 mt-0.5">
-                      {getSpecialtyIcon(spec.iconName)}
-                    </div>
-                    <div>
-                      <p className="text-xs font-bold text-[#005A9C] group-hover:text-[#00BFFF] transition-colors">
-                        {spec.title}
-                      </p>
-                      <p className="text-[11px] text-slate-500 line-clamp-1">{spec.shortDesc}</p>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
+            Especialidades
+          </button>
 
           {/* Section 3: Nosotros */}
           <button
