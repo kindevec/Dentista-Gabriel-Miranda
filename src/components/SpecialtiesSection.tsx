@@ -170,26 +170,26 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
 
         {/* 3. Luxury 3D Feature Carousel Showcase */}
         <div id="especialidades" className="w-full max-w-6xl mx-auto scroll-mt-24">
-          {/* ========================================================= */}
-          {/* DESKTOP EXPERIENCE (lg:flex) — 100% PRESERVED 3D WHEEL   */}
-          {/* ========================================================= */}
-          <div className="hidden lg:flex relative overflow-hidden rounded-[3.5rem] flex-row min-h-[640px] border border-cyan-200/80 bg-white/95 backdrop-blur-2xl shadow-2xl shadow-cyan-950/10">
-            {/* Left Column: Interactive Wheel of Specialties */}
-            <div className="w-[40%] relative z-30 flex flex-col justify-between overflow-hidden bg-gradient-to-br from-[#005A9C] via-[#0A2540] to-[#003B66] p-8 lg:p-10 border-r border-cyan-400/20">
+          {/* ========================================================================= */}
+          {/* DESKTOP EXPERIENCE (lg:grid) — SOBRE EL LIENZO DIRECTAMENTE (SIN BOX-IN-BOX) */}
+          {/* ========================================================================= */}
+          <div className="hidden lg:grid grid-cols-12 gap-8 xl:gap-12 items-center min-h-[620px] py-4">
+            {/* Left Column: Interactive Wheel of Specialties sobre el lienzo */}
+            <div className="col-span-5 relative z-20 flex flex-col justify-center space-y-4">
               {/* Panel Top Title */}
-              <div className="relative z-40">
-                <h3 className="text-2xl lg:text-3xl font-black text-white tracking-tight leading-tight">
-                  Especialidades <span className="text-[#00BFFF]">Digitales</span>
+              <div>
+                <h3 className="text-2xl lg:text-3xl font-black text-[#0A2540] tracking-tight leading-tight">
+                  Especialidades <span className="text-[#005A9C]">Digitales</span>
                 </h3>
-                <p className="text-xs sm:text-sm text-cyan-100/70 mt-1">
+                <p className="text-xs sm:text-sm text-slate-500 mt-1">
                   Selecciona una especialidad para ver su tecnología y plan clínico.
                 </p>
               </div>
 
-              {/* Desktop Vertical Spring Wheel */}
+              {/* Desktop Vertical Spring Wheel sobre fondo claro */}
               <div className="relative w-full h-[420px] flex items-center justify-start overflow-hidden my-auto">
-                <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#005A9C] via-[#005A9C]/80 to-transparent z-40 pointer-events-none" />
-                <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0A2540] via-[#0A2540]/80 to-transparent z-40 pointer-events-none" />
+                <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-slate-50 via-slate-50/80 to-transparent z-40 pointer-events-none" />
+                <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-50 via-slate-50/80 to-transparent z-40 pointer-events-none" />
 
                 <div className="relative w-full h-full flex items-center justify-start z-20">
                   {SPECIALTIES_DATA.map((spec, index) => {
@@ -223,28 +223,28 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                         <button
                           onClick={() => handleChipClick(index)}
                           className={cn(
-                            'relative flex items-center gap-3.5 w-full px-5 py-3.5 rounded-2xl transition-all duration-500 text-left group border cursor-pointer',
+                            'relative flex items-center gap-3.5 w-full px-5 py-3.5 rounded-2xl transition-all duration-300 text-left group border cursor-pointer',
                             isActive
-                              ? 'bg-white text-[#0A2540] shadow-xl shadow-cyan-950/25 border-white z-10 scale-102'
-                              : 'bg-white/5 text-white/70 border-white/10 hover:border-cyan-400/40 hover:bg-white/10 hover:text-white'
+                              ? 'bg-white text-[#0A2540] shadow-xl shadow-[#005A9C]/15 border-cyan-300 ring-2 ring-[#00BFFF]/30 z-10 scale-[1.02]'
+                              : 'bg-white/70 hover:bg-white text-slate-600 hover:text-[#0A2540] border-slate-200/70 hover:border-cyan-200 shadow-2xs'
                           )}
                         >
                           <div
                             className={cn(
-                              'w-9 h-9 rounded-xl flex items-center justify-center transition-colors duration-300 shrink-0',
+                              'w-9 h-9 rounded-xl flex items-center justify-center transition-colors duration-300 shrink-0 shadow-xs',
                               isActive
-                                ? 'bg-[#005A9C] text-white shadow-xs'
-                                : 'bg-white/10 text-cyan-300 group-hover:text-white'
+                                ? 'bg-gradient-to-br from-[#005A9C] to-[#0084DE] text-white shadow-cyan-500/20'
+                                : 'bg-slate-100 text-slate-500 group-hover:bg-cyan-50 group-hover:text-[#005A9C]'
                             )}
                           >
-                            {getSpecialtyIcon(spec.iconName, isActive ? 'w-5 h-5 text-white' : 'w-5 h-5 text-cyan-300')}
+                            {getSpecialtyIcon(spec.iconName, isActive ? 'w-5 h-5 text-white' : 'w-5 h-5 text-cyan-600')}
                           </div>
 
                           <div className="flex flex-col min-w-0">
                             <span
                               className={cn(
                                 'font-bold text-sm tracking-tight truncate',
-                                isActive ? 'text-[#0A2540]' : 'text-white'
+                                isActive ? 'text-[#0A2540]' : 'text-slate-700 group-hover:text-[#005A9C]'
                               )}
                             >
                               {spec.title}
@@ -252,7 +252,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                             <span
                               className={cn(
                                 'text-[11px] truncate',
-                                isActive ? 'text-slate-500' : 'text-cyan-200/60'
+                                isActive ? 'text-[#005A9C] font-semibold' : 'text-slate-400'
                               )}
                             >
                               {spec.estimatedTime || 'Evaluación 3D'}
@@ -270,10 +270,10 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
               </div>
             </div>
 
-            {/* Right Column: 3D Stack / Card Perspective Showcase */}
-            <div className="flex-1 relative flex items-center justify-center py-10 px-10 overflow-hidden bg-slate-900/5 min-h-[640px]">
+            {/* Right Column: 3D Stack / Card Perspective Showcase sobre el lienzo */}
+            <div className="col-span-7 relative flex flex-col items-center justify-center py-4">
               <div className="relative w-full max-w-[480px] h-[560px] flex items-center justify-center">
-                {/* Dynamic Ambient Glow */}
+                {/* Dynamic Ambient Glow sobre el lienzo */}
                 <motion.div
                   key={`glow-${currentIndex}`}
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -281,7 +281,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                   transition={{ duration: 0.6 }}
                   className="absolute inset-0 z-0 pointer-events-none"
                 >
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[60%] bg-[#00BFFF]/8 rounded-full blur-[80px]" />
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[75%] bg-[#00BFFF]/12 rounded-full blur-[90px]" />
                 </motion.div>
 
                 {SPECIALTIES_DATA.map((spec, index) => {
@@ -411,7 +411,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
               </div>
 
               {/* Dot Position Indicators */}
-              <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 mt-6 justify-center">
                 {SPECIALTIES_DATA.map((_, dotIdx) => (
                   <button
                     key={dotIdx}
@@ -420,8 +420,8 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                     className={cn(
                       'rounded-full transition-all duration-400 cursor-pointer',
                       dotIdx === currentIndex
-                        ? 'w-6 h-2 bg-gradient-to-r from-[#00BFFF] to-cyan-400 shadow-[0_0_8px_rgba(0,191,255,0.5)]'
-                        : 'w-2 h-2 bg-white/30 hover:bg-white/50'
+                        ? 'w-6 h-2 bg-gradient-to-r from-[#005A9C] to-[#00BFFF] shadow-[0_0_8px_rgba(0,90,156,0.3)]'
+                        : 'w-2 h-2 bg-slate-300 hover:bg-slate-400'
                     )}
                   />
                 ))}
