@@ -10,6 +10,7 @@ export interface Specialty {
   estimatedTime: string;
   suitableFor: string;
   iconBgColor?: string;
+  image?: string;
 }
 
 export interface DoctorProfile {

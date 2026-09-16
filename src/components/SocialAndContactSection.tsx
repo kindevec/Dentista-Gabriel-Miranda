@@ -388,8 +388,26 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
             transition={{ duration: 0.6 }}
             className="lg:col-span-5 space-y-6"
           >
-            {/* Contact Details Card with Organic Curves */}
-            <div className="bg-white/95 backdrop-blur-2xl rounded-[3rem] p-8 sm:p-10 shadow-2xl shadow-cyan-950/5 border border-white space-y-6">
+            {/* Contact Details Card with Organic Masked Architectural Header */}
+            <div className="bg-white/95 backdrop-blur-2xl rounded-[3rem] p-8 sm:p-10 shadow-2xl shadow-cyan-950/5 border border-white space-y-6 overflow-hidden">
+              
+              {/* Masked Architectural Exterior Photo */}
+              <div className="relative h-44 -mx-8 -mt-8 sm:-mx-10 sm:-mt-10 mb-6 overflow-hidden rounded-t-[3rem]">
+                <img
+                  src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=800&auto=format&fit=crop"
+                  alt="Edificio Médico Platinum"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-white via-white/30 to-transparent" />
+                
+                {/* Floating Architectural Badge */}
+                <div className="absolute bottom-3 left-6 z-10 flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-950/80 backdrop-blur-md text-white text-[10px] font-extrabold border border-white/20">
+                  <MapPin className="w-3.5 h-3.5 text-[#00BFFF]" />
+                  <span>Edificio Médico Platinum • Piso 4</span>
+                </div>
+              </div>
+
               <h3 className="text-2xl font-black text-[#0A2540]">
                 Información de Ubicación
               </h3>

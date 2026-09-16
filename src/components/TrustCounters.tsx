@@ -47,28 +47,53 @@ export const TrustCounters: React.FC = () => {
         className="bg-white/95 backdrop-blur-2xl rounded-[2.5rem] p-7 sm:p-9 shadow-2xl shadow-cyan-950/5 border border-white/60"
       >
         {/* 4 Main Metrics: Sin divisores rígidos rectos, flotando libremente */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-          {CLINIC_STATS.map((stat, idx) => (
-            <motion.div
-              key={idx}
-              variants={itemVariants}
-              whileHover={{ y: -3, scale: 1.02 }}
-              className="flex flex-col items-center text-center transition-all"
-            >
-              <div className="w-13 h-13 rounded-full bg-cyan-50/80 flex items-center justify-center mb-2.5 text-[#005A9C]">
-                {getStatIcon(stat.iconName)}
-              </div>
-              <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0A2540] tracking-tight">
-                {stat.value}
-              </div>
-              <div className="text-xs sm:text-sm font-bold text-[#005A9C] mt-1">
-                {stat.label}
-              </div>
-              <div className="text-[11px] text-slate-500 mt-0.5">
-                {stat.sublabel}
-              </div>
-            </motion.div>
-          ))}
+        {/* 4 Main Metrics: Cápsulas de Esmalte Enmascaradas */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          {CLINIC_STATS.map((stat, idx) => {
+            const statPhotos = [
+              "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=400&auto=format&fit=crop",
+              "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=400&auto=format&fit=crop",
+              "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=400&auto=format&fit=crop",
+              "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=400&auto=format&fit=crop",
+            ];
+            return (
+              <motion.div
+                key={idx}
+                variants={itemVariants}
+                whileHover={{ y: -4, scale: 1.02 }}
+                className="flex flex-col items-center text-center p-4 sm:p-5 rounded-[2rem] bg-gradient-to-b from-cyan-50/40 via-white/80 to-cyan-50/20 border border-cyan-100/60 shadow-xs relative overflow-hidden group transition-all"
+              >
+                {/* Subtle Masked Micro-Photo Background */}
+                <div
+                  className="absolute inset-0 opacity-[0.04] group-hover:opacity-[0.08] transition-opacity duration-500 pointer-events-none"
+                  style={{
+                    WebkitMaskImage: 'radial-gradient(circle at center, black 30%, transparent 80%)',
+                    maskImage: 'radial-gradient(circle at center, black 30%, transparent 80%)',
+                  }}
+                >
+                  <img
+                    src={statPhotos[idx % statPhotos.length]}
+                    alt=""
+                    aria-hidden="true"
+                    className="w-full h-full object-cover filter grayscale"
+                  />
+                </div>
+
+                <div className="w-13 h-13 rounded-full bg-cyan-50/90 border border-cyan-100/80 flex items-center justify-center mb-2.5 text-[#005A9C] shadow-xs group-hover:scale-110 transition-transform relative z-10">
+                  {getStatIcon(stat.iconName)}
+                </div>
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0A2540] tracking-tight relative z-10">
+                  {stat.value}
+                </div>
+                <div className="text-xs sm:text-sm font-bold text-[#005A9C] mt-1 relative z-10">
+                  {stat.label}
+                </div>
+                <div className="text-[11px] text-slate-500 mt-0.5 relative z-10">
+                  {stat.sublabel}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Feature Pills: Formas de píldora redondeadas 100% orgánicas sin cajas anidadas */}

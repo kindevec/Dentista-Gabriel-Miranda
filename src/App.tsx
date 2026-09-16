@@ -13,6 +13,7 @@ import { Footer } from './components/Footer';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { AppointmentModal } from './components/AppointmentModal';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
+import { DentalMaskDefinitions } from './components/DentalMaskDefinitions';
 import { createWhatsAppLink, EMERGENCY_WA_MESSAGE } from './data/clinicData';
 
 export default function App() {
@@ -63,6 +64,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-slate-700 font-sans antialiased selection:bg-cyan-500/20 selection:text-[#005A9C] pb-16 lg:pb-0 overflow-x-hidden">
+      {/* Centralized SVG Mask Definitions */}
+      <DentalMaskDefinitions />
+
       {/* 1. Top Bar */}
       <TopBar />
 

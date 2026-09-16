@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Calendar, AlertTriangle, ShieldCheck, Sparkles, Clock, CheckCircle2, PhoneCall, ArrowRight } from 'lucide-react';
+import { Calendar, AlertTriangle, ShieldCheck, Sparkles, Clock, CheckCircle2, ArrowRight, Activity, Award } from 'lucide-react';
 import { DOCTOR_NAME, CLINIC_PHONE_DISPLAY, createWhatsAppLink, EMERGENCY_WA_MESSAGE } from '../data/clinicData';
 import { OrganicDentalRibbon } from './OrganicDentalRibbon';
 import { CurvedSectionDivider } from './CurvedSectionDivider';
@@ -36,8 +36,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking, onOpenE
       id="inicio"
       className="relative overflow-hidden pt-8 pb-20 md:pt-14 md:pb-28"
     >
-      {/* 1. Full-Quality High-Definition Photographic Background (Dental Clinic Suite) */}
-      <div className="absolute inset-0 z-0">
+      {/* 1. Full-Quality High-Definition Photographic Background with Organic Radial Fade Mask */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          WebkitMaskImage: 'radial-gradient(ellipse 95% 85% at 50% 30%, black 45%, transparent 95%)',
+          maskImage: 'radial-gradient(ellipse 95% 85% at 50% 30%, black 45%, transparent 95%)',
+        }}
+      >
         <img
           src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1920&auto=format&fit=crop"
           alt="Consultorio Odontología Gabriel Miranda"
@@ -87,11 +93,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking, onOpenE
               En el consultorio del <strong className="text-[#005A9C] font-semibold">{DOCTOR_NAME}</strong> combinamos escaneo intraoral 3D sin pastas, planificación digital computarizada y un trato profundamente empático para transformar tu salud bucal con tratamientos 100% indoloros.
             </motion.p>
 
-            {/* Feature Highlights - Erradicado Box-in-Box con Píldoras Suaves */}
+            {/* Feature Highlights - Píldoras con micro-interacción */}
             <motion.div variants={itemVariants} className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 pt-2">
               <motion.div
                 whileHover={{ y: -2, scale: 1.02 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-md shadow-xs text-xs font-bold text-[#0A2540]"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/85 backdrop-blur-md shadow-xs text-xs font-bold text-[#0A2540] border border-cyan-100/60"
               >
                 <CheckCircle2 className="w-4 h-4 text-[#00BFFF] shrink-0" />
                 <span>Escáner Intraoral 3D</span>
@@ -99,7 +105,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking, onOpenE
 
               <motion.div
                 whileHover={{ y: -2, scale: 1.02 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-md shadow-xs text-xs font-bold text-[#0A2540]"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/85 backdrop-blur-md shadow-xs text-xs font-bold text-[#0A2540] border border-cyan-100/60"
               >
                 <CheckCircle2 className="w-4 h-4 text-[#00BFFF] shrink-0" />
                 <span>Anestesia Guiada</span>
@@ -107,7 +113,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking, onOpenE
 
               <motion.div
                 whileHover={{ y: -2, scale: 1.02 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-md shadow-xs text-xs font-bold text-[#0A2540]"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/85 backdrop-blur-md shadow-xs text-xs font-bold text-[#0A2540] border border-cyan-100/60"
               >
                 <CheckCircle2 className="w-4 h-4 text-[#00BFFF] shrink-0" />
                 <span>Garantía Clínica Total</span>
@@ -156,78 +162,131 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking, onOpenE
             </motion.div>
           </motion.div>
 
-          {/* Right Column: Organic Pebble-Shaped Clinical Portrait */}
+          {/* Right Column: Creative Multi-Tier Mask Architecture */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-5 relative"
+            className="lg:col-span-5 relative flex items-center justify-center pt-6 lg:pt-0"
           >
-            {/* Doctor Image Container with Organic Rounded Corners (Not a stiff box!) */}
-            <div className="relative mx-auto max-w-md lg:max-w-none rounded-[3rem] rounded-tr-[1.5rem] rounded-bl-[1.5rem] overflow-hidden shadow-2xl bg-gradient-to-br from-cyan-50 to-sky-100 group">
-              <img
-                src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1000&auto=format&fit=crop"
-                alt="Dr. Gabriel Miranda especialista en odontología estética y digital"
-                referrerPolicy="no-referrer"
-                className="w-full h-[460px] sm:h-[510px] object-cover object-top transition-transform duration-700 group-hover:scale-105"
-              />
+            {/* Ambient Multi-Layer Radial Mask Aura */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-cyan-400/20 via-[#005A9C]/15 to-transparent rounded-full blur-2xl scale-110 pointer-events-none" />
 
-              {/* Bottom Gradient Fade */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A2540]/85 via-[#0A2540]/20 to-transparent" />
+            {/* 1. CENTRAL ARCH PORTAL MASK (Dr. Gabriel Miranda Portrait) */}
+            <div className="relative w-full max-w-[340px] sm:max-w-[400px]">
+              {/* Outer Architectural Arch Contour with Gradient Rim */}
+              <div className="p-2 rounded-t-[16rem] rounded-b-[3.5rem] bg-gradient-to-b from-cyan-300 via-sky-100 to-white/90 shadow-[0_30px_70px_-15px_rgba(0,90,156,0.35)] relative group">
+                
+                {/* Inner Arch Window (The Masked Viewport) */}
+                <div className="relative rounded-t-[15rem] rounded-b-[3rem] overflow-hidden bg-slate-900 h-[480px] sm:h-[530px]">
+                  <img
+                    src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1000&auto=format&fit=crop"
+                    alt="Dr. Gabriel Miranda especialista en odontología estética y digital"
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                  />
 
-              {/* Doctor Identification Card inside image with Curved Pill Shape */}
-              <div className="absolute bottom-5 left-5 right-5 text-white p-4 rounded-3xl bg-black/40 backdrop-blur-md">
-                <p className="text-sm font-bold flex items-center gap-1.5">
-                  <ShieldCheck className="w-4 h-4 text-[#00BFFF]" />
-                  {DOCTOR_NAME}
-                </p>
-                <p className="text-xs text-cyan-100 opacity-90 mt-0.5">
-                  Director Clínico • Especialista en Estética Oral & Implantes
-                </p>
+                  {/* Internal Architectural Glass Overlays */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A2540]/90 via-[#0A2540]/25 to-transparent" />
+
+                  {/* Doctor Identification Floating Bar inside Arch */}
+                  <div className="absolute bottom-4 inset-x-4 p-4 rounded-[2rem] bg-black/45 backdrop-blur-xl border border-white/20 text-white text-center">
+                    <p className="text-sm font-black flex items-center justify-center gap-1.5 text-white">
+                      <ShieldCheck className="w-4 h-4 text-[#00BFFF]" />
+                      {DOCTOR_NAME}
+                    </p>
+                    <p className="text-[11px] text-cyan-200 font-medium mt-0.5">
+                      Director Clínico • Odontología Digital 3D
+                    </p>
+                  </div>
+                </div>
               </div>
+
+              {/* 2. TOP-RIGHT FLOATING ORGANIC MASK: 3D Intraoral Scanner Lens */}
+              <motion.div
+                animate={{
+                  y: [-8, 8, -8],
+                  rotate: [0, 2, 0],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 5.5,
+                  ease: 'easeInOut',
+                }}
+                className="absolute -top-6 -right-4 sm:-right-8 z-20 w-32 sm:w-40 h-32 sm:h-40 rounded-[2.5rem] rounded-tr-lg p-1 bg-gradient-to-br from-white via-cyan-100 to-sky-200 shadow-2xl shadow-cyan-900/20 group"
+              >
+                <div className="relative w-full h-full rounded-[2.2rem] rounded-tr-md overflow-hidden bg-slate-800">
+                  <img
+                    src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=800&auto=format&fit=crop"
+                    alt="Escáner intraoral 3D de alta definición"
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                  
+                  {/* Micro Pulse Badge */}
+                  <div className="absolute bottom-2 left-2 right-2 px-2 py-1 rounded-full bg-slate-900/85 backdrop-blur-md flex items-center justify-center gap-1.5 border border-cyan-400/30">
+                    <Activity className="w-3 h-3 text-[#00BFFF] animate-pulse" />
+                    <span className="text-[9px] font-extrabold text-cyan-200 uppercase tracking-wider">
+                      Escáner 3D
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* 3. BOTTOM-LEFT FLOATING ORGANIC MASK: Radiant Smile Transformation */}
+              <motion.div
+                animate={{
+                  y: [8, -8, 8],
+                  rotate: [0, -2, 0],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 6,
+                  ease: 'easeInOut',
+                }}
+                className="absolute -bottom-6 -left-4 sm:-left-8 z-20 p-1 rounded-full bg-gradient-to-tr from-white via-emerald-100 to-cyan-200 shadow-2xl shadow-[#005A9C]/25"
+              >
+                <div className="flex items-center gap-2.5 px-3 py-2 rounded-full bg-white/95 backdrop-blur-xl border border-white/60">
+                  {/* Small Circular Mask with Patient Transformation Photo */}
+                  <div className="w-12 h-12 rounded-full overflow-hidden shrink-0 border-2 border-emerald-400 shadow-xs relative">
+                    <img
+                      src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=800&auto=format&fit=crop"
+                      alt="Paciente con sonrisa perfecta"
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  <div className="pr-3 text-left">
+                    <div className="flex items-center gap-1">
+                      <Sparkles className="w-3.5 h-3.5 text-emerald-500" />
+                      <p className="text-xs font-black text-[#0A2540]">100% Sin Dolor</p>
+                    </div>
+                    <p className="text-[10px] text-slate-500 font-medium">Anestesia guiada digital</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* 4. FLOATING CREDENTIAL PILL: Top Left */}
+              <motion.div
+                animate={{
+                  scale: [1, 1.03, 1],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 4,
+                  ease: 'easeInOut',
+                }}
+                className="absolute top-1/4 -left-6 sm:-left-10 z-20 hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-md shadow-lg border border-cyan-100 text-[#005A9C]"
+              >
+                <Award className="w-3.5 h-3.5 text-[#00BFFF]" />
+                <span className="text-[10px] font-extrabold uppercase tracking-wide">
+                  12 Años Experiencia
+                </span>
+              </motion.div>
+
             </div>
-
-            {/* Floating Card 1: 100% Indoloro with Smooth Curved Pill shape */}
-            <motion.div
-              animate={{
-                y: [-6, 6, -6],
-              }}
-              transition={{
-                repeat: Infinity,
-                duration: 5,
-                ease: 'easeInOut',
-              }}
-              className="absolute -top-4 -left-4 sm:-left-6 bg-white/95 backdrop-blur-xl px-4 py-3 rounded-full shadow-xl hidden sm:flex items-center gap-3 z-20"
-            >
-              <div className="w-10 h-10 rounded-full bg-cyan-100 text-[#005A9C] flex items-center justify-center font-bold">
-                <Sparkles className="w-5 h-5 text-[#005A9C]" />
-              </div>
-              <div className="pr-2">
-                <p className="text-xs font-bold text-[#0A2540]">100% Sin Dolor</p>
-                <p className="text-[11px] text-slate-500">Anestesia digital guiada</p>
-              </div>
-            </motion.div>
-
-            {/* Floating Card 2: Respuesta WhatsApp Inmediata with Pill shape */}
-            <motion.div
-              animate={{
-                y: [6, -6, 6],
-              }}
-              transition={{
-                repeat: Infinity,
-                duration: 6,
-                ease: 'easeInOut',
-              }}
-              className="absolute -bottom-6 -right-2 sm:-right-4 bg-white/95 backdrop-blur-xl px-4 py-3 rounded-full shadow-xl flex items-center gap-3 z-20"
-            >
-              <div className="w-10 h-10 rounded-full bg-[#005A9C] text-[#00BFFF] flex items-center justify-center">
-                <PhoneCall className="w-4 h-4" />
-              </div>
-              <div className="pr-2">
-                <p className="text-xs font-bold text-[#0A2540]">Citas Inmediatas</p>
-                <p className="text-[11px] text-slate-500">Respuesta &lt; 5 min</p>
-              </div>
-            </motion.div>
           </motion.div>
 
         </div>

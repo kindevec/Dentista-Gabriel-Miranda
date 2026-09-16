@@ -52,6 +52,7 @@ export const SPECIALTIES_DATA: Specialty[] = [
     fullDesc: "Corregimos apiñamientos, mordidas abiertas o cruzadas mediante planificación computarizada 3D, permitiéndote ver el resultado final antes de iniciar.",
     iconName: "Sparkles",
     badge: "Más Solicitado",
+    image: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=800&auto=format&fit=crop",
     features: [
       "Escaneo digital intraoral sin pastas ni náuseas",
       "Alineadores transparentes 100% discretos",
@@ -69,6 +70,7 @@ export const SPECIALTIES_DATA: Specialty[] = [
     fullDesc: "Diseño biomimético personalizado adaptado a tus rasgos faciales con prueba estética en vivo (Mock-up) para garantizar la naturalidad de tu nueva sonrisa.",
     iconName: "Smile",
     badge: "Alta Estética",
+    image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=800&auto=format&fit=crop",
     features: [
       "Mock-up previo (prueba estética directa en boca)",
       "Carillas de porcelana E-max o resina estratificada",
@@ -86,6 +88,7 @@ export const SPECIALTIES_DATA: Specialty[] = [
     fullDesc: "Cirugía mínimamente invasiva mediante guía quirúrgica 3D. Recupera tu capacidad masticatoria y la confianza para reír sin dolor y con fijación para toda la vida.",
     iconName: "ShieldCheck",
     badge: "Precisión Quirúrgica",
+    image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop",
     features: [
       "Planificación tomográfica digital milimétrica",
       "Procedimiento sin bisturí tradicional ni dolor",
@@ -103,6 +106,7 @@ export const SPECIALTIES_DATA: Specialty[] = [
     fullDesc: "Tratamiento de conducto indoloro con microscopía clínica de alta magnificación y localizador electrónico apical que resuelve la molestia en una sola cita.",
     iconName: "Activity",
     badge: "Alivio Inmediato",
+    image: "https://images.unsplash.com/photo-1629909615184-74f495363b67?q=80&w=800&auto=format&fit=crop",
     features: [
       "Tratamiento completado en 1 sola sesión de 60 min",
       "Anestesia computarizada indolora y localizada",
@@ -120,6 +124,7 @@ export const SPECIALTIES_DATA: Specialty[] = [
     fullDesc: "Tratamiento preventivo esencial que desinflama encías, combate el mal aliento y devuelve el brillo natural a tus dientes sin desgastar el esmalte.",
     iconName: "Droplets",
     badge: "Cuidado Preventivo",
+    image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=800&auto=format&fit=crop",
     features: [
       "Eliminación ultrasónica de sarro supra y subgingival",
       "Aeropulidor con bicarbonato micronizado para manchas",
@@ -137,6 +142,7 @@ export const SPECIALTIES_DATA: Specialty[] = [
     fullDesc: "Tecnología de fotoactivación en frío que disuelve pigmentos causados por café, té, tabaco o el paso de los años, manteniendo tus dientes protegidos.",
     iconName: "Zap",
     badge: "Efecto Inmediato",
+    image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=800&auto=format&fit=crop",
     features: [
       "Aclaramiento de 4 a 6 tonos en 45 minutos",
       "Fórmula clínica con nitrato de potasio anti-sensibilidad",
@@ -154,6 +160,7 @@ export const SPECIALTIES_DATA: Specialty[] = [
     fullDesc: "Ambiente amigable con técnicas de adaptación psicológica positiva, selladores preventivos y guía del desarrollo maxilar y dental infantil.",
     iconName: "HeartHandshake",
     badge: "Atención Empática",
+    image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop",
     features: [
       "Enfoque 'Decir - Mostrar - Hacer' sin miedo ni dolor",
       "Sellantes de fosas y fisuras contra caries",

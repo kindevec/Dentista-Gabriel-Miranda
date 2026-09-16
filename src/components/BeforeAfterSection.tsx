@@ -68,23 +68,24 @@ const InteractiveBeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
   };
 
   return (
-    <div
-      ref={containerRef}
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
-      onPointerUp={handlePointerUp}
-      onPointerCancel={handlePointerUp}
-      className="relative w-full h-[280px] sm:h-[340px] rounded-[2rem] overflow-hidden select-none cursor-ew-resize shadow-2xl bg-slate-900 touch-none group"
-      style={{ userSelect: 'none', WebkitUserSelect: 'none' }}
-    >
-      {/* Background After Image */}
-      <img
-        src={afterImage}
-        alt={`${title} - Después`}
-        referrerPolicy="no-referrer"
-        draggable={false}
-        className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
-      />
+    <div className="p-1 rounded-[2.6rem] bg-gradient-to-b from-cyan-400/35 via-sky-300/10 to-transparent shadow-[0_20px_50px_-15px_rgba(0,191,255,0.25)] relative group">
+      <div
+        ref={containerRef}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+        className="relative w-full h-[280px] sm:h-[340px] rounded-[2.3rem] overflow-hidden select-none cursor-ew-resize shadow-2xl bg-slate-950 touch-none"
+        style={{ userSelect: 'none', WebkitUserSelect: 'none' }}
+      >
+        {/* Background After Image */}
+        <img
+          src={afterImage}
+          alt={`${title} - Después`}
+          referrerPolicy="no-referrer"
+          draggable={false}
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none group-hover:scale-103 transition-transform duration-700"
+        />
 
       {/* After Badge */}
       <div className="absolute top-3 right-3 bg-[#005A9C]/90 text-white text-[10px] sm:text-[11px] font-extrabold px-3.5 py-1 rounded-full backdrop-blur-md shadow-md z-10 flex items-center gap-1 border border-white/20 pointer-events-none">
@@ -133,7 +134,8 @@ const InteractiveBeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
         </span>
       </div>
     </div>
-  );
+  </div>
+);
 };
 
 export const BeforeAfterSection: React.FC = () => {

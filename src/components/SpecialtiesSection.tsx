@@ -191,17 +191,33 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                     className="h-full bg-white/95 backdrop-blur-xl rounded-[2.5rem] p-7 sm:p-8 shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300 flex flex-col justify-between relative overflow-hidden group border border-white/80"
                   >
                     <div>
-                      {/* Badge & Icon Header */}
-                      <div className="flex items-center justify-between mb-6">
-                        <div className="w-14 h-14 rounded-full bg-cyan-50 flex items-center justify-center group-hover:bg-[#005A9C] transition-colors duration-300">
+                      {/* Creative Masked Image Viewport Header */}
+                      <div className="relative h-44 -mx-7 -mt-7 sm:-mx-8 sm:-mt-8 mb-6 overflow-hidden rounded-t-[2.5rem]">
+                        <img
+                          src={spec.image || "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=800&auto=format&fit=crop"}
+                          alt={spec.title}
+                          referrerPolicy="no-referrer"
+                          className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
+                        />
+                        
+                        {/* Architectural Fade Mask */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-tr from-[#005A9C]/25 via-transparent to-[#00BFFF]/20 mix-blend-overlay" />
+
+                        {/* Floating Icon Portal on Image Edge */}
+                        <div className="absolute bottom-2 left-6 z-10 w-13 h-13 rounded-full bg-white/95 backdrop-blur-md shadow-lg border border-cyan-100 flex items-center justify-center group-hover:bg-[#005A9C] transition-colors duration-300">
                           <span className="group-hover:brightness-200 transition-all">
                             {getSpecialtyIcon(spec.iconName)}
                           </span>
                         </div>
+
+                        {/* Procedure Badge Top Right */}
                         {spec.badge && (
-                          <span className="px-3.5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-gradient-to-r from-[#005A9C] to-[#00BFFF] text-white shadow-xs">
-                            {spec.badge}
-                          </span>
+                          <div className="absolute top-4 right-4 z-10">
+                            <span className="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-slate-900/80 backdrop-blur-md text-cyan-300 shadow-md border border-cyan-400/30">
+                              {spec.badge}
+                            </span>
+                          </div>
                         )}
                       </div>
 
