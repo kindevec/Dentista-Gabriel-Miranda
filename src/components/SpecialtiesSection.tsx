@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import {
-  Sparkles,
+  Layers,
   Smile,
   ShieldCheck,
   Activity,
@@ -20,11 +20,11 @@ import { OrganicDentalRibbon } from './OrganicDentalRibbon';
 import { CurvedSectionDivider } from './CurvedSectionDivider';
 
 interface SpecialtiesSectionProps {
-  onSelectSpecialtyForBooking: (specialtyId: string) => void;
+  onSelectSpecialtyForBooking?: (specialtyId: string) => void;
 }
 
 export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
-  onSelectSpecialtyForBooking,
+  onSelectSpecialtyForBooking: _onSelectSpecialtyForBooking,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(3);
@@ -90,8 +90,8 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
 
   const getSpecialtyIcon = (iconName: string) => {
     switch (iconName) {
-      case 'Sparkles':
-        return <Sparkles className="w-6 h-6 text-[#00BFFF]" />;
+      case 'Layers':
+        return <Layers className="w-6 h-6 text-[#00BFFF]" />;
       case 'Smile':
         return <Smile className="w-6 h-6 text-[#00BFFF]" />;
       case 'ShieldCheck':
@@ -105,12 +105,12 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
       case 'HeartHandshake':
         return <HeartHandshake className="w-6 h-6 text-[#00BFFF]" />;
       default:
-        return <Sparkles className="w-6 h-6 text-[#00BFFF]" />;
+        return <Layers className="w-6 h-6 text-[#00BFFF]" />;
     }
   };
 
   return (
-    <section id="especialidades" className="py-24 relative overflow-hidden bg-slate-50/70">
+    <section id="especialidades" className="py-14 sm:py-16 relative overflow-hidden bg-slate-50/70">
       {/* 1. Intercalated High-Definition Background Texture */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img
@@ -125,7 +125,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
       {/* 2. Floating 3D Curved Ribbon */}
       <OrganicDentalRibbon className="top-12 -right-16 w-96 md:w-[32rem] opacity-40" variant="blue" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-4 sm:pb-6">
         
         {/* Header with Animation */}
         <motion.div
@@ -133,15 +133,12 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-14 space-y-3"
+          className="text-center max-w-3xl mx-auto mb-8 sm:mb-10 space-y-2.5"
         >
-          <span className="px-5 py-2 rounded-full bg-cyan-100/80 text-[#005A9C] text-xs font-bold uppercase tracking-wider shadow-xs backdrop-blur-md">
-            Tratamientos Especializados
-          </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0A2540] tracking-tight">
             Odontología integral con tecnología de vanguardia
           </h2>
-          <p className="text-sm sm:text-base text-slate-600">
+          <p className="text-sm sm:text-base text-slate-600 text-justify">
             Cada procedimiento en el consultorio del {DOCTOR_NAME} es personalizado, empleando planificación digital computarizada, materiales de grado biomédico y protocolos de esterilización hospitalaria.
           </p>
         </motion.div>
@@ -183,97 +180,74 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
               {SPECIALTIES_DATA.map((spec) => (
                 <div
                   key={spec.id}
-                  className="shrink-0 p-3 sm:p-4.5 flex flex-col"
+                  className="shrink-0 p-2.5 sm:p-3.5 flex flex-col"
                   style={{ width: `${100 / itemsPerView}%` }}
                 >
                   <motion.div
-                    whileHover={{ y: -6, scale: 1.015 }}
-                    className="h-full bg-white/95 backdrop-blur-xl rounded-[2.5rem] p-7 sm:p-8 shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300 flex flex-col justify-between relative overflow-hidden group border border-white/80"
+                    whileHover={{ y: -6, scale: 1.012 }}
+                    className="h-full bg-white/95 backdrop-blur-2xl rounded-[2.6rem] p-5 sm:p-6 shadow-xl shadow-cyan-950/5 hover:shadow-2xl hover:shadow-[#005A9C]/15 transition-all duration-500 flex flex-col justify-between relative overflow-hidden group border border-slate-100 hover:border-cyan-200"
                   >
+                    {/* Subtle Ambient Radial Glow on Hover */}
+                    <div className="absolute -right-16 -top-16 w-44 h-44 bg-gradient-to-br from-[#00BFFF]/10 via-cyan-400/5 to-transparent rounded-full blur-2xl pointer-events-none group-hover:scale-150 transition-transform duration-700" />
+
                     <div>
-                      {/* Creative Masked Image Viewport Header */}
-                      <div className="relative h-44 -mx-7 -mt-7 sm:-mx-8 sm:-mt-8 mb-6 overflow-hidden rounded-t-[2.5rem]">
+                      {/* Architectural High-Resolution Image Frame */}
+                      <div className="relative h-48 sm:h-52 w-full rounded-[2rem] overflow-hidden bg-slate-900 shadow-md mb-5 group-hover:shadow-lg transition-shadow">
                         <img
                           src={spec.image || "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=800&auto=format&fit=crop"}
                           alt={spec.title}
                           referrerPolicy="no-referrer"
                           className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
                         />
-                        
-                        {/* Architectural Fade Mask */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent" />
-                        <div className="absolute inset-0 bg-gradient-to-tr from-[#005A9C]/25 via-transparent to-[#00BFFF]/20 mix-blend-overlay" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
 
-                        {/* Floating Icon Portal on Image Edge */}
-                        <div className="absolute bottom-2 left-6 z-10 w-13 h-13 rounded-full bg-white/95 backdrop-blur-md shadow-lg border border-cyan-100 flex items-center justify-center group-hover:bg-[#005A9C] transition-colors duration-300">
-                          <span className="group-hover:brightness-200 transition-all">
-                            {getSpecialtyIcon(spec.iconName)}
-                          </span>
+                        {/* Floating Specialty Icon */}
+                        <div className="absolute bottom-3 left-3 z-10 w-11 h-11 rounded-2xl bg-white/95 backdrop-blur-md shadow-md border border-cyan-100/80 flex items-center justify-center text-[#005A9C] group-hover:bg-[#005A9C] group-hover:text-white transition-all duration-300">
+                          {getSpecialtyIcon(spec.iconName)}
                         </div>
 
-                        {/* Procedure Badge Top Right */}
-                        {spec.badge && (
-                          <div className="absolute top-4 right-4 z-10">
-                            <span className="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-slate-900/80 backdrop-blur-md text-cyan-300 shadow-md border border-cyan-400/30">
-                              {spec.badge}
-                            </span>
-                          </div>
-                        )}
+                        {/* Integrated Duration / Procedure Tag */}
+                        <div className="absolute bottom-3 right-3 z-10 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/80 backdrop-blur-md text-cyan-200 text-[11px] font-semibold border border-white/15">
+                          <Clock className="w-3.5 h-3.5 text-[#00BFFF]" />
+                          <span>{spec.estimatedTime || 'Evaluación 3D'}</span>
+                        </div>
                       </div>
 
                       {/* Title & Description */}
-                      <h3 className="text-xl font-bold text-[#0A2540] mb-2 group-hover:text-[#005A9C] transition-colors">
+                      <h3 className="text-lg sm:text-xl font-black text-[#0A2540] mb-2.5 group-hover:text-[#005A9C] transition-colors leading-snug">
                         {spec.title}
                       </h3>
-                      <p className="text-xs sm:text-sm text-slate-600 mb-6 leading-relaxed">
+                      <p className="text-xs sm:text-sm text-slate-600 mb-4 leading-relaxed text-justify">
                         {spec.shortDesc}
                       </p>
 
-                      {/* Features List */}
-                      <ul className="space-y-3 mb-6 text-xs text-slate-700">
+                      {/* Clinical Highlights List */}
+                      <div className="space-y-2 mb-5">
                         {spec.features.map((feat, fIdx) => (
-                          <li key={fIdx} className="flex items-start gap-2.5">
-                            <Check className="w-4 h-4 text-[#00BFFF] shrink-0 mt-0.5" />
-                            <span className="leading-snug">{feat}</span>
-                          </li>
+                          <div key={fIdx} className="flex items-start gap-2.5 text-xs text-slate-700 font-medium leading-snug">
+                            <div className="w-4 h-4 rounded-full bg-cyan-50 border border-cyan-200/70 text-[#005A9C] flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
+                              <Check className="w-2.5 h-2.5 stroke-[3]" />
+                            </div>
+                            <span>{feat}</span>
+                          </div>
                         ))}
-                      </ul>
+                      </div>
                     </div>
 
-                    {/* Action Buttons & WhatsApp Quick Link */}
-                    <div className="pt-5 border-t border-slate-100 space-y-3">
-                      {/* Estimated duration badge */}
-                      <div className="flex items-center justify-between text-[11px] text-slate-500 px-1">
-                        <span className="flex items-center gap-1.5 font-medium">
-                          <Clock className="w-3.5 h-3.5 text-[#00BFFF]" />
-                          {spec.estimatedTime || 'Según evaluación'}
-                        </span>
-                        <span className="text-[#005A9C] font-semibold">Diagnóstico 3D</span>
-                      </div>
-
-                      {/* Direct WhatsApp Consultation Button */}
+                    {/* Single Direct WhatsApp CTA (Space-Optimized) */}
+                    <div className="pt-4 border-t border-slate-100/90">
                       <motion.a
-                        whileHover={{ scale: 1.02 }}
+                        whileHover={{ scale: 1.02, y: -2 }}
                         whileTap={{ scale: 0.98 }}
-                        href={createWhatsAppLink(`Hola ${DOCTOR_NAME}, deseo información específica sobre el tratamiento de ${spec.title}.`)}
+                        href={createWhatsAppLink(spec.waMessage || `Hola ${DOCTOR_NAME}, deseo información y solicitar una cita sobre el tratamiento de ${spec.title}.`)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full py-3.5 px-5 rounded-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xs"
+                        className="w-full py-3.5 px-5 rounded-full bg-gradient-to-r from-[#25D366] via-[#20BA5A] to-[#128C7E] hover:from-[#20BA5A] hover:to-[#0f7a6d] text-white font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2.5 transition-all duration-300 shadow-md shadow-emerald-500/20 hover:shadow-lg hover:shadow-emerald-500/30 group/btn cursor-pointer"
                       >
-                        <WhatsAppIcon className="w-4 h-4 text-[#25D366]" />
+                        <WhatsAppIcon className="w-4 h-4 text-white group-hover/btn:scale-110 transition-transform" />
                         <span>Consultar por WhatsApp</span>
+                        <ArrowRight className="w-3.5 h-3.5 text-white/80 group-hover/btn:translate-x-1 transition-transform" />
                       </motion.a>
-
-                      {/* Agendar en el formulario */}
-                      <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={() => onSelectSpecialtyForBooking(spec.id)}
-                        className="w-full py-3 px-5 rounded-full bg-slate-100 hover:bg-[#005A9C] hover:text-white text-slate-700 font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer"
-                      >
-                        <span>Agendar Consulta</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </motion.button>
                     </div>
                   </motion.div>
                 </div>
@@ -282,7 +256,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
           </div>
 
           {/* Carousel Pagination Dots */}
-          <div className="flex items-center justify-center gap-2 mt-8">
+          <div className="flex items-center justify-center gap-2 mt-6">
             {Array.from({ length: maxIndex + 1 }).map((_, dotIdx) => (
               <button
                 key={dotIdx}

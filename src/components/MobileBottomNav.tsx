@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Sparkles, UserCheck, Star, MessageSquare } from 'lucide-react';
+import { Home, Layers, UserCheck, Star, MessageSquare } from 'lucide-react';
 
 interface MobileBottomNavProps {
   activeSection: string;
@@ -13,6 +13,10 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
 }) => {
   const handleNavClick = (sectionId: string) => {
     setActiveSection(sectionId);
+    if (sectionId === 'inicio') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     const element = document.getElementById(sectionId);
     if (element) {
       const navOffset = 70;
@@ -61,7 +65,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
           {activeSection === 'especialidades' && (
             <span className="absolute -top-1.5 w-6 h-1 rounded-full bg-gradient-to-r from-[#005A9C] to-[#00BFFF]" />
           )}
-          <Sparkles className={`w-5 h-5 transition-transform duration-200 ${activeSection === 'especialidades' ? 'scale-110 text-[#00BFFF]' : ''}`} />
+          <Layers className={`w-5 h-5 transition-transform duration-200 ${activeSection === 'especialidades' ? 'scale-110 text-[#00BFFF]' : ''}`} />
           <span className="text-[9.5px] leading-tight mt-0.5 truncate max-w-full text-center">
             Especialidades
           </span>

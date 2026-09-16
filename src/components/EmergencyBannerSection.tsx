@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { AlertCircle, Zap, ShieldCheck, Clock, ArrowRight, PhoneCall } from 'lucide-react';
+import { Zap, ShieldCheck, Clock, ArrowRight, PhoneCall } from 'lucide-react';
 import { DOCTOR_NAME, CLINIC_PHONE_DISPLAY, createWhatsAppLink, EMERGENCY_WA_MESSAGE } from '../data/clinicData';
 import { WhatsAppIcon } from './OfficialSocialLogos';
 import { OrganicDentalRibbon } from './OrganicDentalRibbon';
@@ -32,7 +32,7 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
   };
 
   return (
-    <section id="urgencias" className="relative overflow-hidden py-24 text-white bg-[#07192C]">
+    <section id="urgencias" className="relative overflow-hidden py-14 sm:py-16 text-white bg-[#07192C]">
       {/* 1. Intercalated High-Definition Photographic Background */}
       <div className="absolute inset-0 z-0">
         <img
@@ -50,25 +50,16 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
       <OrganicDentalRibbon className="-top-12 -left-16 w-96 md:w-[32rem] opacity-70" variant="cyan" />
       <OrganicDentalRibbon className="-bottom-16 -right-20 w-96 md:w-[32rem] opacity-50" variant="white" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center"
         >
           {/* Left Column: Urgencia Headline & Rapid Triage Steps */}
-          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-            
-            {/* Urgent Badge with Soft Curved Pill */}
-            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-red-500/20 border border-red-400/40 backdrop-blur-md shadow-lg shadow-red-500/10">
-              <span className="w-2.5 h-2.5 rounded-full bg-red-400 animate-ping" />
-              <AlertCircle className="w-4 h-4 text-red-400" />
-              <span className="text-xs font-black uppercase tracking-widest text-red-200">
-                Urgencias Dentales 24 Horas
-              </span>
-            </motion.div>
+          <div className="lg:col-span-7 space-y-5 text-center lg:text-left">
 
             {/* Title */}
             <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
@@ -79,7 +70,7 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
             </motion.h2>
 
             {/* Subtext */}
-            <motion.p variants={itemVariants} className="text-sm sm:text-base text-cyan-100/90 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+            <motion.p variants={itemVariants} className="text-sm sm:text-base text-cyan-100/90 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed text-justify">
               No dejes que el dolor de muela, un traumatismo, fractura o absceso empeore. En el consultorio del <strong className="text-white font-bold">{DOCTOR_NAME}</strong> disponemos de un protocolo médico de intervención prioritaria con respuesta en minutos.
             </motion.p>
 
@@ -93,7 +84,7 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
                   <Zap className="w-4 h-4" />
                 </div>
                 <h3 className="text-xs font-black text-white uppercase tracking-wider">1. Contacto 24/7</h3>
-                <p className="text-[11px] text-cyan-100/80 mt-1 leading-relaxed">Escríbenos o llámanos; te atenderemos sin demoras.</p>
+                <p className="text-[11px] text-cyan-100/80 mt-1 leading-relaxed text-justify">Escríbenos o llámanos; te atenderemos sin demoras.</p>
               </motion.div>
 
               <motion.div
@@ -104,7 +95,7 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
                   <ShieldCheck className="w-4 h-4" />
                 </div>
                 <h3 className="text-xs font-black text-white uppercase tracking-wider">2. Alivio Inmediato</h3>
-                <p className="text-[11px] text-cyan-100/80 mt-1 leading-relaxed">Anestesia guiada para suprimir el dolor de inmediato.</p>
+                <p className="text-[11px] text-cyan-100/80 mt-1 leading-relaxed text-justify">Anestesia guiada para suprimir el dolor de inmediato.</p>
               </motion.div>
 
               <motion.div
@@ -115,7 +106,7 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
                   <Clock className="w-4 h-4" />
                 </div>
                 <h3 className="text-xs font-black text-white uppercase tracking-wider">3. Tratamiento</h3>
-                <p className="text-[11px] text-cyan-100/80 mt-1 leading-relaxed">Diagnóstico digital 3D y solución definitiva hoy mismo.</p>
+                <p className="text-[11px] text-cyan-100/80 mt-1 leading-relaxed text-justify">Diagnóstico digital 3D y solución definitiva hoy mismo.</p>
               </motion.div>
             </motion.div>
 

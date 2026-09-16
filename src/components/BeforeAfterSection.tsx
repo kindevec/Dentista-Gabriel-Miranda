@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'motion/react';
 import { BEFORE_AFTER_CASES, createWhatsAppLink, DOCTOR_NAME } from '../data/clinicData';
 import {
   Star,
-  Sparkles,
   MoveHorizontal,
   Quote,
   CheckCircle2,
@@ -11,7 +10,8 @@ import {
   ShieldCheck,
   Activity,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Clock
 } from 'lucide-react';
 import { WhatsAppIcon } from './OfficialSocialLogos';
 import { OrganicDentalRibbon } from './OrganicDentalRibbon';
@@ -88,7 +88,7 @@ const InteractiveBeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
 
       {/* After Badge */}
       <div className="absolute top-4 right-4 bg-[#005A9C]/90 text-white text-[10px] sm:text-[11px] font-extrabold px-3.5 py-1 rounded-full backdrop-blur-md shadow-md z-10 flex items-center gap-1 border border-white/20 pointer-events-none">
-        <Sparkles className="w-3 h-3 text-[#00BFFF]" />
+        <CheckCircle2 className="w-3 h-3 text-[#00BFFF]" />
         <span>DESPUÉS</span>
       </div>
 
@@ -209,7 +209,7 @@ export const BeforeAfterSection: React.FC = () => {
   };
 
   return (
-    <section id="casos-reales" className="py-24 relative overflow-hidden bg-[#07182B] text-white">
+    <section id="casos-reales" className="py-14 sm:py-16 relative overflow-hidden bg-[#07182B] text-white">
       {/* 1. Intercalated High-Definition Photographic Background (Dental Aesthetic Suite) */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img
@@ -227,7 +227,7 @@ export const BeforeAfterSection: React.FC = () => {
       <OrganicDentalRibbon className="-top-12 -left-20 w-[32rem] md:w-[44rem] opacity-60" variant="cyan" />
       <OrganicDentalRibbon className="-bottom-16 -right-24 w-[34rem] md:w-[48rem] opacity-50" variant="blue" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-4 sm:pb-6">
         
         {/* Section Header with Animation */}
         <motion.div
@@ -235,19 +235,15 @@ export const BeforeAfterSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-10 space-y-3"
+          className="text-center max-w-3xl mx-auto mb-7 sm:mb-8 space-y-2"
         >
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-cyan-500/15 text-cyan-300 text-xs font-bold uppercase tracking-wider backdrop-blur-md shadow-lg shadow-cyan-500/10 border border-cyan-400/30">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-300" />
-            <span>Resultados Clínicos Verificados</span>
-          </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
             Casos Reales: Transformaciones de{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-200 to-white">
               Antes y Después
             </span>
           </h2>
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-300 leading-relaxed text-justify">
             Descubre transformaciones estéticas y funcionales reales realizadas por el {DOCTOR_NAME}. Arrastra el deslizador interactivo para apreciar cada detalle con precisión microscópica.
           </p>
         </motion.div>
@@ -258,7 +254,7 @@ export const BeforeAfterSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto mb-10"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto mb-8"
         >
           <div className="p-5 rounded-[2rem] bg-white/10 backdrop-blur-xl text-center shadow-lg border border-white/10">
             <div className="flex items-center justify-between text-xs font-bold text-cyan-300 mb-2">
@@ -381,7 +377,8 @@ export const BeforeAfterSection: React.FC = () => {
                         {/* Case Meta Details con padding interno limpio */}
                         <div className="p-6 sm:p-7 space-y-4 text-left">
                           <div className="flex items-center justify-between">
-                            <span className="text-[11px] font-bold uppercase tracking-wider text-cyan-200 bg-cyan-500/20 px-3.5 py-1 rounded-full">
+                            <span className="text-xs font-semibold text-cyan-300 flex items-center gap-1.5">
+                              <Clock className="w-3.5 h-3.5 text-[#00BFFF]" />
                               {c.duration}
                             </span>
                             <div className="flex items-center text-amber-400">
@@ -392,12 +389,12 @@ export const BeforeAfterSection: React.FC = () => {
                           </div>
 
                           <h3 className="text-lg sm:text-xl font-bold text-white leading-snug">{c.title}</h3>
-                          <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">{c.description}</p>
+                          <p className="text-xs sm:text-sm text-slate-300 leading-relaxed text-justify">{c.description}</p>
 
                           {/* Testimonial */}
                           <div className="pt-2 pl-2 relative">
                             <Quote className="w-5 h-5 text-cyan-400/30 mb-1" />
-                            <p className="text-xs italic text-cyan-100 font-light leading-relaxed">
+                            <p className="text-xs italic text-cyan-100 font-light leading-relaxed text-justify">
                               "{c.testimonial}"
                             </p>
                             <div className="flex items-center gap-1.5 mt-2">
@@ -456,7 +453,7 @@ export const BeforeAfterSection: React.FC = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mt-12 max-w-2xl mx-auto p-4 rounded-full bg-white/5 flex items-center justify-center gap-3 text-xs text-slate-300 text-center"
+          className="mt-8 max-w-2xl mx-auto flex items-center justify-center gap-2 text-xs text-slate-400 text-center"
         >
           <Info className="w-4 h-4 text-cyan-400 shrink-0" />
           <span>

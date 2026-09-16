@@ -33,11 +33,11 @@ export const FaqSection: React.FC = () => {
   };
 
   return (
-    <section id="preguntas" className="py-24 bg-white relative overflow-hidden">
+    <section id="preguntas" className="py-14 sm:py-16 bg-white relative overflow-hidden">
       {/* Subtle organic ribbon accent */}
       <OrganicDentalRibbon className="-top-10 -right-20 w-96 opacity-30" variant="cyan" />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-4 sm:pb-6">
         
         {/* Header with Animation */}
         <motion.div
@@ -45,15 +45,12 @@ export const FaqSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-14 space-y-3"
+          className="text-center mb-8 sm:mb-10 space-y-2"
         >
-          <span className="px-5 py-2 rounded-full bg-cyan-100/80 text-[#005A9C] text-xs font-bold uppercase tracking-wider shadow-xs backdrop-blur-md">
-            Preguntas Frecuentes
-          </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0A2540] tracking-tight">
             Resolvemos tus Dudas sobre Tratamientos y Consultas
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto text-justify">
             Conoce los aspectos clave sobre el manejo del dolor, facilidades de pago y tiempos de atención en nuestro consultorio.
           </p>
         </motion.div>
@@ -108,7 +105,7 @@ export const FaqSection: React.FC = () => {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
                     >
-                      <div className="px-7 pb-6 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-cyan-100/60 pl-14">
+                      <div className="px-7 pb-6 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-cyan-100/60 pl-14 text-justify">
                         {faq.answer}
                       </div>
                     </motion.div>
@@ -125,7 +122,7 @@ export const FaqSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-14 text-center p-8 rounded-[2.5rem] bg-slate-50"
+          className="mt-8 sm:mt-10 text-center p-6 sm:p-7 rounded-[2.5rem] bg-slate-50"
         >
           <p className="text-sm font-semibold text-[#0A2540] mb-3">
             ¿Tienes alguna consulta médica adicional que no esté en esta lista?

@@ -19,16 +19,16 @@ export const EMERGENCY_WA_MESSAGE = `¡URGENCIA DENTAL! Hola ${DOCTOR_NAME}, pre
 
 export const CLINIC_STATS: ClinicStat[] = [
   {
-    value: "+12",
-    label: "Años de Trayectoria",
-    sublabel: "Experiencia clínica especializada",
-    iconName: "Award",
+    value: "100%",
+    label: "Diagnóstico Digital 3D",
+    sublabel: "Planificación milimétrica computarizada",
+    iconName: "Cpu",
   },
   {
-    value: "+4,500",
-    label: "Pacientes Atendidos",
-    sublabel: "Sonrisas saludables restauradas",
-    iconName: "Users",
+    value: "24/7",
+    label: "Atención Prioritaria",
+    sublabel: "Respuesta inmediata ante emergencias",
+    iconName: "ShieldCheck",
   },
   {
     value: "99.4%",
@@ -50,7 +50,7 @@ export const SPECIALTIES_DATA: Specialty[] = [
     title: "Ortodoncia Invisible & Digital 3D",
     shortDesc: "Alineación estética avanzada con alineadores transparentes removibles o brackets de autoligado de baja fricción.",
     fullDesc: "Corregimos apiñamientos, mordidas abiertas o cruzadas mediante planificación computarizada 3D, permitiéndote ver el resultado final antes de iniciar.",
-    iconName: "Sparkles",
+    iconName: "Layers",
     badge: "Más Solicitado",
     image: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=800&auto=format&fit=crop",
     features: [

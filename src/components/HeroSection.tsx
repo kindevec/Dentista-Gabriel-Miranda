@@ -2,18 +2,13 @@ import React, { useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
 import {
   Calendar,
-  Sparkles,
   ArrowRight,
-  ShieldCheck,
   Check,
   Clock,
   AlertTriangle,
-  Droplets,
-  Activity
+  Droplets
 } from 'lucide-react';
 import {
-  DOCTOR_NAME,
-  CLINIC_PHONE_DISPLAY,
   createWhatsAppLink,
   EMERGENCY_WA_MESSAGE
 } from '../data/clinicData';
@@ -82,7 +77,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   return (
     <section
       id="inicio"
-      className="relative overflow-hidden pt-8 pb-16 sm:pt-14 sm:pb-24 bg-gradient-to-b from-sky-50/60 via-white to-[#F8FAFC]"
+      className="relative overflow-hidden pt-24 pb-10 sm:pt-28 sm:pb-14 bg-gradient-to-b from-sky-50/60 via-white to-[#F8FAFC]"
     >
       {/* Subtle Organic Dental Ribbons for Atmospheric Depth */}
       <OrganicDentalRibbon className="-top-12 -left-16 w-[36rem] opacity-35" variant="cyan" />
@@ -90,7 +85,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
       {/* Main Canvas - 100% Open Space (Zero Box-in-Box) */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* ============================================================== */}
           {/* LEFT COLUMN: Clean Typography, Proposition & Direct CTAs */}
@@ -99,14 +94,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             variants={containerVariants}
             initial="hidden"
             animate="show"
-            className="lg:col-span-7 space-y-6 text-center lg:text-left"
+            className="lg:col-span-7 space-y-5 text-center lg:text-left"
           >
-            {/* Clinical Authority Tag */}
-            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50/90 border border-cyan-200/70 text-[#005A9C] text-xs font-bold uppercase tracking-wider shadow-2xs">
-              <Sparkles className="w-3.5 h-3.5 text-[#00BFFF]" />
-              <span>Odontología Digital 3D • {DOCTOR_NAME}</span>
-            </motion.div>
-
             {/* H1 Main Heading */}
             <motion.h1
               variants={itemVariants}
@@ -122,7 +111,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             {/* Clean Subtitle - Free on Canvas without Box-in-Box */}
             <motion.p
               variants={itemVariants}
-              className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal"
+              className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal text-justify"
             >
               Transformamos tu salud dental con escaneo intraoral computarizado, ortodoncia invisible y rehabilitación de mínima invasión. Una experiencia médica precisa, serena y 100% confortable en Quito.
             </motion.p>
@@ -320,33 +309,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-25deg] pointer-events-none"
                 />
               </div>
-
-              {/* Floating Chip Top-Right: Escáner 3D Digital */}
-              <motion.div
-                animate={{ y: [-5, 5, -5] }}
-                transition={{ repeat: Infinity, duration: 4.8, ease: 'easeInOut' }}
-                className="absolute top-2 -right-2 sm:-right-4 z-20 px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-xl border border-cyan-100 shadow-xl shadow-cyan-950/10 flex items-center gap-1.5 hover:scale-105 transition-transform"
-              >
-                <Activity className="w-3.5 h-3.5 text-[#00BFFF] animate-pulse" />
-                <span className="text-[10px] font-extrabold text-[#005A9C] uppercase tracking-wide">
-                  Escáner 3D Digital
-                </span>
-              </motion.div>
-
-              {/* Floating Chip Bottom-Left: 100% Sin Dolor */}
-              <motion.div
-                animate={{ y: [5, -5, 5] }}
-                transition={{ repeat: Infinity, duration: 5.5, ease: 'easeInOut' }}
-                className="absolute bottom-4 -left-2 sm:-left-4 z-20 px-4 py-2 rounded-full bg-white/95 backdrop-blur-xl border border-white shadow-xl shadow-cyan-950/10 flex items-center gap-2 hover:scale-105 transition-transform"
-              >
-                <div className="w-7 h-7 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
-                  <ShieldCheck className="w-4 h-4" />
-                </div>
-                <div className="text-left">
-                  <p className="text-xs font-black text-[#0A2540]">100% Sin Dolor</p>
-                  <p className="text-[9px] text-slate-500 font-medium">Anestesia guiada digital</p>
-                </div>
-              </motion.div>
             </motion.div>
 
           </div>

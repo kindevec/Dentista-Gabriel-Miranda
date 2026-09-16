@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Logo } from './Logo';
-import { ChevronDown, Sparkles, Smile, ShieldCheck, Activity, Droplets, Zap, HeartHandshake } from 'lucide-react';
+import { ChevronDown, Layers, Smile, ShieldCheck, Activity, Droplets, Zap, HeartHandshake } from 'lucide-react';
 import { SPECIALTIES_DATA } from '../data/clinicData';
 
 interface NavbarProps {
@@ -19,8 +19,9 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 25);
+      setIsScrolled(window.scrollY > 15);
     };
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -28,6 +29,11 @@ export const Navbar: React.FC<NavbarProps> = ({
   const handleNavClick = (sectionId: string) => {
     setActiveSection(sectionId);
     setIsDropdownOpen(false);
+
+    if (sectionId === 'inicio') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
 
     const element = document.getElementById(sectionId);
     if (element) {
@@ -43,8 +49,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const getSpecialtyIcon = (iconName: string) => {
     switch (iconName) {
-      case 'Sparkles':
-        return <Sparkles className="w-4 h-4 text-[#00BFFF]" />;
+      case 'Layers':
+        return <Layers className="w-4 h-4 text-[#00BFFF]" />;
       case 'Smile':
         return <Smile className="w-4 h-4 text-[#00BFFF]" />;
       case 'ShieldCheck':
@@ -58,16 +64,16 @@ export const Navbar: React.FC<NavbarProps> = ({
       case 'HeartHandshake':
         return <HeartHandshake className="w-4 h-4 text-[#00BFFF]" />;
       default:
-        return <Sparkles className="w-4 h-4 text-[#00BFFF]" />;
+        return <Layers className="w-4 h-4 text-[#00BFFF]" />;
     }
   };
 
   return (
     <header
-      className={`sticky top-0 z-40 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ease-in-out ${
         isScrolled
-          ? 'bg-white/92 backdrop-blur-xl shadow-lg shadow-sky-950/5 border-b border-sky-100/80 py-3'
-          : 'bg-white/95 backdrop-blur-md border-b border-slate-100 py-4'
+          ? 'bg-white/85 backdrop-blur-xl shadow-lg shadow-sky-950/5 border-b border-sky-100/80 py-2.5 sm:py-3'
+          : 'bg-transparent backdrop-blur-none border-b border-transparent shadow-none py-3.5 sm:py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -84,8 +90,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => handleNavClick('inicio')}
             className={`px-4 py-2 rounded-full text-xs xl:text-sm font-semibold transition-all duration-200 cursor-pointer ${
               activeSection === 'inicio'
-                ? 'text-[#005A9C] bg-cyan-50 font-bold shadow-xs'
-                : 'text-slate-600 hover:text-[#005A9C] hover:bg-slate-50'
+                ? isScrolled
+                  ? 'text-[#005A9C] bg-cyan-50 font-bold shadow-xs'
+                  : 'text-[#005A9C] bg-white/70 backdrop-blur-xs font-bold shadow-xs border border-cyan-100/60'
+                : 'text-slate-600 hover:text-[#005A9C] hover:bg-white/60'
             }`}
           >
             Inicio
@@ -101,8 +109,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => handleNavClick('especialidades')}
               className={`px-4 py-2 rounded-full text-xs xl:text-sm font-semibold flex items-center gap-1.5 transition-all duration-200 cursor-pointer ${
                 activeSection === 'especialidades'
-                  ? 'text-[#005A9C] bg-cyan-50 font-bold'
-                  : 'text-slate-600 hover:text-[#005A9C] hover:bg-slate-50'
+                  ? isScrolled
+                    ? 'text-[#005A9C] bg-cyan-50 font-bold'
+                    : 'text-[#005A9C] bg-white/70 backdrop-blur-xs font-bold shadow-xs border border-cyan-100/60'
+                  : 'text-slate-600 hover:text-[#005A9C] hover:bg-white/60'
               }`}
             >
               <span>Especialidades</span>
@@ -148,8 +158,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => handleNavClick('nosotros')}
             className={`px-4 py-2 rounded-full text-xs xl:text-sm font-semibold transition-all duration-200 cursor-pointer ${
               activeSection === 'nosotros'
-                ? 'text-[#005A9C] bg-cyan-50 font-bold'
-                : 'text-slate-600 hover:text-[#005A9C] hover:bg-slate-50'
+                ? isScrolled
+                  ? 'text-[#005A9C] bg-cyan-50 font-bold'
+                  : 'text-[#005A9C] bg-white/70 backdrop-blur-xs font-bold shadow-xs border border-cyan-100/60'
+                : 'text-slate-600 hover:text-[#005A9C] hover:bg-white/60'
             }`}
           >
             Nosotros
@@ -160,8 +172,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => handleNavClick('casos-reales')}
             className={`px-4 py-2 rounded-full text-xs xl:text-sm font-semibold transition-all duration-200 cursor-pointer ${
               activeSection === 'casos-reales'
-                ? 'text-[#005A9C] bg-cyan-50 font-bold'
-                : 'text-slate-600 hover:text-[#005A9C] hover:bg-slate-50'
+                ? isScrolled
+                  ? 'text-[#005A9C] bg-cyan-50 font-bold'
+                  : 'text-[#005A9C] bg-white/70 backdrop-blur-xs font-bold shadow-xs border border-cyan-100/60'
+                : 'text-slate-600 hover:text-[#005A9C] hover:bg-white/60'
             }`}
           >
             Casos Reales
@@ -172,8 +186,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => handleNavClick('contacto')}
             className={`px-4 py-2 rounded-full text-xs xl:text-sm font-semibold transition-all duration-200 cursor-pointer ${
               activeSection === 'contacto'
-                ? 'text-[#005A9C] bg-cyan-50 font-bold'
-                : 'text-slate-600 hover:text-[#005A9C] hover:bg-slate-50'
+                ? isScrolled
+                  ? 'text-[#005A9C] bg-cyan-50 font-bold'
+                  : 'text-[#005A9C] bg-white/70 backdrop-blur-xs font-bold shadow-xs border border-cyan-100/60'
+                : 'text-slate-600 hover:text-[#005A9C] hover:bg-white/60'
             }`}
           >
             Redes & Contacto

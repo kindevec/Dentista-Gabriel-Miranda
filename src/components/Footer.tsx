@@ -12,11 +12,11 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[#0A2540] text-slate-300 pt-16 pb-24 lg:pb-12 border-t border-white/10 relative">
+    <footer className="bg-[#0A2540] text-slate-300 pt-12 pb-20 lg:pb-10 border-t border-white/10 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-8 sm:pb-10 border-b border-white/10">
           
           {/* Col 1: Brand & Philosophy (5 Cols) */}
           <div className="lg:col-span-5 space-y-4">
@@ -24,7 +24,7 @@ export const Footer: React.FC = () => {
               <Logo size="lg" variant="dark" />
             </div>
 
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md pt-2">
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md pt-2 text-justify">
               Odontología de alta gama fundamentada en precisión tecnológica 3D, bioseguridad quirúrgica de grado hospitalario y una vocación auténtica por la salud y la serenidad de nuestros pacientes.
             </p>
 

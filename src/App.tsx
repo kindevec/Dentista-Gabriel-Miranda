@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { TopBar } from './components/TopBar';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { TrustCounters } from './components/TrustCounters';
@@ -68,10 +67,7 @@ export default function App() {
       {/* Centralized SVG Mask Definitions */}
       <DentalMaskDefinitions />
 
-      {/* 1. Top Bar */}
-      <TopBar />
-
-      {/* 2. Sticky Navbar with Exactly 5 Sections & Mobile Drawer */}
+      {/* Sticky & Translucent Navbar with Materialization on Scroll */}
       <Navbar
         activeSection={activeSection}
         setActiveSection={setActiveSection}

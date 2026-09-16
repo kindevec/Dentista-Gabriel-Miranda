@@ -1,12 +1,14 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Award, Users, Star, ShieldCheck, Cpu, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Award, Users, Star, ShieldCheck, Cpu } from 'lucide-react';
 import { CLINIC_STATS } from '../data/clinicData';
 import { OrganicDentalRibbon } from './OrganicDentalRibbon';
 
 export const TrustCounters: React.FC = () => {
   const getStatIcon = (iconName: string) => {
     switch (iconName) {
+      case 'Cpu':
+        return <Cpu className="w-6 h-6 sm:w-7 sm:h-7 text-[#00BFFF]" />;
       case 'Award':
         return <Award className="w-6 h-6 sm:w-7 sm:h-7 text-[#00BFFF]" />;
       case 'Users':
@@ -32,15 +34,19 @@ export const TrustCounters: React.FC = () => {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" as const },
+    },
   };
 
   return (
-    <section id="confianza" className="py-20 sm:py-24 relative overflow-hidden bg-[#F8FAFC]">
-      {/* Subtle Background Texture & Medical Gradients */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+    <section id="confianza" className="py-14 sm:py-16 bg-[#F8FAFC] relative overflow-hidden">
+      {/* Background Masked Texture */}
+      <div className="absolute inset-0 pointer-events-none">
         <img
-          src="https://images.unsplash.com/photo-1629909615184-74f495363b67?q=80&w=1920&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1920&auto=format&fit=crop"
           alt=""
           aria-hidden="true"
           className="w-full h-full object-cover opacity-[0.03] filter grayscale"
@@ -60,16 +66,13 @@ export const TrustCounters: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-14 space-y-3"
+          className="text-center max-w-3xl mx-auto mb-8 sm:mb-10 space-y-2.5"
         >
-          <span className="px-5 py-2 rounded-full bg-cyan-100/80 text-[#005A9C] text-xs font-bold uppercase tracking-wider shadow-xs backdrop-blur-md">
-            Sello de Excelencia & Confianza
-          </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0A2540] tracking-tight">
             Cifras Reales que Avalan Nuestra Experiencia
           </h2>
-          <p className="text-sm sm:text-base text-slate-600">
-            Más de una década de práctica clínica fundamentada en diagnósticos digitales, bioseguridad hospitalaria y tratamientos indoloros.
+          <p className="text-sm sm:text-base text-slate-600 text-justify">
+            Práctica clínica fundamentada en diagnósticos digitales 3D, bioseguridad hospitalaria y tratamientos indoloros.
           </p>
         </motion.div>
 
@@ -79,7 +82,7 @@ export const TrustCounters: React.FC = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
-          className="bg-white/95 backdrop-blur-2xl rounded-[3rem] p-7 sm:p-10 lg:p-12 shadow-2xl shadow-cyan-950/5 border border-white"
+          className="bg-white/95 backdrop-blur-2xl rounded-[3rem] p-6 sm:p-8 lg:p-9 shadow-2xl shadow-cyan-950/5 border border-white"
         >
           {/* 4 Main Metrics: Cápsulas de Esmalte Enmascaradas */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -128,50 +131,6 @@ export const TrustCounters: React.FC = () => {
                 </motion.div>
               );
             })}
-          </div>
-
-          {/* Feature Pills: Formas de píldora redondeadas 100% orgánicas */}
-          <div className="mt-9 pt-8 border-t border-slate-100/80">
-            <p className="text-xs font-bold text-center uppercase tracking-wider text-slate-400 mb-4">
-              Estándares y Bioseguridad Incluidos en Cada Tratamiento
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              <motion.div
-                variants={itemVariants}
-                whileHover={{ y: -2, scale: 1.03 }}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-50/90 hover:bg-cyan-50/80 border border-slate-200/60 hover:border-cyan-200 text-xs font-bold text-slate-700 hover:text-[#005A9C] shadow-2xs transition-all cursor-default"
-              >
-                <Cpu className="w-4 h-4 text-[#00BFFF]" />
-                <span>Escaneo Digital 3D</span>
-              </motion.div>
-
-              <motion.div
-                variants={itemVariants}
-                whileHover={{ y: -2, scale: 1.03 }}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-50/90 hover:bg-cyan-50/80 border border-slate-200/60 hover:border-cyan-200 text-xs font-bold text-slate-700 hover:text-[#005A9C] shadow-2xs transition-all cursor-default"
-              >
-                <Sparkles className="w-4 h-4 text-[#005A9C]" />
-                <span>Ortodoncia Invisible</span>
-              </motion.div>
-
-              <motion.div
-                variants={itemVariants}
-                whileHover={{ y: -2, scale: 1.03 }}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-50/90 hover:bg-cyan-50/80 border border-slate-200/60 hover:border-cyan-200 text-xs font-bold text-slate-700 hover:text-[#005A9C] shadow-2xs transition-all cursor-default"
-              >
-                <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                <span>Autoclave Clase B</span>
-              </motion.div>
-
-              <motion.div
-                variants={itemVariants}
-                whileHover={{ y: -2, scale: 1.03 }}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-50/90 hover:bg-cyan-50/80 border border-slate-200/60 hover:border-cyan-200 text-xs font-bold text-slate-700 hover:text-[#005A9C] shadow-2xs transition-all cursor-default"
-              >
-                <CheckCircle2 className="w-4 h-4 text-[#0084DE]" />
-                <span>Financiamiento Sin Intereses</span>
-              </motion.div>
-            </div>
           </div>
         </motion.div>
 

@@ -16,7 +16,6 @@ import {
   Phone,
   Mail,
   Clock,
-  Calendar,
   CheckCircle,
   ExternalLink,
   ArrowRight
@@ -114,7 +113,7 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
   };
 
   return (
-    <section id="contacto" className="py-24 relative overflow-hidden bg-[#F8FAFC]">
+    <section id="contacto" className="py-14 sm:py-16 relative overflow-hidden bg-[#F8FAFC]">
       <div id="redes-contacto" className="absolute -top-24 pointer-events-none" aria-hidden="true" />
       {/* 1. Intercalated High-Definition Photographic Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -130,7 +129,7 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
       {/* 2. Floating 3D Curved Ribbon */}
       <OrganicDentalRibbon className="top-1/3 -right-20 w-[30rem] opacity-40" variant="cyan" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-6 sm:pb-8">
         
         {/* Section Header with Animation */}
         <motion.div
@@ -138,15 +137,12 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16 space-y-3"
+          className="text-center max-w-3xl mx-auto mb-8 sm:mb-10 space-y-2.5"
         >
-          <span className="px-5 py-2 rounded-full bg-cyan-100/80 text-[#005A9C] text-xs font-bold uppercase tracking-wider shadow-xs backdrop-blur-md">
-            Canales Oficiales & Agendamiento
-          </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0A2540] tracking-tight">
             Agenda tu Consulta o Conéctate con Nosotros
           </h2>
-          <p className="text-sm sm:text-base text-slate-600">
+          <p className="text-sm sm:text-base text-slate-600 text-justify">
             Estamos a tu disposición a través de nuestros canales oficiales verificados. Reserva tu cita médica en línea o escríbenos directamente a WhatsApp.
           </p>
         </motion.div>
@@ -157,7 +153,7 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.15 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 sm:mb-12"
         >
           {SOCIAL_NETWORKS.map((social) => (
             <motion.div
@@ -167,20 +163,17 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
               className="bg-white/95 backdrop-blur-xl rounded-[2.5rem] p-8 shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300 flex flex-col justify-between group border border-white"
             >
               <div>
-                <div className="flex items-center justify-between mb-6">
-                  <div className="p-1 group-hover:scale-110 transition-transform duration-300">
+                <div className="mb-5">
+                  <div className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center p-2.5 group-hover:scale-105 transition-transform duration-300">
                     {getSocialIcon(social.iconType)}
                   </div>
-                  <span className="text-[10px] font-extrabold uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-slate-100 text-slate-700">
-                    Canal Oficial
-                  </span>
                 </div>
 
                 <h3 className="text-xl font-black text-[#0A2540] group-hover:text-[#005A9C] transition-colors">
                   {social.name}
                 </h3>
                 <p className="text-xs font-bold text-[#00BFFF] mb-3">{social.handle}</p>
-                <p className="text-xs text-slate-600 leading-relaxed mb-6">
+                <p className="text-xs text-slate-600 leading-relaxed mb-6 text-justify">
                   {social.description}
                 </p>
               </div>
@@ -215,17 +208,13 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-7 bg-white/95 backdrop-blur-2xl rounded-[3rem] p-8 sm:p-10 shadow-2xl shadow-cyan-950/5 border border-white"
+            className="lg:col-span-7 bg-white/95 backdrop-blur-2xl rounded-[3rem] p-6 sm:p-8 shadow-2xl shadow-cyan-950/5 border border-white"
           >
-            <div className="mb-8">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 text-[#005A9C] text-xs font-bold uppercase tracking-wider mb-2">
-                <Calendar className="w-3.5 h-3.5 text-[#00BFFF]" />
-                <span>Formulario Directo de Solicitud</span>
-              </div>
+            <div className="mb-6">
               <h3 className="text-2xl sm:text-3xl font-black text-[#0A2540]">
                 Reserva tu Cita de Valoración
               </h3>
-              <p className="text-xs sm:text-sm text-slate-500 mt-1">
+              <p className="text-xs sm:text-sm text-slate-500 mt-1 text-justify">
                 Completa tus datos y serás transferido a nuestro WhatsApp oficial con tu requerimiento organizado.
               </p>
             </div>
@@ -389,10 +378,10 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
             className="lg:col-span-5 space-y-6"
           >
             {/* Contact Details Card with Organic Masked Architectural Header */}
-            <div className="bg-white/95 backdrop-blur-2xl rounded-[3rem] p-8 sm:p-10 shadow-2xl shadow-cyan-950/5 border border-white space-y-6 overflow-hidden">
+            <div className="bg-white/95 backdrop-blur-2xl rounded-[3rem] p-6 sm:p-8 shadow-2xl shadow-cyan-950/5 border border-white space-y-6 overflow-hidden">
               
               {/* Masked Architectural Exterior Photo */}
-              <div className="relative h-44 -mx-8 -mt-8 sm:-mx-10 sm:-mt-10 mb-6 overflow-hidden rounded-t-[3rem]">
+              <div className="relative h-44 -mx-6 -mt-6 sm:-mx-8 sm:-mt-8 mb-5 overflow-hidden rounded-t-[3rem]">
                 <img
                   src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=800&auto=format&fit=crop"
                   alt="Edificio Médico Platinum"
@@ -400,12 +389,6 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-white via-white/30 to-transparent" />
-                
-                {/* Floating Architectural Badge */}
-                <div className="absolute bottom-3 left-6 z-10 flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-950/80 backdrop-blur-md text-white text-[10px] font-extrabold border border-white/20">
-                  <MapPin className="w-3.5 h-3.5 text-[#00BFFF]" />
-                  <span>Edificio Médico Platinum • Piso 4</span>
-                </div>
               </div>
 
               <h3 className="text-2xl font-black text-[#0A2540]">
@@ -465,14 +448,26 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
                 </div>
               </div>
 
-              {/* Building Amenities Badges with Rounded Pills */}
+              {/* Building Amenities List */}
               <div className="pt-4 border-t border-slate-100">
                 <p className="text-xs font-bold text-[#0A2540] mb-3">Comodidades del Edificio Médico:</p>
-                <div className="flex flex-wrap gap-2 text-[11px] text-slate-600">
-                  <span className="px-4 py-1.5 rounded-full bg-slate-50 font-medium">Parqueadero Subterráneo Gratuito</span>
-                  <span className="px-4 py-1.5 rounded-full bg-slate-50 font-medium">Ascensores Camilleros</span>
-                  <span className="px-4 py-1.5 rounded-full bg-slate-50 font-medium">Seguridad Privada 24/7</span>
-                  <span className="px-4 py-1.5 rounded-full bg-slate-50 font-medium">Rampas de Accesibilidad</span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-slate-600">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-3.5 h-3.5 text-[#005A9C] shrink-0" />
+                    <span>Parqueadero subterráneo</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-3.5 h-3.5 text-[#005A9C] shrink-0" />
+                    <span>Ascensores camilleros</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-3.5 h-3.5 text-[#005A9C] shrink-0" />
+                    <span>Seguridad privada 24/7</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-3.5 h-3.5 text-[#005A9C] shrink-0" />
+                    <span>Rampas de accesibilidad</span>
+                  </div>
                 </div>
               </div>
             </div>
