@@ -72,11 +72,11 @@ export const Navbar: React.FC<NavbarProps> = ({
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ease-in-out ${
         isScrolled
-          ? 'bg-white/85 backdrop-blur-xl shadow-lg shadow-sky-950/5 border-b border-sky-100/80 py-2.5 sm:py-3'
-          : 'bg-transparent backdrop-blur-none border-b border-transparent shadow-none py-3.5 sm:py-5'
+          ? 'bg-white/85 backdrop-blur-xl shadow-lg shadow-sky-950/5 border-b border-sky-100/80 py-2 sm:py-3'
+          : 'bg-transparent backdrop-blur-none border-b border-transparent shadow-none py-3 sm:py-5'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between">
         
         {/* Logo */}
         <div onClick={() => handleNavClick('inicio')} className="cursor-pointer">

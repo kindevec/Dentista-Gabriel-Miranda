@@ -14,25 +14,25 @@ export const Logo: React.FC<LogoProps> = ({
   variant = 'light',
 }) => {
   const iconSizes = {
-    sm: 'w-9 h-9',
-    md: 'w-11 h-11',
-    lg: 'w-16 h-16',
+    sm: 'w-8 h-8 sm:w-9 sm:h-9',
+    md: 'w-9 h-9 sm:w-11 sm:h-11',
+    lg: 'w-13 h-13 sm:w-16 sm:h-16',
   };
 
   const titleSizes = {
-    sm: 'text-base',
-    md: 'text-lg sm:text-xl',
-    lg: 'text-2xl sm:text-3xl',
+    sm: 'text-sm sm:text-base',
+    md: 'text-base sm:text-xl',
+    lg: 'text-xl sm:text-3xl',
   };
 
   const subtitleSizes = {
-    sm: 'text-[9px]',
-    md: 'text-[10px] sm:text-[11px]',
-    lg: 'text-xs sm:text-sm',
+    sm: 'text-[8.5px] sm:text-[9px]',
+    md: 'text-[9px] sm:text-[11px]',
+    lg: 'text-[11px] sm:text-sm',
   };
 
   return (
-    <div className={`inline-flex items-center gap-3 select-none group cursor-pointer ${className}`}>
+    <div className={`inline-flex items-center gap-2 sm:gap-3 select-none group cursor-pointer ${className}`}>
       {/* Luxury Dental Crest / Monogram Icon */}
       <div
         className={`relative flex items-center justify-center rounded-2xl bg-gradient-to-br from-[#005A9C] via-[#0A2540] to-[#0084DE] p-2 shadow-md shadow-[#005A9C]/20 border border-cyan-400/30 transition-all duration-300 group-hover:scale-105 group-hover:shadow-cyan-400/30 ${iconSizes[size]}`}

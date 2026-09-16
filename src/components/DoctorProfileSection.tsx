@@ -125,10 +125,10 @@ export const DoctorProfileSection: React.FC = () => {
             {/* Philosophy Quote with Soft Rounded Pebble */}
             <motion.div
               variants={itemVariants}
-              className="p-6 rounded-[2rem] bg-cyan-50/70 relative shadow-2xs"
+              className="p-4 sm:p-6 rounded-[1.8rem] sm:rounded-[2rem] bg-cyan-50/70 relative shadow-2xs"
             >
-              <Quote className="w-7 h-7 text-[#00BFFF]/20 absolute top-4 right-4" />
-              <p className="text-xs sm:text-sm italic text-[#005A9C] font-medium pr-8 leading-relaxed text-justify">
+              <Quote className="w-6 h-6 sm:w-7 sm:h-7 text-[#00BFFF]/20 absolute top-4 right-4" />
+              <p className="text-xs sm:text-sm italic text-[#005A9C] font-medium pr-6 sm:pr-8 leading-relaxed text-justify">
                 {DOCTOR_PROFILE.philosophy}
               </p>
             </motion.div>
@@ -237,7 +237,7 @@ export const DoctorProfileSection: React.FC = () => {
               <motion.div
                 animate={{ y: [-6, 6, -6] }}
                 transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-                className="absolute -bottom-8 -right-3 sm:-right-6 z-20 w-36 sm:w-44 h-36 sm:h-44 rounded-[2.5rem] rounded-tr-lg p-1.5 bg-gradient-to-br from-white via-cyan-100 to-emerald-200 shadow-2xl shadow-cyan-950/20"
+                className="absolute -bottom-6 sm:-bottom-8 right-0 sm:-right-6 z-20 w-32 sm:w-44 h-32 sm:h-44 rounded-[2rem] sm:rounded-[2.5rem] rounded-tr-lg p-1.5 bg-gradient-to-br from-white via-cyan-100 to-emerald-200 shadow-2xl shadow-cyan-950/20"
               >
                 <div className="relative w-full h-full rounded-[2.2rem] rounded-tr-md overflow-hidden bg-slate-900 group">
                   <img

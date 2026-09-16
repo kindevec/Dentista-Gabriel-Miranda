@@ -60,7 +60,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-700 font-sans antialiased selection:bg-cyan-500/20 selection:text-[#005A9C] pb-16 lg:pb-0 overflow-x-hidden">
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-700 font-sans antialiased selection:bg-cyan-500/20 selection:text-[#005A9C] pb-[calc(4.5rem+env(safe-area-inset-bottom,0px))] lg:pb-0 overflow-x-hidden">
       {/* Centralized SVG Mask Definitions */}
       <DentalMaskDefinitions />
 

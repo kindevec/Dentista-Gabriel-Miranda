@@ -160,7 +160,7 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
               key={social.id}
               variants={itemVariants}
               whileHover={{ y: -6, scale: 1.02 }}
-              className="bg-white/95 backdrop-blur-xl rounded-[2.5rem] p-8 shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300 flex flex-col justify-between group border border-white"
+              className="bg-white/95 backdrop-blur-xl rounded-[2.2rem] sm:rounded-[2.5rem] p-6 sm:p-8 shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300 flex flex-col justify-between group border border-white"
             >
               <div>
                 <div className="mb-5">
@@ -200,7 +200,7 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
         </motion.div>
 
         {/* 2. Split Layout: Interactive Booking Form + Clinic Location Details */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           
           {/* Left Column (7 cols): Formulario sin Box-in-Box con Inputs Píldora */}
           <motion.div
@@ -208,7 +208,7 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-7 bg-white/95 backdrop-blur-2xl rounded-[3rem] p-6 sm:p-8 shadow-2xl shadow-cyan-950/5 border border-white"
+            className="lg:col-span-7 bg-white/95 backdrop-blur-2xl rounded-[2.2rem] sm:rounded-[3rem] p-5 sm:p-8 shadow-2xl shadow-cyan-950/5 border border-white"
           >
             <div className="mb-6">
               <h3 className="text-2xl sm:text-3xl font-black text-[#0A2540]">
@@ -231,7 +231,7 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
                   placeholder="Ej. María Fernanda Morales"
                   value={formData.patientName}
                   onChange={(e) => setFormData({ ...formData, patientName: e.target.value })}
-                  className="w-full px-5 py-3.5 rounded-full bg-slate-50/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00BFFF]/40 text-sm transition-all"
+                  className="w-full px-5 py-3.5 rounded-full bg-slate-50/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00BFFF]/40 text-base sm:text-sm transition-all"
                 />
               </div>
 
@@ -247,7 +247,7 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
                     placeholder="+593 98 231 5408"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-5 py-3.5 rounded-full bg-slate-50/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00BFFF]/40 text-sm transition-all"
+                    className="w-full px-5 py-3.5 rounded-full bg-slate-50/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00BFFF]/40 text-base sm:text-sm transition-all"
                   />
                 </div>
                 <div>
@@ -259,7 +259,7 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
                     placeholder="paciente@correo.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-5 py-3.5 rounded-full bg-slate-50/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00BFFF]/40 text-sm transition-all"
+                    className="w-full px-5 py-3.5 rounded-full bg-slate-50/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00BFFF]/40 text-base sm:text-sm transition-all"
                   />
                 </div>
               </div>
@@ -272,7 +272,7 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
                 <select
                   value={formData.specialtyId}
                   onChange={(e) => setFormData({ ...formData, specialtyId: e.target.value })}
-                  className="w-full px-5 py-3.5 rounded-full bg-slate-50/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00BFFF]/40 text-sm transition-all cursor-pointer"
+                  className="w-full px-5 py-3.5 rounded-full bg-slate-50/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00BFFF]/40 text-base sm:text-sm transition-all cursor-pointer"
                 >
                   {SPECIALTIES_DATA.map((s) => (
                     <option key={s.id} value={s.id}>
@@ -293,7 +293,7 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
                     type="date"
                     value={formData.preferredDate}
                     onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
-                    className="w-full px-5 py-3.5 rounded-full bg-slate-50/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00BFFF]/40 text-sm transition-all"
+                    className="w-full px-5 py-3.5 rounded-full bg-slate-50/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00BFFF]/40 text-base sm:text-sm transition-all"
                   />
                 </div>
                 <div>
@@ -303,7 +303,7 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
                   <select
                     value={formData.preferredTime}
                     onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
-                    className="w-full px-5 py-3.5 rounded-full bg-slate-50/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00BFFF]/40 text-sm transition-all cursor-pointer"
+                    className="w-full px-5 py-3.5 rounded-full bg-slate-50/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00BFFF]/40 text-base sm:text-sm transition-all cursor-pointer"
                   >
                     <option value="Mañana (09:00 - 12:00)">Mañana (08:30 - 12:00)</option>
                     <option value="Tarde (13:00 - 16:00)">Mediodía / Tarde (13:00 - 16:00)</option>
@@ -323,18 +323,18 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
                   placeholder="Describe brevemente tus expectativas, si presentas sensibilidad o si requieres valoración estética..."
                   value={formData.notes}
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                  className="w-full px-5 py-3.5 rounded-3xl bg-slate-50/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00BFFF]/40 text-sm transition-all resize-none"
+                  className="w-full px-5 py-3.5 rounded-3xl bg-slate-50/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00BFFF]/40 text-base sm:text-sm transition-all resize-none"
                 />
               </div>
 
               {/* Emergency Checkbox with Rounded Pill */}
-              <div className="flex items-center gap-3 p-4 rounded-full bg-amber-50/70">
+              <div className="flex items-start sm:items-center gap-3 p-3.5 sm:p-4 rounded-2xl sm:rounded-full bg-amber-50/70">
                 <input
                   type="checkbox"
                   id="isEmergency"
                   checked={formData.isEmergency}
                   onChange={(e) => setFormData({ ...formData, isEmergency: e.target.checked })}
-                  className="w-4 h-4 text-red-600 rounded-full focus:ring-red-500 cursor-pointer ml-1"
+                  className="w-4 h-4 text-red-600 rounded-full focus:ring-red-500 cursor-pointer ml-1 mt-0.5 sm:mt-0"
                 />
                 <label htmlFor="isEmergency" className="text-xs text-amber-900 font-semibold cursor-pointer">
                   Presento dolor agudo o requiero atención médica urgente prioritaria
@@ -346,7 +346,7 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="w-full py-4.5 rounded-full bg-gradient-to-r from-[#005A9C] via-[#0084DE] to-[#00BFFF] hover:from-[#004a82] hover:to-[#00a3da] text-white font-black text-xs uppercase tracking-wider transition-all duration-300 shadow-xl shadow-[#005A9C]/25 flex items-center justify-center gap-2.5 cursor-pointer mt-4"
+                className="w-full py-4 sm:py-4.5 rounded-full bg-gradient-to-r from-[#005A9C] via-[#0084DE] to-[#00BFFF] hover:from-[#004a82] hover:to-[#00a3da] text-white font-black text-xs uppercase tracking-wider transition-all duration-300 shadow-xl shadow-[#005A9C]/25 flex items-center justify-center gap-2.5 cursor-pointer mt-4"
               >
                 <WhatsAppIcon className="w-5 h-5 text-white" />
                 <span>Confirmar y Enviar Solicitud por WhatsApp</span>
@@ -378,10 +378,10 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
             className="lg:col-span-5 space-y-6"
           >
             {/* Contact Details Card with Organic Masked Architectural Header */}
-            <div className="bg-white/95 backdrop-blur-2xl rounded-[3rem] p-6 sm:p-8 shadow-2xl shadow-cyan-950/5 border border-white space-y-6 overflow-hidden">
+            <div className="bg-white/95 backdrop-blur-2xl rounded-[2.2rem] sm:rounded-[3rem] p-5 sm:p-8 shadow-2xl shadow-cyan-950/5 border border-white space-y-6 overflow-hidden">
               
               {/* Masked Architectural Exterior Photo */}
-              <div className="relative h-44 -mx-6 -mt-6 sm:-mx-8 sm:-mt-8 mb-5 overflow-hidden rounded-t-[3rem]">
+              <div className="relative h-44 -mx-5 -mt-5 sm:-mx-8 sm:-mt-8 mb-5 overflow-hidden rounded-t-[2.2rem] sm:rounded-t-[3rem]">
                 <img
                   src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=800&auto=format&fit=crop"
                   alt="Edificio Médico Platinum"

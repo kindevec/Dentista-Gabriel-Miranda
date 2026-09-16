@@ -78,18 +78,18 @@ export const FaqSection: React.FC = () => {
               >
                 <button
                   onClick={() => toggleFaq(faq.id)}
-                  className="w-full py-5 px-7 flex items-center justify-between text-left gap-4 cursor-pointer focus:outline-none"
+                  className="w-full py-4 sm:py-5 px-4 sm:px-7 flex items-center justify-between text-left gap-3 sm:gap-4 cursor-pointer focus:outline-none"
                   aria-expanded={isOpen}
                 >
-                  <div className="flex items-center gap-3.5">
+                  <div className="flex items-center gap-3 sm:gap-3.5">
                     <HelpCircle className={`w-5 h-5 shrink-0 transition-colors ${isOpen ? 'text-[#00BFFF]' : 'text-slate-400'}`} />
-                    <span className="text-sm sm:text-base font-bold text-[#0A2540]">
+                    <span className="text-xs sm:text-base font-bold text-[#0A2540]">
                       {faq.question}
                     </span>
                   </div>
 
                   <div
-                    className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${
+                    className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${
                       isOpen ? 'bg-[#005A9C] text-white rotate-180' : 'bg-white text-slate-500 shadow-2xs'
                     }`}
                   >
@@ -105,7 +105,7 @@ export const FaqSection: React.FC = () => {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
                     >
-                      <div className="px-7 pb-6 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-cyan-100/60 pl-14 text-justify">
+                      <div className="px-4 sm:px-7 pb-5 sm:pb-6 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-cyan-100/60 pl-11 sm:pl-14 text-justify">
                         {faq.answer}
                       </div>
                     </motion.div>
@@ -122,7 +122,7 @@ export const FaqSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-8 sm:mt-10 text-center p-6 sm:p-7 rounded-[2.5rem] bg-slate-50"
+          className="mt-8 sm:mt-10 text-center p-5 sm:p-7 rounded-[2rem] sm:rounded-[2.5rem] bg-slate-50"
         >
           <p className="text-sm font-semibold text-[#0A2540] mb-3">
             ¿Tienes alguna consulta médica adicional que no esté en esta lista?

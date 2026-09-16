@@ -75,10 +75,10 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
             </motion.p>
 
             {/* 3 Steps Triage - Diseño fluido y abierto sin cajitas cuadradas rígidas */}
-            <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+            <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 pt-2">
               <motion.div
                 whileHover={{ y: -3 }}
-                className="p-5 rounded-[2rem] bg-white/10 backdrop-blur-md text-left transition-all border border-white/10"
+                className="p-4 sm:p-5 rounded-[1.8rem] sm:rounded-[2rem] bg-white/10 backdrop-blur-md text-left transition-all border border-white/10"
               >
                 <div className="w-9 h-9 rounded-full bg-cyan-400/20 flex items-center justify-center mb-3 text-cyan-300">
                   <Zap className="w-4 h-4" />
@@ -89,7 +89,7 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
 
               <motion.div
                 whileHover={{ y: -3 }}
-                className="p-5 rounded-[2rem] bg-white/10 backdrop-blur-md text-left transition-all border border-white/10"
+                className="p-4 sm:p-5 rounded-[1.8rem] sm:rounded-[2rem] bg-white/10 backdrop-blur-md text-left transition-all border border-white/10"
               >
                 <div className="w-9 h-9 rounded-full bg-emerald-400/20 flex items-center justify-center mb-3 text-emerald-300">
                   <ShieldCheck className="w-4 h-4" />
@@ -100,7 +100,7 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
 
               <motion.div
                 whileHover={{ y: -3 }}
-                className="p-5 rounded-[2rem] bg-white/10 backdrop-blur-md text-left transition-all border border-white/10"
+                className="p-4 sm:p-5 rounded-[1.8rem] sm:rounded-[2rem] bg-white/10 backdrop-blur-md text-left transition-all border border-white/10"
               >
                 <div className="w-9 h-9 rounded-full bg-amber-400/20 flex items-center justify-center mb-3 text-amber-300">
                   <Clock className="w-4 h-4" />
@@ -110,8 +110,8 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
               </motion.div>
             </motion.div>
 
-            {/* CTAs */}
-            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+            {/* Direct Action Emergency Buttons */}
+            <motion.div variants={itemVariants} className="pt-2 flex flex-col sm:flex-row gap-3 sm:gap-4">
               <motion.a
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
@@ -119,20 +119,20 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={onOpenEmergency}
-                className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-red-500 via-rose-600 to-red-600 hover:from-red-600 hover:to-rose-700 text-white font-black text-xs uppercase tracking-wider transition-all duration-300 shadow-xl shadow-red-600/30 flex items-center justify-center gap-3 cursor-pointer animate-halo-emergency"
+                className="w-full sm:w-auto px-5 sm:px-8 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-red-500 via-rose-600 to-red-600 hover:from-red-600 hover:to-rose-700 text-white font-black text-[11px] sm:text-xs uppercase tracking-wider transition-all duration-300 shadow-xl shadow-red-600/30 flex items-center justify-center gap-2.5 sm:gap-3 cursor-pointer animate-halo-emergency"
               >
-                <WhatsAppIcon className="w-5 h-5 text-white" />
-                <span>Solicitar Urgencia Dental por WhatsApp</span>
-                <ArrowRight className="w-4 h-4" />
+                <WhatsAppIcon className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0" />
+                <span className="text-center">Solicitar Urgencia Dental por WhatsApp</span>
+                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
               </motion.a>
 
               <motion.a
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
                 href={`tel:${CLINIC_PHONE_DISPLAY.replace(/\s+/g, '')}`}
-                className="w-full sm:w-auto px-7 py-4 rounded-full bg-white/15 hover:bg-white/25 backdrop-blur-md text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full sm:w-auto px-5 sm:px-7 py-3 sm:py-4 rounded-full bg-white/15 hover:bg-white/25 backdrop-blur-md text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
-                <PhoneCall className="w-4 h-4 text-cyan-300" />
+                <PhoneCall className="w-4 h-4 text-cyan-300 shrink-0" />
                 <span>Llamar: {CLINIC_PHONE_DISPLAY}</span>
               </motion.a>
             </motion.div>

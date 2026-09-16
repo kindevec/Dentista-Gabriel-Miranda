@@ -37,11 +37,29 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
 }) => {
   const [step, setStep] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
+  const mobilePillsRef = useRef<HTMLDivElement>(null);
 
   const totalItems = SPECIALTIES_DATA.length;
   const currentIndex = ((step % totalItems) + totalItems) % totalItems;
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Smoothly center the active pill in the mobile horizontal bar
+  useEffect(() => {
+    if (!mobilePillsRef.current) return;
+    const activeBtn = mobilePillsRef.current.querySelector(`[data-pill-index="${currentIndex}"]`) as HTMLElement;
+    if (activeBtn) {
+      activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+  }, [currentIndex]);
 
   const nextStep = useCallback(() => {
     setStep((prev) => prev + 1);
@@ -264,18 +282,19 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
               </div>
 
               {/* Mobile Horizontal Pill Scroller (visible on < lg) */}
-              <div className="lg:hidden flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none py-1">
+              <div ref={mobilePillsRef} className="lg:hidden flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none py-1 scroll-smooth">
                 {SPECIALTIES_DATA.map((spec, index) => {
                   const isActive = index === currentIndex;
                   return (
                     <button
                       key={spec.id}
+                      data-pill-index={index}
                       onClick={() => handleChipClick(index)}
                       className={cn(
-                        'flex items-center gap-2 px-3.5 py-2 rounded-full text-xs font-bold shrink-0 transition-all border cursor-pointer',
+                        'flex items-center gap-2 px-3.5 py-2 rounded-full text-xs font-bold shrink-0 transition-all border cursor-pointer select-none',
                         isActive
                           ? 'bg-white text-[#005A9C] border-white shadow-md'
-                          : 'bg-white/10 text-white/80 border-white/15'
+                          : 'bg-white/10 text-white/80 border-white/15 hover:bg-white/15'
                       )}
                     >
                       {getSpecialtyIcon(spec.iconName, isActive ? 'w-4 h-4 text-[#005A9C]' : 'w-4 h-4 text-cyan-300')}
@@ -327,12 +346,12 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
 
             {/* Right Column: 3D Stack / Card Perspective Showcase */}
             <div
-              className="flex-1 relative flex items-center justify-center py-8 sm:py-12 lg:py-10 px-4 sm:px-8 lg:px-10 overflow-hidden bg-slate-900/5 min-h-[580px] lg:min-h-[640px]"
+              className="flex-1 relative flex items-center justify-center py-6 sm:py-12 lg:py-10 px-3 sm:px-8 lg:px-10 overflow-hidden bg-slate-900/5 min-h-[540px] sm:min-h-[580px] lg:min-h-[640px]"
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
             >
-              <div className="relative w-full max-w-[480px] h-[520px] sm:h-[560px] flex items-center justify-center">
+              <div className="relative w-full max-w-[480px] h-[500px] sm:h-[560px] flex items-center justify-center">
                 {/* Dynamic Ambient Glow behind Active Card */}
                 <motion.div
                   key={`glow-${currentIndex}`}
@@ -348,16 +367,17 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                   const isActive = status === 'active';
                   const isPrev = status === 'prev';
                   const isNext = status === 'next';
+                  const sideOffset = isMobile ? 46 : 85;
 
                   return (
                     <motion.div
                       key={spec.id}
                       initial={false}
                       animate={{
-                        x: isActive ? 0 : isPrev ? -85 : isNext ? 85 : 0,
-                        scale: isActive ? 1 : isPrev || isNext ? 0.88 : 0.72,
-                        opacity: isActive ? 1 : isPrev || isNext ? 0.45 : 0,
-                        rotate: isPrev ? -3 : isNext ? 3 : 0,
+                        x: isActive ? 0 : isPrev ? -sideOffset : isNext ? sideOffset : 0,
+                        scale: isActive ? 1 : isPrev || isNext ? (isMobile ? 0.9 : 0.88) : 0.72,
+                        opacity: isActive ? 1 : isPrev || isNext ? (isMobile ? 0.35 : 0.45) : 0,
+                        rotate: isPrev ? (isMobile ? -1.5 : -3) : isNext ? (isMobile ? 1.5 : 3) : 0,
                         zIndex: isActive ? 20 : isPrev || isNext ? 10 : 0,
                         pointerEvents: isActive ? 'auto' : isPrev || isNext ? 'auto' : 'none',
                       }}
@@ -393,26 +413,26 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 via-55% to-slate-950/35 pointer-events-none" />
 
                       {/* Top Bar inside Card */}
-                      <div className="relative z-20 p-5 sm:p-6 flex items-center justify-between gap-2">
+                      <div className="relative z-20 p-4 sm:p-6 flex items-center justify-between gap-2">
                         <div className="flex items-center gap-2">
-                          <div className="w-11 h-11 rounded-2xl bg-white/15 backdrop-blur-xl border border-white/20 flex items-center justify-center text-cyan-300 shadow-md">
+                          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-white/15 backdrop-blur-xl border border-white/20 flex items-center justify-center text-cyan-300 shadow-md">
                             {getSpecialtyIcon(spec.iconName, 'w-5 h-5 text-cyan-300')}
                           </div>
                           {spec.badge && (
-                            <span className="px-3 py-1 rounded-full bg-gradient-to-r from-cyan-500 to-[#005A9C] text-white text-[10px] sm:text-[11px] font-extrabold shadow-sm tracking-wide">
+                            <span className="px-2.5 sm:px-3 py-1 rounded-full bg-gradient-to-r from-cyan-500 to-[#005A9C] text-white text-[9.5px] sm:text-[11px] font-extrabold shadow-sm tracking-wide">
                               {spec.badge}
                             </span>
                           )}
                         </div>
 
-                        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/80 backdrop-blur-md text-cyan-200 text-[11px] font-semibold border border-white/15">
+                        <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-slate-900/80 backdrop-blur-md text-cyan-200 text-[10.5px] sm:text-[11px] font-semibold border border-white/15">
                           <Clock className="w-3.5 h-3.5 text-[#00BFFF]" />
                           <span>{spec.estimatedTime || 'Evaluación 3D'}</span>
                         </div>
                       </div>
 
                       {/* Bottom Content inside Card */}
-                      <div className="relative z-20 p-5 sm:p-6 pt-0 flex flex-col justify-end">
+                      <div className="relative z-20 p-4 sm:p-6 pt-0 flex flex-col justify-end">
                         <AnimatePresence mode="wait">
                           {isActive && (
                             <motion.div
@@ -421,27 +441,27 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                               exit={{ opacity: 0, y: -10 }}
                               transition={{ duration: 0.35 }}
                             >
-                              <div className="inline-block bg-cyan-400/20 text-cyan-300 border border-cyan-400/40 px-3 py-1 rounded-full text-[10.5px] font-bold uppercase tracking-wider mb-2 backdrop-blur-md">
+                              <div className="inline-block bg-cyan-400/20 text-cyan-300 border border-cyan-400/40 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-[10.5px] font-bold uppercase tracking-wider mb-1.5 sm:mb-2 backdrop-blur-md">
                                 Especialidad {index + 1} de {totalItems}
                               </div>
 
-                              <h3 className="text-xl sm:text-2xl font-black text-white leading-tight mb-2">
+                              <h3 className="text-lg sm:text-2xl font-black text-white leading-tight mb-1.5 sm:mb-2">
                                 {spec.title}
                               </h3>
 
-                              <p className="text-xs sm:text-[13px] text-slate-200 mb-3.5 line-clamp-2 leading-relaxed text-justify">
+                              <p className="text-[11.5px] sm:text-[13px] text-slate-200 mb-2.5 sm:mb-3.5 line-clamp-2 leading-relaxed text-justify">
                                 {spec.shortDesc}
                               </p>
 
                               {/* Highlights Bullet Points with Staggered Animation */}
-                              <div className="space-y-1.5 mb-4">
+                              <div className="space-y-1 sm:space-y-1.5 mb-2.5 sm:mb-4">
                                 {spec.features.slice(0, 3).map((feat, fIdx) => (
                                   <motion.div
                                     key={fIdx}
                                     initial={{ opacity: 0, x: -12 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.15 + fIdx * 0.1, duration: 0.3 }}
-                                    className="flex items-center gap-2 text-[11px] sm:text-xs text-slate-100 font-medium"
+                                    className="flex items-center gap-2 text-[10.5px] sm:text-xs text-slate-100 font-medium"
                                   >
                                     <div className="w-4 h-4 rounded-full bg-cyan-400/20 border border-cyan-400/50 text-cyan-300 flex items-center justify-center shrink-0 shadow-2xs">
                                       <Check className="w-2.5 h-2.5 stroke-[3]" />
@@ -457,7 +477,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                                   initial={{ opacity: 0 }}
                                   animate={{ opacity: 1 }}
                                   transition={{ delay: 0.45, duration: 0.3 }}
-                                  className="text-[10.5px] sm:text-[11px] text-cyan-200/70 italic mb-4 line-clamp-1"
+                                  className="text-[10px] sm:text-[11px] text-cyan-200/70 italic mb-2.5 sm:mb-4 line-clamp-1"
                                 >
                                   Ideal para: {spec.suitableFor}
                                 </motion.p>
@@ -473,7 +493,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                                 href={createWhatsAppLink(spec.waMessage || `Hola ${DOCTOR_NAME}, deseo información y solicitar una cita sobre el tratamiento de ${spec.title}.`)}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="w-full py-3 px-5 rounded-full bg-gradient-to-r from-[#25D366] via-[#20BA5A] to-[#128C7E] hover:from-[#20BA5A] hover:to-[#0f7a6d] text-white font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-lg shadow-emerald-950/40 hover:shadow-emerald-500/30 group/btn cursor-pointer"
+                                className="w-full py-2.5 sm:py-3 px-4 sm:px-5 rounded-full bg-gradient-to-r from-[#25D366] via-[#20BA5A] to-[#128C7E] hover:from-[#20BA5A] hover:to-[#0f7a6d] text-white font-extrabold text-[11px] sm:text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-lg shadow-emerald-950/40 hover:shadow-emerald-500/30 group/btn cursor-pointer"
                               >
                                 <WhatsAppIcon className="w-4 h-4 text-white group-hover/btn:scale-110 transition-transform" />
                                 <span>Consultar por WhatsApp</span>
@@ -489,7 +509,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
               </div>
 
               {/* Dot Position Indicators */}
-              <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5">
+              <div className="absolute bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5">
                 {SPECIALTIES_DATA.map((_, dotIdx) => (
                   <button
                     key={dotIdx}

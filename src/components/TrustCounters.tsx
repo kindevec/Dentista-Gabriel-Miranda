@@ -82,10 +82,10 @@ export const TrustCounters: React.FC = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
-          className="bg-white/95 backdrop-blur-2xl rounded-[3rem] p-6 sm:p-8 lg:p-9 shadow-2xl shadow-cyan-950/5 border border-white"
+          className="bg-white/95 backdrop-blur-2xl rounded-[2.2rem] sm:rounded-[3rem] p-4 sm:p-8 lg:p-9 shadow-2xl shadow-cyan-950/5 border border-white"
         >
           {/* 4 Main Metrics: Cápsulas de Esmalte Enmascaradas */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             {CLINIC_STATS.map((stat, idx) => {
               const statPhotos = [
                 "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=400&auto=format&fit=crop",
@@ -98,7 +98,7 @@ export const TrustCounters: React.FC = () => {
                   key={idx}
                   variants={itemVariants}
                   whileHover={{ y: -5, scale: 1.02 }}
-                  className="flex flex-col items-center text-center p-5 sm:p-6 rounded-[2.2rem] bg-gradient-to-b from-cyan-50/40 via-white/90 to-sky-50/30 border border-cyan-100/70 hover:border-cyan-300 shadow-xs hover:shadow-xl hover:shadow-[#005A9C]/10 relative overflow-hidden group transition-all duration-300"
+                  className="flex flex-col items-center text-center p-3.5 sm:p-6 rounded-[1.8rem] sm:rounded-[2.2rem] bg-gradient-to-b from-cyan-50/40 via-white/90 to-sky-50/30 border border-cyan-100/70 hover:border-cyan-300 shadow-xs hover:shadow-xl hover:shadow-[#005A9C]/10 relative overflow-hidden group transition-all duration-300"
                 >
                   {/* Subtle Masked Micro-Photo Background */}
                   <div
@@ -116,16 +116,16 @@ export const TrustCounters: React.FC = () => {
                     />
                   </div>
 
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-cyan-50 to-sky-100 border border-cyan-200/80 flex items-center justify-center mb-3 text-[#005A9C] shadow-xs group-hover:scale-110 transition-transform relative z-10">
+                  <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-cyan-50 to-sky-100 border border-cyan-200/80 flex items-center justify-center mb-2 sm:mb-3 text-[#005A9C] shadow-xs group-hover:scale-110 transition-transform relative z-10">
                     {getStatIcon(stat.iconName)}
                   </div>
-                  <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0A2540] tracking-tight relative z-10">
+                  <div className="text-2xl sm:text-4xl lg:text-5xl font-black text-[#0A2540] tracking-tight relative z-10">
                     {stat.value}
                   </div>
-                  <div className="text-xs sm:text-sm font-bold text-[#005A9C] mt-1.5 relative z-10">
+                  <div className="text-xs sm:text-sm font-bold text-[#005A9C] mt-1 relative z-10">
                     {stat.label}
                   </div>
-                  <div className="text-[11px] text-slate-500 mt-0.5 relative z-10 leading-snug">
+                  <div className="text-[10px] sm:text-[11px] text-slate-500 mt-0.5 relative z-10 leading-snug">
                     {stat.sublabel}
                   </div>
                 </motion.div>

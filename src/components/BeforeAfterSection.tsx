@@ -119,7 +119,7 @@ const InteractiveBeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
         style={{ left: `${sliderPosition}%` }}
       >
         {/* Handle Knob with Pulsing Light */}
-        <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-white text-[#005A9C] shadow-2xl flex items-center justify-center border-2 border-[#00BFFF] cursor-ew-resize">
+        <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white text-[#005A9C] shadow-2xl flex items-center justify-center border-2 border-[#00BFFF] cursor-ew-resize touch-none">
           <MoveHorizontal className="w-4 h-4 animate-pulse" />
         </div>
       </div>
@@ -265,7 +265,7 @@ export const BeforeAfterSection: React.FC = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setActiveCategory(cat.id as any)}
-              className={`px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
+              className={`px-3.5 sm:px-6 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
                 activeCategory === cat.id
                   ? 'bg-gradient-to-r from-[#005A9C] to-[#00BFFF] text-white shadow-lg shadow-cyan-500/25'
                   : 'bg-white/10 text-slate-300 hover:bg-white/20'
@@ -277,16 +277,16 @@ export const BeforeAfterSection: React.FC = () => {
         </motion.div>
 
         {/* 3. Carousel Container with Flanked Controls (Kindev Standard Ergonomics) */}
-        <div className="relative px-2 sm:px-4">
+        <div className="relative px-1 sm:px-4">
           
           {/* Flanked Navigation Button: Left (Kindev Rule 2) */}
           {maxIndex > 0 && (
             <button
               onClick={handlePrev}
               aria-label="Caso anterior"
-              className="absolute -left-2 sm:-left-4 lg:-left-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/15 hover:bg-white/25 backdrop-blur-xl text-white border border-white/25 shadow-2xl flex items-center justify-center transition-all duration-200 active:scale-95 cursor-pointer"
+              className="absolute left-0 sm:-left-4 lg:-left-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-900/80 sm:bg-white/15 hover:bg-white/25 backdrop-blur-xl text-white border border-white/25 shadow-2xl flex items-center justify-center transition-all duration-200 active:scale-95 cursor-pointer"
             >
-              <ChevronLeft className="w-6 h-6" />
+              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
           )}
 
@@ -295,9 +295,9 @@ export const BeforeAfterSection: React.FC = () => {
             <button
               onClick={handleNext}
               aria-label="Caso siguiente"
-              className="absolute -right-2 sm:-right-4 lg:-right-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/15 hover:bg-white/25 backdrop-blur-xl text-white border border-white/25 shadow-2xl flex items-center justify-center transition-all duration-200 active:scale-95 cursor-pointer"
+              className="absolute right-0 sm:-right-4 lg:-right-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-900/80 sm:bg-white/15 hover:bg-white/25 backdrop-blur-xl text-white border border-white/25 shadow-2xl flex items-center justify-center transition-all duration-200 active:scale-95 cursor-pointer"
             >
-              <ChevronRight className="w-6 h-6" />
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
           )}
 

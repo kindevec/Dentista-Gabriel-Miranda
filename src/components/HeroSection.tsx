@@ -179,11 +179,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             {/* Operating Schedule Line */}
             <motion.div
               variants={itemVariants}
-              className="pt-1 flex items-center justify-center lg:justify-start gap-2 text-xs text-slate-500"
+              className="pt-1 flex flex-wrap items-center justify-center lg:justify-start gap-x-2 gap-y-1 text-xs text-slate-500 text-center lg:text-left"
             >
-              <Clock className="w-3.5 h-3.5 text-[#00BFFF]" />
-              <span>Horarios: Lun - Vie 08:30 a 19:00 | Sáb 09:00 a 15:00</span>
-              <span className="text-slate-400">•</span>
+              <div className="flex items-center gap-1.5">
+                <Clock className="w-3.5 h-3.5 text-[#00BFFF] shrink-0" />
+                <span>Horarios: Lun - Vie 08:30 a 19:00 | Sáb 09:00 a 15:00</span>
+              </div>
+              <span className="text-slate-400 hidden sm:inline">•</span>
               <span className="font-semibold text-slate-700">Edificio Platinum, Quito</span>
             </motion.div>
           </motion.div>
@@ -195,7 +197,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             onMouseMove={handleMouseMove}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            className="lg:col-span-5 relative flex items-center justify-center py-6 cursor-pointer select-none"
+            className="lg:col-span-5 relative flex items-center justify-center py-4 sm:py-6 cursor-pointer select-none overflow-hidden sm:overflow-visible"
             style={{ perspective: 1000 }}
           >
             {/* 1. Dynamic Water Ripple Waves Radiating Outward */}
@@ -209,7 +211,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 duration: 5,
                 ease: 'easeInOut',
               }}
-              className="absolute w-72 sm:w-88 h-72 sm:h-88 rounded-full border-2 border-cyan-400/35 pointer-events-none -z-10"
+              className="absolute w-60 sm:w-88 h-60 sm:h-88 rounded-full border-2 border-cyan-400/35 pointer-events-none -z-10"
             />
             <motion.div
               animate={{
@@ -222,7 +224,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 ease: 'easeInOut',
                 delay: 1.5,
               }}
-              className="absolute w-88 sm:w-96 h-88 sm:h-96 rounded-full border border-sky-400/25 pointer-events-none -z-10"
+              className="absolute w-72 sm:w-96 h-72 sm:h-96 rounded-full border border-sky-400/25 pointer-events-none -z-10"
             />
 
             {/* 2. Interactive Ambient Glowing Halo (Follows Mouse Parallax) */}
@@ -231,7 +233,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 x: glowX,
                 y: glowY,
               }}
-              className="absolute w-72 sm:w-96 h-72 sm:h-96 bg-gradient-to-tr from-[#00BFFF]/30 via-cyan-400/20 to-sky-300/10 rounded-full blur-3xl pointer-events-none -z-10 scale-110"
+              className="absolute w-64 sm:w-96 h-64 sm:h-96 bg-gradient-to-tr from-[#00BFFF]/30 via-cyan-400/20 to-sky-300/10 rounded-full blur-3xl pointer-events-none -z-10 scale-110"
             />
 
             {/* 3. Floating Crystal Water Droplets in 3D Space */}
