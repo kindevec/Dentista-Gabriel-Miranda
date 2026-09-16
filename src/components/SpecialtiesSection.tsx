@@ -23,7 +23,7 @@ interface SpecialtiesSectionProps {
 }
 
 const ITEM_HEIGHT = 68;
-const VIRTUAL_OFFSETS = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5];
+const VIRTUAL_OFFSETS = [-3, -2, -1, 0, 1, 2, 3];
 
 const SPECIALTY_SHORT_TITLES: Record<string, string> = {
   ortodoncia: 'Ortodoncia 3D',
@@ -69,18 +69,19 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
   }, []);
 
   // Shortest signed difference to rotate directly to target item
-  const handleChipClick = (index: number) => {
+  const handleChipClick = useCallback((index: number) => {
     let diff = index - currentIndex;
     if (diff > totalItems / 2) diff -= totalItems;
     if (diff < -totalItems / 2) diff += totalItems;
     if (diff !== 0) setStep((s) => s + diff);
-  };
+  }, [currentIndex, totalItems]);
 
   const wheelAccumulatorRef = useRef<number>(0);
-  const wheelTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const wheelTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isWheelLockedRef = useRef<boolean>(false);
 
-  // Deslizamiento fluido y continuo por rueda de ratón (sensación de arrastre real)
-  const handleWheel = (e: React.WheelEvent) => {
+  // Deslizamiento fluido, controlado y de alto rendimiento por rueda de ratón
+  const handleWheel = useCallback((e: React.WheelEvent) => {
     e.stopPropagation();
     wheelAccumulatorRef.current += e.deltaY;
 
@@ -88,34 +89,38 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
       clearTimeout(wheelTimerRef.current);
     }
 
-    const threshold = 36;
-    if (Math.abs(wheelAccumulatorRef.current) >= threshold) {
+    const threshold = 40;
+    if (!isWheelLockedRef.current && Math.abs(wheelAccumulatorRef.current) >= threshold) {
       const direction = wheelAccumulatorRef.current > 0 ? 1 : -1;
       setStep((s) => s + direction);
       wheelAccumulatorRef.current = 0;
+      isWheelLockedRef.current = true;
+      setTimeout(() => {
+        isWheelLockedRef.current = false;
+      }, 90);
     }
 
     wheelTimerRef.current = setTimeout(() => {
       wheelAccumulatorRef.current = 0;
+      isWheelLockedRef.current = false;
     }, 140);
-  };
+  }, []);
 
-  // Arrastre físico táctil interactivo con mouse o touch
-  const handleTrackDragEnd = (
+  // Arrastre físico táctil interactivo con mouse o touch con inercia optimizada
+  const handleTrackDragEnd = useCallback((
     _event: MouseEvent | TouchEvent | PointerEvent,
     info: PanInfo
   ) => {
     const deltaY = info.offset.y;
     const velocityY = info.velocity.y;
-    // Calcula cuántos pasos se desplaza en función de la distancia arrastrada y la velocidad de inercia
-    const projectedDistance = deltaY + velocityY * 0.16;
+    const projectedDistance = deltaY + velocityY * 0.15;
     const stepsMoved = -Math.round(projectedDistance / ITEM_HEIGHT);
     if (stepsMoved !== 0) {
       setStep((s) => s + stepsMoved);
     }
-  };
+  }, []);
 
-  const getCardStatus = (index: number) => {
+  const getCardStatus = useCallback((index: number) => {
     const diff = index - currentIndex;
     const len = totalItems;
 
@@ -127,7 +132,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
     if (normalizedDiff === -1) return 'prev';
     if (normalizedDiff === 1) return 'next';
     return 'hidden';
-  };
+  }, [currentIndex, totalItems]);
 
   // Touch Swipe Handlers for mobile
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -209,7 +214,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
               {/* Desktop Infinite Loop Wheel sobre el lienzo (Cero Contenedor, Cero Sombras de Máscara) */}
               <div
                 onWheel={handleWheel}
-                className="relative w-full h-[470px] flex items-center justify-start overflow-hidden select-none my-auto cursor-grab active:cursor-grabbing"
+                className="relative w-full h-[470px] flex items-center justify-start overflow-hidden select-none my-auto cursor-grab active:cursor-grabbing contain-paint"
               >
                 {/* Infinite Continuous Virtual Track con Arrastre Físico e Inercia */}
                 <motion.div
@@ -220,11 +225,11 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                   animate={{ y: 201 - step * ITEM_HEIGHT }}
                   transition={{
                     type: 'spring',
-                    stiffness: 260,
-                    damping: 26,
-                    mass: 0.7,
+                    stiffness: 280,
+                    damping: 28,
+                    mass: 0.6,
                   }}
-                  className="relative w-full h-full z-20"
+                  className="relative w-full h-full z-20 will-change-transform transform-gpu"
                 >
                   {VIRTUAL_OFFSETS.map((offset) => {
                     const absIndex = step + offset;
@@ -233,19 +238,17 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                     const isActive = offset === 0;
                     const distance = Math.abs(offset);
 
-                    // Desvanecimiento suave y progresivo: a distancia 3 ya es casi transparente y a >= 4 invisible
+                    // Desvanecimiento suave y progresivo en 7 posiciones visibles
                     const opacity = isActive
                       ? 1
                       : distance === 1
                       ? 0.88
                       : distance === 2
                       ? 0.45
-                      : distance === 3
-                      ? 0.08
-                      : 0;
+                      : 0.12;
 
                     const scale = isActive
-                      ? 1.03
+                      ? 1.02
                       : distance === 1
                       ? 0.98
                       : distance === 2
@@ -272,21 +275,22 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                             }
                           }}
                           className={cn(
-                            'relative flex items-center gap-3.5 w-full h-full px-5 py-3 rounded-2xl transition-all duration-300 text-left group cursor-pointer select-none border-0',
+                            'relative flex items-center gap-3.5 w-full h-full px-5 py-3 rounded-2xl transition-[background-color,box-shadow] duration-200 text-left group cursor-pointer select-none border-0',
                             isActive
                               ? 'bg-gradient-to-br from-[#FFFFFF] via-[#EDF4FA] to-[#E5EFF8] shadow-[-5px_-5px_12px_rgba(255,255,255,0.95),4px_4px_12px_rgba(0,90,156,0.08),inset_0_0_0_1.5px_rgba(0,191,255,0.45)] scale-[1.02] z-20'
                               : 'bg-gradient-to-br from-[#FFFFFF] via-[#EDF4FA] to-[#E5EFF8] hover:from-[#FFFFFF] hover:to-[#DEECF8] shadow-[-4px_-4px_10px_rgba(255,255,255,0.9),3px_3px_10px_rgba(0,75,135,0.05)] hover:shadow-[-6px_-6px_14px_rgba(255,255,255,1),4px_4px_12px_rgba(0,75,135,0.08)]'
                           )}
                           style={{
                             opacity,
-                            transform: `scale(${scale})`,
+                            transform: `scale(${scale}) translateZ(0)`,
                             pointerEvents: distance <= 2 ? 'auto' : 'none',
+                            willChange: 'transform, opacity',
                           }}
                         >
                           {/* Pozo de Icono Neumórfico Hundido (Exacto a Imágenes de Referencia #0D2750 + #FFFFFF) */}
                           <div
                             className={cn(
-                              'w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 shrink-0 border-0',
+                              'w-9 h-9 rounded-xl flex items-center justify-center transition-[background-color,box-shadow,color] duration-200 shrink-0 border-0',
                               isActive
                                 ? 'bg-gradient-to-br from-[#005A9C] via-[#0070BA] to-[#0A2540] text-white shadow-[0_3px_10px_rgba(0,90,156,0.4),inset_1px_1px_2px_rgba(255,255,255,0.4)]'
                                 : 'bg-[#E2EDF8] text-[#005A9C] shadow-[inset_4px_4px_8px_rgba(13,39,80,0.14),inset_-4px_-4px_8px_#FFFFFF] group-hover:bg-[#005A9C] group-hover:text-white group-hover:shadow-[0_4px_14px_rgba(0,90,156,0.35)]'
@@ -335,141 +339,155 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
             {/* Right Column: 3D Stack / Card Perspective Showcase sobre el lienzo */}
             <div className="col-span-7 relative flex flex-col items-center justify-center py-4">
               <div className="relative w-full max-w-[480px] h-[560px] flex items-center justify-center">
-                {/* Dynamic Ambient Glow sobre el lienzo */}
-                <motion.div
-                  key={`glow-${currentIndex}`}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6 }}
-                  className="absolute inset-0 z-0 pointer-events-none"
-                >
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[75%] bg-[#00BFFF]/12 rounded-full blur-[90px]" />
-                </motion.div>
+                {/* Lightweight Static Ambient Glow (Zero Blur Shader Overhead) */}
+                <div
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[75%] rounded-full pointer-events-none z-0 transform-gpu"
+                  style={{
+                    background: 'radial-gradient(ellipse at center, rgba(0, 191, 255, 0.16) 0%, rgba(0, 90, 156, 0.05) 45%, transparent 70%)',
+                    transform: 'translate(-50%, -50%) translateZ(0)',
+                  }}
+                />
 
-                {SPECIALTIES_DATA.map((spec, index) => {
-                  const status = getCardStatus(index);
-                  const isActive = status === 'active';
-                  const isPrev = status === 'prev';
-                  const isNext = status === 'next';
-                  const sideOffset = 85;
+                <AnimatePresence initial={false}>
+                  {SPECIALTIES_DATA.filter((_, idx) => getCardStatus(idx) !== 'hidden').map((spec) => {
+                    const status = getCardStatus(SPECIALTIES_DATA.findIndex((s) => s.id === spec.id));
+                    const isActive = status === 'active';
+                    const isPrev = status === 'prev';
+                    const isNext = status === 'next';
+                    const sideOffset = 85;
 
-                  return (
-                    <motion.div
-                      key={spec.id}
-                      initial={false}
-                      animate={{
-                        x: isActive ? 0 : isPrev ? -sideOffset : isNext ? sideOffset : 0,
-                        scale: isActive ? 1 : isPrev || isNext ? 0.88 : 0.72,
-                        opacity: isActive ? 1 : isPrev || isNext ? 0.45 : 0,
-                        rotate: isPrev ? -3 : isNext ? 3 : 0,
-                        zIndex: isActive ? 20 : isPrev || isNext ? 10 : 0,
-                        pointerEvents: isActive ? 'auto' : isPrev || isNext ? 'auto' : 'none',
-                      }}
-                      transition={{
-                        type: 'spring',
-                        stiffness: 240,
-                        damping: 24,
-                        mass: 0.8,
-                      }}
-                      onClick={() => {
-                        if (isPrev) prevStep();
-                        if (isNext) nextStep();
-                      }}
-                      className={cn(
-                        'absolute inset-0 rounded-[2.5rem] overflow-hidden border-2 shadow-2xl transition-shadow duration-500 bg-slate-950 flex flex-col justify-between select-none cursor-default',
-                        isActive
-                          ? 'border-cyan-400/50 shadow-cyan-950/25'
-                          : 'border-white/10 hover:border-cyan-300/40 cursor-pointer'
-                      )}
-                    >
-                      {/* Full-bleed clinical image */}
-                      <img
-                        src={spec.image || 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=800&auto=format&fit=crop'}
-                        alt={spec.title}
-                        referrerPolicy="no-referrer"
+                    return (
+                      <motion.div
+                        key={spec.id}
+                        initial={{
+                          opacity: 0,
+                          scale: 0.82,
+                          x: isNext ? sideOffset * 1.2 : isPrev ? -sideOffset * 1.2 : 0,
+                        }}
+                        animate={{
+                          x: isActive ? 0 : isPrev ? -sideOffset : sideOffset,
+                          scale: isActive ? 1 : 0.88,
+                          opacity: isActive ? 1 : 0.45,
+                          rotate: isPrev ? -3 : isNext ? 3 : 0,
+                          zIndex: isActive ? 20 : 10,
+                          pointerEvents: isActive ? 'auto' : 'auto',
+                        }}
+                        exit={{
+                          opacity: 0,
+                          scale: 0.78,
+                          x: isPrev ? -sideOffset * 1.3 : sideOffset * 1.3,
+                          transition: { duration: 0.22, ease: 'easeOut' },
+                        }}
+                        transition={{
+                          type: 'spring',
+                          stiffness: 260,
+                          damping: 26,
+                          mass: 0.7,
+                        }}
+                        onClick={() => {
+                          if (isPrev) prevStep();
+                          if (isNext) nextStep();
+                        }}
                         className={cn(
-                          'absolute inset-0 w-full h-full object-cover transition-all duration-700 pointer-events-none',
-                          isActive ? 'scale-100 brightness-100' : 'scale-105 brightness-75 blur-[1px]'
+                          'absolute inset-0 rounded-[2.5rem] overflow-hidden border-2 shadow-2xl transition-[box-shadow,border-color] duration-300 bg-slate-950 flex flex-col justify-between select-none cursor-default transform-gpu will-change-transform',
+                          isActive
+                            ? 'border-cyan-400/50 shadow-cyan-950/25'
+                            : 'border-white/10 hover:border-cyan-300/40 cursor-pointer'
                         )}
-                      />
-
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 via-55% to-slate-950/35 pointer-events-none" />
-
-                      {/* Top Bar inside Card */}
-                      <div className="relative z-20 p-6 flex items-center">
-                        <div className="w-11 h-11 rounded-2xl bg-white/15 backdrop-blur-xl border border-white/20 flex items-center justify-center text-cyan-300 shadow-md">
-                          {getSpecialtyIcon(spec.iconName, 'w-5 h-5 text-cyan-300')}
-                        </div>
-                      </div>
-
-                      {/* Bottom Content inside Card */}
-                      <div className="relative z-20 p-6 pt-0 flex flex-col justify-end">
-                        <AnimatePresence mode="wait">
-                          {isActive && (
-                            <motion.div
-                              initial={{ opacity: 0, y: 15 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              exit={{ opacity: 0, y: -10 }}
-                              transition={{ duration: 0.35 }}
-                            >
-                              <h3 className="text-2xl font-black text-white leading-tight mb-2">
-                                {spec.title}
-                              </h3>
-
-                              <p className="text-[13px] text-slate-200 mb-3.5 line-clamp-2 leading-relaxed text-justify">
-                                {spec.shortDesc}
-                              </p>
-
-                              <div className="space-y-1.5 mb-4">
-                                {spec.features.slice(0, 3).map((feat, fIdx) => (
-                                  <motion.div
-                                    key={fIdx}
-                                    initial={{ opacity: 0, x: -12 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: 0.15 + fIdx * 0.1, duration: 0.3 }}
-                                    className="flex items-center gap-2 text-xs text-slate-100 font-medium"
-                                  >
-                                    <div className="w-4 h-4 rounded-full bg-cyan-400/20 border border-cyan-400/50 text-cyan-300 flex items-center justify-center shrink-0 shadow-2xs">
-                                      <Check className="w-2.5 h-2.5 stroke-[3]" />
-                                    </div>
-                                    <span className="truncate">{feat}</span>
-                                  </motion.div>
-                                ))}
-                              </div>
-
-                              {spec.suitableFor && (
-                                <motion.p
-                                  initial={{ opacity: 0 }}
-                                  animate={{ opacity: 1 }}
-                                  transition={{ delay: 0.45, duration: 0.3 }}
-                                  className="text-[11px] text-cyan-200/70 italic mb-4 line-clamp-1"
-                                >
-                                  Ideal para: {spec.suitableFor}
-                                </motion.p>
-                              )}
-
-                              <motion.a
-                                initial={{ opacity: 0, y: 8 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.5, duration: 0.3 }}
-                                whileHover={{ scale: 1.02, y: -2 }}
-                                whileTap={{ scale: 0.98 }}
-                                href={createWhatsAppLink(spec.waMessage || `Hola ${DOCTOR_NAME}, deseo información y solicitar una cita sobre el tratamiento de ${spec.title}.`)}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-full py-3 px-5 rounded-full bg-gradient-to-r from-[#25D366] via-[#20BA5A] to-[#128C7E] hover:from-[#20BA5A] hover:to-[#0f7a6d] text-white font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-lg shadow-emerald-950/40 hover:shadow-emerald-500/30 group/btn cursor-pointer"
-                              >
-                                <WhatsAppIcon className="w-4 h-4 text-white group-hover/btn:scale-110 transition-transform" />
-                                <span>Consultar por WhatsApp</span>
-                                <ArrowRight className="w-3.5 h-3.5 text-white/80 group-hover/btn:translate-x-1 transition-transform" />
-                              </motion.a>
-                            </motion.div>
+                      >
+                        {/* Full-bleed clinical image optimized */}
+                        <img
+                          src={spec.image || 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=800&auto=format&fit=crop'}
+                          alt={spec.title}
+                          loading="lazy"
+                          decoding="async"
+                          width={480}
+                          height={560}
+                          referrerPolicy="no-referrer"
+                          className={cn(
+                            'absolute inset-0 w-full h-full object-cover transition-opacity duration-300 pointer-events-none transform-gpu',
+                            isActive ? 'brightness-100 opacity-100' : 'brightness-75 opacity-80'
                           )}
-                        </AnimatePresence>
-                      </div>
-                    </motion.div>
-                  );
-                })}
+                        />
+
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 via-55% to-slate-950/35 pointer-events-none" />
+
+                        {/* Top Bar inside Card */}
+                        <div className="relative z-20 p-6 flex items-center">
+                          <div className="w-11 h-11 rounded-2xl bg-white/15 backdrop-blur-md border border-white/20 flex items-center justify-center text-cyan-300 shadow-md">
+                            {getSpecialtyIcon(spec.iconName, 'w-5 h-5 text-cyan-300')}
+                          </div>
+                        </div>
+
+                        {/* Bottom Content inside Card */}
+                        <div className="relative z-20 p-6 pt-0 flex flex-col justify-end">
+                          <AnimatePresence mode="wait">
+                            {isActive && (
+                              <motion.div
+                                initial={{ opacity: 0, y: 12 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -8 }}
+                                transition={{ duration: 0.25 }}
+                              >
+                                <h3 className="text-2xl font-black text-white leading-tight mb-2">
+                                  {spec.title}
+                                </h3>
+
+                                <p className="text-[13px] text-slate-200 mb-3.5 line-clamp-2 leading-relaxed text-justify">
+                                  {spec.shortDesc}
+                                </p>
+
+                                <div className="space-y-1.5 mb-4">
+                                  {spec.features.slice(0, 3).map((feat, fIdx) => (
+                                    <motion.div
+                                      key={fIdx}
+                                      initial={{ opacity: 0, x: -10 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ delay: 0.1 + fIdx * 0.08, duration: 0.25 }}
+                                      className="flex items-center gap-2 text-xs text-slate-100 font-medium"
+                                    >
+                                      <div className="w-4 h-4 rounded-full bg-cyan-400/20 border border-cyan-400/50 text-cyan-300 flex items-center justify-center shrink-0 shadow-2xs">
+                                        <Check className="w-2.5 h-2.5 stroke-[3]" />
+                                      </div>
+                                      <span className="truncate">{feat}</span>
+                                    </motion.div>
+                                  ))}
+                                </div>
+
+                                {spec.suitableFor && (
+                                  <motion.p
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 0.35, duration: 0.25 }}
+                                    className="text-[11px] text-cyan-200/70 italic mb-4 line-clamp-1"
+                                  >
+                                    Ideal para: {spec.suitableFor}
+                                  </motion.p>
+                                )}
+
+                                <motion.a
+                                  initial={{ opacity: 0, y: 6 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  transition={{ delay: 0.4, duration: 0.25 }}
+                                  whileHover={{ scale: 1.02, y: -2 }}
+                                  whileTap={{ scale: 0.98 }}
+                                  href={createWhatsAppLink(spec.waMessage || `Hola ${DOCTOR_NAME}, deseo información y solicitar una cita sobre el tratamiento de ${spec.title}.`)}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="w-full py-3 px-5 rounded-full bg-gradient-to-r from-[#25D366] via-[#20BA5A] to-[#128C7E] hover:from-[#20BA5A] hover:to-[#0f7a6d] text-white font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-lg shadow-emerald-950/40 hover:shadow-emerald-500/30 group/btn cursor-pointer"
+                                >
+                                  <WhatsAppIcon className="w-4 h-4 text-white group-hover/btn:scale-110 transition-transform" />
+                                  <span>Consultar por WhatsApp</span>
+                                  <ArrowRight className="w-3.5 h-3.5 text-white/80 group-hover/btn:translate-x-1 transition-transform" />
+                                </motion.a>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </AnimatePresence>
               </div>
 
               {/* Dot Position Indicators */}
@@ -508,7 +526,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                     data-pill-index={index}
                     onClick={() => handleChipClick(index)}
                     className={cn(
-                      'flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold shrink-0 transition-all duration-300 border-0 cursor-pointer select-none active:scale-95',
+                      'flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold shrink-0 transition-[background-color,box-shadow,color] duration-200 border-0 cursor-pointer select-none active:scale-95',
                       isActive
                         ? 'bg-gradient-to-br from-[#FFFFFF] via-[#EDF4FA] to-[#E5EFF8] text-[#003B66] shadow-[-4px_-4px_10px_rgba(255,255,255,0.9),3px_3px_10px_rgba(0,90,156,0.10),inset_0_0_0_1.5px_rgba(0,191,255,0.5)]'
                         : 'bg-gradient-to-br from-[#FFFFFF] via-[#EDF4FA] to-[#E5EFF8] text-[#005A9C] shadow-[-3px_-3px_8px_rgba(255,255,255,0.9),2px_2px_8px_rgba(0,75,135,0.05)]'
@@ -561,15 +579,17 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                       initial={{ opacity: 0, scale: 0.97 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.97 }}
-                      transition={{ duration: 0.26, ease: 'easeOut' }}
-                      className="w-full min-h-[500px] sm:min-h-[540px] rounded-[2.2rem] overflow-hidden border-2 border-cyan-400/40 shadow-2xl shadow-cyan-950/20 bg-slate-950 flex flex-col justify-between select-none relative"
+                      transition={{ duration: 0.24, ease: 'easeOut' }}
+                      className="w-full min-h-[500px] sm:min-h-[540px] rounded-[2.2rem] overflow-hidden border-2 border-cyan-400/40 shadow-2xl shadow-cyan-950/20 bg-slate-950 flex flex-col justify-between select-none relative transform-gpu will-change-transform"
                     >
                       {/* Full-bleed photo with zero padding */}
                       <img
                         src={spec.image || 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=800&auto=format&fit=crop'}
                         alt={spec.title}
+                        loading="lazy"
+                        decoding="async"
                         referrerPolicy="no-referrer"
-                        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                        className="absolute inset-0 w-full h-full object-cover pointer-events-none transform-gpu"
                       />
 
                       {/* Contrast Gradient Overlay */}
@@ -577,7 +597,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
 
                       {/* Card Top Bar */}
                       <div className="relative z-20 p-4 sm:p-5 flex items-center">
-                        <div className="w-9 h-9 rounded-xl bg-white/15 backdrop-blur-xl border border-white/20 flex items-center justify-center text-cyan-300 shadow-md">
+                        <div className="w-9 h-9 rounded-xl bg-white/15 backdrop-blur-md border border-white/20 flex items-center justify-center text-cyan-300 shadow-md">
                           {getSpecialtyIcon(spec.iconName, 'w-4 h-4 text-cyan-300')}
                         </div>
                       </div>

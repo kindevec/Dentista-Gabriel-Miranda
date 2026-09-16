@@ -58,7 +58,7 @@ export const OrganicDentalRibbon: React.FC<OrganicDentalRibbonProps> = ({
         rotate: { repeat: Infinity, duration: 10, ease: 'easeInOut' },
         opacity: { duration: 1 },
       }}
-      className={`pointer-events-none select-none absolute ${className}`}
+      className={`pointer-events-none select-none absolute transform-gpu will-change-transform ${className}`}
       aria-hidden="true"
     >
       <svg
