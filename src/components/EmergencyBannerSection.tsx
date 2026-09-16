@@ -33,22 +33,34 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
 
   return (
     <section id="urgencias" className="relative overflow-hidden py-14 sm:py-16 text-white bg-[#07192C]">
-      {/* 1. Intercalated High-Definition Photographic Background */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1920&auto=format&fit=crop"
-          alt="Quirófano y atención médica de urgencia Odontología Gabriel Miranda"
-          referrerPolicy="no-referrer"
-          className="w-full h-full object-cover object-center filter brightness-[0.4] contrast-125 scale-105"
-        />
-        {/* Medical Deep Blue & Cyan Atmospheric Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#07192C]/95 via-[#003B6F]/90 to-[#0A2540]/95 mix-blend-multiply" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-500/15 via-transparent to-black/60" />
+      {/* 1. Split Atmospheric Background: Right-side Full Bleed Medical Photo */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {/* Base dark medical canvas */}
+        <div className="absolute inset-0 bg-[#07192C]" />
+
+        {/* Right Half Clinical Photo - Top to Bottom, Bleeding to Right Edge */}
+        <div className="absolute top-0 bottom-0 right-0 w-full lg:w-1/2 h-full">
+          <img
+            src="https://images.unsplash.com/photo-1629909615184-74f495363b67?q=80&w=1600&auto=format&fit=crop"
+            alt="Atención médica prioritaria en Odontología Gabriel Miranda"
+            referrerPolicy="no-referrer"
+            className="w-full h-full object-cover object-center filter brightness-[0.35] lg:brightness-[0.45] contrast-115 scale-105"
+          />
+          {/* Fades: Seamless horizontal gradient into #07192C on the left */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#07192C] via-[#07192C]/70 to-transparent" />
+          {/* Vertical fades to protect section dividers at top and bottom */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#07192C] via-transparent to-[#07192C]" />
+          {/* Cyan glow overlay requested by user */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-500/15 via-transparent to-black/60" />
+        </div>
+
+        {/* Left atmospheric subtle glow */}
+        <div className="absolute -left-20 top-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
       </div>
 
       {/* 2. Floating 3D Curved Dental Ribbons */}
       <OrganicDentalRibbon className="-top-12 -left-16 w-96 md:w-[32rem] opacity-70" variant="cyan" />
-      <OrganicDentalRibbon className="-bottom-16 -right-20 w-96 md:w-[32rem] opacity-50" variant="white" />
+      <OrganicDentalRibbon className="-bottom-16 -right-20 w-96 md:w-[32rem] opacity-40" variant="white" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6">
         <motion.div
@@ -56,7 +68,7 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
         >
           {/* Left Column: Urgencia Headline & Rapid Triage Steps */}
           <div className="lg:col-span-7 space-y-5 text-center lg:text-left">
@@ -128,27 +140,16 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
 
           </div>
 
-          {/* Right Column: Organic Curved Shape Visual */}
-          <motion.div variants={itemVariants} className="lg:col-span-5 relative">
-            <div className="relative mx-auto max-w-md lg:max-w-none rounded-[3rem] rounded-tl-[1.5rem] rounded-br-[1.5rem] overflow-hidden shadow-2xl group">
-              <img
-                src="https://images.unsplash.com/photo-1629909615184-74f495363b67?q=80&w=1000&auto=format&fit=crop"
-                alt="Atención médica prioritaria en Odontología Gabriel Miranda"
-                referrerPolicy="no-referrer"
-                className="w-full h-[430px] object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A2540] via-transparent to-transparent opacity-80" />
-
-              {/* Floating emergency badge card */}
-              <div className="absolute bottom-6 left-6 right-6 p-4 rounded-3xl bg-white/15 backdrop-blur-xl text-white">
-                <div className="flex items-center gap-2 text-xs font-black text-cyan-300 mb-1">
-                  <ShieldCheck className="w-4 h-4" />
-                  <span>DISPONIBILIDAD INMEDIATA</span>
-                </div>
-                <p className="text-xs text-white/90">
-                  Ubicación estratégica en Quito con acceso camillero y parqueadero médico subterráneo.
-                </p>
+          {/* Right Column: Floating Badge on Open Photographic Canvas (Zero Box-in-Box) */}
+          <motion.div variants={itemVariants} className="lg:col-span-5 relative flex items-center lg:items-end justify-center lg:justify-end pt-4 lg:pt-0">
+            <div className="max-w-sm w-full p-5 sm:p-6 rounded-[2rem] bg-slate-900/60 lg:bg-slate-950/50 backdrop-blur-xl border border-white/15 text-white shadow-2xl shadow-black/40">
+              <div className="flex items-center gap-2 text-xs font-black text-cyan-300 mb-1.5">
+                <ShieldCheck className="w-4 h-4 text-cyan-300 shrink-0" />
+                <span className="tracking-wide">DISPONIBILIDAD INMEDIATA</span>
               </div>
+              <p className="text-xs text-cyan-100/90 leading-relaxed text-justify">
+                Ubicación estratégica en Quito con acceso camillero y parqueadero médico subterráneo.
+              </p>
             </div>
           </motion.div>
 
