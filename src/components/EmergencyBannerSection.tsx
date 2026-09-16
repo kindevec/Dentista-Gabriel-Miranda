@@ -38,29 +38,27 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
         {/* Base dark medical canvas */}
         <div className="absolute inset-0 bg-[#07192C]" />
 
-        {/* Right Half Clinical Photo - Top to Bottom, Bleeding to Right Edge */}
+        {/* Right Half Clinical Photo - Full HD Crisp Quality from Middle to Right Edge */}
         <div className="absolute top-0 bottom-0 right-0 w-full lg:w-1/2 h-full">
           <img
-            src="https://images.unsplash.com/photo-1629909615184-74f495363b67?q=80&w=1600&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1629909615184-74f495363b67?q=85&w=1600&auto=format&fit=crop"
             alt="Atención médica prioritaria en Odontología Gabriel Miranda"
             referrerPolicy="no-referrer"
-            className="w-full h-full object-cover object-center filter brightness-[0.35] lg:brightness-[0.45] contrast-115 scale-105"
+            className="w-full h-full object-cover object-center brightness-100 contrast-[1.03]"
           />
-          {/* Fades: Seamless horizontal gradient into #07192C on the left */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#07192C] via-[#07192C]/70 to-transparent" />
-          {/* Vertical fades to protect section dividers at top and bottom */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#07192C] via-transparent to-[#07192C]" />
-          {/* Cyan glow overlay requested by user */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-500/15 via-transparent to-black/60" />
+          {/* Mobile Overlay only (protects readability on single column mobile) */}
+          <div className="lg:hidden absolute inset-0 bg-[#07192C]/85" />
+
+          {/* Desktop Left Edge Seamless Blend */}
+          <div className="hidden lg:block absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-[#07192C] to-transparent" />
         </div>
 
         {/* Left atmospheric subtle glow */}
         <div className="absolute -left-20 top-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
       </div>
 
-      {/* 2. Floating 3D Curved Dental Ribbons */}
+      {/* 2. Floating 3D Curved Dental Ribbon (Left side only) */}
       <OrganicDentalRibbon className="-top-12 -left-16 w-96 md:w-[32rem] opacity-70" variant="cyan" />
-      <OrganicDentalRibbon className="-bottom-16 -right-20 w-96 md:w-[32rem] opacity-40" variant="white" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6">
         <motion.div
@@ -140,18 +138,8 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
 
           </div>
 
-          {/* Right Column: Floating Badge on Open Photographic Canvas (Zero Box-in-Box) */}
-          <motion.div variants={itemVariants} className="lg:col-span-5 relative flex items-center lg:items-end justify-center lg:justify-end pt-4 lg:pt-0">
-            <div className="max-w-sm w-full p-5 sm:p-6 rounded-[2rem] bg-slate-900/60 lg:bg-slate-950/50 backdrop-blur-xl border border-white/15 text-white shadow-2xl shadow-black/40">
-              <div className="flex items-center gap-2 text-xs font-black text-cyan-300 mb-1.5">
-                <ShieldCheck className="w-4 h-4 text-cyan-300 shrink-0" />
-                <span className="tracking-wide">DISPONIBILIDAD INMEDIATA</span>
-              </div>
-              <p className="text-xs text-cyan-100/90 leading-relaxed text-justify">
-                Ubicación estratégica en Quito con acceso camillero y parqueadero médico subterráneo.
-              </p>
-            </div>
-          </motion.div>
+          {/* Right Column: Open Photographic Canvas for Full Quality Image */}
+          <div className="hidden lg:block lg:col-span-5 pointer-events-none" aria-hidden="true" />
 
         </motion.div>
       </div>
