@@ -89,40 +89,25 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
               No dejes que el dolor de muela, un traumatismo, fractura o absceso empeore. En el consultorio del <strong className="text-white font-bold">{DOCTOR_NAME}</strong> disponemos de un protocolo médico de intervención prioritaria con respuesta en minutos.
             </motion.p>
 
-            {/* 3 Steps Triage - Diseño fluido y abierto sin cajitas cuadradas rígidas */}
-            <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 pt-2">
-              <motion.div
-                whileHover={{ y: -3 }}
-                className="p-4 sm:p-5 rounded-[1.8rem] sm:rounded-[2rem] bg-white/10 backdrop-blur-md text-left transition-all border border-white/10"
-              >
-                <div className="w-9 h-9 rounded-full bg-cyan-400/20 flex items-center justify-center mb-3 text-cyan-300">
-                  <Zap className="w-4 h-4" />
-                </div>
-                <h3 className="text-xs font-black text-white uppercase tracking-wider">1. Contacto 24/7</h3>
-                <p className="text-[11px] text-cyan-100/80 mt-1 leading-relaxed text-justify">Escríbenos o llámanos; te atenderemos sin demoras.</p>
-              </motion.div>
+            {/* 3 Steps Triage - Directamente sobre el lienzo sin contenedores */}
+            <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 pt-3">
+              <div className="text-left space-y-2">
+                <Zap className="w-7 h-7 text-cyan-300 drop-shadow-[0_0_10px_rgba(103,232,249,0.5)]" />
+                <h3 className="text-xs sm:text-sm font-black text-white uppercase tracking-wider">1. Contacto 24/7</h3>
+                <p className="text-[11.5px] sm:text-xs text-cyan-100/80 leading-relaxed text-justify">Escríbenos o llámanos; te atenderemos sin demoras.</p>
+              </div>
 
-              <motion.div
-                whileHover={{ y: -3 }}
-                className="p-4 sm:p-5 rounded-[1.8rem] sm:rounded-[2rem] bg-white/10 backdrop-blur-md text-left transition-all border border-white/10"
-              >
-                <div className="w-9 h-9 rounded-full bg-emerald-400/20 flex items-center justify-center mb-3 text-emerald-300">
-                  <ShieldCheck className="w-4 h-4" />
-                </div>
-                <h3 className="text-xs font-black text-white uppercase tracking-wider">2. Alivio Inmediato</h3>
-                <p className="text-[11px] text-cyan-100/80 mt-1 leading-relaxed text-justify">Anestesia guiada para suprimir el dolor de inmediato.</p>
-              </motion.div>
+              <div className="text-left space-y-2">
+                <ShieldCheck className="w-7 h-7 text-emerald-300 drop-shadow-[0_0_10px_rgba(110,231,183,0.5)]" />
+                <h3 className="text-xs sm:text-sm font-black text-white uppercase tracking-wider">2. Alivio Inmediato</h3>
+                <p className="text-[11.5px] sm:text-xs text-cyan-100/80 leading-relaxed text-justify">Anestesia guiada para suprimir el dolor de inmediato.</p>
+              </div>
 
-              <motion.div
-                whileHover={{ y: -3 }}
-                className="p-4 sm:p-5 rounded-[1.8rem] sm:rounded-[2rem] bg-white/10 backdrop-blur-md text-left transition-all border border-white/10"
-              >
-                <div className="w-9 h-9 rounded-full bg-amber-400/20 flex items-center justify-center mb-3 text-amber-300">
-                  <Clock className="w-4 h-4" />
-                </div>
-                <h3 className="text-xs font-black text-white uppercase tracking-wider">3. Tratamiento</h3>
-                <p className="text-[11px] text-cyan-100/80 mt-1 leading-relaxed text-justify">Diagnóstico digital 3D y solución definitiva hoy mismo.</p>
-              </motion.div>
+              <div className="text-left space-y-2">
+                <Clock className="w-7 h-7 text-amber-300 drop-shadow-[0_0_10px_rgba(252,211,77,0.5)]" />
+                <h3 className="text-xs sm:text-sm font-black text-white uppercase tracking-wider">3. Tratamiento</h3>
+                <p className="text-[11.5px] sm:text-xs text-cyan-100/80 leading-relaxed text-justify">Diagnóstico digital 3D y solución definitiva hoy mismo.</p>
+              </div>
             </motion.div>
 
             {/* Direct Action Emergency Button */}
