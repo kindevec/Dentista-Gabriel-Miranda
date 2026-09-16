@@ -144,7 +144,7 @@ export const DoctorProfileSection: React.FC = () => {
                 className="px-8 py-4 rounded-full bg-gradient-to-r from-[#005A9C] to-[#0084DE] hover:from-[#004b83] hover:to-[#0070bc] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-xl shadow-[#005A9C]/20 flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Calendar className="w-4 h-4 text-cyan-200" />
-                <span>Agendar Consulta con el {DOCTOR_NAME.split(' ')[1]}</span>
+                <span>Agendar consulta</span>
                 <ArrowRight className="w-3.5 h-3.5 text-cyan-200" />
               </motion.a>
             </motion.div>
