@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'motion/react';
+import React, { useState } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
 import {
   Calendar,
   Sparkles,
@@ -7,7 +7,9 @@ import {
   ShieldCheck,
   Check,
   Clock,
-  AlertTriangle
+  AlertTriangle,
+  Droplets,
+  Activity
 } from 'lucide-react';
 import {
   DOCTOR_NAME,
@@ -27,6 +29,36 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onOpenBooking,
   onOpenEmergency,
 }) => {
+  // 3D Parallax Tilt Physics using Motion Values
+  const [isHovered, setIsHovered] = useState(false);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springConfig = { damping: 25, stiffness: 180 };
+  const smoothMouseX = useSpring(mouseX, springConfig);
+  const smoothMouseY = useSpring(mouseY, springConfig);
+
+  // 3D Rotation angles based on cursor position (-12deg to +12deg)
+  const rotateX = useTransform(smoothMouseY, [-0.5, 0.5], ['12deg', '-12deg']);
+  const rotateY = useTransform(smoothMouseX, [-0.5, 0.5], ['-12deg', '12deg']);
+  const glowX = useTransform(smoothMouseX, [-0.5, 0.5], ['-25px', '25px']);
+  const glowY = useTransform(smoothMouseY, [-0.5, 0.5], ['-25px', '25px']);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    mouseX.set(x);
+    mouseY.set(y);
+  };
+
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    mouseX.set(0);
+    mouseY.set(0);
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     show: {
@@ -165,48 +197,155 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </motion.div>
 
           {/* ============================================================== */}
-          {/* RIGHT COLUMN: Expansive 3D Tooth Visual with Generous Air */}
+          {/* RIGHT COLUMN: Interactive 3D Tooth Molar with Liquid Splash    */}
           {/* ============================================================== */}
-          <div className="lg:col-span-5 relative flex items-center justify-center">
-            
-            {/* Ambient Cyan Halo */}
-            <div className="absolute w-72 sm:w-96 h-72 sm:h-96 bg-[#00BFFF]/20 rounded-full blur-3xl pointer-events-none scale-110" />
-
-            {/* Majestic 3D Tooth Molar with Splash */}
+          <div
+            onMouseMove={handleMouseMove}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            className="lg:col-span-5 relative flex items-center justify-center py-6 cursor-pointer select-none"
+            style={{ perspective: 1000 }}
+          >
+            {/* 1. Dynamic Water Ripple Waves Radiating Outward */}
             <motion.div
               animate={{
-                y: [-8, 8, -8],
+                scale: [0.85, 1.25, 0.85],
+                opacity: [0.2, 0.5, 0.2],
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: 5,
+                ease: 'easeInOut',
+              }}
+              className="absolute w-72 sm:w-88 h-72 sm:h-88 rounded-full border-2 border-cyan-400/35 pointer-events-none -z-10"
+            />
+            <motion.div
+              animate={{
+                scale: [1.2, 0.9, 1.2],
+                opacity: [0.15, 0.35, 0.15],
               }}
               transition={{
                 repeat: Infinity,
                 duration: 6,
-                ease: "easeInOut",
+                ease: 'easeInOut',
+                delay: 1.5,
               }}
+              className="absolute w-88 sm:w-96 h-88 sm:h-96 rounded-full border border-sky-400/25 pointer-events-none -z-10"
+            />
+
+            {/* 2. Interactive Ambient Glowing Halo (Follows Mouse Parallax) */}
+            <motion.div
+              style={{
+                x: glowX,
+                y: glowY,
+              }}
+              className="absolute w-72 sm:w-96 h-72 sm:h-96 bg-gradient-to-tr from-[#00BFFF]/30 via-cyan-400/20 to-sky-300/10 rounded-full blur-3xl pointer-events-none -z-10 scale-110"
+            />
+
+            {/* 3. Floating Crystal Water Droplets in 3D Space */}
+            <motion.div
+              animate={{
+                y: [-12, 12, -12],
+                x: [-4, 4, -4],
+                rotate: [0, 15, 0],
+              }}
+              transition={{ repeat: Infinity, duration: 4.5, ease: 'easeInOut' }}
+              className="absolute -top-3 left-8 z-20 w-7 h-7 rounded-full bg-gradient-to-br from-white via-cyan-200 to-sky-400/60 shadow-lg shadow-cyan-500/30 backdrop-blur-md border border-white/80 pointer-events-none flex items-center justify-center"
+            >
+              <Droplets className="w-3.5 h-3.5 text-cyan-700/80" />
+            </motion.div>
+
+            <motion.div
+              animate={{
+                y: [10, -10, 10],
+                x: [5, -5, 5],
+                scale: [0.9, 1.1, 0.9],
+              }}
+              transition={{ repeat: Infinity, duration: 5.2, ease: 'easeInOut', delay: 1 }}
+              className="absolute top-12 right-6 z-20 w-5 h-5 rounded-full bg-gradient-to-tr from-white via-cyan-100 to-sky-300 shadow-md shadow-sky-400/30 backdrop-blur-md border border-white/90 pointer-events-none"
+            />
+
+            <motion.div
+              animate={{
+                y: [-8, 8, -8],
+                scale: [1, 1.15, 1],
+              }}
+              transition={{ repeat: Infinity, duration: 3.8, ease: 'easeInOut', delay: 2 }}
+              className="absolute bottom-10 right-8 z-20 w-6 h-6 rounded-full bg-gradient-to-br from-white via-cyan-200 to-blue-400/50 shadow-md shadow-cyan-500/25 backdrop-blur-md border border-white/80 pointer-events-none"
+            />
+
+            {/* 4. THE INTERACTIVE 3D TOOTH MOLAR SCULPTURE */}
+            <motion.div
+              style={{
+                rotateX,
+                rotateY,
+                transformStyle: 'preserve-3d',
+              }}
+              animate={
+                isHovered
+                  ? { scale: 1.05 }
+                  : {
+                      y: [-8, 8, -8],
+                      scale: 1,
+                    }
+              }
+              transition={
+                isHovered
+                  ? { duration: 0.3 }
+                  : { repeat: Infinity, duration: 6, ease: 'easeInOut' }
+              }
               className="relative z-10 w-full max-w-[360px] sm:max-w-[440px] lg:max-w-[480px]"
             >
-              <div
-                className="relative w-full aspect-square flex items-center justify-center"
-                style={{
-                  WebkitMaskImage: 'radial-gradient(circle at center, black 72%, transparent 98%)',
-                  maskImage: 'radial-gradient(circle at center, black 72%, transparent 98%)',
-                }}
-              >
+              {/* Pure Transparent PNG Container with Specular Sheen Pass */}
+              <div className="relative w-full aspect-square flex items-center justify-center overflow-hidden">
                 <img
-                  src="/hero-3d-tooth.jpg"
-                  alt="Odontología digital 3D de alta definición"
-                  className="w-full h-full object-contain mix-blend-multiply filter contrast-[1.03] drop-shadow-[0_25px_40px_rgba(0,90,156,0.25)]"
+                  src="/hero-3d-tooth.png"
+                  alt="Molar 3D con splash líquido hiperrealista"
+                  className="w-full h-full object-contain filter contrast-[1.05] drop-shadow-[0_25px_45px_rgba(0,140,255,0.35)] transition-all duration-300"
                   loading="eager"
+                />
+
+                {/* Specular Light Flare / Gleam Sweep on Enamel */}
+                <motion.div
+                  animate={{
+                    x: ['-120%', '220%'],
+                    opacity: [0, 0.75, 0],
+                  }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 3.5,
+                    repeatDelay: 3,
+                    ease: 'easeInOut',
+                  }}
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-25deg] pointer-events-none"
                 />
               </div>
 
-              {/* Minimal floating seal */}
+              {/* Floating Chip Top-Right: Escáner 3D Digital */}
               <motion.div
-                animate={{ y: [4, -4, 4] }}
-                transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut" }}
-                className="absolute bottom-4 left-4 z-20 px-4 py-2 rounded-full bg-white/95 backdrop-blur-md border border-cyan-100 shadow-lg shadow-cyan-950/10 flex items-center gap-2"
+                animate={{ y: [-5, 5, -5] }}
+                transition={{ repeat: Infinity, duration: 4.8, ease: 'easeInOut' }}
+                className="absolute top-2 -right-2 sm:-right-4 z-20 px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-xl border border-cyan-100 shadow-xl shadow-cyan-950/10 flex items-center gap-1.5 hover:scale-105 transition-transform"
               >
-                <ShieldCheck className="w-4 h-4 text-emerald-500" />
-                <span className="text-xs font-black text-[#0A2540]">100% Sin Dolor</span>
+                <Activity className="w-3.5 h-3.5 text-[#00BFFF] animate-pulse" />
+                <span className="text-[10px] font-extrabold text-[#005A9C] uppercase tracking-wide">
+                  Escáner 3D Digital
+                </span>
+              </motion.div>
+
+              {/* Floating Chip Bottom-Left: 100% Sin Dolor */}
+              <motion.div
+                animate={{ y: [5, -5, 5] }}
+                transition={{ repeat: Infinity, duration: 5.5, ease: 'easeInOut' }}
+                className="absolute bottom-4 -left-2 sm:-left-4 z-20 px-4 py-2 rounded-full bg-white/95 backdrop-blur-xl border border-white shadow-xl shadow-cyan-950/10 flex items-center gap-2 hover:scale-105 transition-transform"
+              >
+                <div className="w-7 h-7 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
+                  <ShieldCheck className="w-4 h-4" />
+                </div>
+                <div className="text-left">
+                  <p className="text-xs font-black text-[#0A2540]">100% Sin Dolor</p>
+                  <p className="text-[9px] text-slate-500 font-medium">Anestesia guiada digital</p>
+                </div>
               </motion.div>
             </motion.div>
 
