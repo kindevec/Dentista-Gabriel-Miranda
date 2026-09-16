@@ -249,18 +249,6 @@ export const DoctorProfileSection: React.FC = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
                 </div>
               </motion.div>
-
-              {/* Floating Quote Badge on Top Left */}
-              <motion.div
-                animate={{ y: [4, -4, 4] }}
-                transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-                className="absolute -top-4 -left-4 sm:-left-6 bg-[#0A2540] text-white p-4 rounded-[2rem] shadow-xl max-w-[240px] sm:max-w-xs hidden sm:block border border-white/10 z-20"
-              >
-                <p className="text-xs font-bold text-[#00BFFF] mb-0.5">Cero Temores, Cero Dolor</p>
-                <p className="text-[11px] text-cyan-100 leading-snug">
-                  "Explicamos cada paso con visualización 3D para tu completa tranquilidad."
-                </p>
-              </motion.div>
             </div>
 
           </div>

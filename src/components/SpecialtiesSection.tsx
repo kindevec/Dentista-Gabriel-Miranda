@@ -9,7 +9,6 @@ import {
   Zap,
   HeartHandshake,
   Check,
-  Clock,
   ArrowRight,
   ChevronLeft,
   ChevronRight
@@ -335,21 +334,9 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 via-55% to-slate-950/35 pointer-events-none" />
 
                       {/* Top Bar inside Card */}
-                      <div className="relative z-20 p-6 flex items-center justify-between gap-2">
-                        <div className="flex items-center gap-2">
-                          <div className="w-11 h-11 rounded-2xl bg-white/15 backdrop-blur-xl border border-white/20 flex items-center justify-center text-cyan-300 shadow-md">
-                            {getSpecialtyIcon(spec.iconName, 'w-5 h-5 text-cyan-300')}
-                          </div>
-                          {spec.badge && (
-                            <span className="px-3 py-1 rounded-full bg-gradient-to-r from-cyan-500 to-[#005A9C] text-white text-[11px] font-extrabold shadow-sm tracking-wide">
-                              {spec.badge}
-                            </span>
-                          )}
-                        </div>
-
-                        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/80 backdrop-blur-md text-cyan-200 text-[11px] font-semibold border border-white/15">
-                          <Clock className="w-3.5 h-3.5 text-[#00BFFF]" />
-                          <span>{spec.estimatedTime || 'Evaluación 3D'}</span>
+                      <div className="relative z-20 p-6 flex items-center">
+                        <div className="w-11 h-11 rounded-2xl bg-white/15 backdrop-blur-xl border border-white/20 flex items-center justify-center text-cyan-300 shadow-md">
+                          {getSpecialtyIcon(spec.iconName, 'w-5 h-5 text-cyan-300')}
                         </div>
                       </div>
 
@@ -527,21 +514,9 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/85 via-50% to-slate-950/40 pointer-events-none" />
 
                       {/* Card Top Bar */}
-                      <div className="relative z-20 p-4 sm:p-5 flex items-center justify-between gap-2">
-                        <div className="flex items-center gap-2">
-                          <div className="w-9 h-9 rounded-xl bg-white/15 backdrop-blur-xl border border-white/20 flex items-center justify-center text-cyan-300 shadow-md">
-                            {getSpecialtyIcon(spec.iconName, 'w-4 h-4 text-cyan-300')}
-                          </div>
-                          {spec.badge && (
-                            <span className="px-2.5 py-1 rounded-full bg-gradient-to-r from-cyan-500 to-[#005A9C] text-white text-[10px] font-extrabold shadow-sm tracking-wide">
-                              {spec.badge}
-                            </span>
-                          )}
-                        </div>
-
-                        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900/80 backdrop-blur-md text-cyan-200 text-[10px] sm:text-[11px] font-semibold border border-white/15">
-                          <Clock className="w-3 h-3 text-[#00BFFF]" />
-                          <span>{spec.estimatedTime || 'Evaluación 3D'}</span>
+                      <div className="relative z-20 p-4 sm:p-5 flex items-center">
+                        <div className="w-9 h-9 rounded-xl bg-white/15 backdrop-blur-xl border border-white/20 flex items-center justify-center text-cyan-300 shadow-md">
+                          {getSpecialtyIcon(spec.iconName, 'w-4 h-4 text-cyan-300')}
                         </div>
                       </div>
 

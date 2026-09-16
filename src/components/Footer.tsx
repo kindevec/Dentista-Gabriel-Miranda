@@ -28,7 +28,7 @@ export const Footer: React.FC = () => {
               Odontología de alta gama fundamentada en precisión tecnológica 3D, bioseguridad quirúrgica de grado hospitalario y una vocación auténtica por la salud y la serenidad de nuestros pacientes.
             </p>
 
-            <div className="inline-flex items-center gap-2 p-2 rounded-xl bg-white/5 border border-white/10 text-cyan-200 text-xs font-semibold">
+            <div className="flex items-center gap-2 text-cyan-200 text-xs font-semibold pt-1">
               <ShieldCheck className="w-4 h-4 text-[#00BFFF]" />
               <span>Registro y Habilitación Sanitaria Oficial</span>
             </div>
