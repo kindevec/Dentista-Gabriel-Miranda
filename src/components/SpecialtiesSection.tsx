@@ -195,15 +195,15 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
           className="text-center max-w-3xl mx-auto mb-5 sm:mb-8 space-y-2.5"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0A2540] tracking-tight">
-            Especialidades <span className="text-[#005A9C]">Digitales</span>
+            Servicios <span className="text-[#005A9C]">Digitales</span>
           </h2>
           <p className="text-sm sm:text-base text-slate-600 max-w-xl mx-auto">
-            Selecciona una especialidad para ver su tecnología y plan clínico.
+            Selecciona un servicio para ver su tecnología y plan clínico.
           </p>
         </motion.div>
 
         {/* 3. Luxury 3D Feature Carousel Showcase */}
-        <div id="especialidades" className="w-full max-w-6xl mx-auto scroll-mt-24">
+        <div id="servicios" className="w-full max-w-6xl mx-auto scroll-mt-24">
           {/* ========================================================================= */}
           {/* DESKTOP EXPERIENCE (lg:grid) — SOBRE EL LIENZO DIRECTAMENTE (SIN BOX-IN-BOX) */}
           {/* ========================================================================= */}
@@ -666,7 +666,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                     <button
                       key={dotIdx}
                       onClick={() => handleChipClick(dotIdx)}
-                      aria-label={`Ir a especialidad ${dotIdx + 1}`}
+                      aria-label={`Ir al servicio ${dotIdx + 1}`}
                       className={cn(
                         'rounded-full transition-all duration-300 cursor-pointer',
                         dotIdx === currentIndex

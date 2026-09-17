@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { SpecialtiesSection } from './components/SpecialtiesSection';
+import { SpecialtiesCarouselSection } from './components/SpecialtiesCarouselSection';
 import { EmergencyBannerSection } from './components/EmergencyBannerSection';
 import { DoctorProfileSection } from './components/DoctorProfileSection';
 import { FaqSection } from './components/FaqSection';
@@ -74,8 +75,13 @@ export default function App() {
           onOpenEmergency={handleOpenEmergency}
         />
 
-        {/* 2. Especialidades Clínicas (Fondo médico perla intercalado con textura de laboratorio 3D) */}
+        {/* 2. Servicios Odontológicos Digitales (3D Wheel Neumórfico) */}
         <SpecialtiesSection
+          onSelectSpecialtyForBooking={handleOpenBookingWithSpecialty}
+        />
+
+        {/* 3. Especialidades Odontológicas (Carrusel Horizontal Amplio con Información Detallada) */}
+        <SpecialtiesCarouselSection
           onSelectSpecialtyForBooking={handleOpenBookingWithSpecialty}
         />
 
