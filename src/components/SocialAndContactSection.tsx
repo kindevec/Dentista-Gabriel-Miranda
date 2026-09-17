@@ -290,25 +290,24 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
               </AnimatePresence>
             </form>
 
-            {/* Canales y Redes Sociales Oficiales */}
-            <div className="pt-6 mt-6 border-t border-slate-200/70">
-              <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-3">
+            {/* Canales y Redes Sociales Oficiales (Únicamente iconos, sin contenedor ni texto) */}
+            <div className="pt-5 mt-5 border-t border-slate-200/70 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <p className="text-xs font-semibold text-slate-500">
                 O contáctanos en nuestros canales oficiales:
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <div className="flex items-center gap-3">
                 {SOCIAL_NETWORKS.map((social) => (
                   <a
                     key={social.id}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`Abrir ${social.name}`}
-                    className="flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl bg-white border border-slate-200/80 shadow-2xs hover:shadow-sm hover:border-slate-300 text-xs font-bold transition-all active:scale-95 cursor-pointer text-[#0A2540]"
+                    aria-label={social.name}
+                    className="transition-transform duration-200 hover:scale-115 active:scale-95 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0084DE] rounded-full inline-flex"
                   >
-                    {social.id === 'whatsapp' && <OfficialWhatsAppLogo className="w-4 h-4 shrink-0" />}
-                    {social.id === 'instagram' && <OfficialInstagramLogo className="w-4 h-4 shrink-0" />}
-                    {social.id === 'facebook' && <OfficialFacebookLogo className="w-4 h-4 shrink-0" />}
-                    <span className="truncate">{social.id === 'whatsapp' ? 'WhatsApp' : social.id === 'instagram' ? 'Instagram' : 'Facebook'}</span>
+                    {social.id === 'whatsapp' && <OfficialWhatsAppLogo className="w-8 h-8 drop-shadow-xs" />}
+                    {social.id === 'instagram' && <OfficialInstagramLogo className="w-8 h-8 drop-shadow-xs" />}
+                    {social.id === 'facebook' && <OfficialFacebookLogo className="w-8 h-8 drop-shadow-xs" />}
                   </a>
                 ))}
               </div>
