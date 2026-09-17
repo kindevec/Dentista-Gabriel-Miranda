@@ -152,69 +152,80 @@ export const DoctorProfileSection: React.FC = () => {
 
         </motion.div>
 
-        {/* Clinical Technology & Infrastructure Showcase - Open Soft Flow */}
+        {/* Clinical Technology & Infrastructure Showcase - Directo sobre el lienzo (Cero Box-in-Box) */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.7 }}
-          className="bg-white/95 backdrop-blur-2xl rounded-[3rem] p-6 sm:p-9 lg:p-10 shadow-2xl shadow-cyan-950/5 border border-white"
+          className="pt-6 sm:pt-10"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             
             {/* Left: Infrastructure Features */}
-            <div className="space-y-6">
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0A2540]">
-                Instalaciones diseñadas para tu máxima bioseguridad y bienestar
-              </h3>
-              <p className="text-sm text-slate-600 leading-relaxed text-justify">
-                Nos alejamos del concepto tradicional de clínica fría o estresante. Nuestro consultorio cuenta con diseño acústico sereno, música ambiental relajante y equipamiento digital no invasivo.
-              </p>
+            <div className="lg:col-span-7 space-y-6">
+              <div>
+                <span className="text-xs font-black tracking-widest text-[#0084DE] uppercase mb-1.5 block">
+                  Infraestructura & Bioseguridad
+                </span>
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0A2540] tracking-tight">
+                  Instalaciones diseñadas para tu máxima bioseguridad y bienestar
+                </h3>
+                <p className="text-sm sm:text-base text-slate-600 leading-relaxed text-justify mt-2">
+                  Nos alejamos del concepto tradicional de clínica fría o estresante. Nuestro consultorio cuenta con diseño acústico sereno, música ambiental relajante y equipamiento digital no invasivo.
+                </p>
+              </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3.5 pt-1">
                 <motion.div
-                  whileHover={{ y: -2 }}
-                  className="flex items-start gap-4 p-4 rounded-[2rem] bg-slate-50/80 transition-all"
+                  whileHover={{ x: 4 }}
+                  className="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-200/80 shadow-2xs transition-all"
                 >
-                  <div className="w-12 h-12 rounded-full bg-[#005A9C] text-white shrink-0 flex items-center justify-center shadow-xs">
+                  <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#005A9C] to-[#0084DE] text-white shrink-0 flex items-center justify-center shadow-xs">
                     <Cpu className="w-5 h-5 text-cyan-200" />
                   </div>
                   <div>
                     <h4 className="text-sm font-bold text-[#0A2540]">Escáner Óptico Intraoral 3D</h4>
-                    <p className="text-xs text-slate-500 mt-1 text-justify">Mapeo milimétrico de tus dientes en solo 3 minutos. Sin pastas ni náuseas.</p>
+                    <p className="text-xs text-slate-600 mt-1 text-justify leading-relaxed">
+                      Mapeo milimétrico de tus dientes en solo 3 minutos. Sin pastas molestas ni sensación de náuseas.
+                    </p>
                   </div>
                 </motion.div>
 
                 <motion.div
-                  whileHover={{ y: -2 }}
-                  className="flex items-start gap-4 p-4 rounded-[2rem] bg-slate-50/80 transition-all"
+                  whileHover={{ x: 4 }}
+                  className="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-200/80 shadow-2xs transition-all"
                 >
-                  <div className="w-12 h-12 rounded-full bg-[#005A9C] text-white shrink-0 flex items-center justify-center shadow-xs">
+                  <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#005A9C] to-[#0084DE] text-white shrink-0 flex items-center justify-center shadow-xs">
                     <Heart className="w-5 h-5 text-cyan-200" />
                   </div>
                   <div>
                     <h4 className="text-sm font-bold text-[#0A2540]">Odontología de Mínima Invasión</h4>
-                    <p className="text-xs text-slate-500 mt-1 text-justify">Preservamos al máximo el tejido sano y la estructura biológica natural del diente.</p>
+                    <p className="text-xs text-slate-600 mt-1 text-justify leading-relaxed">
+                      Preservamos al máximo el tejido sano y la estructura biológica natural del diente.
+                    </p>
                   </div>
                 </motion.div>
 
                 <motion.div
-                  whileHover={{ y: -2 }}
-                  className="flex items-start gap-4 p-4 rounded-[2rem] bg-slate-50/80 transition-all"
+                  whileHover={{ x: 4 }}
+                  className="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-200/80 shadow-2xs transition-all"
                 >
-                  <div className="w-12 h-12 rounded-full bg-[#005A9C] text-white shrink-0 flex items-center justify-center shadow-xs">
+                  <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#005A9C] to-[#0084DE] text-white shrink-0 flex items-center justify-center shadow-xs">
                     <Shield className="w-5 h-5 text-cyan-200" />
                   </div>
                   <div>
                     <h4 className="text-sm font-bold text-[#0A2540]">Bioseguridad de Grado Hospitalario</h4>
-                    <p className="text-xs text-slate-500 mt-1 text-justify">Esterilización certificada en Autoclave Clase B con sellado al vacío de todo el instrumental.</p>
+                    <p className="text-xs text-slate-600 mt-1 text-justify leading-relaxed">
+                      Esterilización certificada en Autoclave Clase B con sellado al vacío de todo el instrumental.
+                    </p>
                   </div>
                 </motion.div>
               </div>
             </div>
 
             {/* Right: Overlapping Dual-Mask Architectural Composition */}
-            <div className="relative flex items-center justify-center pt-4 lg:pt-0">
+            <div className="lg:col-span-5 relative flex items-center justify-center pt-4 lg:pt-0">
               {/* Primary Architectural Arch Mask: Clinical Suite */}
               <div className="relative w-full max-w-md rounded-t-[14rem] rounded-b-[3rem] overflow-hidden shadow-2xl p-1.5 bg-gradient-to-b from-cyan-200 via-sky-100 to-white">
                 <div className="relative w-full h-[400px] sm:h-[440px] rounded-t-[13.5rem] rounded-b-[2.6rem] overflow-hidden bg-slate-900 group">
@@ -226,7 +237,7 @@ export const DoctorProfileSection: React.FC = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0A2540]/80 via-transparent to-transparent" />
                   
-                  <div className="absolute bottom-4 left-4 right-4 p-3 rounded-2xl bg-white/90 backdrop-blur-md text-[#0A2540] text-center border border-white/60">
+                  <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded-2xl bg-white/95 backdrop-blur-md text-[#0A2540] text-center border border-white/60 shadow-lg">
                     <p className="text-xs font-bold">Unidad Odontológica Ergonómica 3D</p>
                     <p className="text-[11px] text-slate-500">Diseño acústico sereno y luz natural</p>
                   </div>
@@ -237,7 +248,7 @@ export const DoctorProfileSection: React.FC = () => {
               <motion.div
                 animate={{ y: [-6, 6, -6] }}
                 transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-                className="absolute -bottom-6 sm:-bottom-8 right-0 sm:-right-6 z-20 w-32 sm:w-44 h-32 sm:h-44 rounded-[2rem] sm:rounded-[2.5rem] rounded-tr-lg p-1.5 bg-gradient-to-br from-white via-cyan-100 to-emerald-200 shadow-2xl shadow-cyan-950/20"
+                className="absolute -bottom-6 sm:-bottom-8 right-0 sm:-right-4 z-20 w-32 sm:w-44 h-32 sm:h-44 rounded-[2rem] sm:rounded-[2.5rem] rounded-tr-lg p-1.5 bg-gradient-to-br from-white via-cyan-100 to-emerald-200 shadow-2xl shadow-cyan-950/20"
               >
                 <div className="relative w-full h-full rounded-[2.2rem] rounded-tr-md overflow-hidden bg-slate-900 group">
                   <img
