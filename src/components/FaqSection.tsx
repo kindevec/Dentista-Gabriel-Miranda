@@ -34,8 +34,8 @@ export const FaqSection: React.FC = () => {
 
   return (
     <section id="preguntas" className="py-10 sm:py-12 bg-white relative overflow-hidden">
-      {/* Subtle organic ribbon accent */}
-      <OrganicDentalRibbon className="-top-10 -right-20 w-96 opacity-30" variant="cyan" />
+      {/* Subtle organic ribbon accent in gold */}
+      <OrganicDentalRibbon className="-top-10 -right-20 w-96 opacity-25" variant="gold" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-2 sm:pb-3">
         
@@ -47,11 +47,14 @@ export const FaqSection: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-5 sm:mb-7 space-y-2"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0A2540] tracking-tight">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/30 text-[#84631E] text-xs font-bold tracking-wider uppercase mb-2">
+            Preguntas Frecuentes
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
             Resolvemos tus Dudas sobre Tratamientos y Consultas
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto text-justify">
-            Conoce los aspectos clave sobre el manejo del dolor, facilidades de pago y tiempos de atención en nuestro consultorio.
+          <p className="text-sm sm:text-base text-stone-600 max-w-2xl mx-auto text-justify">
+            Conoce los aspectos clave sobre el manejo del dolor, facilidades de pago con crédito directo y tiempos de atención en Miranda Dental Studio.
           </p>
         </motion.div>
 
@@ -72,8 +75,8 @@ export const FaqSection: React.FC = () => {
                 variants={itemVariants}
                 className={`rounded-[2rem] transition-all duration-300 overflow-hidden ${
                   isOpen
-                    ? 'bg-cyan-50/60 shadow-md border border-cyan-200/80'
-                    : 'bg-slate-50/80 hover:bg-slate-100/70 shadow-2xs'
+                    ? 'bg-[#FAF7EE] shadow-md border border-[#D4AF37]/50'
+                    : 'bg-[#FAF9F5] hover:bg-stone-100/70 border border-stone-200/50 shadow-2xs'
                 }`}
               >
                 <button
@@ -82,15 +85,15 @@ export const FaqSection: React.FC = () => {
                   aria-expanded={isOpen}
                 >
                   <div className="flex items-center gap-3 sm:gap-3.5">
-                    <HelpCircle className={`w-5 h-5 shrink-0 transition-colors ${isOpen ? 'text-[#00BFFF]' : 'text-slate-400'}`} />
-                    <span className="text-xs sm:text-base font-bold text-[#0A2540]">
+                    <HelpCircle className={`w-5 h-5 shrink-0 transition-colors ${isOpen ? 'text-[#AA7C11]' : 'text-stone-400'}`} />
+                    <span className="text-xs sm:text-base font-bold text-[#0D0D0D]">
                       {faq.question}
                     </span>
                   </div>
 
                   <div
                     className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${
-                      isOpen ? 'bg-[#005A9C] text-white rotate-180' : 'bg-white text-slate-500 shadow-2xs'
+                      isOpen ? 'bg-[#D4AF37] text-white shadow-[0_2px_10px_rgba(212,175,55,0.4)] rotate-180' : 'bg-white text-stone-500 shadow-2xs border border-stone-200/60'
                     }`}
                   >
                     <ChevronDown className="w-4 h-4" />
@@ -105,7 +108,7 @@ export const FaqSection: React.FC = () => {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
                     >
-                      <div className="px-4 sm:px-7 pb-5 sm:pb-6 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-cyan-100/60 pl-11 sm:pl-14 text-justify">
+                      <div className="px-4 sm:px-7 pb-5 sm:pb-6 pt-1 text-xs sm:text-sm text-stone-600 leading-relaxed border-t border-[#D4AF37]/20 pl-11 sm:pl-14 text-justify">
                         {faq.answer}
                       </div>
                     </motion.div>
@@ -124,7 +127,7 @@ export const FaqSection: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-6 sm:mt-8 text-center"
         >
-          <p className="text-sm font-semibold text-[#0A2540] mb-3">
+          <p className="text-sm font-semibold text-[#0D0D0D] mb-3">
             ¿Tienes alguna consulta médica adicional que no esté en esta lista?
           </p>
           <motion.a
@@ -133,7 +136,7 @@ export const FaqSection: React.FC = () => {
             href={createWhatsAppLink(`Hola ${DOCTOR_NAME}, tengo una pregunta sobre un tratamiento dental que me gustaría consultar.`)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold text-xs transition-all shadow-xs cursor-pointer"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#FAF7EE] hover:bg-[#F5EED8] text-[#84631E] border border-[#D4AF37]/30 font-bold text-xs transition-all shadow-xs cursor-pointer"
           >
             <WhatsAppIcon className="w-4 h-4 text-[#25D366]" />
             <span>Consultar directamente por WhatsApp</span>
@@ -144,7 +147,7 @@ export const FaqSection: React.FC = () => {
 
       {/* Organic Curved Wave Transition into Contact Section */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
-        <CurvedSectionDivider position="bottom" fillColor="#F8FAFC" variant="wave1" />
+        <CurvedSectionDivider position="bottom" fillColor="#FAF9F5" variant="wave1" />
       </div>
     </section>
   );

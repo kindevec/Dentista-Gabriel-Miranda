@@ -1,205 +1,200 @@
 import { Specialty, DoctorProfile, SocialNetwork, FaqItem } from '../types';
 
-export const CLINIC_NAME = "Odontología Gabriel Miranda";
-export const DOCTOR_NAME = "Dr. Gabriel Miranda";
-export const DOCTOR_TITLE = "Especialista en Rehabilitación Oral & Estética Dental";
+export const CLINIC_NAME = "Miranda Dental Studio";
+export const CLINIC_TAGLINE = "Rehabilitación Oral y Estética";
+export const DOCTOR_NAME = "Dr. Gabriel Mateo Miranda Hormaza";
+export const DOCTOR_TITLE = "Odontólogo — Rehabilitación Oral y Estética";
+export const DOCTOR_SENESCYT = "1042-2023-2642790";
 export const CLINIC_PHONE_DISPLAY = "+593 98 231 5408";
 export const CLINIC_PHONE_RAW = "593982315408";
-export const CLINIC_EMAIL = "contacto@odontologiagabrielmiranda.com";
-export const CLINIC_ADDRESS = "Av. de los Shyris y Naciones Unidas, Edificio Médico Platinum, Piso 4, Cons. 402";
+export const CLINIC_EMAIL = "contacto@mirandadentalstudio.com";
+export const CLINIC_ADDRESS = "Av. 19 de Mayo y Velasco Ibarra, Edificio color gris, Local planta baja (Parqueadero para pacientes)";
 export const CLINIC_CITY = "Quito - Ecuador";
-export const CLINIC_HOURS = "Lun - Vie: 08:30 AM - 19:00 PM | Sáb: 09:00 AM - 15:00 PM | Urgencias 24/7";
+export const CLINIC_HOURS = "Lunes a Sábado: 09:00 AM - 19:00 PM | Domingo: 09:00 AM - 14:00 PM";
+export const VALUATION_PRICE = 15;
+export const VALUATION_DETAILS = "Incluye diagnóstico integral, fotografías clínicas de alta definición y radiografías dentales.";
+export const FINANCING_INFO = "Efectivo, Transferencia, se aceptan todas las tarjetas de crédito y débito. Crédito directo dental desde $400 hasta $2,000.";
 
 export function createWhatsAppLink(message: string): string {
   return `https://wa.me/${CLINIC_PHONE_RAW}?text=${encodeURIComponent(message)}`;
 }
 
-export const GENERAL_WA_MESSAGE = `Hola ${DOCTOR_NAME}, deseo agendar una cita de evaluación y diagnóstico dental en su consultorio.`;
-export const BOOKING_WA_MESSAGE = `Hola ${DOCTOR_NAME}, deseo agendar una cita dental en su consultorio. ¿Me podría indicar qué días y horarios tiene disponibilidad? Muchas gracias.`;
-export const EMERGENCY_WA_MESSAGE = `¡URGENCIA DENTAL! Hola ${DOCTOR_NAME}, presento dolor agudo o una emergencia dental y requiero atención prioritaria inmediata.`;
+export const GENERAL_WA_MESSAGE = `Hola ${DOCTOR_NAME}, deseo agendar la consulta de valoración de $15 (incluye diagnóstico, fotografías y radiografías) en Miranda Dental Studio.`;
+export const BOOKING_WA_MESSAGE = `Hola ${DOCTOR_NAME}, deseo agendar una cita en Miranda Dental Studio. ¿Qué días y horarios tiene disponibilidad?`;
+export const EMERGENCY_WA_MESSAGE = `¡URGENCIA DENTAL! Hola ${DOCTOR_NAME}, presento dolor agudo y requiero atención prioritaria en Miranda Dental Studio.`;
 
+/**
+ * SERVICIOS BÁSICOS Y DE CONSULTORIO (Utilizados en la Rueda Interactiva de Servicios)
+ */
 export const SPECIALTIES_DATA: Specialty[] = [
   {
-    id: "ortodoncia",
-    title: "Ortodoncia Invisible & Digital 3D",
-    shortDesc: "Alineación estética avanzada con alineadores transparentes removibles o brackets de autoligado de baja fricción.",
-    fullDesc: "Corregimos apiñamientos, mordidas abiertas o cruzadas mediante planificación computarizada 3D, permitiéndote ver el resultado final antes de iniciar.",
-    iconName: "Layers",
-    badge: "Más Solicitado",
-    image: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=800&auto=format&fit=crop",
-    features: [
-      "Escaneo digital intraoral sin pastas ni náuseas",
-      "Alineadores transparentes 100% discretos",
-      "Reducción del tiempo de tratamiento hasta un 35%",
-      "Controles presenciales y seguimiento digital"
-    ],
-    waMessage: `Hola ${DOCTOR_NAME}, me gustaría agendar una valoración para Ortodoncia Invisible y conocer el plan de tratamiento.`,
-    estimatedTime: "6 a 16 meses",
-    suitableFor: "Adultos y jóvenes que buscan discreción, comodidad y rapidez."
-  },
-  {
-    id: "diseno-sonrisa",
-    title: "Diseño de Sonrisa & Carillas Dentales",
-    shortDesc: "Carillas cerámicas ultrafinas (0.3 mm) y resinas de alta estética para armonizar forma, tamaño y tonalidad.",
-    fullDesc: "Diseño biomimético personalizado adaptado a tus rasgos faciales con prueba estética en vivo (Mock-up) para garantizar la naturalidad de tu nueva sonrisa.",
-    iconName: "Smile",
-    badge: "Alta Estética",
-    image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=800&auto=format&fit=crop",
-    features: [
-      "Mock-up previo (prueba estética directa en boca)",
-      "Carillas de porcelana E-max o resina estratificada",
-      "Corrección de manchas, fracturas y desgastes",
-      "Preservación máxima de tu esmalte natural"
-    ],
-    waMessage: `Hola ${DOCTOR_NAME}, deseo solicitar una consulta de valoración para Diseño de Sonrisa y Carillas Estéticas.`,
-    estimatedTime: "2 a 3 sesiones",
-    suitableFor: "Personas con dientes pigmentados, desgastados, con espacios o asimétricos."
-  },
-  {
-    id: "implantes",
-    title: "Implantes Dentales Guiados por Computadora",
-    shortDesc: "Reposición fija y definitiva de piezas perdidas con implantes de titanio biocompatible y coronas de circonio.",
-    fullDesc: "Cirugía mínimamente invasiva mediante guía quirúrgica 3D. Recupera tu capacidad masticatoria y la confianza para reír sin dolor y con fijación para toda la vida.",
-    iconName: "ShieldCheck",
-    badge: "Precisión Quirúrgica",
-    image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop",
-    features: [
-      "Planificación tomográfica digital milimétrica",
-      "Procedimiento sin bisturí tradicional ni dolor",
-      "Coronas estéticas de circonio translúcido",
-      "Posibilidad de carga y diente provisional inmediato"
-    ],
-    waMessage: `Hola ${DOCTOR_NAME}, requiero información y valoración para Implantes Dentales Guiados por Computadora.`,
-    estimatedTime: "1 a 3 citas",
-    suitableFor: "Pacientes con pérdida de una o varias piezas dentales."
-  },
-  {
-    id: "endodoncia",
-    title: "Endodoncia Microscópica en 1 Sesión",
-    shortDesc: "Salvamos tu diente natural eliminando el dolor y la infección pulpar con tecnología rotatoria de última generación.",
-    fullDesc: "Tratamiento de conducto indoloro con microscopía clínica de alta magnificación y localizador electrónico apical que resuelve la molestia en una sola cita.",
-    iconName: "Activity",
-    badge: "Alivio Inmediato",
-    image: "https://images.unsplash.com/photo-1629909615184-74f495363b67?q=80&w=800&auto=format&fit=crop",
-    features: [
-      "Tratamiento completado en 1 sola sesión de 60 min",
-      "Anestesia computarizada indolora y localizada",
-      "Limas de níquel-titanio termo-tratadas",
-      "Sellado radicular termoplástico tridimensional"
-    ],
-    waMessage: `Hola ${DOCTOR_NAME}, tengo dolor dental agudo y solicito una cita prioritaria de Endodoncia.`,
-    estimatedTime: "1 sesión (60 min)",
-    suitableFor: "Dolor intenso, caries profundas, inflamación o traumatismos dentales."
-  },
-  {
-    id: "limpieza-profilaxis",
-    title: "Limpieza con Ultrasonido & Profilaxis Pro",
-    shortDesc: "Higiene dental profunda con tecnología piezoeléctrica ultrasónica para remover sarro, manchas y placa bacteriana.",
-    fullDesc: "Tratamiento preventivo esencial que desinflama encías, combate el mal aliento y devuelve el brillo natural a tus dientes sin desgastar el esmalte.",
+    id: "profilaxis-profunda",
+    title: "Profilaxis Dental Profunda con Ultrasonido",
+    shortDesc: "Limpieza profesional con ultrasonido para eliminar sarro subgingival, placa bacteriana y manchas superficiales.",
+    fullDesc: "Higiene dental avanzada de grado clínico que desinflama encías, previene la enfermedad periodontal y devuelve la pureza y frescura a tu sonrisa.",
     iconName: "Droplets",
-    badge: "Cuidado Preventivo",
+    badge: "Cuidado Preventivo Esencial",
     image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=800&auto=format&fit=crop",
     features: [
-      "Eliminación ultrasónica de sarro supra y subgingival",
-      "Aeropulidor con bicarbonato micronizado para manchas",
-      "Aplicación tópica de flúor remineralizante",
-      "Evaluación periodontal completa incluida"
+      "Eliminación ultrasónica de cálculo y sarro",
+      "Pulido dental con pasta profiláctica suave",
+      "Control bacteriano y salud de encías",
+      "Revisión diagnóstica completa"
     ],
-    waMessage: `Hola ${DOCTOR_NAME}, deseo agendar una Limpieza Dental Ultrasónica y Profilaxis Profunda.`,
-    estimatedTime: "40 minutos",
-    suitableFor: "Revisión preventiva semestral para toda la familia."
+    waMessage: `Hola ${DOCTOR_NAME}, deseo agendar una Profilaxis Dental Profunda en Miranda Dental Studio.`,
+    estimatedTime: "40 a 45 minutos",
+    suitableFor: "Toda la familia como mantenimiento preventivo semestral."
   },
   {
-    id: "blanqueamiento",
-    title: "Blanqueamiento Dental LED / Láser",
-    shortDesc: "Aclara hasta 5 tonos de tu esmalte en una sola sesión de 45 minutos con fórmulas desensibilizantes.",
-    fullDesc: "Tecnología de fotoactivación en frío que disuelve pigmentos causados por café, té, tabaco o el paso de los años, manteniendo tus dientes protegidos.",
-    iconName: "Zap",
-    badge: "Efecto Inmediato",
+    id: "restauraciones-esteticas",
+    title: "Restauraciones Estéticas Biomiméticas",
+    shortDesc: "Calzas y reconstrucciones invisibles en resina de alta densidad que imitan el color y textura natural del diente.",
+    fullDesc: "Reemplazo de restauraciones metálicas oscuras o reparación de caries y fracturas con resinas nanoparticuladas biocompatibles de larga duración.",
+    iconName: "ShieldCheck",
+    badge: "Biomimética Dental",
+    image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=800&auto=format&fit=crop",
+    features: [
+      "Estratificación de capas con color dental exacto",
+      "Aislamiento absoluto para máxima adhesión",
+      "Pulido de alto brillo inalterable",
+      "Preservación de la anatomía original"
+    ],
+    waMessage: `Hola ${DOCTOR_NAME}, quisiera agendar una cita para Restauraciones Estéticas en resina.`,
+    estimatedTime: "45 minutos por pieza",
+    suitableFor: "Pacientes con caries, fracturas o restauraciones antiguas deterioradas."
+  },
+  {
+    id: "blanqueamiento-led",
+    title: "Blanqueamiento Dental Profesional LED",
+    shortDesc: "Aclara hasta 4 tonos el esmalte dental en una sesión con gel desensibilizante fotoactivado.",
+    fullDesc: "Tecnología de fotoactivación controlada que elimina pigmentos profundos por café, té o tabaco sin dañar la integridad de tu esmalte.",
+    iconName: "Smile",
+    badge: "Efecto Luminoso Inmediato",
     image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=800&auto=format&fit=crop",
     features: [
-      "Aclaramiento de 4 a 6 tonos en 45 minutos",
+      "Aclaramiento de 3 a 5 tonos en 1 sola cita",
+      "Protector gingival fotopolimerizable",
       "Fórmula clínica con nitrato de potasio anti-sensibilidad",
-      "Kit de refuerzo en casa opcional personalizado",
-      "Protección gingival foto-polimerizable"
+      "Brillo radiante y natural de tu sonrisa"
     ],
-    waMessage: `Hola ${DOCTOR_NAME}, quisiera agendar una sesión de Blanqueamiento Dental LED en consultorio.`,
-    estimatedTime: "45 a 60 minutos",
-    suitableFor: "Pacientes con tonalidad amarilla o manchas que desean una sonrisa reluciente."
+    waMessage: `Hola ${DOCTOR_NAME}, me gustaría agendar una sesión de Blanqueamiento Dental LED en consultorio.`,
+    estimatedTime: "50 minutos",
+    suitableFor: "Dientes oscurecidos o manchados que buscan una sonrisa rejuvenecida."
   },
   {
-    id: "odontopediatria",
-    title: "Odontopediatría & Atención Familiar",
-    shortDesc: "Odontología empática, cálida y libre de traumas pensada para niños, adolescentes y toda la familia.",
-    fullDesc: "Ambiente amigable con técnicas de adaptación psicológica positiva, selladores preventivos y guía del desarrollo maxilar y dental infantil.",
-    iconName: "HeartHandshake",
-    badge: "Atención Empática",
-    image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop",
+    id: "microabrasion",
+    title: "Microabrasión Dental para Fluorosis",
+    shortDesc: "Tratamiento químico-mecánico especializado para eliminar manchas blancas o pardas causadas por fluorosis.",
+    fullDesc: "Técnica conservadora que pule y remueve las alteraciones de color superficiales del esmalte, devolviendo una tonalidad homogénea y natural a tus dientes frontales.",
+    iconName: "Activity",
+    badge: "Tratamiento de Manchas",
+    image: "https://images.unsplash.com/photo-1629909615184-74f495363b67?q=80&w=800&auto=format&fit=crop",
     features: [
-      "Enfoque 'Decir - Mostrar - Hacer' sin miedo ni dolor",
-      "Sellantes de fosas y fisuras contra caries",
-      "Detección temprana de anomalías de mordida",
-      "Educación interactiva en técnica de cepillado"
+      "Eliminación selectiva de manchas por fluorosis",
+      "Procedimiento mínimamente invasivo sin desgastes agresivos",
+      "Remineralización inmediata con flúor tópico",
+      "Resultados visibles en la misma sesión"
     ],
-    waMessage: `Hola ${DOCTOR_NAME}, me gustaría agendar una cita odontopediátrica para mi hijo/a con su equipo.`,
+    waMessage: `Hola ${DOCTOR_NAME}, requiero una valoración para Microabrasión Dental y tratamiento de fluorosis.`,
+    estimatedTime: "45 a 60 minutos",
+    suitableFor: "Pacientes con manchas blancas o marrones congénitas o por exceso de flúor."
+  },
+  {
+    id: "extracciones-dentales",
+    title: "Cirugía y Extracciones Atraumáticas",
+    shortDesc: "Retiro seguro y libre de dolor de piezas dentales no restaurables o molares dañados.",
+    fullDesc: "Extracciones realizadas bajo técnicas de microcirugía atraumática que preservan el hueso alveolar para futuros implantes o rehabilitaciones fijas.",
+    iconName: "ShieldCheck",
+    badge: "Procedimiento Atraumático",
+    image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop",
+    features: [
+      "Anestesia guiada 100% indolora",
+      "Preservación de reborde óseo",
+      "Técnicas mínimamente invasivas",
+      "Instrucciones y seguimiento postquirúrgico directo"
+    ],
+    waMessage: `Hola ${DOCTOR_NAME}, necesito información y cita para una Extracción Dental segura.`,
     estimatedTime: "30 a 45 minutos",
-    suitableFor: "Bebés, niños y adolescentes en etapa de crecimiento dental."
+    suitableFor: "Dientes con fracturas severas o raíces no recuperables."
+  },
+  {
+    id: "consulta-valoracion",
+    title: "Consulta de Valoración Médica Integral ($15)",
+    shortDesc: "Evaluación clínica exhaustiva con fotografías clínicas y radiografías dentales incluidas.",
+    fullDesc: "El punto de partida ideal para transformar tu sonrisa: diagnóstico clínico completo, fotografías intraorales y radiografías por solo $15 con el Dr. Gabriel Mateo Miranda.",
+    iconName: "Layers",
+    badge: "Solo $15 Incluye Rayos X",
+    image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=800&auto=format&fit=crop",
+    features: [
+      "Diagnóstico clínico personalizado completo",
+      "Fotografías intraorales y extraorales de alta resolución",
+      "Radiografías dentales diagnósticas incluidas",
+      "Presupuesto honesto y plan de crédito directo"
+    ],
+    waMessage: `Hola ${DOCTOR_NAME}, deseo reservar mi Consulta de Valoración de $15 con diagnóstico, fotos y radiografías.`,
+    estimatedTime: "30 a 45 minutos",
+    suitableFor: "Nuevos pacientes que buscan un diagnóstico certero y accesible."
   }
 ];
 
 export const DOCTOR_PROFILE: DoctorProfile = {
-  name: "Dr. Gabriel Miranda",
-  title: "Cirujano Dentista & Especialista en Estética Oral",
-  role: "Director Clínico y Fundador",
-  specialty: "Rehabilitación Oral, Estética Dental & Odontología Digital",
-  experienceYears: 12,
+  name: "Dr. Gabriel Mateo Miranda Hormaza",
+  title: "Odontólogo — Especialista en Rehabilitación Oral y Estética",
+  role: "Director Clínico y Fundador de Miranda Dental Studio",
+  specialty: "Rehabilitación Oral, Prótesis Implanto-Asistida, Estética Dental y Armonización Facial",
+  experienceYears: 3,
   image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1000&auto=format&fit=crop",
-  bio: "Con más de una década dedicada a perfeccionar sonrisas, el Dr. Gabriel Miranda fusiona la precisión científica con la sensibilidad artística. Su enfoque primordial es ofrecer tratamientos odontológicos de excelencia en un ambiente cálido, relajado y 100% libre de dolor, sustentado en tecnología digital 3D y los más estrictos estándares de bioseguridad internacional.",
+  bio: "El Dr. Gabriel Mateo Miranda Hormaza (Graduado en 2023, con 3 años de trayectoria clínica) es egresado de la prestigiosa Universidad de los Andes y actualmente cursa su 2do año de Residencia en la especialidad de Rehabilitación Oral y Prótesis implanto asistida en la Universidad de los Hemisferios. Con residencia internacional en la Universidad Cayetano Heredia de Perú, diplomado en Carillas 'Arte en Resinas' (Perú), diplomado en Endodoncia mecanizada en CPO BRASIL y formación continua en congresos internacionales como SMILE & HOF 2026 en Río de Janeiro (Brasil), fusiona la máxima precisión biomecánica con la armonía estética natural.",
   credentials: [
-    "Especialista en Rehabilitación Oral & Implantología Quirúrgica",
-    "Diplomado Internacional en Odontología Estética y Diseño de Sonrisa Biomimético",
-    "Certificación Oficial en Ortodoncia Digital con Alineadores Invisibles",
-    "Miembro Activo de la Federación Odontológica Ecuatoriana"
+    "Registro Oficial de Título Senescyt: 1042-2023-2642790",
+    "Cursando 2do año de Residencia en Rehabilitación Oral y Prótesis Implanto Asistida (Universidad de los Hemisferios)",
+    "Graduado en Odontología por la Universidad de los Andes (2023)",
+    "Residencia Odontológica en Universidad Cayetano Heredia (Perú)",
+    "Diplomado Internacional en Carillas 'Arte en Resinas' (Perú)",
+    "Diplomado en Endodoncia Mecanizada en CPO BRASIL",
+    "Congreso en Brasil Río de Janeiro 2026 SMILE & HOF",
+    "Congreso Internacional Regional Amazónico",
+    "Congreso de Odontología Restauradora Estética en Rehabilitación Oral (Quito)"
   ],
-  philosophy: "«Cada paciente es único. Mi mayor satisfacción es ver cómo una sonrisa saludable y armónica transforma la seguridad y la calidad de vida de una persona, sin que el proceso cause temor ni dolor.»",
-  schedule: "Lunes a Viernes: 08:30 AM - 19:00 PM | Sábados: 09:00 AM - 15:00 PM"
+  philosophy: "«Brindar una odontología especializada, basada en la excelencia clínica, la tecnología y la atención humana, buscando resultados funcionales, estéticos y naturales. Cada paciente merece un tratamiento personalizado, honesto y pensado para cuidar su salud y transformar su sonrisa y calidad de vida.»",
+  schedule: "Lunes a Sábado: 09:00 AM - 19:00 PM | Domingo: 09:00 AM - 14:00 PM"
 };
 
 export const FAQ_DATA: FaqItem[] = [
   {
     id: "faq-1",
-    question: "¿Los tratamientos dentales duelen?",
-    answer: "No. En Odontología Gabriel Miranda aplicamos anestesia computarizada y técnicas de mínima invasión que eliminan el dolor durante y después de los procedimientos. Nuestro principal compromiso es que vivas una experiencia odontológica serena y confortable.",
+    question: "¿Qué incluye la consulta de valoración de $15?",
+    answer: "La consulta de valoración de $15 es integral: incluye diagnóstico clínico minucioso con el Dr. Gabriel Mateo Miranda, registro fotográfico de tu sonrisa y radiografías dentales diagnósticas. Además, recibirás tu plan de tratamiento personalizado con presupuesto claro y opciones de financiamiento.",
     category: "general"
   },
   {
     id: "faq-2",
-    question: "¿Qué facilidades y formas de pago ofrecen?",
-    answer: "Aceptamos efectivo, transferencias bancarias directas, tarjetas de débito y tarjetas de crédito con planes de financiamiento diferido a 3, 6, 9 y 12 meses sin intereses en tratamientos como Ortodoncia e Implantes.",
+    question: "¿Qué formas de pago y crédito directo tienen?",
+    answer: "Aceptamos efectivo, transferencias bancarias y todas las tarjetas de crédito y débito. Adicionalmente, contamos con nuestro Crédito Directo Dental propio para tratamientos desde $400 hasta $2,000 sin trámites engorrosos.",
     category: "pagos"
   },
   {
     id: "faq-3",
-    question: "¿Qué incluye la consulta inicial de valoración?",
-    answer: "La consulta inicial incluye examen clínico integral, escaneo digital intraoral 3D de alta definición, diagnóstico fotográfico de tu sonrisa, plan de tratamiento personalizado con presupuesto detallado y asesoría médica sin compromiso.",
+    question: "¿Atienden los fines de semana y domingos?",
+    answer: "¡Sí! En Miranda Dental Studio comprendemos los horarios laborales de nuestros pacientes. Atendemos de Lunes a Sábado de 9:00 am a 7:00 pm, y los Domingos de 9:00 am a 2:00 pm con cita previa o urgencias.",
     category: "general"
   },
   {
     id: "faq-4",
-    question: "¿Cómo sé si soy candidato para Ortodoncia Invisible o Carillas?",
-    answer: "Durante la primera consulta digital realizamos un escaneo en 3D que proyecta la movilidad y el espacio de tus dientes. Si tus encías y raíces están saludables, prácticamente el 95% de los pacientes califican para alineadores o carillas estéticas.",
-    category: "tratamientos"
-  },
-  {
-    id: "faq-5",
-    question: "¿Qué debo hacer en caso de una urgencia dental?",
-    answer: "Si presentas dolor agudo, inflamación, pérdida o fractura de un diente, haz clic de inmediato en nuestro botón rojo de 'Urgencias 24/7' en la web o escríbenos a WhatsApp. Nuestro equipo médico te dará instrucciones de primeros auxilios y te asignará atención prioritaria en el consultorio.",
+    question: "¿Tienen parqueadero para pacientes?",
+    answer: "Sí, nuestras instalaciones en Av. 19 de Mayo y Velasco Ibarra (Edificio color gris, planta baja) cuentan con parqueadero propio y exclusivo para la total comodidad de nuestros pacientes.",
     category: "general"
   },
   {
+    id: "faq-5",
+    question: "¿Qué especialidades atienden en el consultorio?",
+    answer: "Ofrecemos Rehabilitación Oral (prótesis y coronas), Estética Dental y Carillas, Endodoncia mecanizada (CPO Brasil), Implantología, Cirugía de terceros molares, Ortodoncia (autoligado y estéticos), Armonización Facial (Botox, Ácido Hialurónico, Bichectomía) y Periodoncia.",
+    category: "tratamientos"
+  },
+  {
     id: "faq-6",
-    question: "¿Tienen parqueadero y acceso para personas con movilidad reducida?",
-    answer: "Sí, el Edificio Médico Platinum cuenta con parqueadero privado subterráneo gratuito para nuestros pacientes, rampas de acceso y amplios ascensores camilleros para tu total comodidad.",
+    question: "¿Los tratamientos causan dolor?",
+    answer: "No. En Miranda Dental Studio aplicamos técnicas de anestesia guiada, odontología de mínima invasión y enfoque biológico respetuoso para que cada procedimiento sea completamente confortable y relajado.",
     category: "general"
   }
 ];
@@ -207,15 +202,15 @@ export const FAQ_DATA: FaqItem[] = [
 export const SOCIAL_NETWORKS: SocialNetwork[] = [
   {
     id: "whatsapp",
-    name: "WhatsApp Oficial 24/7",
+    name: "WhatsApp Oficial Miranda Dental Studio",
     handle: "+593 98 231 5408",
     iconType: "whatsapp",
     color: "#25D366",
     bgColor: "bg-emerald-50 border-emerald-200 text-[#25D366]",
-    description: "Canal prioritario de respuesta médica directa. Agenda tu cita, consulta dudas de tratamientos o solicita atención de emergencia las 24 horas del día con respuesta en menos de 5 minutos.",
+    description: "Canal de atención directa y agendamiento médico con el Dr. Gabriel Mateo Miranda. Reserva tu valoración de $15 o consulta sobre tratamientos.",
     actionText: "Chatear por WhatsApp",
-    url: createWhatsAppLink("Hola Dr. Gabriel Miranda, me contacto desde su sitio web oficial para agendar una cita o realizar una consulta médica."),
-    waMessage: "Hola Dr. Gabriel Miranda, me comunico desde la web para agendar una cita de evaluación.",
+    url: createWhatsAppLink("Hola Dr. Gabriel Mateo Miranda, deseo agendar una consulta de valoración de $15 en Miranda Dental Studio."),
+    waMessage: "Hola Dr. Gabriel Mateo Miranda, deseo información para una cita.",
     image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=800&auto=format&fit=crop"
   },
   {
@@ -223,25 +218,25 @@ export const SOCIAL_NETWORKS: SocialNetwork[] = [
     name: "Instagram Oficial",
     handle: "@odontologia_miranda",
     iconType: "instagram",
-    color: "#E4405F",
-    bgColor: "bg-pink-50 border-pink-200 text-[#E4405F]",
-    description: "Sigue nuestros casos clínicos reales en video, testimonios de pacientes, recomendaciones de cuidado bucal y los últimos avances en odontología digital que aplicamos en el consultorio.",
+    color: "#D4AF37",
+    bgColor: "bg-amber-50 border-amber-200 text-[#D4AF37]",
+    description: "Casos clínicos reales de Rehabilitación Oral, Diseño de Sonrisa y Estética en Miranda Dental Studio.",
     actionText: "Seguir en Instagram",
     url: "https://www.instagram.com/odontologia_miranda/",
-    waMessage: "Hola Dr. Gabriel Miranda, vi su Instagram oficial @odontologia_miranda y quisiera agendar una consulta.",
+    waMessage: "Hola Dr. Gabriel Mateo Miranda, vi su Instagram oficial y deseo agendar una valoración.",
     image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=800&auto=format&fit=crop"
   },
   {
     id: "facebook",
     name: "Facebook Oficial",
-    handle: "Odontología Gabriel Miranda",
+    handle: "Miranda Dental Studio",
     iconType: "facebook",
     color: "#1877F2",
     bgColor: "bg-blue-50 border-blue-200 text-[#1877F2]",
-    description: "Comunidad de pacientes en constante crecimiento. Artículos sobre prevención dental, promociones de temporada, transmisiones en vivo y testimonios de pacientes satisfechos.",
+    description: "Comunidad de pacientes y testimonios sobre nuestros tratamientos dentales en Quito.",
     actionText: "Visitar Facebook",
     url: "https://facebook.com/odontologiagabrielmiranda",
-    waMessage: "Hola Dr. Gabriel Miranda, vi su página de Facebook y deseo información para una cita.",
+    waMessage: "Hola Dr. Gabriel Mateo Miranda, vi su página oficial de Facebook y deseo una cita.",
     image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop"
   }
 ];

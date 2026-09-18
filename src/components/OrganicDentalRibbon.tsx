@@ -3,42 +3,42 @@ import { motion } from 'motion/react';
 
 interface OrganicDentalRibbonProps {
   className?: string;
-  variant?: 'cyan' | 'blue' | 'white';
+  variant?: 'gold' | 'champagne' | 'white' | 'cyan' | 'blue';
 }
 
 export const OrganicDentalRibbon: React.FC<OrganicDentalRibbonProps> = ({
   className = '',
-  variant = 'cyan'
+  variant = 'gold'
 }) => {
   const getGradients = () => {
     switch (variant) {
-      case 'cyan':
+      case 'gold':
         return {
-          start: '#00BFFF',
-          mid: '#38BDF8',
-          stop: '#005A9C',
-          opacity: 0.28,
-        };
-      case 'blue':
-        return {
-          start: '#005A9C',
-          mid: '#0084DE',
-          stop: '#00BFFF',
+          start: '#F3E5AB',
+          mid: '#D4AF37',
+          stop: '#997328',
           opacity: 0.35,
+        };
+      case 'champagne':
+        return {
+          start: '#FFFFFF',
+          mid: '#F3E5AB',
+          stop: '#C5A059',
+          opacity: 0.30,
         };
       case 'white':
         return {
           start: '#FFFFFF',
-          mid: '#E0F2FE',
-          stop: '#BAE6FD',
-          opacity: 0.4,
+          mid: '#FAF9F6',
+          stop: '#F3E5AB',
+          opacity: 0.45,
         };
       default:
         return {
-          start: '#00BFFF',
-          mid: '#38BDF8',
-          stop: '#005A9C',
-          opacity: 0.28,
+          start: '#F3E5AB',
+          mid: '#D4AF37',
+          stop: '#997328',
+          opacity: 0.35,
         };
     }
   };
@@ -58,53 +58,40 @@ export const OrganicDentalRibbon: React.FC<OrganicDentalRibbonProps> = ({
         rotate: { repeat: Infinity, duration: 10, ease: 'easeInOut' },
         opacity: { duration: 1 },
       }}
-      className={`pointer-events-none select-none absolute transform-gpu will-change-transform ${className}`}
-      aria-hidden="true"
+      className={`pointer-events-none ${className}`}
     >
       <svg
-        viewBox="0 0 700 240"
+        viewBox="0 0 800 600"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full filter drop-shadow-lg"
+        className="w-full h-full drop-shadow-[0_15px_25px_rgba(212,175,55,0.15)]"
       >
         <defs>
           <linearGradient id={`ribbonGrad-${variant}`} x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor={grad.start} stopOpacity={grad.opacity} />
-            <stop offset="50%" stopColor={grad.mid} stopOpacity={grad.opacity * 0.8} />
-            <stop offset="100%" stopColor={grad.stop} stopOpacity="0" />
+            <stop offset="45%" stopColor={grad.mid} stopOpacity={grad.opacity * 1.2} />
+            <stop offset="100%" stopColor={grad.stop} stopOpacity={grad.opacity * 0.7} />
           </linearGradient>
-          <linearGradient id={`ribbonStroke-${variant}`} x1="0%" y1="0%" x2="100%" y2="50%">
-            <stop offset="0%" stopColor={grad.start} stopOpacity={grad.opacity * 1.5} />
-            <stop offset="100%" stopColor={grad.mid} stopOpacity="0.1" />
-          </linearGradient>
+          <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="10" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
         </defs>
-        
-        {/* Dynamic primary wave ribbon */}
+
+        {/* 3D Organic Smooth Fluid Ribbon Ribbon Track */}
         <path
-          d="M20 180 C 140 40, 280 220, 440 90 C 560 -10, 640 120, 680 150"
-          stroke={`url(#ribbonStroke-${variant})`}
-          strokeWidth="38"
-          strokeLinecap="round"
-          fill="none"
+          d="M 50 320 C 180 180, 260 460, 420 280 C 580 100, 680 420, 780 240 C 720 380, 560 220, 410 400 C 250 560, 150 220, 50 320 Z"
+          fill={`url(#ribbonGrad-${variant})`}
+          filter="url(#softGlow)"
         />
 
-        {/* Secondary inner soft ribbon fill */}
+        {/* Dynamic Light Specular Edge */}
         <path
-          d="M50 190 C 160 70, 290 200, 430 110 C 530 40, 610 130, 650 160"
-          stroke={`url(#ribbonGrad-${variant})`}
-          strokeWidth="60"
-          strokeLinecap="round"
-          fill="none"
-        />
-
-        {/* Delicate light accent trail */}
-        <path
-          d="M80 200 C 190 90, 310 180, 420 120 C 500 70, 590 140, 620 170"
+          d="M 50 320 C 180 180, 260 460, 420 280 C 580 100, 680 420, 780 240"
           stroke={grad.start}
           strokeWidth="2.5"
-          strokeDasharray="8 8"
-          strokeOpacity="0.55"
-          fill="none"
+          strokeLinecap="round"
+          strokeOpacity={0.6}
         />
       </svg>
     </motion.div>

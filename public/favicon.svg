@@ -1,30 +1,42 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
   <defs>
-    <linearGradient id="favGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stopColor="#00BFFF" />
-      <stop offset="100%" stopColor="#005A9C" />
+    <linearGradient id="goldMetallic" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F3E5AB" />
+      <stop offset="35%" stop-color="#D4AF37" />
+      <stop offset="70%" stop-color="#AA7C11" />
+      <stop offset="100%" stop-color="#E5C378" />
     </linearGradient>
-    <linearGradient id="accentGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-      <stop offset="0%" stopColor="#38BDF8" />
-      <stop offset="100%" stopColor="#06B6D4" />
+    <linearGradient id="goldRing" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#997328" />
+      <stop offset="50%" stop-color="#F3E5AB" />
+      <stop offset="100%" stop-color="#D4AF37" />
     </linearGradient>
   </defs>
-  <rect width="64" height="64" rx="16" fill="url(#favGrad)" />
-  <!-- Stylized Tooth & Smile -->
+
+  <!-- Obsidian luxury background -->
+  <rect width="64" height="64" rx="16" fill="#0D0D0D" stroke="#D4AF37" stroke-width="1.5" />
+
+  <!-- Outer Fine Gold Circle -->
+  <circle cx="32" cy="32" r="24" stroke="url(#goldRing)" stroke-width="1.8" />
+  <circle cx="32" cy="32" r="21" stroke="url(#goldMetallic)" stroke-width="0.8" stroke-opacity="0.6" />
+
+  <!-- Stylized M Monogram -->
   <path
-    d="M20 20 C20 14 26 12 32 12 C38 12 44 14 44 20 C46 26 45 34 42 40 C39 46 37 53 34 53 C32 53 32 46 32 46 C32 46 32 53 30 53 C27 53 25 46 22 40 C19 34 18 26 20 20 Z"
-    fill="#FFFFFF"
+    d="M 19 42 L 19 22 L 32 35 L 45 22 L 45 42"
+    stroke="url(#goldMetallic)"
+    stroke-width="2.6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
   />
-  <!-- Smile Arc -->
+
+  <!-- Inner Interlaced Arch -->
   <path
-    d="M24 32 Q32 41 40 32"
-    stroke="#005A9C"
-    stroke-width="3"
+    d="M 24 42 C 24 29 40 29 40 42"
+    stroke="url(#goldRing)"
+    stroke-width="1.5"
     stroke-linecap="round"
   />
-  <!-- Sparkle star -->
-  <path
-    d="M42 16 L44 12 L46 16 L50 18 L46 20 L44 24 L42 20 L38 18 Z"
-    fill="#38BDF8"
-  />
+
+  <!-- Crest Diamond Accent -->
+  <circle cx="32" cy="17" r="1.6" fill="url(#goldMetallic)" />
 </svg>

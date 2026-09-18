@@ -9,7 +9,9 @@ import {
   CLINIC_HOURS,
   SPECIALTIES_DATA,
   DOCTOR_NAME,
-  createWhatsAppLink
+  createWhatsAppLink,
+  VALUATION_PRICE,
+  FINANCING_INFO
 } from '../data/clinicData';
 import {
   MapPin,
@@ -18,7 +20,9 @@ import {
   Clock,
   CheckCircle,
   ExternalLink,
-  ArrowRight
+  ArrowRight,
+  CreditCard,
+  Sparkles
 } from 'lucide-react';
 import {
   OfficialWhatsAppLogo,
@@ -26,7 +30,6 @@ import {
   OfficialFacebookLogo,
   WhatsAppIcon
 } from './OfficialSocialLogos';
-import { OrganicDentalRibbon } from './OrganicDentalRibbon';
 import { CurvedSectionDivider } from './CurvedSectionDivider';
 
 interface SocialAndContactSectionProps {
@@ -34,7 +37,7 @@ interface SocialAndContactSectionProps {
 }
 
 export const SocialAndContactSection: React.FC<SocialAndContactSectionProps> = ({
-  preselectedSpecialty = 'ortodoncia',
+  preselectedSpecialty = 'rehabilitacion-oral',
 }) => {
   const [formData, setFormData] = useState({
     patientName: '',
@@ -58,67 +61,61 @@ export const SocialAndContactSection: React.FC<SocialAndContactSectionProps> = (
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const spec = SPECIALTIES_DATA.find((s) => s.id === formData.specialtyId)?.title || 'Evaluación General';
+    const matchedService = SPECIALTIES_DATA.find((s) => s.id === formData.specialtyId);
+    const serviceName = matchedService ? matchedService.title : 'Consulta de Valoración Médica';
 
-    const message = formData.isEmergency
-      ? `¡ATENCIÓN DE URGENCIA DENTAL!
-Paciente: ${formData.patientName}
-Teléfono: ${formData.phone}
-Email: ${formData.email || 'No especificado'}
-Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
-      : `Hola ${DOCTOR_NAME}, solicito agendar una cita oficial desde su web:
-- Paciente: ${formData.patientName}
-- Teléfono: ${formData.phone}
-- Email: ${formData.email || 'No especificado'}
-- Tratamiento: ${spec}
-- Fecha deseada: ${formData.preferredDate || 'Lo antes posible'}
-- Horario preferido: ${formData.preferredTime}
-- Motivo de consulta: ${formData.notes || 'Primera valoración diagnóstica'}`;
+    const messageLines = [
+      `*SOLICITUD DE CITA EN MIRANDA DENTAL STUDIO*`,
+      `👤 *Paciente:* ${formData.patientName}`,
+      `📞 *Teléfono:* ${formData.phone}`,
+      formData.email ? `✉️ *Email:* ${formData.email}` : '',
+      `🦷 *Motivo / Tratamiento:* ${serviceName}`,
+      formData.preferredDate ? `📅 *Fecha Sugerida:* ${formData.preferredDate}` : '',
+      `⏰ *Franja Horaria:* ${formData.preferredTime}`,
+      `💳 *Valoración:* $${VALUATION_PRICE} (Incluye Diagnóstico, Fotos y Rayos X)`,
+      formData.isEmergency ? `🚨 *Condición:* ¡PRESENTA DOLOR O URGENCIA PRIORITARIA!` : '',
+      formData.notes ? `📝 *Nota Médica:* ${formData.notes}` : '',
+    ].filter(Boolean);
 
-    const waUrl = createWhatsAppLink(message);
-    window.open(waUrl, '_blank');
+    const fullMessage = messageLines.join('\n');
+    const waUrl = createWhatsAppLink(fullMessage);
+
     setIsSubmitted(true);
+
+    setTimeout(() => {
+      window.open(waUrl, '_blank');
+      setIsSubmitted(false);
+    }, 900);
   };
 
   return (
-    <section id="contacto" className="py-10 sm:py-12 relative overflow-hidden bg-[#F8FAFC]">
-      <div id="redes-contacto" className="absolute -top-24 pointer-events-none" aria-hidden="true" />
-      {/* 1. Intercalated High-Definition Photographic Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <img
-          src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1920&auto=format&fit=crop"
-          alt="Edificio Médico Platinum Odontología Gabriel Miranda"
-          referrerPolicy="no-referrer"
-          className="w-full h-full object-cover opacity-[0.05] filter grayscale"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#F8FAFC] via-white/80 to-[#F8FAFC]" />
-      </div>
-
-      {/* 2. Floating 3D Curved Ribbon */}
-      <OrganicDentalRibbon className="top-1/3 -right-20 w-[30rem] opacity-40" variant="cyan" />
-
+    <section id="contacto" className="py-14 sm:py-20 relative overflow-hidden bg-gradient-to-b from-white via-[#FAF9F5] to-white scroll-mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-4 sm:pb-5">
         
-        {/* Section Header with Animation */}
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-5 sm:mb-7 space-y-2.5"
+          className="text-center max-w-3xl mx-auto mb-10 sm:mb-14 space-y-2.5"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0A2540] tracking-tight">
-            Agenda tu Consulta o Conéctate con Nosotros
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/45 text-[#84631E] text-xs font-black uppercase tracking-wider shadow-2xs">
+            <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+            <span>Atención Médica Presencial & Asesoría Directa</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
+            Agenda tu <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#84631E]">Valoración de $15</span>
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 text-justify">
-            Estamos a tu disposición a través de nuestros canales oficiales verificados. Reserva tu cita médica en línea o escríbenos directamente a WhatsApp.
+          <p className="text-sm sm:text-base text-stone-600 max-w-xl mx-auto text-justify">
+            Incluye diagnóstico clínico completo, fotografías y radiografías dentales con el {DOCTOR_NAME}. Atendemos de Lunes a Domingo.
           </p>
         </motion.div>
 
-        {/* 2. Split Layout: Interactive Booking Form + Clinic Location Details */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+        {/* Split Layout: Booking Form + Location & Financing */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           
-          {/* Left Column (7 cols): Formulario directo sobre el lienzo (Cero Box-in-Box) */}
+          {/* Left Column (7 cols): Formulario directo sobre el lienzo */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -127,22 +124,22 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
             className="lg:col-span-7 flex flex-col justify-between"
           >
             <div className="mb-6">
-              <span className="text-xs font-black tracking-widest text-[#0084DE] uppercase mb-1.5 block">
-                Agendamiento Rápido 24/7
+              <span className="text-xs font-black tracking-widest text-[#84631E] uppercase mb-1.5 block">
+                Agendamiento Inmediato • Miranda Dental Studio
               </span>
-              <h3 className="text-2xl sm:text-3xl font-black text-[#0A2540] tracking-tight">
-                Reserva tu Cita de Valoración
+              <h3 className="text-2xl sm:text-3xl font-black text-[#0D0D0D] tracking-tight">
+                Reserva tu Cita en Línea
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 mt-1.5 leading-relaxed">
-                Completa tus datos y serás transferido directamente a nuestro WhatsApp oficial con tu requerimiento organizado.
+              <p className="text-xs sm:text-sm text-stone-600 mt-1.5 leading-relaxed">
+                Completa tus datos y serás transferido a nuestro WhatsApp verificado con tu cita preparada.
               </p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Patient Name */}
               <div>
-                <label className="block text-[11px] font-bold text-[#0A2540] uppercase tracking-wider mb-1.5 pl-1">
-                  Nombre Completo *
+                <label className="block text-[11px] font-bold text-[#0D0D0D] uppercase tracking-wider mb-1.5 pl-1">
+                  Nombre y Apellido *
                 </label>
                 <input
                   type="text"
@@ -150,14 +147,14 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
                   placeholder="Ej. María Fernanda Morales"
                   value={formData.patientName}
                   onChange={(e) => setFormData({ ...formData, patientName: e.target.value })}
-                  className="w-full px-5 py-3.5 rounded-2xl bg-white border border-slate-200/90 shadow-xs focus:border-[#005A9C] focus:ring-3 focus:ring-[#00BFFF]/20 text-slate-800 placeholder:text-slate-400 text-sm transition-all outline-none"
+                  className="w-full px-5 py-3.5 rounded-2xl bg-white border border-stone-300 shadow-xs focus:border-[#D4AF37] focus:ring-3 focus:ring-[#D4AF37]/20 text-stone-800 placeholder:text-stone-400 text-sm transition-all outline-none"
                 />
               </div>
 
               {/* Phone & Email */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[11px] font-bold text-[#0A2540] uppercase tracking-wider mb-1.5 pl-1">
+                  <label className="block text-[11px] font-bold text-[#0D0D0D] uppercase tracking-wider mb-1.5 pl-1">
                     Teléfono Celular / WhatsApp *
                   </label>
                   <input
@@ -166,11 +163,11 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
                     placeholder="+593 98 231 5408"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-5 py-3.5 rounded-2xl bg-white border border-slate-200/90 shadow-xs focus:border-[#005A9C] focus:ring-3 focus:ring-[#00BFFF]/20 text-slate-800 placeholder:text-slate-400 text-sm transition-all outline-none"
+                    className="w-full px-5 py-3.5 rounded-2xl bg-white border border-stone-300 shadow-xs focus:border-[#D4AF37] focus:ring-3 focus:ring-[#D4AF37]/20 text-stone-800 placeholder:text-stone-400 text-sm transition-all outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-bold text-[#0A2540] uppercase tracking-wider mb-1.5 pl-1">
+                  <label className="block text-[11px] font-bold text-[#0D0D0D] uppercase tracking-wider mb-1.5 pl-1">
                     Correo Electrónico (Opcional)
                   </label>
                   <input
@@ -178,88 +175,89 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
                     placeholder="paciente@correo.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-5 py-3.5 rounded-2xl bg-white border border-slate-200/90 shadow-xs focus:border-[#005A9C] focus:ring-3 focus:ring-[#00BFFF]/20 text-slate-800 placeholder:text-slate-400 text-sm transition-all outline-none"
+                    className="w-full px-5 py-3.5 rounded-2xl bg-white border border-stone-300 shadow-xs focus:border-[#D4AF37] focus:ring-3 focus:ring-[#D4AF37]/20 text-stone-800 placeholder:text-stone-400 text-sm transition-all outline-none"
                   />
                 </div>
               </div>
 
-              {/* Specialty Selector */}
+              {/* Specialty Select */}
               <div>
-                <label className="block text-[11px] font-bold text-[#0A2540] uppercase tracking-wider mb-1.5 pl-1">
-                  Tratamiento o Especialidad Deseada *
+                <label className="block text-[11px] font-bold text-[#0D0D0D] uppercase tracking-wider mb-1.5 pl-1">
+                  Tratamiento o Motivo de Consulta *
                 </label>
                 <select
                   value={formData.specialtyId}
                   onChange={(e) => setFormData({ ...formData, specialtyId: e.target.value })}
-                  className="w-full px-5 py-3.5 rounded-2xl bg-white border border-slate-200/90 shadow-xs focus:border-[#005A9C] focus:ring-3 focus:ring-[#00BFFF]/20 text-slate-800 text-sm transition-all cursor-pointer outline-none"
+                  className="w-full px-5 py-3.5 rounded-2xl bg-white border border-stone-300 shadow-xs focus:border-[#D4AF37] focus:ring-3 focus:ring-[#D4AF37]/20 text-stone-800 text-sm transition-all outline-none"
                 >
-                  {SPECIALTIES_DATA.map((s) => (
-                    <option key={s.id} value={s.id}>
-                      {s.title}
-                    </option>
-                  ))}
-                  <option value="general">Evaluación General & Limpieza Profunda</option>
+                  <option value="consulta-valoracion">Consulta de Valoración Integral ($15 - Incluye Diagnóstico, Fotos y Rayos X)</option>
+                  <option value="rehabilitacion-oral">Rehabilitación Oral & Prótesis (Coronas de Circonio e Implanto-Asistida)</option>
+                  <option value="estetica-carillas">Estética Dental & Carillas (Arte en Resinas / Microabrasión Fluorosis)</option>
+                  <option value="endodoncia-mecanizada">Endodoncia Mecanizada (CPO Brasil - Alivio en 1 Sesión)</option>
+                  <option value="implantologia">Implantología Dental (Titanio Biocompatible)</option>
+                  <option value="cirugia-terceros-molares">Cirugía Oral & Extracción de Terceros Molares (Muelas del Juicio)</option>
+                  <option value="ortodoncia">Ortodoncia Integral (Autoligado Pasivo & Estéticos)</option>
+                  <option value="armonizacion-facial">Armonización Facial (Bichectomía, Botox & Ácido Hialurónico)</option>
+                  <option value="periodoncia">Periodoncia & Plástica Gingival (Gingivectomía & Detartrajes)</option>
+                  <option value="profilaxis-profunda">Profilaxis Dental Profunda con Ultrasonido</option>
+                  <option value="blanqueamiento-led">Blanqueamiento Dental Profesional LED</option>
                 </select>
               </div>
 
-              {/* Date & Time Preferences */}
+              {/* Preferred Date & Time */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[11px] font-bold text-[#0A2540] uppercase tracking-wider mb-1.5 pl-1">
-                    Fecha Preferida
+                  <label className="block text-[11px] font-bold text-[#0D0D0D] uppercase tracking-wider mb-1.5 pl-1">
+                    Fecha Deseada
                   </label>
                   <input
                     type="date"
                     value={formData.preferredDate}
                     onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
-                    className="w-full px-5 py-3.5 rounded-2xl bg-white border border-slate-200/90 shadow-xs focus:border-[#005A9C] focus:ring-3 focus:ring-[#00BFFF]/20 text-slate-800 text-sm transition-all outline-none"
+                    className="w-full px-5 py-3.5 rounded-2xl bg-white border border-stone-300 shadow-xs focus:border-[#D4AF37] focus:ring-3 focus:ring-[#D4AF37]/20 text-stone-800 text-sm transition-all outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-bold text-[#0A2540] uppercase tracking-wider mb-1.5 pl-1">
-                    Horario Conveniente
+                  <label className="block text-[11px] font-bold text-[#0D0D0D] uppercase tracking-wider mb-1.5 pl-1">
+                    Horario Preferido
                   </label>
                   <select
                     value={formData.preferredTime}
                     onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
-                    className="w-full px-5 py-3.5 rounded-2xl bg-white border border-slate-200/90 shadow-xs focus:border-[#005A9C] focus:ring-3 focus:ring-[#00BFFF]/20 text-slate-800 text-sm transition-all cursor-pointer outline-none"
+                    className="w-full px-5 py-3.5 rounded-2xl bg-white border border-stone-300 shadow-xs focus:border-[#D4AF37] focus:ring-3 focus:ring-[#D4AF37]/20 text-stone-800 text-sm transition-all outline-none"
                   >
-                    <option value="Mañana (09:00 - 12:00)">Mañana (08:30 - 12:00)</option>
-                    <option value="Tarde (13:00 - 16:00)">Mediodía / Tarde (13:00 - 16:00)</option>
-                    <option value="Fin de tarde (16:00 - 19:00)">Fin de tarde (16:00 - 19:00)</option>
-                    <option value="Sábados (09:00 - 14:00)">Sábado Matutino</option>
+                    <option value="Mañana (09:00 - 12:00)">Mañana (09:00 AM - 12:00 PM)</option>
+                    <option value="Mediodía (12:00 - 15:00)">Mediodía (12:00 PM - 15:00 PM)</option>
+                    <option value="Tarde (15:00 - 19:00)">Tarde (15:00 PM - 19:00 PM)</option>
+                    <option value="Domingo (09:00 - 14:00)">Domingo Especial (09:00 AM - 14:00 PM)</option>
                   </select>
                 </div>
               </div>
 
-              {/* Notes */}
+              {/* Clinical Notes */}
               <div>
-                <label className="block text-[11px] font-bold text-[#0A2540] uppercase tracking-wider mb-1.5 pl-1">
-                  Motivo de Consulta o Molestia Específica
+                <label className="block text-[11px] font-bold text-[#0D0D0D] uppercase tracking-wider mb-1.5 pl-1">
+                  Notas Adicionales o Síntomas
                 </label>
                 <textarea
                   rows={3}
-                  placeholder="Describe brevemente tus expectativas, si presentas sensibilidad o si requieres valoración estética..."
+                  placeholder="Describe brevemente tu molestia dental o el resultado estético que buscas..."
                   value={formData.notes}
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                  className="w-full px-5 py-3.5 rounded-2xl bg-white border border-slate-200/90 shadow-xs focus:border-[#005A9C] focus:ring-3 focus:ring-[#00BFFF]/20 text-slate-800 placeholder:text-slate-400 text-sm transition-all resize-none outline-none"
+                  className="w-full px-5 py-3.5 rounded-2xl bg-white border border-stone-300 shadow-xs focus:border-[#D4AF37] focus:ring-3 focus:ring-[#D4AF37]/20 text-stone-800 placeholder:text-stone-400 text-sm transition-all outline-none resize-none"
                 />
               </div>
 
-              {/* Emergency Toggle Inline */}
-              <label
-                htmlFor="isEmergency"
-                className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200/60 cursor-pointer transition-colors hover:bg-amber-50"
-              >
+              {/* Emergency Checkbox */}
+              <label className="flex items-center gap-3 p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200/80 cursor-pointer">
                 <input
                   type="checkbox"
-                  id="isEmergency"
                   checked={formData.isEmergency}
                   onChange={(e) => setFormData({ ...formData, isEmergency: e.target.checked })}
-                  className="w-4 h-4 text-red-600 rounded focus:ring-red-500 cursor-pointer shrink-0 ml-1"
+                  className="w-4 h-4 rounded text-[#D4AF37] focus:ring-[#D4AF37] border-amber-300"
                 />
-                <span className="text-xs text-amber-950 font-medium leading-tight">
-                  Presento <strong className="font-bold text-red-700">dolor agudo</strong> o requiero atención médica urgente prioritaria
+                <span className="text-xs text-stone-800 font-medium leading-tight">
+                  Presento <strong className="font-bold text-amber-900">dolor agudo</strong> o requiero atención médica urgente prioritaria
                 </span>
               </label>
 
@@ -268,11 +266,11 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
                 whileHover={{ scale: 1.015 }}
                 whileTap={{ scale: 0.985 }}
                 type="submit"
-                className="w-full py-4 rounded-2xl bg-gradient-to-r from-[#005A9C] via-[#0084DE] to-[#00BFFF] hover:from-[#004a82] hover:to-[#00a3da] text-white font-black text-xs uppercase tracking-wider transition-all duration-300 shadow-lg shadow-[#005A9C]/25 flex items-center justify-center gap-2.5 cursor-pointer mt-2"
+                className="w-full py-4 rounded-2xl bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] hover:from-[#C5A059] hover:to-[#84631E] text-[#0B0B0B] font-black text-xs uppercase tracking-wider transition-all duration-300 shadow-lg shadow-amber-950/15 flex items-center justify-center gap-2.5 cursor-pointer mt-2 border border-[#D4AF37]/60"
               >
-                <WhatsAppIcon className="w-5 h-5 text-white" />
-                <span>Confirmar y Enviar Solicitud por WhatsApp</span>
-                <ArrowRight className="w-4 h-4 text-cyan-200" />
+                <WhatsAppIcon className="w-5 h-5 text-[#0B0B0B]" />
+                <span>Confirmar y Enviar Solicitud por WhatsApp ($15)</span>
+                <ArrowRight className="w-4 h-4 text-[#0B0B0B]" />
               </motion.button>
 
               <AnimatePresence>
@@ -284,18 +282,18 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
                     className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200/80 text-emerald-800 text-xs font-semibold flex items-center justify-center gap-2"
                   >
                     <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>¡Solicitud preparada! Serás redirigido a WhatsApp para enviar el mensaje al consultorio.</span>
+                    <span>¡Solicitud preparada! Serás redirigido a WhatsApp para enviar el mensaje a Miranda Dental Studio.</span>
                   </motion.div>
                 )}
               </AnimatePresence>
             </form>
 
-            {/* Canales y Redes Sociales Oficiales (Únicamente iconos, sin contenedor ni texto) */}
-            <div className="pt-5 mt-5 border-t border-slate-200/70 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <p className="text-xs font-semibold text-slate-500">
+            {/* Official Social Channels - Strictly Standalone Icons */}
+            <div className="pt-5 mt-5 border-t border-stone-200/70 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <p className="text-xs font-semibold text-stone-500">
                 O contáctanos en nuestros canales oficiales:
               </p>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3.5">
                 {SOCIAL_NETWORKS.map((social) => (
                   <a
                     key={social.id}
@@ -303,7 +301,7 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.name}
-                    className="transition-transform duration-200 hover:scale-115 active:scale-95 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0084DE] rounded-full inline-flex"
+                    className="transition-transform duration-200 hover:scale-115 active:scale-95 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] rounded-full inline-flex"
                   >
                     {social.id === 'whatsapp' && <OfficialWhatsAppLogo className="w-8 h-8 drop-shadow-xs" />}
                     {social.id === 'instagram' && <OfficialInstagramLogo className="w-8 h-8 drop-shadow-xs" />}
@@ -314,7 +312,7 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
             </div>
           </motion.div>
 
-          {/* Right Column (5 cols): Location Info & Medical Amenities sobre el lienzo */}
+          {/* Right Column (5 cols): Real Location, Payment Methods & Google Maps */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -322,53 +320,53 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
             transition={{ duration: 0.6 }}
             className="lg:col-span-5 flex flex-col justify-between space-y-6"
           >
-            {/* Sede Information - Directo sobre el lienzo */}
+            {/* Sede Information */}
             <div className="space-y-5">
               <div>
-                <span className="text-xs font-black tracking-widest text-[#0084DE] uppercase mb-1.5 block">
-                  Sede Clínica Principal
+                <span className="text-xs font-black tracking-widest text-[#84631E] uppercase mb-1.5 block">
+                  Ubicación & Consultorio Clínico
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-black text-[#0A2540] tracking-tight">
-                  Edificio Médico Platinum
+                <h3 className="text-2xl sm:text-3xl font-black text-[#0D0D0D] tracking-tight">
+                  Miranda Dental Studio
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
-                  Instalaciones diseñadas para tu confort y seguridad, equipadas con tecnología de diagnóstico 3D y bioseguridad grado hospitalario.
+                <p className="text-xs sm:text-sm text-stone-600 mt-1 leading-relaxed">
+                  Instalaciones de primer nivel con parqueadero privado en planta baja para tu total comodidad.
                 </p>
               </div>
 
-              {/* Contact Rows directamente sobre el lienzo con jerarquía tipográfica */}
+              {/* Contact Rows */}
               <div className="space-y-4">
                 <div className="flex items-start gap-3.5">
-                  <div className="w-9 h-9 rounded-xl bg-cyan-500/10 text-[#005A9C] shrink-0 flex items-center justify-center mt-0.5 shadow-2xs">
-                    <MapPin className="w-4 h-4 text-[#005A9C]" />
+                  <div className="w-9 h-9 rounded-xl bg-[#FAF7EE] border border-[#D4AF37]/40 text-[#84631E] shrink-0 flex items-center justify-center mt-0.5 shadow-2xs">
+                    <MapPin className="w-4 h-4 text-[#84631E]" />
                   </div>
                   <div>
-                    <h4 className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Dirección</h4>
-                    <p className="text-sm font-bold text-[#0A2540] leading-snug">{CLINIC_ADDRESS}</p>
-                    <p className="text-xs font-semibold text-[#0084DE] mt-0.5">{CLINIC_CITY}</p>
+                    <h4 className="text-[11px] font-bold text-stone-400 uppercase tracking-wider">Dirección</h4>
+                    <p className="text-sm font-bold text-[#0D0D0D] leading-snug">{CLINIC_ADDRESS}</p>
+                    <p className="text-xs font-semibold text-[#84631E] mt-0.5">{CLINIC_CITY}</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3.5">
-                  <div className="w-9 h-9 rounded-xl bg-cyan-500/10 text-[#005A9C] shrink-0 flex items-center justify-center mt-0.5 shadow-2xs">
-                    <Clock className="w-4 h-4 text-[#005A9C]" />
+                  <div className="w-9 h-9 rounded-xl bg-[#FAF7EE] border border-[#D4AF37]/40 text-[#84631E] shrink-0 flex items-center justify-center mt-0.5 shadow-2xs">
+                    <Clock className="w-4 h-4 text-[#84631E]" />
                   </div>
                   <div>
-                    <h4 className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Horario de Atención</h4>
-                    <p className="text-sm font-bold text-[#0A2540] leading-snug">{CLINIC_HOURS}</p>
+                    <h4 className="text-[11px] font-bold text-stone-400 uppercase tracking-wider">Horario de Atención</h4>
+                    <p className="text-sm font-bold text-[#0D0D0D] leading-snug">{CLINIC_HOURS}</p>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex items-start gap-3.5">
-                    <div className="w-9 h-9 rounded-xl bg-cyan-500/10 text-[#005A9C] shrink-0 flex items-center justify-center mt-0.5 shadow-2xs">
-                      <Phone className="w-4 h-4 text-[#005A9C]" />
+                    <div className="w-9 h-9 rounded-xl bg-[#FAF7EE] border border-[#D4AF37]/40 text-[#84631E] shrink-0 flex items-center justify-center mt-0.5 shadow-2xs">
+                      <Phone className="w-4 h-4 text-[#84631E]" />
                     </div>
                     <div>
-                      <h4 className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Línea Telefónica</h4>
+                      <h4 className="text-[11px] font-bold text-stone-400 uppercase tracking-wider">Teléfono / WhatsApp</h4>
                       <a
                         href={`tel:${CLINIC_PHONE_DISPLAY.replace(/\s+/g, '')}`}
-                        className="text-sm font-bold text-[#005A9C] hover:underline"
+                        className="text-sm font-bold text-[#84631E] hover:underline"
                       >
                         {CLINIC_PHONE_DISPLAY}
                       </a>
@@ -376,14 +374,14 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
                   </div>
 
                   <div className="flex items-start gap-3.5">
-                    <div className="w-9 h-9 rounded-xl bg-cyan-500/10 text-[#005A9C] shrink-0 flex items-center justify-center mt-0.5 shadow-2xs">
-                      <Mail className="w-4 h-4 text-[#005A9C]" />
+                    <div className="w-9 h-9 rounded-xl bg-[#FAF7EE] border border-[#D4AF37]/40 text-[#84631E] shrink-0 flex items-center justify-center mt-0.5 shadow-2xs">
+                      <Mail className="w-4 h-4 text-[#84631E]" />
                     </div>
                     <div>
-                      <h4 className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Correo Electrónico</h4>
+                      <h4 className="text-[11px] font-bold text-stone-400 uppercase tracking-wider">Correo</h4>
                       <a
                         href={`mailto:${CLINIC_EMAIL}`}
-                        className="text-xs font-bold text-slate-700 hover:text-[#005A9C] transition-colors truncate block max-w-[170px]"
+                        className="text-xs font-bold text-stone-700 hover:text-[#84631E] transition-colors truncate block max-w-[170px]"
                       >
                         {CLINIC_EMAIL}
                       </a>
@@ -392,54 +390,40 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
                 </div>
               </div>
 
-              {/* Amenities directamente sobre el lienzo */}
-              <div className="pt-4 border-t border-slate-200/70">
-                <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2.5">
-                  Comodidades del Edificio Médico:
-                </p>
-                <div className="grid grid-cols-2 gap-2 text-xs text-slate-700 font-medium">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-3.5 h-3.5 text-[#005A9C] shrink-0" />
-                    <span>Parqueadero subterráneo</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-3.5 h-3.5 text-[#005A9C] shrink-0" />
-                    <span>Ascensores camilleros</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-3.5 h-3.5 text-[#005A9C] shrink-0" />
-                    <span>Seguridad privada 24/7</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-3.5 h-3.5 text-[#005A9C] shrink-0" />
-                    <span>Rampas de accesibilidad</span>
-                  </div>
+              {/* Formas de Pago & Crédito Directo (Exacto al PDF) */}
+              <div className="p-4 rounded-2xl bg-[#FAF7EE] border border-[#D4AF37]/40 space-y-2">
+                <div className="flex items-center gap-2 text-[#84631E]">
+                  <CreditCard className="w-4 h-4" />
+                  <h4 className="text-xs font-black uppercase tracking-wider">Formas de Pago & Financiamiento</h4>
                 </div>
+                <p className="text-xs text-stone-700 leading-relaxed">
+                  {FINANCING_INFO}
+                </p>
               </div>
             </div>
 
             {/* Single Organic Window for Google Maps Location */}
-            <div className="rounded-[2.2rem] overflow-hidden shadow-lg border border-slate-200/80 relative group h-56 sm:h-64">
+            <div className="rounded-[2.2rem] overflow-hidden shadow-lg border border-stone-200/80 relative group h-56 sm:h-64">
               <img
                 src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=800&auto=format&fit=crop"
-                alt="Mapa Edificio Médico Platinum Quito"
+                alt="Mapa Miranda Dental Studio"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A2540]/90 via-[#0A2540]/60 to-transparent flex flex-col items-center justify-end p-6 text-center text-white">
-                <MapPin className="w-7 h-7 text-cyan-400 mb-1 animate-bounce" />
-                <p className="text-sm font-black">Edificio Médico Platinum</p>
-                <p className="text-xs text-cyan-100 mb-3.5 font-medium">Av. Shyris y Naciones Unidas, Quito</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/90 via-[#0B0B0B]/60 to-transparent flex flex-col items-center justify-end p-6 text-center text-white">
+                <MapPin className="w-7 h-7 text-[#D4AF37] mb-1 animate-bounce" />
+                <p className="text-sm font-black">Miranda Dental Studio</p>
+                <p className="text-xs text-stone-200 mb-3.5 font-medium">Av. 19 de Mayo y Velasco Ibarra (Planta Baja)</p>
                 <motion.a
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  href="https://maps.google.com/?q=Av.+de+los+Shyris+y+Naciones+Unidas,+Quito"
+                  href="https://maps.google.com/?q=Av.+19+de+Mayo+y+Velasco+Ibarra,+Quito"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-2.5 rounded-full bg-white text-[#005A9C] text-xs font-extrabold shadow-md hover:bg-cyan-50 transition-all flex items-center gap-1.5 cursor-pointer"
+                  className="px-5 py-2.5 rounded-full bg-white text-[#0B0B0B] text-xs font-black shadow-md hover:bg-[#FAF7EE] transition-all flex items-center gap-1.5 cursor-pointer border border-[#D4AF37]/40"
                 >
                   <span>Abrir en Google Maps</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
+                  <ExternalLink className="w-3.5 h-3.5 text-[#84631E]" />
                 </motion.a>
               </div>
             </div>
@@ -449,9 +433,9 @@ Motivo urgente: ${formData.notes || 'Dolor o emergencia dental activa.'}`
 
       </div>
 
-      {/* Organic Curved Wave Transition into Footer */}
+      {/* Curved Divider into Footer */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
-        <CurvedSectionDivider position="bottom" fillColor="#0A2540" variant="smoothCurve" />
+        <CurvedSectionDivider position="bottom" fillColor="#0D0D0D" variant="smoothCurve" />
       </div>
     </section>
   );

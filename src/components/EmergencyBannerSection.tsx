@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Clock, Bandage, Syringe } from 'lucide-react';
-import { DOCTOR_NAME, createWhatsAppLink, EMERGENCY_WA_MESSAGE } from '../data/clinicData';
+import { Clock, CreditCard, Sparkles, ArrowRight, ShieldCheck } from 'lucide-react';
+import { DOCTOR_NAME, createWhatsAppLink, GENERAL_WA_MESSAGE, CLINIC_HOURS } from '../data/clinicData';
 import { WhatsAppIcon } from './OfficialSocialLogos';
 import { OrganicDentalRibbon } from './OrganicDentalRibbon';
 import { CurvedSectionDivider } from './CurvedSectionDivider';
@@ -10,7 +10,7 @@ interface EmergencyBannerSectionProps {
   onOpenEmergency?: () => void;
 }
 
-export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ onOpenEmergency }) => {
+export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ onOpenEmergency: _onOpenEmergency }) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     show: {
@@ -32,38 +32,36 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
   };
 
   return (
-    <section id="urgencias" className="relative overflow-hidden py-12 sm:py-14 lg:py-16 text-white bg-[#07192C]">
-      {/* Top Organic Wave Transition from Specialties Section (Masks background & photo) */}
+    <section id="urgencias" className="relative overflow-hidden py-14 sm:py-16 lg:py-20 text-white bg-[#0D0D0D] border-y border-[#D4AF37]/30">
+      {/* Top Organic Wave Transition from Specialties Section */}
       <div className="absolute top-0 left-0 right-0 z-20 pointer-events-none">
-        <CurvedSectionDivider position="top" fillColor="#EDF4FA" variant="wave1" />
+        <CurvedSectionDivider position="top" fillColor="#FFFFFF" variant="wave1" />
       </div>
 
-      {/* 1. Split Atmospheric Background: Right-side Full Bleed Medical Photo */}
+      {/* Atmospheric Background with Warm Gold Light */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Base dark medical canvas */}
-        <div className="absolute inset-0 bg-[#07192C]" />
+        <div className="absolute inset-0 bg-[#0D0D0D]" />
 
-        {/* Right Half Clinical Photo - Full HD Crisp Quality from Middle to Right Edge */}
-        <div className="absolute top-0 bottom-0 right-0 w-full lg:w-1/2 h-full">
+        {/* Right Half Clinical High-Aesthetic Image with Golden Shadowing */}
+        <div className="absolute top-0 bottom-0 right-0 w-full lg:w-1/2 h-full opacity-35 lg:opacity-60">
           <img
             src="https://images.unsplash.com/photo-1629909615184-74f495363b67?q=85&w=1600&auto=format&fit=crop"
-            alt="Atención médica prioritaria en Odontología Gabriel Miranda"
+            alt="Miranda Dental Studio — Dr. Gabriel Mateo Miranda"
             referrerPolicy="no-referrer"
-            className="w-full h-full object-cover object-center brightness-100 contrast-[1.03]"
+            className="w-full h-full object-cover object-center brightness-90 contrast-[1.05]"
           />
-          {/* Mobile Overlay only (protects readability on single column mobile) */}
-          <div className="lg:hidden absolute inset-0 bg-[#07192C]/85" />
-
-          {/* Desktop Left Edge Seamless Blend */}
-          <div className="hidden lg:block absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-[#07192C] to-transparent" />
+          {/* Mobile Overlay */}
+          <div className="lg:hidden absolute inset-0 bg-[#0D0D0D]/85" />
+          {/* Desktop Blend */}
+          <div className="hidden lg:block absolute inset-y-0 left-0 w-36 bg-gradient-to-r from-[#0D0D0D] via-[#0D0D0D]/90 to-transparent" />
         </div>
 
-        {/* Left atmospheric subtle glow */}
-        <div className="absolute -left-20 top-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
+        {/* Gold Atmospheric Radial Glow */}
+        <div className="absolute -left-20 top-1/2 -translate-y-1/2 w-96 h-96 bg-[#D4AF37]/15 rounded-full blur-3xl" />
       </div>
 
-      {/* 2. Floating 3D Curved Dental Ribbon (Left side only) */}
-      <OrganicDentalRibbon className="-top-12 -left-16 w-96 md:w-[32rem] opacity-70" variant="cyan" />
+      {/* Floating 3D Curved Ribbon in Gold */}
+      <OrganicDentalRibbon className="-top-12 -left-16 w-96 md:w-[32rem] opacity-40" variant="gold" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-2 sm:pb-3">
         <motion.div
@@ -73,70 +71,72 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
           viewport={{ once: true, amount: 0.2 }}
           className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
         >
-          {/* Left Column: Urgencia Headline & Rapid Triage Steps */}
+          {/* Left Column: Headline & Rapid Triage Steps */}
           <div className="lg:col-span-7 space-y-5 text-center lg:text-left">
+
+            {/* Micro Kicker */}
+            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1A1A1A] border border-[#D4AF37]/50 text-[#F3E5AB] text-xs font-black uppercase tracking-wider">
+              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+              <span>Propuesta Exclusiva • Miranda Dental Studio</span>
+            </motion.div>
 
             {/* Title */}
             <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
-              ¿Dolor dental insoportable o una emergencia imprevista?{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-200 to-white">
-                Te atendemos hoy mismo
+              Consulta de Valoración Médica por{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F3E5AB] via-[#D4AF37] to-[#C5A059]">
+                solo $15
               </span>
             </motion.h2>
 
             {/* Subtext */}
-            <motion.p variants={itemVariants} className="text-sm sm:text-base text-cyan-100/90 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed text-justify">
-              No dejes que el dolor de muela, un traumatismo, fractura o absceso empeore. En el consultorio del <strong className="text-white font-bold">{DOCTOR_NAME}</strong> disponemos de un protocolo médico de intervención prioritaria con respuesta en minutos.
+            <motion.p variants={itemVariants} className="text-sm sm:text-base text-stone-300 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed text-justify">
+              Inicia tu tratamiento con total claridad: examen clínico detallado con el <strong className="text-white font-bold">{DOCTOR_NAME}</strong>, diagnóstico fotográfico de tu sonrisa y radiografías dentales por solo $15. Además, accede a nuestro <strong>Crédito Directo Dental</strong> de $400 a $2,000.
             </motion.p>
 
-            {/* 3 Steps Triage - Directamente sobre el lienzo sin contenedores */}
+            {/* 3 Pillars: Valoración, Crédito Directo, Horarios */}
             <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 pt-3">
-              <div className="text-left space-y-2">
-                <Clock className="w-7 h-7 text-cyan-300 drop-shadow-[0_0_10px_rgba(103,232,249,0.5)]" />
-                <h3 className="text-xs sm:text-sm font-black text-white uppercase tracking-wider">1. Contacto 24/7</h3>
-                <p className="text-[11.5px] sm:text-xs text-cyan-100/80 leading-relaxed text-justify">Escríbenos o llámanos; te atenderemos sin demoras.</p>
+              <div className="text-left space-y-2 p-3.5 rounded-2xl bg-white/5 border border-[#D4AF37]/25 backdrop-blur-xs">
+                <ShieldCheck className="w-6 h-6 text-[#D4AF37]" />
+                <h3 className="text-xs sm:text-sm font-black text-[#F3E5AB] uppercase tracking-wider">1. Diagnóstico $15</h3>
+                <p className="text-[11px] sm:text-xs text-stone-300 leading-relaxed text-justify">Incluye diagnóstico clínico, fotografías y radiografías.</p>
               </div>
 
-              <div className="text-left space-y-2">
-                <Bandage className="w-7 h-7 text-emerald-300 drop-shadow-[0_0_10px_rgba(110,231,183,0.5)]" />
-                <h3 className="text-xs sm:text-sm font-black text-white uppercase tracking-wider">2. Alivio Inmediato</h3>
-                <p className="text-[11.5px] sm:text-xs text-cyan-100/80 leading-relaxed text-justify">Anestesia guiada para suprimir el dolor de inmediato.</p>
+              <div className="text-left space-y-2 p-3.5 rounded-2xl bg-white/5 border border-[#D4AF37]/25 backdrop-blur-xs">
+                <CreditCard className="w-6 h-6 text-[#D4AF37]" />
+                <h3 className="text-xs sm:text-sm font-black text-[#F3E5AB] uppercase tracking-wider">2. Crédito Directo</h3>
+                <p className="text-[11px] sm:text-xs text-stone-300 leading-relaxed text-justify">Financiamiento desde $400 hasta $2,000 sin intermediarios.</p>
               </div>
 
-              <div className="text-left space-y-2">
-                <Syringe className="w-7 h-7 text-amber-300 drop-shadow-[0_0_10px_rgba(252,211,77,0.5)]" />
-                <h3 className="text-xs sm:text-sm font-black text-white uppercase tracking-wider">3. Tratamiento</h3>
-                <p className="text-[11.5px] sm:text-xs text-cyan-100/80 leading-relaxed text-justify">Diagnóstico digital 3D y solución definitiva hoy mismo.</p>
+              <div className="text-left space-y-2 p-3.5 rounded-2xl bg-white/5 border border-[#D4AF37]/25 backdrop-blur-xs">
+                <Clock className="w-6 h-6 text-[#D4AF37]" />
+                <h3 className="text-xs sm:text-sm font-black text-[#F3E5AB] uppercase tracking-wider">3. Lunes a Domingo</h3>
+                <p className="text-[11px] sm:text-xs text-stone-300 leading-relaxed text-justify">{CLINIC_HOURS}</p>
               </div>
             </motion.div>
 
-            {/* Direct Action Emergency Button */}
-            <motion.div variants={itemVariants} className="pt-2 flex justify-center lg:justify-start">
+            {/* CTA Button */}
+            <motion.div variants={itemVariants} className="pt-3 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
               <motion.a
-                whileHover={{ scale: 1.03 }}
+                whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                href={createWhatsAppLink(EMERGENCY_WA_MESSAGE)}
+                href={createWhatsAppLink(GENERAL_WA_MESSAGE)}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={onOpenEmergency}
-                className="w-full sm:w-auto px-6 py-2.5 sm:py-3 rounded-full bg-gradient-to-r from-red-500 via-rose-600 to-red-600 hover:from-red-600 hover:to-rose-700 text-white font-extrabold text-xs uppercase tracking-wider transition-all duration-300 shadow-lg shadow-red-600/30 flex items-center justify-center gap-2.5 cursor-pointer animate-halo-emergency"
+                className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] hover:from-[#C5A059] hover:to-[#84631E] text-[#0B0B0B] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2.5 transition-all shadow-xl shadow-amber-950/30 cursor-pointer border border-[#D4AF37]/60"
               >
-                <WhatsAppIcon className="w-5 h-5 sm:w-6 sm:h-6 text-white shrink-0" />
-                <span>Solicitar urgencia dental</span>
+                <WhatsAppIcon className="w-4 h-4 text-[#0B0B0B]" />
+                <span>Reservar Valoración de $15 por WhatsApp</span>
+                <ArrowRight className="w-3.5 h-3.5 text-[#0B0B0B]" />
               </motion.a>
             </motion.div>
 
           </div>
-
-          {/* Right Column: Open Photographic Canvas for Full Quality Image */}
-          <div className="hidden lg:block lg:col-span-5 pointer-events-none" aria-hidden="true" />
-
         </motion.div>
       </div>
 
-      {/* Bottom Organic Curved Wave Transition into Doctor Profile Section (Masks background & photo) */}
+      {/* Bottom Wave Transition to Doctor Profile */}
       <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none">
-        <CurvedSectionDivider position="bottom" fillColor="#F8FAFC" variant="wave1" />
+        <CurvedSectionDivider position="bottom" fillColor="#FAF9F5" variant="smoothCurve" />
       </div>
     </section>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { DOCTOR_PROFILE, DOCTOR_NAME, createWhatsAppLink } from '../data/clinicData';
-import { Cpu, Shield, Heart, Calendar, CheckCircle2, Quote, ArrowRight } from 'lucide-react';
+import { DOCTOR_PROFILE, DOCTOR_NAME, createWhatsAppLink, GENERAL_WA_MESSAGE, DOCTOR_SENESCYT } from '../data/clinicData';
+import { Cpu, Shield, Heart, Calendar, CheckCircle2, Quote, ArrowRight, Award } from 'lucide-react';
 import { OrganicDentalRibbon } from './OrganicDentalRibbon';
 import { CurvedSectionDivider } from './CurvedSectionDivider';
 
@@ -26,20 +26,14 @@ export const DoctorProfileSection: React.FC = () => {
   };
 
   return (
-    <section id="nosotros" className="py-10 sm:py-12 relative overflow-hidden bg-[#F8FAFC]">
-      {/* 1. Intercalated Background Photo Texture */}
+    <section id="nosotros" className="py-14 sm:py-20 relative overflow-hidden bg-[#FAF9F5]">
+      {/* Subtle Background Texture */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <img
-          src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1920&auto=format&fit=crop"
-          alt="Instalaciones médicas Odontología Gabriel Miranda"
-          referrerPolicy="no-referrer"
-          className="w-full h-full object-cover opacity-[0.03] filter grayscale"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#F8FAFC] via-white/80 to-[#F8FAFC]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#FAF9F5] via-white/80 to-[#FAF9F5]" />
       </div>
 
-      {/* 2. Floating 3D Curved Ribbon */}
-      <OrganicDentalRibbon className="top-1/4 -left-16 w-96 md:w-[32rem] opacity-50" variant="cyan" />
+      {/* Floating 3D Curved Ribbon in Gold */}
+      <OrganicDentalRibbon className="top-1/4 -left-16 w-96 md:w-[32rem] opacity-30" variant="gold" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-2 sm:pb-3">
         
@@ -49,66 +43,74 @@ export const DoctorProfileSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-5 sm:mb-7 space-y-2.5"
+          className="text-center max-w-3xl mx-auto mb-10 sm:mb-14 space-y-2.5"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0A2540] tracking-tight">
-            Conoce al {DOCTOR_NAME} y su Filosofía de Atención
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/45 text-[#84631E] text-xs font-black uppercase tracking-wider shadow-2xs">
+            <Award className="w-3.5 h-3.5 text-[#D4AF37]" />
+            <span>Perfil Profesional & Trayectoria</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
+            Conoce al <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#84631E]">{DOCTOR_NAME}</span>
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 text-justify">
-            Especialista comprometido con la excelencia científica, la innovación tecnológica y un trato empático donde tu tranquilidad es la máxima prioridad.
+          <p className="text-sm sm:text-base text-stone-600 max-w-2xl mx-auto text-justify">
+            Especialista comprometido con la excelencia científica, la innovación tecnológica y un trato empático donde tu salud y confort son la máxima prioridad.
           </p>
         </motion.div>
 
-        {/* Doctor Main Profile - Erradicado Box-in-Box, Superficie Abierta y Orgánica */}
+        {/* Doctor Main Profile - Open Layout */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.15 }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center mb-10 sm:mb-12"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center mb-16 sm:mb-20"
         >
-          {/* Left Doctor Photo with Architectural Arch Portal Mask & Glowing Rim */}
+          {/* Left Doctor Photo with Architectural Arch Frame in Gold & White */}
           <motion.div variants={itemVariants} className="lg:col-span-5 relative flex justify-center">
             <div className="relative w-full max-w-[360px] sm:max-w-[400px]">
-              {/* Outer Architectural Arch Frame with Medical Cyan-Sky Gradient */}
-              <div className="p-2 rounded-t-[16rem] rounded-b-[3.5rem] bg-gradient-to-b from-cyan-300 via-sky-100 to-white shadow-[0_25px_60px_-15px_rgba(0,90,156,0.25)] relative group">
+              {/* Outer Architectural Arch Frame with Gold & Champagne Gradient */}
+              <div className="p-2 rounded-t-[16rem] rounded-b-[3.5rem] bg-gradient-to-b from-[#D4AF37] via-[#F3E5AB] to-[#FFFFFF] shadow-[0_25px_60px_-15px_rgba(132,99,30,0.2)] relative group">
                 
                 {/* Inner Masked Viewport */}
-                <div className="relative rounded-t-[15.5rem] rounded-b-[3rem] overflow-hidden bg-slate-900 h-[480px] sm:h-[530px]">
+                <div className="relative rounded-t-[15.5rem] rounded-b-[3rem] overflow-hidden bg-stone-900 h-[480px] sm:h-[530px]">
                   <img
                     src={DOCTOR_PROFILE.image}
-                    alt={`${DOCTOR_NAME} - Especialista en Odontología`}
+                    alt={`${DOCTOR_NAME} - Odontólogo Especialista`}
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                   />
 
-                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-[#0A2540] via-[#0A2540]/60 to-transparent p-7 text-white">
-                    <h3 className="text-2xl sm:text-3xl font-black">{DOCTOR_NAME}</h3>
-                    <p className="text-xs font-semibold text-cyan-300 mt-0.5">{DOCTOR_PROFILE.title}</p>
+                  {/* Gradient Info Overlay */}
+                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-[#0B0B0B] via-[#0B0B0B]/70 to-transparent p-7 text-white">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-[#D4AF37]/25 text-[#F3E5AB] text-[10px] font-mono font-bold uppercase mb-1 border border-[#D4AF37]/40">
+                      Senescyt: {DOCTOR_SENESCYT}
+                    </div>
+                    <h3 className="text-xl sm:text-2xl font-black text-white">{DOCTOR_NAME}</h3>
+                    <p className="text-xs font-semibold text-[#D4AF37] mt-0.5">{DOCTOR_PROFILE.title}</p>
                   </div>
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Right Doctor Bio, Credentials & Quote - Open Layout Without Nested Containers */}
+          {/* Right Doctor Bio, Credentials & Official Philosophy */}
           <div className="lg:col-span-7 space-y-6">
             <motion.div variants={itemVariants} className="space-y-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#00BFFF]">
+              <span className="text-xs font-black uppercase tracking-wider text-[#84631E]">
                 {DOCTOR_PROFILE.role}
               </span>
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0A2540]">
-                Salud, Estética y Tranquilidad en un Solo Lugar
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D0D0D] tracking-tight">
+                Salud, Estética y Armonía Natural
               </h3>
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed pt-2 text-justify">
+              <p className="text-sm sm:text-base text-stone-600 leading-relaxed pt-2 text-justify">
                 {DOCTOR_PROFILE.bio}
               </p>
             </motion.div>
 
             {/* Academic Credentials List with Animation */}
-            <motion.div variants={itemVariants} className="space-y-3 pt-2">
-              <p className="text-xs font-bold uppercase tracking-wider text-[#005A9C]">
-                Formación y Certificaciones Destacadas:
+            <motion.div variants={itemVariants} className="space-y-2.5 pt-1">
+              <p className="text-xs font-black uppercase tracking-wider text-[#84631E]">
+                Formación Académica & Residencias Internacionales:
               </p>
               {DOCTOR_PROFILE.credentials.map((cred, idx) => (
                 <motion.div
@@ -116,108 +118,104 @@ export const DoctorProfileSection: React.FC = () => {
                   whileHover={{ x: 4 }}
                   className="flex items-start gap-3 transition-transform"
                 >
-                  <CheckCircle2 className="w-4 h-4 text-[#00BFFF] shrink-0 mt-0.5" />
-                  <span className="text-xs sm:text-sm text-slate-700 font-medium">{cred}</span>
+                  <CheckCircle2 className="w-4 h-4 text-[#84631E] shrink-0 mt-0.5" />
+                  <span className="text-xs sm:text-sm text-stone-700 font-medium">{cred}</span>
                 </motion.div>
               ))}
             </motion.div>
 
-            {/* Philosophy Quote with Soft Rounded Pebble */}
+            {/* Official Philosophy Card (Cita Textual del PDF) */}
             <motion.div
               variants={itemVariants}
-              className="p-4 sm:p-6 rounded-[1.8rem] sm:rounded-[2rem] bg-cyan-50/70 relative shadow-2xs"
+              className="p-5 sm:p-6 rounded-2xl bg-[#FAF7EE] border border-[#D4AF37]/40 relative shadow-xs"
             >
-              <Quote className="w-6 h-6 sm:w-7 sm:h-7 text-[#00BFFF]/20 absolute top-4 right-4" />
-              <p className="text-xs sm:text-sm italic text-[#005A9C] font-medium pr-6 sm:pr-8 leading-relaxed text-justify">
+              <Quote className="w-7 h-7 text-[#D4AF37]/35 absolute top-3 right-4" />
+              <p className="text-xs sm:text-sm font-serif italic text-stone-700 leading-relaxed text-justify relative z-10">
                 {DOCTOR_PROFILE.philosophy}
               </p>
+              <div className="mt-3 flex items-center justify-between pt-2 border-t border-[#D4AF37]/20">
+                <span className="text-xs font-black text-[#84631E] uppercase tracking-wider">
+                  — Filosofía de Atención de Miranda Dental Studio
+                </span>
+              </div>
             </motion.div>
 
-            {/* Action Button */}
-            <motion.div variants={itemVariants} className="pt-2 flex flex-col sm:flex-row gap-3">
-              <motion.a
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                href={createWhatsAppLink(`Hola ${DOCTOR_NAME}, quisiera agendar una consulta personalizada directamente con usted.`)}
+            {/* Direct CTA */}
+            <motion.div variants={itemVariants} className="pt-2 flex flex-col sm:flex-row gap-3.5">
+              <a
+                href={createWhatsAppLink(GENERAL_WA_MESSAGE)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-4 rounded-full bg-gradient-to-r from-[#005A9C] to-[#0084DE] hover:from-[#004b83] hover:to-[#0070bc] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-xl shadow-[#005A9C]/20 flex items-center justify-center gap-2 cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] hover:from-[#C5A059] hover:to-[#84631E] text-[#0B0B0B] font-black text-xs uppercase tracking-wider transition-all shadow-md shadow-amber-950/15 cursor-pointer border border-[#D4AF37]/50 active:scale-98"
               >
-                <Calendar className="w-4 h-4 text-cyan-200" />
-                <span>Agendar consulta</span>
-                <ArrowRight className="w-3.5 h-3.5 text-cyan-200" />
-              </motion.a>
+                <Calendar className="w-4 h-4 text-[#0B0B0B]" />
+                <span>Agendar Valoración $15 con el Dr. Miranda</span>
+                <ArrowRight className="w-3.5 h-3.5 text-[#0B0B0B]" />
+              </a>
             </motion.div>
           </div>
-
         </motion.div>
 
-        {/* Clinical Technology & Infrastructure Showcase - Directo sobre el lienzo (Cero Box-in-Box) */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7 }}
-          className="pt-6 sm:pt-10"
-        >
+        {/* Facilities & Infrastructure (Directly on Canvas, No Outer Box-in-Box) */}
+        <div className="pt-6 sm:pt-10 border-t border-stone-200/80">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             
             {/* Left: Infrastructure Features */}
             <div className="lg:col-span-7 space-y-6">
               <div>
-                <span className="text-xs font-black tracking-widest text-[#0084DE] uppercase mb-1.5 block">
-                  Infraestructura & Bioseguridad
+                <span className="text-xs font-black tracking-widest text-[#84631E] uppercase mb-1.5 block">
+                  Infraestructura, Ubicación & Bioseguridad
                 </span>
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0A2540] tracking-tight">
-                  Instalaciones diseñadas para tu máxima bioseguridad y bienestar
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D0D0D] tracking-tight">
+                  Instalaciones Diseñadas para tu Máxima Tranquilidad
                 </h3>
-                <p className="text-sm sm:text-base text-slate-600 leading-relaxed text-justify mt-2">
-                  Nos alejamos del concepto tradicional de clínica fría o estresante. Nuestro consultorio cuenta con diseño acústico sereno, música ambiental relajante y equipamiento digital no invasivo.
+                <p className="text-sm sm:text-base text-stone-600 leading-relaxed text-justify mt-2">
+                  Ubicados en Av. 19 de Mayo y Velasco Ibarra (Edificio gris, Planta Baja con parqueadero para pacientes). Ofrecemos un consultorio sereno con diseño acústico relajante y equipamiento de diagnóstico digital 3D.
                 </p>
               </div>
 
               <div className="space-y-3.5 pt-1">
                 <motion.div
                   whileHover={{ x: 4 }}
-                  className="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-200/80 shadow-2xs transition-all"
+                  className="flex items-start gap-4 p-4 rounded-2xl bg-white border border-stone-200/80 shadow-2xs transition-all"
                 >
-                  <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#005A9C] to-[#0084DE] text-white shrink-0 flex items-center justify-center shadow-xs">
-                    <Cpu className="w-5 h-5 text-cyan-200" />
+                  <div className="w-11 h-11 rounded-xl bg-[#FAF7EE] border border-[#D4AF37]/40 text-[#84631E] shrink-0 flex items-center justify-center shadow-xs">
+                    <Cpu className="w-5 h-5 text-[#84631E]" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-[#0A2540]">Escáner Óptico Intraoral 3D</h4>
-                    <p className="text-xs text-slate-600 mt-1 text-justify leading-relaxed">
-                      Mapeo milimétrico de tus dientes en solo 3 minutos. Sin pastas molestas ni sensación de náuseas.
+                    <h4 className="text-sm font-bold text-[#0D0D0D]">Diagnóstico Integral & Radiografías ($15)</h4>
+                    <p className="text-xs text-stone-600 mt-1 text-justify leading-relaxed">
+                      Fotografías clínicas de alta definición y radiografías dentales para un diagnóstico certero sin sorpresas.
                     </p>
                   </div>
                 </motion.div>
 
                 <motion.div
                   whileHover={{ x: 4 }}
-                  className="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-200/80 shadow-2xs transition-all"
+                  className="flex items-start gap-4 p-4 rounded-2xl bg-white border border-stone-200/80 shadow-2xs transition-all"
                 >
-                  <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#005A9C] to-[#0084DE] text-white shrink-0 flex items-center justify-center shadow-xs">
-                    <Heart className="w-5 h-5 text-cyan-200" />
+                  <div className="w-11 h-11 rounded-xl bg-[#FAF7EE] border border-[#D4AF37]/40 text-[#84631E] shrink-0 flex items-center justify-center shadow-xs">
+                    <Heart className="w-5 h-5 text-[#84631E]" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-[#0A2540]">Odontología de Mínima Invasión</h4>
-                    <p className="text-xs text-slate-600 mt-1 text-justify leading-relaxed">
-                      Preservamos al máximo el tejido sano y la estructura biológica natural del diente.
+                    <h4 className="text-sm font-bold text-[#0D0D0D]">Odontología de Mínima Invasión</h4>
+                    <p className="text-xs text-stone-600 mt-1 text-justify leading-relaxed">
+                      Preservamos al máximo el tejido sano y la estructura biológica natural del diente con técnicas biomiméticas.
                     </p>
                   </div>
                 </motion.div>
 
                 <motion.div
                   whileHover={{ x: 4 }}
-                  className="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-200/80 shadow-2xs transition-all"
+                  className="flex items-start gap-4 p-4 rounded-2xl bg-white border border-stone-200/80 shadow-2xs transition-all"
                 >
-                  <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#005A9C] to-[#0084DE] text-white shrink-0 flex items-center justify-center shadow-xs">
-                    <Shield className="w-5 h-5 text-cyan-200" />
+                  <div className="w-11 h-11 rounded-xl bg-[#FAF7EE] border border-[#D4AF37]/40 text-[#84631E] shrink-0 flex items-center justify-center shadow-xs">
+                    <Shield className="w-5 h-5 text-[#84631E]" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-[#0A2540]">Bioseguridad de Grado Hospitalario</h4>
-                    <p className="text-xs text-slate-600 mt-1 text-justify leading-relaxed">
-                      Esterilización certificada en Autoclave Clase B con sellado al vacío de todo el instrumental.
+                    <h4 className="text-sm font-bold text-[#0D0D0D]">Bioseguridad & Parqueadero Exclusivo</h4>
+                    <p className="text-xs text-stone-600 mt-1 text-justify leading-relaxed">
+                      Esterilización certificada de todo el instrumental y parqueadero privado gratuito en planta baja para tu comodidad.
                     </p>
                   </div>
                 </motion.div>
@@ -226,51 +224,52 @@ export const DoctorProfileSection: React.FC = () => {
 
             {/* Right: Overlapping Dual-Mask Architectural Composition */}
             <div className="lg:col-span-5 relative flex items-center justify-center pt-4 lg:pt-0">
-              {/* Primary Architectural Arch Mask: Clinical Suite */}
-              <div className="relative w-full max-w-md rounded-t-[14rem] rounded-b-[3rem] overflow-hidden shadow-2xl p-1.5 bg-gradient-to-b from-cyan-200 via-sky-100 to-white">
-                <div className="relative w-full h-[400px] sm:h-[440px] rounded-t-[13.5rem] rounded-b-[2.6rem] overflow-hidden bg-slate-900 group">
+              {/* Primary Architectural Arch Mask */}
+              <div className="relative w-full max-w-md rounded-t-[14rem] rounded-b-[3rem] overflow-hidden shadow-2xl p-1.5 bg-gradient-to-b from-[#D4AF37] via-[#F3E5AB] to-white">
+                <div className="relative w-full h-[400px] sm:h-[440px] rounded-t-[13.5rem] rounded-b-[2.6rem] overflow-hidden bg-stone-900 group">
                   <img
-                    src="https://images.unsplash.com/photo-1629909615184-74f495363b67?q=80&w=1000&auto=format&fit=crop"
-                    alt="Instalaciones clínicas de Odontología Gabriel Miranda"
+                    src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop"
+                    alt="Consultorio Clínico Miranda Dental Studio"
                     referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 brightness-95"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A2540]/80 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/80 via-transparent to-transparent" />
                   
-                  <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded-2xl bg-white/95 backdrop-blur-md text-[#0A2540] text-center border border-white/60 shadow-lg">
-                    <p className="text-xs font-bold">Unidad Odontológica Ergonómica 3D</p>
-                    <p className="text-[11px] text-slate-500">Diseño acústico sereno y luz natural</p>
+                  <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded-2xl bg-white/95 backdrop-blur-md text-[#0D0D0D] text-center border border-[#D4AF37]/30 shadow-lg">
+                    <p className="text-xs font-bold text-[#0D0D0D]">Consultorio Dental Ergonómico</p>
+                    <p className="text-[11px] text-stone-500">Av. 19 de Mayo y Velasco Ibarra • Planta Baja</p>
                   </div>
                 </div>
               </div>
 
-              {/* Secondary Overlapping Squircle Mask: Sterilization & 3D Lab */}
+              {/* Secondary Floating Overlapping Window */}
               <motion.div
                 animate={{ y: [-6, 6, -6] }}
                 transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-                className="absolute -bottom-6 sm:-bottom-8 right-0 sm:-right-4 z-20 w-32 sm:w-44 h-32 sm:h-44 rounded-[2rem] sm:rounded-[2.5rem] rounded-tr-lg p-1.5 bg-gradient-to-br from-white via-cyan-100 to-emerald-200 shadow-2xl shadow-cyan-950/20"
+                className="absolute -bottom-6 sm:-bottom-8 right-0 sm:-right-4 z-20 w-32 sm:w-44 h-32 sm:h-44 rounded-[2rem] sm:rounded-[2.5rem] rounded-tr-lg p-1.5 bg-gradient-to-br from-white via-[#F3E5AB] to-[#D4AF37] shadow-2xl shadow-amber-950/20"
               >
-                <div className="relative w-full h-full rounded-[2.2rem] rounded-tr-md overflow-hidden bg-slate-900 group">
+                <div className="relative w-full h-full rounded-[2.2rem] rounded-tr-md overflow-hidden bg-stone-900 group">
                   <img
-                    src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop"
-                    alt="Instrumental quirúrgico y bioseguridad"
+                    src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=600&auto=format&fit=crop"
+                    alt="Equipamiento y Bioseguridad en Miranda Dental Studio"
                     referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-2.5">
+                    <span className="text-[10px] font-bold text-white uppercase tracking-tight">
+                      Bioseguridad
+                    </span>
+                  </div>
                 </div>
               </motion.div>
             </div>
 
           </div>
-        </motion.div>
+        </div>
 
       </div>
 
-      {/* Organic Curved Wave Transition into FAQ Section */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
-        <CurvedSectionDivider position="bottom" fillColor="#FFFFFF" variant="deepCurve" />
-      </div>
+      <CurvedSectionDivider position="bottom" fillColor="#FFFFFF" variant="smoothCurve" />
     </section>
   );
 };
