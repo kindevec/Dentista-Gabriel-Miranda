@@ -5,7 +5,6 @@ import {
   ArrowRight,
   Check,
   Clock,
-  Sparkles,
   MapPin,
   CreditCard
 } from 'lucide-react';
@@ -97,12 +96,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             animate="show"
             className="lg:col-span-7 space-y-4 text-center lg:text-left"
           >
-            {/* Doctor & Studio Pre-Badge */}
-            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/45 text-[#84631E] text-xs font-black uppercase tracking-wider shadow-2xs">
-              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
-              <span>Miranda Dental Studio • Dr. Gabriel Miranda</span>
-            </motion.div>
-
             {/* H1 Main Heading */}
             <motion.h1
               variants={itemVariants}

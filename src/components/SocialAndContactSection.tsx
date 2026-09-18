@@ -22,8 +22,7 @@ import {
   CheckCircle,
   ExternalLink,
   ArrowRight,
-  CreditCard,
-  Sparkles
+  CreditCard
 } from 'lucide-react';
 import {
   OfficialWhatsAppLogo,
@@ -101,10 +100,6 @@ export const SocialAndContactSection: React.FC<SocialAndContactSectionProps> = (
           transition={{ duration: 0.5 }}
           className="text-center max-w-3xl mx-auto mb-5 sm:mb-7 space-y-2"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/45 text-[#84631E] text-xs font-black uppercase tracking-wider shadow-2xs">
-            <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
-            <span>Atención Médica Presencial & Asesoría Directa</span>
-          </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
             Agenda tu <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#84631E]">Valoración de $15</span>
           </h2>

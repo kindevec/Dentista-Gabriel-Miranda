@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Clock, CreditCard, Sparkles, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Clock, CreditCard, ArrowRight, ShieldCheck } from 'lucide-react';
 import { DOCTOR_NAME, createWhatsAppLink, GENERAL_WA_MESSAGE, CLINIC_HOURS } from '../data/clinicData';
 import { WhatsAppIcon } from './OfficialSocialLogos';
 import { OrganicDentalRibbon } from './OrganicDentalRibbon';
@@ -69,11 +69,7 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
           {/* Left Column: Headline & Rapid Triage Steps */}
           <div className="lg:col-span-7 space-y-5 text-center lg:text-left">
 
-            {/* Micro Kicker */}
-            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1A1A1A] border border-[#D4AF37]/50 text-[#F3E5AB] text-xs font-black uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
-              <span>Propuesta Exclusiva • Miranda Dental Studio</span>
-            </motion.div>
+
 
             {/* Title */}
             <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">

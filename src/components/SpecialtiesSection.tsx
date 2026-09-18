@@ -191,9 +191,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
           transition={{ duration: 0.5 }}
           className="text-center max-w-3xl mx-auto mb-4 sm:mb-6 space-y-2"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/45 text-[#84631E] text-xs font-black uppercase tracking-wider shadow-2xs">
-            <span>Atención Odontológica Personalizada</span>
-          </div>
+
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
             Servicios <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#84631E]">Básicos & Clínicos</span>
           </h2>

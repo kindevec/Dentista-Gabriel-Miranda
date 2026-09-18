@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { DOCTOR_PROFILE, DOCTOR_NAME, createWhatsAppLink, GENERAL_WA_MESSAGE } from '../data/clinicData';
-import { Cpu, Shield, Heart, Calendar, CheckCircle2, Quote, ArrowRight, Award } from 'lucide-react';
+import { Cpu, Shield, Heart, Calendar, CheckCircle2, Quote, ArrowRight } from 'lucide-react';
 import { OrganicDentalRibbon } from './OrganicDentalRibbon';
 
 export const DoctorProfileSection: React.FC = () => {
@@ -44,10 +44,6 @@ export const DoctorProfileSection: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="text-center max-w-3xl mx-auto mb-5 sm:mb-7 space-y-2"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/45 text-[#84631E] text-xs font-black uppercase tracking-wider shadow-2xs">
-            <Award className="w-3.5 h-3.5 text-[#D4AF37]" />
-            <span>Perfil Profesional & Trayectoria</span>
-          </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
             Conoce al <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#84631E]">{DOCTOR_NAME}</span>
           </h2>

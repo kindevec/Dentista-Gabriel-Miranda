@@ -46,9 +46,6 @@ export const FaqSection: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-4 sm:mb-6 space-y-1.5"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/30 text-[#84631E] text-xs font-bold tracking-wider uppercase mb-1">
-            Preguntas Frecuentes
-          </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
             Resolvemos tus Dudas sobre Tratamientos y Consultas
           </h2>
