@@ -5,6 +5,7 @@ interface LogoProps {
   showText?: boolean;
   size?: 'sm' | 'md' | 'lg';
   variant?: 'light' | 'dark';
+  neumorphic?: boolean;
 }
 
 export const Logo: React.FC<LogoProps> = ({
@@ -12,37 +13,41 @@ export const Logo: React.FC<LogoProps> = ({
   showText = true,
   size = 'md',
   variant = 'light',
+  neumorphic = false,
 }) => {
   const iconSizes = {
-    sm: 'w-8 h-8 sm:w-9 sm:h-9',
-    md: 'w-10 h-10 sm:w-12 sm:h-12',
-    lg: 'w-14 h-14 sm:w-16 sm:h-16',
+    sm: 'w-10 h-10 sm:w-11 sm:h-11',
+    md: 'w-13 h-13 sm:w-15 sm:h-15 lg:w-16 lg:h-16',
+    lg: 'w-16 h-16 sm:w-20 sm:h-20 lg:w-22 lg:h-22',
   };
 
   const titleSizes = {
-    sm: 'text-sm sm:text-base tracking-[0.18em]',
-    md: 'text-base sm:text-lg lg:text-xl tracking-[0.2em]',
-    lg: 'text-xl sm:text-2xl lg:text-3xl tracking-[0.22em]',
+    sm: 'text-base sm:text-lg tracking-[0.18em]',
+    md: 'text-lg sm:text-xl lg:text-[1.4rem] tracking-[0.2em]',
+    lg: 'text-2xl sm:text-3xl lg:text-4xl tracking-[0.22em]',
   };
 
   const subtitleSizes = {
-    sm: 'text-[8px] sm:text-[9px] tracking-[0.15em]',
-    md: 'text-[9px] sm:text-[10px] tracking-[0.18em]',
-    lg: 'text-[11px] sm:text-xs tracking-[0.2em]',
+    sm: 'text-[9px] sm:text-[10px] tracking-[0.18em]',
+    md: 'text-[10.5px] sm:text-[11.5px] lg:text-xs tracking-[0.2em]',
+    lg: 'text-xs sm:text-sm tracking-[0.22em]',
   };
 
   const specialtySizes = {
-    sm: 'text-[7.5px] tracking-[0.05em]',
-    md: 'text-[8.5px] sm:text-[9.5px] tracking-[0.08em]',
-    lg: 'text-[10px] sm:text-[11px] tracking-[0.1em]',
+    sm: 'text-[8.5px] sm:text-[9px] tracking-[0.06em]',
+    md: 'text-[9.5px] sm:text-[10.5px] lg:text-[11px] tracking-[0.08em]',
+    lg: 'text-[11px] sm:text-xs tracking-[0.1em]',
   };
 
   return (
-    <div className={`inline-flex items-center gap-2.5 sm:gap-3.5 select-none group cursor-pointer ${className}`}>
-      {/* Miranda Dental Studio Official Luxury Gold Monogram */}
+    <div className={`inline-flex items-center gap-3 sm:gap-4 select-none group cursor-pointer ${className}`}>
       {/* Miranda Dental Studio Official 3D Gold Wire Emblem (Pure Gold Threads, Transparent) */}
       <div
-        className={`relative flex items-center justify-center transition-all duration-300 group-hover:scale-105 shrink-0 ${iconSizes[size]}`}
+        className={`relative flex items-center justify-center transition-all duration-300 group-hover:scale-105 shrink-0 ${iconSizes[size]} ${
+          neumorphic
+            ? 'p-2 sm:p-2.5 rounded-2xl bg-gradient-to-br from-[#FFFFFF] via-[#FAF9F5] to-[#F3EDE1] shadow-[-3px_-3px_9px_rgba(255,255,255,0.95),4px_4px_12px_rgba(180,140,50,0.18)] border border-[#D4AF37]/40 ring-1 ring-white/80'
+            : ''
+        }`}
       >
         <img
           src="/logo-miranda.png"

@@ -48,15 +48,18 @@ export const Navbar: React.FC<NavbarProps> = ({
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ease-in-out ${
         isScrolled
-          ? 'bg-white/92 backdrop-blur-xl shadow-lg shadow-amber-950/5 border-b border-[#D4AF37]/30 py-2 sm:py-3'
-          : 'bg-white/40 backdrop-blur-xs border-b border-transparent shadow-none py-3 sm:py-5'
+          ? 'bg-white/95 backdrop-blur-xl shadow-lg shadow-amber-950/5 border-b border-[#D4AF37]/30 py-2 sm:py-2.5'
+          : 'bg-white/70 backdrop-blur-md border-b border-transparent shadow-none py-2.5 sm:py-3.5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between">
         
-        {/* Logo Miranda Dental Studio */}
-        <div onClick={() => handleNavClick('inicio')} className="cursor-pointer">
-          <Logo size="md" />
+        {/* Logo Miranda Dental Studio con Neumorfismo */}
+        <div 
+          onClick={() => handleNavClick('inicio')} 
+          className="cursor-pointer transition-transform duration-200 hover:scale-[1.02] active:scale-98"
+        >
+          <Logo size="md" neumorphic />
         </div>
 
         {/* Desktop Navigation Links (Inicio, Servicios, Especialidades, Nosotros, Contacto) */}
