@@ -40,14 +40,14 @@ export const Logo: React.FC<LogoProps> = ({
   return (
     <div className={`inline-flex items-center gap-2.5 sm:gap-3.5 select-none group cursor-pointer ${className}`}>
       {/* Miranda Dental Studio Official Luxury Gold Monogram */}
-      {/* Miranda Dental Studio Official 3D Gold Logo Emblem */}
+      {/* Miranda Dental Studio Official 3D Gold Wire Emblem (Pure Gold Threads, Transparent) */}
       <div
-        className={`relative flex items-center justify-center rounded-full overflow-hidden shadow-md shadow-amber-950/20 border-2 border-[#D4AF37] transition-all duration-300 group-hover:scale-105 group-hover:border-[#F3E5AB] group-hover:shadow-amber-900/30 shrink-0 ${iconSizes[size]}`}
+        className={`relative flex items-center justify-center transition-all duration-300 group-hover:scale-105 shrink-0 ${iconSizes[size]}`}
       >
         <img
-          src="/logo-miranda.jpg"
+          src="/logo-miranda.png"
           alt="Miranda Dental Studio Emblem"
-          className="w-full h-full object-cover scale-[1.03] select-none pointer-events-none"
+          className="w-full h-full object-contain select-none pointer-events-none drop-shadow-[0_2px_5px_rgba(212,175,55,0.25)]"
           loading="eager"
           decoding="async"
         />
