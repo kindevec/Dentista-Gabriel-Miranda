@@ -278,10 +278,10 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                             }
                           }}
                           className={cn(
-                            'relative flex items-center gap-3.5 w-full h-full px-5 py-3 rounded-2xl transition-[background-color,box-shadow] duration-200 text-left group cursor-pointer select-none border-0',
+                            'relative flex items-center gap-3.5 w-full h-full px-5 py-3 rounded-2xl transition-all duration-200 text-left group cursor-pointer select-none',
                             isActive
-                              ? 'bg-gradient-to-br from-[#FFFFFF] via-[#FAF7EE] to-[#F2EADB] shadow-[-10px_-10px_24px_#FFFFFF,10px_10px_26px_rgba(132,99,30,0.18),inset_2px_2px_4px_#FFFFFF,inset_-2px_-2px_4px_rgba(132,99,30,0.12),inset_0_0_0_2px_rgba(212,175,55,0.7)] scale-[1.03] z-20'
-                              : 'bg-gradient-to-br from-[#FFFFFF] via-[#FAF8F2] to-[#F5EFE3] hover:from-[#FFFFFF] hover:to-[#FAF6EE] shadow-[-8px_-8px_20px_#FFFFFF,8px_8px_22px_rgba(132,99,30,0.10),inset_1.5px_1.5px_3px_#FFFFFF,inset_-1.5px_-1.5px_3px_rgba(132,99,30,0.06)] hover:shadow-[-10px_-10px_24px_#FFFFFF,10px_10px_26px_rgba(132,99,30,0.15),inset_2px_2px_4px_#FFFFFF,inset_-2px_-2px_4px_rgba(132,99,30,0.08)]'
+                              ? 'bg-white border-2 border-[#D4AF37] z-20'
+                              : 'bg-white/80 hover:bg-white border border-stone-200/80 hover:border-[#D4AF37]/50'
                           )}
                           style={{
                             opacity,
@@ -290,13 +290,13 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                             willChange: 'transform, opacity',
                           }}
                         >
-                          {/* Pozo de Icono Neumórfico Dorado */}
+                          {/* Pozo de Icono Dorado Limpio */}
                           <div
                             className={cn(
-                              'w-9 h-9 rounded-xl flex items-center justify-center transition-[background-color,box-shadow,color] duration-200 shrink-0 border-0',
+                              'w-9 h-9 rounded-xl flex items-center justify-center transition-colors duration-200 shrink-0',
                               isActive
-                                ? 'bg-gradient-to-br from-[#D4AF37] via-[#AA7C11] to-[#84631E] text-white shadow-[0_4px_12px_rgba(170,124,17,0.4),inset_1.5px_1.5px_3px_rgba(255,255,255,0.4)]'
-                                : 'bg-[#F7F2E7] text-[#84631E] shadow-[inset_3.5px_3.5px_7px_rgba(132,99,30,0.12),inset_-3.5px_-3.5px_7px_#FFFFFF] group-hover:bg-[#D4AF37] group-hover:text-white group-hover:shadow-[0_4px_14px_rgba(212,175,55,0.35)]'
+                                ? 'bg-gradient-to-br from-[#D4AF37] via-[#AA7C11] to-[#84631E] text-white'
+                                : 'bg-[#FAF7EE] text-[#84631E] group-hover:bg-[#D4AF37] group-hover:text-white'
                             )}
                           >
                             {getSpecialtyIcon(spec.iconName, isActive ? 'w-5 h-5 text-white' : 'w-5 h-5 text-[#84631E] group-hover:text-white transition-colors')}
@@ -322,8 +322,8 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                           </div>
 
                           {isActive ? (
-                            <span className="ml-auto flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/15 border border-[#D4AF37]/50 shadow-[0_0_8px_rgba(212,175,55,0.25)] shrink-0">
-                              <span className="w-2 h-2 rounded-full bg-[#D4AF37] shadow-[0_0_8px_#D4AF37] animate-pulse" />
+                            <span className="ml-auto flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/50 shrink-0">
+                              <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />
                               <span className="text-[10px] font-black text-[#84631E] uppercase tracking-wider">Activo</span>
                             </span>
                           ) : (
@@ -342,15 +342,6 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
             {/* Right Column: 3D Stack / Card Perspective Showcase sobre el lienzo */}
             <div className="col-span-7 relative flex flex-col items-center justify-center py-4">
               <div className="relative w-full max-w-[480px] h-[560px] flex items-center justify-center">
-                {/* Lightweight Static Ambient Glow (Zero Blur Shader Overhead) */}
-                <div
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[75%] rounded-full pointer-events-none z-0 transform-gpu"
-                  style={{
-                    background: 'radial-gradient(ellipse at center, rgba(0, 191, 255, 0.16) 0%, rgba(0, 90, 156, 0.05) 45%, transparent 70%)',
-                    transform: 'translate(-50%, -50%) translateZ(0)',
-                  }}
-                />
-
                 <AnimatePresence initial={false}>
                   {SPECIALTIES_DATA.filter((_, idx) => getCardStatus(idx) !== 'hidden').map((spec) => {
                     const status = getCardStatus(SPECIALTIES_DATA.findIndex((s) => s.id === spec.id));
@@ -501,9 +492,9 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                     onClick={() => handleChipClick(dotIdx)}
                     aria-label={`Ir a especialidad ${dotIdx + 1}`}
                     className={cn(
-                      'rounded-full transition-all duration-400 cursor-pointer',
+                      'rounded-full transition-all duration-300 cursor-pointer',
                       dotIdx === currentIndex
-                        ? 'w-6 h-2 bg-gradient-to-r from-[#D4AF37] to-[#84631E] shadow-[0_0_8px_rgba(212,175,55,0.4)]'
+                        ? 'w-6 h-2 bg-gradient-to-r from-[#D4AF37] to-[#84631E]'
                         : 'w-2 h-2 bg-stone-300 hover:bg-stone-400'
                     )}
                   />
@@ -529,10 +520,10 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                     data-pill-index={index}
                     onClick={() => handleChipClick(index)}
                     className={cn(
-                      'flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold shrink-0 transition-[background-color,box-shadow,color] duration-200 border-0 cursor-pointer select-none active:scale-95',
+                      'flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold shrink-0 transition-all duration-200 border cursor-pointer select-none active:scale-95',
                       isActive
-                        ? 'bg-gradient-to-br from-[#FFFFFF] via-[#FAF7EE] to-[#F2EADB] text-[#84631E] shadow-[-6px_-6px_16px_#FFFFFF,6px_6px_18px_rgba(132,99,30,0.18),inset_1.5px_1.5px_3px_#FFFFFF,inset_-1.5px_-1.5px_3px_rgba(132,99,30,0.12),inset_0_0_0_1.5px_rgba(212,175,55,0.7)]'
-                        : 'bg-gradient-to-br from-[#FFFFFF] via-[#FAF8F2] to-[#F5EFE3] text-stone-700 shadow-[-4px_-4px_12px_#FFFFFF,4px_4px_14px_rgba(132,99,30,0.08),inset_1px_1px_2px_#FFFFFF,inset_-1px_-1px_2px_rgba(132,99,30,0.04)]'
+                        ? 'bg-white border-2 border-[#D4AF37] text-[#84631E] shadow-2xs'
+                        : 'bg-white/80 hover:bg-white border-stone-200/80 text-stone-700'
                     )}
                   >
                     <span className={cn(
