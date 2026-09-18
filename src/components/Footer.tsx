@@ -1,7 +1,7 @@
 import React from 'react';
 import { Logo } from './Logo';
-import { CLINIC_PHONE_DISPLAY, CLINIC_EMAIL, CLINIC_ADDRESS, CLINIC_CITY, CLINIC_HOURS, createWhatsAppLink, GENERAL_WA_MESSAGE, DOCTOR_SENESCYT } from '../data/clinicData';
-import { ShieldCheck, MapPin, Phone, Mail, Clock, ArrowUpRight } from 'lucide-react';
+import { CLINIC_PHONE_DISPLAY, CLINIC_EMAIL, CLINIC_ADDRESS, CLINIC_CITY, CLINIC_HOURS, createWhatsAppLink, GENERAL_WA_MESSAGE } from '../data/clinicData';
+import { MapPin, Phone, Mail, Clock, ArrowUpRight } from 'lucide-react';
 import { OfficialWhatsAppLogo, OfficialInstagramLogo, OfficialFacebookLogo } from './OfficialSocialLogos';
 
 export const Footer: React.FC = () => {
@@ -27,11 +27,6 @@ export const Footer: React.FC = () => {
             <p className="text-xs text-stone-300 leading-relaxed max-w-md pt-1 text-justify">
               Miranda Dental Studio — Odontología especializada basada en la excelencia clínica, la tecnología y la atención humana. Creadores de sonrisas funcionales, estéticas y naturales en Quito.
             </p>
-
-            <div className="flex items-center gap-2 text-[#F3E5AB] text-xs font-semibold pt-1">
-              <ShieldCheck className="w-4 h-4 text-[#D4AF37]" />
-              <span>Registro Oficial C.N.S.I.T.: {DOCTOR_SENESCYT}</span>
-            </div>
           </div>
 
           {/* Col 2: Quick Links (3 Cols) */}

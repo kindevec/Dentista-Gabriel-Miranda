@@ -244,20 +244,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               className="absolute w-64 sm:w-96 h-64 sm:h-96 bg-gradient-to-tr from-[#D4AF37]/25 via-[#F3E5AB]/20 to-amber-200/10 rounded-full blur-3xl pointer-events-none -z-10 scale-110"
             />
 
-            {/* 3. Floating Gold Sparkle Accent */}
-            <motion.div
-              animate={{
-                y: [-10, 10, -10],
-                rotate: [0, 15, 0],
-              }}
-              transition={{ repeat: Infinity, duration: 4.5, ease: 'easeInOut' }}
-              className="absolute -top-2 left-6 z-20 px-3 py-1.5 rounded-full bg-white/95 shadow-md shadow-amber-950/10 backdrop-blur-md border border-[#D4AF37]/40 pointer-events-none flex items-center gap-1.5 text-[11px] font-black text-[#84631E]"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
-              <span>C.N.S.I.T.: 1042/2023/2642790</span>
-            </motion.div>
-
-            {/* 4. THE INTERACTIVE 3D TOOTH MOLAR SCULPTURE */}
+            {/* 3. THE INTERACTIVE 3D TOOTH MOLAR SCULPTURE */}
             <motion.div
               style={{
                 rotateX,

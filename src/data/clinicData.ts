@@ -107,7 +107,6 @@ export const DOCTOR_PROFILE: DoctorProfile = {
   image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1000&auto=format&fit=crop",
   bio: "El Dr. Gabriel Miranda (Graduado en 2023, con 3 años de trayectoria clínica) es egresado de la prestigiosa Universidad de los Andes y actualmente cursa su 2do año de Residencia en la especialidad de Rehabilitación Oral y Prótesis implanto asistida en la Universidad de los Hemisferios. Con residencia internacional en la Universidad Cayetano Heredia de Perú, diplomado en Carillas 'Arte en Resinas' (Perú), diplomado en Endodoncia mecanizada en CPO BRASIL y formación continua en congresos internacionales como SMILE & HOF 2026 en Río de Janeiro (Brasil), fusiona la máxima precisión biomecánica con la armonía estética natural.",
   credentials: [
-    "Registro Oficial C.N.S.I.T.: 1042/2023/2642790",
     "Cursando 2do año de Residencia en Rehabilitación Oral y Prótesis Implanto Asistida (Universidad de los Hemisferios)",
     "Graduado en Odontología por la Universidad de los Andes (2023)",
     "Residencia Odontológica en Universidad Cayetano Heredia (Perú)",
