@@ -260,14 +260,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   ? { duration: 0.3 }
                   : { repeat: Infinity, duration: 6, ease: 'easeInOut' }
               }
-              className="relative z-10 w-full max-w-[340px] sm:max-w-[440px] md:max-w-[480px] lg:max-w-[520px] xl:max-w-[560px]"
+              className="relative z-10 w-full max-w-[340px] sm:max-w-[440px] md:max-w-[480px] lg:max-w-[520px] xl:max-w-[560px] transform-gpu will-change-transform"
             >
               <div className="relative w-full aspect-square flex items-center justify-center">
                 <img
                   src="/hero-3d-tooth.webp"
                   alt="Escultura dental 3D de alta estética"
-                  className="w-full h-full object-contain filter contrast-[1.03] drop-shadow-[0_25px_45px_rgba(180,140,50,0.25)] transition-all duration-300"
+                  width={560}
+                  height={560}
                   loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                  className="w-full h-full object-contain filter contrast-[1.03] drop-shadow-[0_25px_45px_rgba(180,140,50,0.25)] transition-all duration-300"
                 />
 
                 {/* Specular Light Flare / Gleam Sweep on Enamel */}
@@ -282,7 +286,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     repeatDelay: 3,
                     ease: 'easeInOut',
                   }}
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-100/30 to-transparent skew-x-[-25deg] pointer-events-none overflow-hidden rounded-full"
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-100/30 to-transparent skew-x-[-25deg] pointer-events-none overflow-hidden rounded-full transform-gpu will-change-transform"
                 />
               </div>
             </motion.div>

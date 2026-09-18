@@ -13,14 +13,18 @@ export const Navbar: React.FC<NavbarProps> = ({
   setActiveSection,
   onOpenBooking: _onOpenBooking,
 }) => {
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
+    let isTicking = false;
     const handleScroll = () => {
-      // 0 en la parte superior (100% transparente), progresando suavemente hasta 1.0 (100% materializado) al llegar a 80px de scroll
-      const currentScroll = window.scrollY;
-      const progress = Math.min(Math.max(currentScroll / 80, 0), 1);
-      setScrollProgress(progress);
+      if (isTicking) return;
+      isTicking = true;
+      window.requestAnimationFrame(() => {
+        const scrolled = window.scrollY > 20;
+        setIsScrolled((prev) => (prev === scrolled ? prev : scrolled));
+        isTicking = false;
+      });
     };
 
     handleScroll();
@@ -48,21 +52,12 @@ export const Navbar: React.FC<NavbarProps> = ({
     }
   };
 
-  const isTop = scrollProgress === 0;
-
   return (
     <header
-      style={{
-        backgroundColor: isTop ? 'transparent' : `rgba(255, 255, 255, ${scrollProgress * 0.95})`,
-        backdropFilter: isTop ? 'none' : `blur(${scrollProgress * 18}px)`,
-        WebkitBackdropFilter: isTop ? 'none' : `blur(${scrollProgress * 18}px)`,
-        borderBottom: isTop ? '1px solid transparent' : `1px solid rgba(212, 175, 55, ${scrollProgress * 0.3})`,
-        boxShadow: isTop ? 'none' : `0 ${10 * scrollProgress}px ${25 * scrollProgress}px -5px rgba(132, 99, 30, ${scrollProgress * 0.08})`,
-      }}
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ease-out ${
-        isTop
-          ? 'py-3 sm:py-4 border-b border-transparent'
-          : 'py-2 sm:py-2.5'
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ease-out transform-gpu will-change-transform ${
+        isScrolled
+          ? 'py-2 sm:py-2.5 bg-white/95 backdrop-blur-md border-b border-[#D4AF37]/30 shadow-[0_10px_25px_-5px_rgba(132,99,30,0.08)]'
+          : 'py-3 sm:py-4 bg-transparent border-b border-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between">

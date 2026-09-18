@@ -387,9 +387,12 @@ export const SocialAndContactSection: React.FC<SocialAndContactSectionProps> = (
             {/* Single Organic Window for Google Maps Location */}
             <div className="rounded-[2.2rem] overflow-hidden shadow-lg border border-stone-200/80 relative group h-56 sm:h-64">
               <img
-                src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=800&auto=format&fit=crop"
+                src="/clinic/ubicacion-mapa.webp"
                 alt="Mapa Miranda Dental Studio"
-                referrerPolicy="no-referrer"
+                width={800}
+                height={500}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/90 via-[#0B0B0B]/60 to-transparent flex flex-col items-center justify-end p-6 text-center text-white">

@@ -48,6 +48,8 @@ export const Logo: React.FC<LogoProps> = ({
         <img
           src="/logo-miranda.webp"
           alt="Miranda Dental Studio Emblem"
+          width={64}
+          height={64}
           className="w-full h-full object-contain rounded-full select-none pointer-events-none drop-shadow-[0_3px_8px_rgba(212,175,55,0.28)]"
           loading="eager"
           decoding="async"

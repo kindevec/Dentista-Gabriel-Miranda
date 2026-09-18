@@ -22,7 +22,7 @@ export const CLINICAL_SPECIALTIES: DetailedClinicalSpecialty[] = [
     badge: "Prótesis & Coronas",
     tagline: "Prótesis totales o parciales, coronas, coronas sobre implantes.",
     summary: "Reconstrucción anatómica y masticatoria integral con prótesis totales o parciales, coronas de alta resistencia y coronas sobre implantes.",
-    image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=1000&auto=format&fit=crop",
+    image: "/specialties/rehabilitacion-oral.webp",
     features: [
       "Prótesis totales o parciales",
       "Coronas estéticas de alta resistencia",
@@ -39,7 +39,7 @@ export const CLINICAL_SPECIALTIES: DetailedClinicalSpecialty[] = [
     badge: "Carillas & Microabrasión",
     tagline: "Carillas directas o indirectas, Microabrasión (Para pacientes con fluorosis).",
     summary: "Diseño de sonrisa de autor: carillas directas o indirectas para perfeccionar forma y color, y microabrasión especializada para pacientes con fluorosis.",
-    image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=1000&auto=format&fit=crop",
+    image: "/specialties/estetica-dental.webp",
     features: [
       "Carillas directas o indirectas",
       "Microabrasión (Para pacientes con fluorosis)",
@@ -56,7 +56,7 @@ export const CLINICAL_SPECIALTIES: DetailedClinicalSpecialty[] = [
     badge: "Tratamiento de Conductos",
     tagline: "Endodoncia o tratamiento de conductos mecanizado y rotatorio.",
     summary: "Alivio definitivo del dolor pulpar y erradicación de infecciones mediante limas rotatorias de alta precisión para salvar tu diente natural.",
-    image: "https://images.unsplash.com/photo-1629909615184-74f495363b67?q=80&w=1000&auto=format&fit=crop",
+    image: "/specialties/endodoncia.webp",
     features: [
       "Tratamiento de conductos mecanizado y rotatorio",
       "Localizador apical de alta precisión (CPO Brasil)",
@@ -73,7 +73,7 @@ export const CLINICAL_SPECIALTIES: DetailedClinicalSpecialty[] = [
     badge: "Titanio Oseointegrado",
     tagline: "Implantes dentales de titanio para reponer piezas fijas y definitivas.",
     summary: "Colocación de implantes dentales de titanio biocompatible que devuelven la firmeza, estabilidad y función masticatoria natural de por vida.",
-    image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1000&auto=format&fit=crop",
+    image: "/specialties/implantologia.webp",
     features: [
       "Implantes dentales de titanio oseointegrado",
       "Coronas sobre implantes con ajuste exacto",
@@ -90,7 +90,7 @@ export const CLINICAL_SPECIALTIES: DetailedClinicalSpecialty[] = [
     badge: "Terceros Molares",
     tagline: "Extracción quirúrgica de terceros molares (muelas del juicio).",
     summary: "Extracción segura, rápida y sin dolor de terceros molares (muelas del juicio) impactadas o retenidas, previniendo apiñamientos e infecciones.",
-    image: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=1000&auto=format&fit=crop",
+    image: "/specialties/cirugia-oral.webp",
     features: [
       "Extracción de terceros molares (muelas del juicio)",
       "Técnica quirúrgica atraumática sin dolor",
@@ -107,7 +107,7 @@ export const CLINICAL_SPECIALTIES: DetailedClinicalSpecialty[] = [
     badge: "Brackets Autoligado & Estéticos",
     tagline: "Brackets convencionales, autoligado, estéticos.",
     summary: "Alineación dental integral y corrección de la mordida mediante brackets convencionales, sistemas de autoligado pasivo y brackets estéticos de alta discreción.",
-    image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1000&auto=format&fit=crop",
+    image: "/specialties/ortodoncia.webp",
     features: [
       "Brackets convencionales",
       "Brackets de autoligado",
@@ -125,7 +125,7 @@ export const CLINICAL_SPECIALTIES: DetailedClinicalSpecialty[] = [
     badge: "Botox, Hialurónico & Bichectomía",
     tagline: "Bichectomía, Ácido Hialurónico, Botox.",
     summary: "Procedimientos médico-estéticos faciales para estilizar mejillas (bichectomía), atenuar bruxismo y líneas de expresión (Botox) y perfilar labios (ácido hialurónico).",
-    image: "https://images.unsplash.com/photo-1512290900672-1f5586616262?q=80&w=1000&auto=format&fit=crop",
+    image: "/specialties/armonizacion-facial.webp",
     features: [
       "Bichectomía (definición de mejillas)",
       "Ácido Hialurónico (perfilado e hidratación labial)",
@@ -142,7 +142,7 @@ export const CLINICAL_SPECIALTIES: DetailedClinicalSpecialty[] = [
     badge: "Gingivectomía & Salud Gingival",
     tagline: "Gingivectomía, retartrajes, frenectomía.",
     summary: "Cuidado clínico de encías y tejidos de soporte: gingivectomía para corregir la sonrisa gingival, retartrajes (detartraje y profilaxis profunda de sarro) y frenectomías funcionales.",
-    image: "https://images.unsplash.com/photo-1629909615184-74f495363b67?q=80&w=1000&auto=format&fit=crop",
+    image: "/specialties/periodoncia.webp",
     features: [
       "Gingivectomía (diseño y nivelación de encías)",
       "Retartrajes (eliminación profunda de sarro y cálculo)",

@@ -153,7 +153,7 @@ export const SOCIAL_NETWORKS: SocialNetwork[] = [
     actionText: "Chatear por WhatsApp",
     url: createWhatsAppLink("Hola Dr. Gabriel Miranda, deseo agendar una consulta de valoración de $15 en Miranda Dental Studio."),
     waMessage: "Hola Dr. Gabriel Miranda, deseo información para una cita.",
-    image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=800&auto=format&fit=crop"
+    image: "/specialties/rehabilitacion-oral.webp"
   },
   {
     id: "instagram",
@@ -166,7 +166,7 @@ export const SOCIAL_NETWORKS: SocialNetwork[] = [
     actionText: "Seguir en Instagram",
     url: "https://www.instagram.com/odontologia_miranda/",
     waMessage: "Hola Dr. Gabriel Miranda, vi su Instagram oficial y deseo agendar una valoración.",
-    image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=800&auto=format&fit=crop"
+    image: "/specialties/estetica-dental.webp"
   },
   {
     id: "facebook",
@@ -179,6 +179,6 @@ export const SOCIAL_NETWORKS: SocialNetwork[] = [
     actionText: "Visitar Facebook",
     url: "https://facebook.com/odontologiagabrielmiranda",
     waMessage: "Hola Dr. Gabriel Miranda, vi su página oficial de Facebook y deseo una cita.",
-    image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop"
+    image: "/specialties/endodoncia.webp"
   }
 ];

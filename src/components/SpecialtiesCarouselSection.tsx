@@ -5,7 +5,7 @@ import {
   ChevronRight,
   Check,
   Clock,
-  User,
+  Sparkles,
   ArrowRight,
   ArrowDown,
   RotateCw,
@@ -13,87 +13,68 @@ import {
 } from 'lucide-react';
 import { WhatsAppIcon } from './OfficialSocialLogos';
 import { createWhatsAppLink } from '../data/clinicData';
-import { CLINICAL_SPECIALTIES, DetailedClinicalSpecialty } from '../data/clinicalSpecialtiesData';
+import { CLINICAL_SPECIALTIES } from '../data/clinicalSpecialtiesData';
 
 interface SpecialtiesCarouselSectionProps {
   onSelectSpecialtyForBooking?: (specialtyId: string) => void;
 }
 
-// 3 sets of specialties to support silky-smooth seamless infinite scrolling
-const INFINITE_SPECIALTIES = [
-  ...CLINICAL_SPECIALTIES.map((s, i) => ({ ...s, uniqueKey: `set-0-${s.id}-${i}` })),
-  ...CLINICAL_SPECIALTIES.map((s, i) => ({ ...s, uniqueKey: `set-1-${s.id}-${i}` })),
-  ...CLINICAL_SPECIALTIES.map((s, i) => ({ ...s, uniqueKey: `set-2-${s.id}-${i}` })),
-];
-
 export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProps> = ({
-  onSelectSpecialtyForBooking
+  onSelectSpecialtyForBooking: _onSelectSpecialtyForBooking
 }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [activeCardIndex, setActiveCardIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [flippedCardId, setFlippedCardId] = useState<string | null>(null);
+
+  // Drag and touch tracking refs to prevent accidental flips when scrolling
   const isMouseDownRef = useRef(false);
   const startXRef = useRef(0);
   const scrollLeftRef = useRef(0);
   const hasDraggedRef = useRef(false);
-  const [flippedCardId, setFlippedCardId] = useState<string | null>(null);
+  const dragDistanceRef = useRef(0);
+  const touchStartXRef = useRef(0);
 
   const totalCards = CLINICAL_SPECIALTIES.length;
 
-  const getCardUnit = useCallback(() => {
-    const el = scrollContainerRef.current;
-    if (!el) return 0;
-    const card = el.querySelector<HTMLElement>('[data-card-index]');
-    if (!card) return 0;
-    return card.offsetWidth + 24; // 24px is gap-6
-  }, []);
-
-  // Initialize scroll position in the center set (Set 1) so infinite scroll works both ways immediately
-  useEffect(() => {
-    const el = scrollContainerRef.current;
-    if (!el) return;
-
-    const initScroll = () => {
-      const cardUnit = getCardUnit();
-      if (cardUnit > 0) {
-        el.scrollLeft = totalCards * cardUnit;
-        setActiveCardIndex(0);
-      }
-    };
-
-    const timer = setTimeout(initScroll, 50);
-    return () => clearTimeout(timer);
-  }, [totalCards, getCardUnit]);
-
-  // Track scroll position to update dots and silently loop when scrolling finishes
+  // Update active indicator dot smoothly as user scrolls
   const handleScroll = useCallback(() => {
     const el = scrollContainerRef.current;
     if (!el) return;
 
-    const cardUnit = getCardUnit();
-    if (cardUnit <= 0) return;
+    const cards = el.querySelectorAll<HTMLElement>('[data-card-index]');
+    if (!cards.length) return;
 
-    // Active specialty index (0 to totalCards - 1)
-    const rawIndex = Math.round(el.scrollLeft / cardUnit);
-    const normalizedIndex = ((rawIndex % totalCards) + totalCards) % totalCards;
-    setActiveCardIndex(normalizedIndex);
+    const maxScroll = el.scrollWidth - el.clientWidth - 15;
 
-    // Debounce silent teleport so smooth scrolling or dragging isn't interrupted
-    if (scrollTimeoutRef.current) {
-      clearTimeout(scrollTimeoutRef.current);
+    // Check if scrolled all the way to the end
+    if (el.scrollLeft >= maxScroll) {
+      setActiveCardIndex(cards.length - 1);
+      return;
     }
-    scrollTimeoutRef.current = setTimeout(() => {
-      const setWidth = totalCards * cardUnit;
-      // If user scrolled past Set 1 into Set 2
-      if (el.scrollLeft >= 2 * setWidth - cardUnit) {
-        el.scrollLeft -= setWidth;
-      } else if (el.scrollLeft < setWidth) {
-        // If user scrolled before Set 1 into Set 0
-        el.scrollLeft += setWidth;
+
+    // Check if at the very start
+    if (el.scrollLeft <= 15) {
+      setActiveCardIndex(0);
+      return;
+    }
+
+    // Find the card closest to the container's left edge
+    let closestIndex = 0;
+    let minDistance = Infinity;
+    const containerLeft = el.getBoundingClientRect().left;
+
+    cards.forEach((card, idx) => {
+      const cardLeft = card.getBoundingClientRect().left;
+      const distance = Math.abs(cardLeft - containerLeft);
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = idx;
       }
-    }, 150);
-  }, [totalCards, getCardUnit]);
+    });
+
+    setActiveCardIndex((prev) => (prev === closestIndex ? prev : closestIndex));
+  }, []);
 
   useEffect(() => {
     const el = scrollContainerRef.current;
@@ -105,58 +86,98 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
     return () => {
       el.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleScroll);
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
     };
   }, [handleScroll]);
 
+  // Direct smooth navigation to specific card index
   const scrollToCard = (index: number) => {
     const el = scrollContainerRef.current;
     if (!el) return;
-    const cardUnit = getCardUnit();
-    if (cardUnit <= 0) return;
 
-    const setWidth = totalCards * cardUnit;
-    const targetScroll = setWidth + index * cardUnit;
-    el.scrollTo({ left: targetScroll, behavior: 'smooth' });
+    const targetIndex = Math.max(0, Math.min(index, totalCards - 1));
+    setActiveCardIndex(targetIndex);
+
+    const cards = el.querySelectorAll<HTMLElement>('[data-card-index]');
+    const targetCard = cards[targetIndex];
+    if (!targetCard) return;
+
+    // If target is the last card, scroll completely to the end
+    if (targetIndex === totalCards - 1) {
+      el.scrollTo({ left: el.scrollWidth - el.clientWidth, behavior: 'smooth' });
+      return;
+    }
+
+    // If target is first card, scroll to 0
+    if (targetIndex === 0) {
+      el.scrollTo({ left: 0, behavior: 'smooth' });
+      return;
+    }
+
+    // Otherwise scroll to the card's exact position
+    const targetLeft = targetCard.offsetLeft - el.offsetLeft;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    const finalScroll = Math.max(0, Math.min(targetLeft, maxScroll));
+
+    el.scrollTo({ left: finalScroll, behavior: 'smooth' });
   };
 
+  // Circular previous navigation
   const handleScrollPrev = () => {
     const el = scrollContainerRef.current;
     if (!el) return;
-    const cardUnit = getCardUnit();
-    if (cardUnit <= 0) return;
 
-    const setWidth = totalCards * cardUnit;
-    // If at or before the start of Set 1, teleport forward to Set 2 seamlessly first
-    if (el.scrollLeft <= setWidth) {
-      el.scrollLeft += setWidth;
+    const isAtStart = el.scrollLeft <= 15 || activeCardIndex <= 0;
+    if (isAtStart) {
+      scrollToCard(totalCards - 1);
+    } else {
+      scrollToCard(activeCardIndex - 1);
     }
-    el.scrollBy({ left: -cardUnit, behavior: 'smooth' });
   };
 
+  // Circular next navigation
   const handleScrollNext = () => {
     const el = scrollContainerRef.current;
     if (!el) return;
-    const cardUnit = getCardUnit();
-    if (cardUnit <= 0) return;
 
-    const setWidth = totalCards * cardUnit;
-    // If near the end of Set 2, teleport back to Set 1 seamlessly first
-    if (el.scrollLeft >= 2 * setWidth - cardUnit) {
-      el.scrollLeft -= setWidth;
+    const maxScroll = el.scrollWidth - el.clientWidth - 15;
+    const isAtEnd = el.scrollLeft >= maxScroll || activeCardIndex >= totalCards - 1;
+    if (isAtEnd) {
+      scrollToCard(0);
+    } else {
+      scrollToCard(activeCardIndex + 1);
     }
-    el.scrollBy({ left: cardUnit, behavior: 'smooth' });
   };
 
-  // Drag-to-scroll functionality for mouse/desktop con umbral de arrastre estricto
+  // Touch handlers for mobile: strict drag threshold prevents accidental card flips while swiping
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.touches[0].clientX;
+    hasDraggedRef.current = false;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    const diff = Math.abs(e.touches[0].clientX - touchStartXRef.current);
+    if (diff > 16) {
+      hasDraggedRef.current = true;
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (hasDraggedRef.current) {
+      setTimeout(() => {
+        hasDraggedRef.current = false;
+      }, 150);
+    }
+  };
+
+  // Mouse drag handlers for desktop with 1:1 tracking
   const handleMouseDown = (e: React.MouseEvent) => {
-    if (e.button !== 0) return; // Solo clic izquierdo principal
+    if (e.button !== 0) return; // Solo botón izquierdo principal
     const el = scrollContainerRef.current;
     if (!el) return;
+
     isMouseDownRef.current = true;
     hasDraggedRef.current = false;
+    dragDistanceRef.current = 0;
     startXRef.current = e.pageX - el.offsetLeft;
     scrollLeftRef.current = el.scrollLeft;
   };
@@ -165,41 +186,37 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
     if (!isMouseDownRef.current) return;
     const el = scrollContainerRef.current;
     if (!el) return;
+
     const currentX = e.pageX - el.offsetLeft;
     const diff = currentX - startXRef.current;
+    dragDistanceRef.current = Math.abs(diff);
 
-    // Solo activar arrastre si supera 7px para permitir clicks y hovers normales
-    if (Math.abs(diff) > 7) {
+    if (Math.abs(diff) > 16) {
       hasDraggedRef.current = true;
       setIsDragging(true);
-      el.scrollLeft = scrollLeftRef.current - diff * 1.2;
+      el.scrollLeft = scrollLeftRef.current - diff;
     }
   };
 
   const handleMouseUpOrLeave = () => {
+    if (!isMouseDownRef.current) return;
     isMouseDownRef.current = false;
-    setTimeout(() => {
-      setIsDragging(false);
+    setIsDragging(false);
+
+    if (dragDistanceRef.current > 16) {
+      setTimeout(() => {
+        hasDraggedRef.current = false;
+      }, 150);
+    } else {
       hasDraggedRef.current = false;
-    }, 60);
+    }
   };
 
+  // Card Flip Toggle: Works symmetrically on front & back without race conditions
   const toggleCardFlip = (specId: string, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
-    // Si se realizó un desplazamiento por arrastre, no voltear la tarjeta
     if (hasDraggedRef.current) return;
     setFlippedCardId((prev) => (prev === specId ? null : specId));
-  };
-
-  const handleBooking = (spec: DetailedClinicalSpecialty, e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (onSelectSpecialtyForBooking) {
-      onSelectSpecialtyForBooking(spec.id);
-    }
-    const contactEl = document.getElementById('contacto');
-    if (contactEl) {
-      contactEl.scrollIntoView({ behavior: 'smooth' });
-    }
   };
 
   return (
@@ -228,7 +245,7 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* ========================================================================= */}
-        {/* SECTION HEADER: Editorial, Blanco & Dorado (Sin Etiquetas)                 */}
+        {/* SECTION HEADER: Editorial, Blanco & Dorado                                 */}
         {/* ========================================================================= */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -242,37 +259,37 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
           </h2>
           
           <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
-            Haz clic en cualquier tarjeta para descubrir sus detalles clínicos, técnicas aplicadas y beneficios directos sin salir de la página.
+            Haz clic en cualquier tarjeta para conocer los detalles del tratamiento y realizar tu consulta directa.
           </p>
         </motion.div>
 
         {/* ========================================================================= */}
-        {/* CAROUSEL WRAPPER CON BOTONES FUERA DE LAS CARDS (NO LAS TAPEN)            */}
+        {/* CAROUSEL WRAPPER CON BOTONES FLANQUEADOS ERGONÓMICOS                       */}
         {/* ========================================================================= */}
         <div className="relative group/carousel px-0 md:px-14 lg:px-16">
           
-          {/* Botón Lateral Izquierdo: Fuera de las cards en el margen exterior izquierdo */}
+          {/* Botón Lateral Izquierdo: Siempre visible, ergonómico y accesible */}
           <button
             type="button"
             onClick={handleScrollPrev}
             aria-label="Especialidad anterior"
-            className="hidden md:flex absolute left-0 lg:left-1 top-1/2 -translate-y-1/2 z-30 w-12 h-12 lg:w-13 lg:h-13 rounded-full items-center justify-center backdrop-blur-md shadow-xl transition-all duration-300 opacity-0 pointer-events-none group-hover/carousel:opacity-100 group-hover/carousel:pointer-events-auto bg-white/95 text-[#84631E] border border-[#D4AF37]/60 shadow-amber-950/20 hover:bg-gradient-to-r hover:from-[#D4AF37] hover:to-[#84631E] hover:text-white hover:border-transparent hover:scale-110 active:scale-95 cursor-pointer"
+            className="hidden md:flex absolute left-0 lg:left-1 top-1/2 -translate-y-1/2 z-30 w-12 h-12 lg:w-14 lg:h-14 rounded-full items-center justify-center backdrop-blur-md shadow-xl transition-all duration-300 bg-white/95 text-[#84631E] border border-[#D4AF37]/60 shadow-amber-950/20 hover:bg-gradient-to-r hover:from-[#D4AF37] hover:to-[#84631E] hover:text-white hover:border-transparent hover:scale-110 active:scale-95 cursor-pointer"
           >
             <ChevronLeft className="w-6 h-6 stroke-[2.5]" />
           </button>
 
-          {/* Botón Lateral Derecho: Fuera de las cards en el margen exterior derecho */}
+          {/* Botón Lateral Derecho: Siempre visible, ergonómico y accesible */}
           <button
             type="button"
             onClick={handleScrollNext}
             aria-label="Siguiente especialidad"
-            className="hidden md:flex absolute right-0 lg:right-1 top-1/2 -translate-y-1/2 z-30 w-12 h-12 lg:w-13 lg:h-13 rounded-full items-center justify-center backdrop-blur-md shadow-xl transition-all duration-300 opacity-0 pointer-events-none group-hover/carousel:opacity-100 group-hover/carousel:pointer-events-auto bg-white/95 text-[#84631E] border border-[#D4AF37]/60 shadow-amber-950/20 hover:bg-gradient-to-r hover:from-[#D4AF37] hover:to-[#84631E] hover:text-white hover:border-transparent hover:scale-110 active:scale-95 cursor-pointer"
+            className="hidden md:flex absolute right-0 lg:right-1 top-1/2 -translate-y-1/2 z-30 w-12 h-12 lg:w-14 lg:h-14 rounded-full items-center justify-center backdrop-blur-md shadow-xl transition-all duration-300 bg-white/95 text-[#84631E] border border-[#D4AF37]/60 shadow-amber-950/20 hover:bg-gradient-to-r hover:from-[#D4AF37] hover:to-[#84631E] hover:text-white hover:border-transparent hover:scale-110 active:scale-95 cursor-pointer"
           >
             <ChevronRight className="w-6 h-6 stroke-[2.5]" />
           </button>
 
           {/* ========================================================================= */}
-          {/* HORIZONTAL CAROUSEL INFINITO: TARJETAS PROPORCIONALES QUE NUNCA SE CORTAN */}
+          {/* HORIZONTAL CAROUSEL CONTAINER: FLUIDO, SNAP DIRECTO, CERO TELEPORT        */}
           {/* ========================================================================= */}
           <div
             ref={scrollContainerRef}
@@ -280,183 +297,188 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUpOrLeave}
             onMouseLeave={handleMouseUpOrLeave}
-            className={`flex gap-6 overflow-x-auto pb-6 pt-2 snap-x snap-mandatory scroll-smooth no-scrollbar select-none ${
-              isDragging ? 'cursor-grabbing' : ''
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            onClickCapture={(e) => {
+              if (hasDraggedRef.current) {
+                e.stopPropagation();
+                e.preventDefault();
+              }
+            }}
+            className={`flex gap-6 overflow-x-auto pb-6 pt-2 snap-x snap-mandatory select-none ${
+              isDragging ? 'scroll-auto cursor-grabbing' : 'scroll-smooth'
             }`}
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none'
             }}
           >
-            {INFINITE_SPECIALTIES.map((spec, index) => {
+            {CLINICAL_SPECIALTIES.map((spec, index) => {
               const isFlipped = flippedCardId === spec.id;
 
               return (
                 <div
-                  key={spec.uniqueKey}
+                  key={spec.id}
                   data-card-index={index}
-                  className="w-full sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)] shrink-0 snap-start h-[490px] sm:h-[510px] [perspective:1200px]"
+                  className="w-full sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)] shrink-0 snap-start h-[500px] sm:h-[520px]"
+                  style={{ perspective: 1200 }}
                 >
-                  {/* 3D Flip Card Container */}
-                  <div
-                    onClick={(e) => {
-                      if (!isFlipped) {
-                        toggleCardFlip(spec.id, e);
-                      }
-                    }}
-                    className={`relative w-full h-full rounded-[2.5rem] transition-transform duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] [transform-style:preserve-3d] cursor-pointer ${
-                      isFlipped ? '[transform:rotateY(180deg)]' : ''
-                    }`}
+                  {/* 3D Flip Card Motion Container */}
+                  <motion.div
+                    animate={{ rotateY: isFlipped ? 180 : 0 }}
+                    transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+                    style={{ transformStyle: 'preserve-3d' }}
+                    className="relative w-full h-full rounded-[2.5rem]"
                   >
                     {/* ========================================================= */}
-                    {/* CARA FRONTAL: FOTO CINEMÁTICA Y TIPOGRAFÍA EDITORIAL       */}
+                    {/* CARA FRONTAL: FOTO CINEMÁTICA Y ACCESO RÁPIDO              */}
                     {/* ========================================================= */}
                     <div
-                      className={`absolute inset-0 w-full h-full rounded-[2.5rem] overflow-hidden bg-stone-900 border border-[#D4AF37]/40 shadow-xl shadow-amber-950/10 [backface-visibility:hidden] flex flex-col justify-between group transition-all duration-300 ${
-                        isFlipped
-                          ? 'pointer-events-none opacity-0 z-0'
-                          : 'pointer-events-auto opacity-100 z-10'
+                      style={{
+                        backfaceVisibility: 'hidden',
+                        WebkitBackfaceVisibility: 'hidden',
+                        transform: 'rotateY(0deg)',
+                      }}
+                      className={`absolute inset-0 w-full h-full rounded-[2.5rem] transition-opacity duration-300 ${
+                        isFlipped ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'
                       }`}
+                      onClick={(e) => toggleCardFlip(spec.id, e)}
                     >
-                      {/* Full-Bleed Large Cinematic Image */}
-                      <img
-                        src={spec.image}
-                        alt={spec.title}
-                        loading="lazy"
-                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out brightness-[0.85]"
-                      />
+                      <div className="w-full h-full rounded-[2.5rem] overflow-hidden bg-stone-900 border border-[#D4AF37]/40 shadow-xl shadow-amber-950/10 flex flex-col justify-between group cursor-pointer relative select-none">
+                        {/* Full-Bleed Large Cinematic Image (WebP local) */}
+                        <img
+                          src={spec.image}
+                          alt={spec.title}
+                          width={500}
+                          height={520}
+                          draggable={false}
+                          loading="lazy"
+                          decoding="async"
+                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out brightness-[0.85] pointer-events-none select-none"
+                        />
 
-                      {/* Gradiente Oscuro y Cálido para Legibilidad Total */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/95 via-[#0B0B0B]/40 to-black/20 pointer-events-none" />
+                        {/* Gradiente Oscuro y Cálido para Legibilidad Total */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/95 via-[#0B0B0B]/40 to-black/20 pointer-events-none" />
 
-                      {/* Espacio Superior Limpio (Sin Etiquetas Estorbando) */}
-                      <div className="relative z-10 p-5 sm:p-6" />
-
-                      {/* Información Inferior con Botón Interactivo para Transformar */}
-                      <div className="relative z-10 p-6 sm:p-7 space-y-3">
-                        <h3 className="text-2xl sm:text-[1.65rem] font-black text-white leading-tight drop-shadow-md">
-                          {spec.title}
-                        </h3>
-                        <p className="text-xs sm:text-[13px] text-stone-200/95 line-clamp-2 leading-relaxed font-medium">
-                          {spec.tagline}
-                        </p>
-
-                        {/* Botón de Transformación 3D */}
-                        <div className="pt-2">
-                          <button
-                            type="button"
-                            onClick={(e) => toggleCardFlip(spec.id, e)}
-                            className="w-full py-3 px-5 rounded-2xl bg-white/95 hover:bg-white text-[#0B0B0B] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md group-hover:bg-gradient-to-r group-hover:from-[#D4AF37] group-hover:via-[#F3E5AB] group-hover:to-[#C5A059] group-hover:text-[#0B0B0B] border border-white/60 cursor-pointer"
-                          >
-                            <RotateCw className="w-3.5 h-3.5 text-[#84631E] group-hover:rotate-180 transition-transform duration-500" />
-                            <span>Ver Detalles Clínicos</span>
-                            <ArrowRight className="w-3.5 h-3.5" />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* ========================================================= */}
-                    {/* CARA TRASERA: INFORMACIÓN CLÍNICA DETALLADA                */}
-                    {/* ========================================================= */}
-                    <div
-                      className={`absolute inset-0 w-full h-full rounded-[2.5rem] bg-gradient-to-b from-[#FFFFFF] via-[#FAF9F6] to-[#F7F4EA] border-2 border-[#D4AF37]/50 shadow-2xl shadow-amber-950/15 p-6 sm:p-7 flex flex-col justify-between [transform:rotateY(180deg)] [backface-visibility:hidden] overflow-y-auto no-scrollbar select-text transition-all duration-300 ${
-                        isFlipped
-                          ? 'pointer-events-auto opacity-100 z-10'
-                          : 'pointer-events-none opacity-0 z-0'
-                      }`}
-                    >
-                      <div className="space-y-4">
-                        {/* Top Bar with Close/Flip-Back Button */}
-                        <div className="flex items-center justify-between pb-2.5 border-b border-stone-200/60">
-                          <span className="text-[11px] font-black uppercase tracking-widest text-[#84631E]">
-                            Detalles Clínicos
+                        {/* Espacio Superior: Badge de Especialidad */}
+                        <div className="relative z-10 p-5 sm:p-6 flex items-center justify-between pointer-events-none">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-[#F3E5AB] text-[10.5px] font-bold tracking-wider uppercase shadow-xs">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
+                            {spec.badge || spec.category}
                           </span>
-                          <button
-                            type="button"
-                            onClick={(e) => toggleCardFlip(spec.id, e)}
-                            aria-label="Volver a la imagen"
-                            className="w-8 h-8 rounded-full bg-stone-100 hover:bg-[#FAF7EE] text-stone-700 hover:text-[#84631E] border border-stone-200/80 flex items-center justify-center transition-colors cursor-pointer"
-                          >
-                            <X className="w-4 h-4" />
-                          </button>
                         </div>
 
-                        {/* Title & Concise Summary */}
-                        <div className="space-y-1.5">
-                          <h4 className="text-xl sm:text-2xl font-black text-[#0D0D0D] leading-tight">
+                        {/* Información Inferior con Botón Interactivo */}
+                        <div className="relative z-10 p-6 sm:p-7 space-y-3">
+                          <h3 className="text-2xl sm:text-[1.65rem] font-black text-white leading-tight drop-shadow-md">
                             {spec.title}
-                          </h4>
-                          <p className="text-xs text-stone-600 leading-relaxed text-justify">
-                            {spec.summary}
+                          </h3>
+                          <p className="text-xs sm:text-[13px] text-stone-200/95 line-clamp-2 leading-relaxed font-medium">
+                            {spec.tagline}
                           </p>
-                        </div>
 
-                        {/* Key Highlights / Features */}
-                        <div className="space-y-2 pt-1 border-t border-stone-200/60">
-                          <span className="text-[10.5px] font-black uppercase tracking-wider text-stone-400 block">
-                            Incluye y Técnicas Clínicas:
-                          </span>
-                          <div className="space-y-1.5">
-                            {spec.features.map((feat, fIdx) => (
-                              <div key={fIdx} className="flex items-start gap-2 text-xs text-stone-700 font-medium">
-                                <div className="w-4 h-4 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/50 text-[#84631E] flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
-                                  <Check className="w-2.5 h-2.5 stroke-[3]" />
-                                </div>
-                                <span className="leading-snug">{feat}</span>
-                              </div>
-                            ))}
+                          {/* Botón de Transformación 3D */}
+                          <div className="pt-2">
+                            <button
+                              type="button"
+                              onClick={(e) => toggleCardFlip(spec.id, e)}
+                              className="w-full py-3 px-5 rounded-2xl bg-white/95 hover:bg-white text-[#0B0B0B] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md hover:bg-gradient-to-r hover:from-[#D4AF37] hover:via-[#F3E5AB] hover:to-[#C5A059] hover:text-[#0B0B0B] border border-white/60 cursor-pointer"
+                            >
+                              <RotateCw className="w-3.5 h-3.5 text-[#84631E] group-hover:rotate-180 transition-transform duration-500" />
+                              <span>Ver Detalles Clínicos</span>
+                              <ArrowRight className="w-3.5 h-3.5" />
+                            </button>
                           </div>
-                        </div>
-
-                        {/* Candidate & Duration */}
-                        <div className="pt-2 border-t border-stone-200/60 space-y-1 text-[11px] text-stone-500">
-                          <div className="flex items-start gap-1.5">
-                            <User className="w-3.5 h-3.5 text-[#84631E] shrink-0 mt-0.5" />
-                            <span><strong>Indicado para:</strong> {spec.patientTarget}</span>
-                          </div>
-                          <div className="flex items-center gap-1.5">
-                            <Clock className="w-3.5 h-3.5 text-[#84631E] shrink-0" />
-                            <span><strong>Tiempo clínico:</strong> {spec.estimatedDuration}</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Bottom Actions: WhatsApp CTA + Agendar Cita + Back */}
-                      <div className="pt-3 mt-1 border-t border-stone-200/60 flex flex-col gap-2">
-                        <a
-                          href={createWhatsAppLink(spec.waMessage)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] hover:from-[#C5A059] hover:to-[#84631E] text-[#0B0B0B] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md shadow-amber-950/15 cursor-pointer border border-[#D4AF37]/50"
-                        >
-                          <WhatsAppIcon className="w-4 h-4 text-[#0B0B0B]" />
-                          <span>Consultar por WhatsApp</span>
-                          <ArrowRight className="w-3.5 h-3.5 text-[#0B0B0B]" />
-                        </a>
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={(e) => handleBooking(spec, e)}
-                            className="flex-1 py-2 px-3 rounded-xl bg-[#FAF7EE] hover:bg-[#F5EED8] text-[#84631E] border border-[#D4AF37]/30 font-bold text-[11px] flex items-center justify-center gap-1 transition-colors cursor-pointer"
-                          >
-                            <span>Agendar Cita</span>
-                          </button>
-
-                          <button
-                            type="button"
-                            onClick={(e) => toggleCardFlip(spec.id, e)}
-                            className="py-2 px-3 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-600 font-bold text-[11px] flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
-                          >
-                            <RotateCw className="w-3 h-3" />
-                            <span>Volver</span>
-                          </button>
                         </div>
                       </div>
                     </div>
-                  </div>
+
+                    {/* ========================================================= */}
+                    {/* CARA TRASERA: INFORMACIÓN CLÍNICA Y CONSULTA (CERO SCROLL) */}
+                    {/* ========================================================= */}
+                    <div
+                      style={{
+                        backfaceVisibility: 'hidden',
+                        WebkitBackfaceVisibility: 'hidden',
+                        transform: 'rotateY(180deg)',
+                      }}
+                      className={`absolute inset-0 w-full h-full rounded-[2.5rem] transition-opacity duration-300 ${
+                        isFlipped ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+                      }`}
+                    >
+                      <div className="w-full h-full rounded-[2.5rem] overflow-hidden bg-gradient-to-b from-white via-[#FAF9F6] to-[#F7F4EA] border-2 border-[#D4AF37]/50 shadow-2xl shadow-amber-950/15 p-6 sm:p-7 flex flex-col justify-between relative select-none">
+                        {/* Contenido Clínico Esencial */}
+                        <div className="flex flex-col justify-between flex-1 min-h-0 space-y-3">
+                          {/* Barra Superior con Badge y Botón Volver */}
+                          <div className="flex items-center justify-between pb-2 border-b border-stone-200/60 shrink-0">
+                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/40 text-[#84631E] text-[10px] font-extrabold uppercase tracking-wider">
+                              <Sparkles className="w-3 h-3 text-[#D4AF37]" />
+                              {spec.badge || spec.category}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={(e) => toggleCardFlip(spec.id, e)}
+                              aria-label="Volver a la portada"
+                              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 hover:bg-[#FAF7EE] text-stone-700 hover:text-[#84631E] border border-stone-200 hover:border-[#D4AF37]/60 text-[11px] font-bold transition-all cursor-pointer active:scale-95 shadow-2xs group/volver"
+                            >
+                              <RotateCw className="w-3.5 h-3.5 text-[#84631E] group-hover/volver:-rotate-180 transition-transform duration-500" />
+                              <span>Volver</span>
+                              <X className="w-3 h-3 text-stone-400 group-hover/volver:text-[#84631E]" />
+                            </button>
+                          </div>
+
+                          {/* Título & Resumen Clínico Directo */}
+                          <div className="space-y-1 shrink-0">
+                            <h4 className="text-xl sm:text-[1.3rem] font-black text-[#0D0D0D] tracking-tight leading-snug">
+                              {spec.title}
+                            </h4>
+                            <p className="text-xs sm:text-[12.5px] text-stone-600 leading-relaxed">
+                              {spec.summary}
+                            </p>
+                          </div>
+
+                          {/* Puntos Clave Esenciales (3 items concisos) */}
+                          <div className="space-y-1.5 pt-2 border-t border-stone-200/60 shrink-0">
+                            <span className="text-[10px] font-black uppercase tracking-wider text-stone-400 block">
+                              Qué incluye el tratamiento:
+                            </span>
+                            <ul className="space-y-1.5">
+                              {spec.features.slice(0, 3).map((feat, fIdx) => (
+                                <li key={fIdx} className="flex items-center gap-2 text-xs text-stone-700 font-medium">
+                                  <div className="w-4 h-4 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/50 text-[#84631E] flex items-center justify-center shrink-0 shadow-2xs">
+                                    <Check className="w-2.5 h-2.5 stroke-[3]" />
+                                  </div>
+                                  <span className="leading-tight truncate">{feat}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+
+                          {/* Tiempo Clínico Estimado */}
+                          <div className="flex items-center gap-2 text-[11px] text-stone-500 bg-white/80 border border-stone-200/70 rounded-xl px-3 py-2 shrink-0">
+                            <Clock className="w-3.5 h-3.5 text-[#84631E] shrink-0" />
+                            <span className="truncate"><strong>Tiempo estimado:</strong> {spec.estimatedDuration}</span>
+                          </div>
+                        </div>
+
+                        {/* Botón de Consulta Único (WhatsApp) */}
+                        <div className="pt-3 border-t border-stone-200/60 shrink-0">
+                          <a
+                            href={createWhatsAppLink(spec.waMessage)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-[#25D366] via-[#20BA5A] to-[#128C7E] hover:from-[#20BA5A] hover:to-[#0f7a6d] text-white font-extrabold text-xs sm:text-[13px] uppercase tracking-wider flex items-center justify-center gap-2.5 transition-all shadow-lg shadow-emerald-950/20 hover:shadow-emerald-600/30 hover:scale-[1.01] active:scale-[0.98] cursor-pointer group/cta"
+                          >
+                            <WhatsAppIcon className="w-4 h-4 text-white group-hover/cta:scale-110 transition-transform" />
+                            <span>Consultar por WhatsApp</span>
+                            <ArrowRight className="w-3.5 h-3.5 text-white/80 group-hover/cta:translate-x-1 transition-transform" />
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
                 </div>
               );
             })}
@@ -499,7 +521,7 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
             </div>
           </div>
 
-          {/* Interactive Navigation Dots (Gold) */}
+          {/* Interactive Navigation Dots (Gold) — 1:1 sincronizado con cada especialidad */}
           <div className="flex items-center gap-2">
             {CLINICAL_SPECIALTIES.map((_, dotIdx) => (
               <button
@@ -516,13 +538,8 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
             ))}
           </div>
 
-          {/* Botón para continuar a la siguiente sección (fuera de las cards) */}
+          {/* Botón para continuar a la siguiente sección */}
           <div className="flex items-center gap-3">
-            <div className="text-xs text-stone-400 hidden lg:flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-              <span>Navegación infinita</span>
-            </div>
-
             <a
               href="#urgencias"
               className="inline-flex items-center gap-2 text-xs font-bold text-[#84631E] hover:text-[#0D0D0D] bg-[#FAF7EE] hover:bg-[#F5EED8] border border-[#D4AF37]/40 px-3.5 py-1.5 rounded-full transition-all duration-200 shadow-2xs cursor-pointer group"

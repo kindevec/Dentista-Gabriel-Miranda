@@ -62,46 +62,30 @@ export const DoctorProfileSection: React.FC = () => {
           viewport={{ once: true, amount: 0.15 }}
           className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center mb-8 sm:mb-10"
         >
-          {/* Left Doctor Photo — Freestanding Cutout sobre Base Arquitectónica de Lujo */}
+          {/* Left Doctor Photo — Retrato de Autor */}
           <motion.div variants={itemVariants} className="lg:col-span-5 relative flex flex-col items-center justify-center">
             {/* Studio Radial Ambient Aura */}
-            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 sm:w-96 h-80 sm:h-96 rounded-full bg-gradient-to-tr from-[#D4AF37]/25 via-[#F3E5AB]/15 to-transparent blur-3xl pointer-events-none -z-10" />
-
+            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 sm:w-96 h-80 sm:h-96 rounded-full bg-gradient-to-tr from-[#D4AF37]/20 via-[#F3E5AB]/10 to-transparent blur-3xl pointer-events-none -z-10" />
 
             <div className="relative w-full max-w-[340px] sm:max-w-[390px] md:max-w-[420px] flex flex-col items-center">
-              {/* Doctor Cutout Image (Desde la cintura, posado naturalmente sobre la base) */}
-              <div className="relative z-10 w-full flex justify-center -mb-4 sm:-mb-5">
+              {/* Doctor Cutout Image */}
+              <div className="relative z-10 w-full flex justify-center">
                 <img
                   src={DOCTOR_PROFILE.image}
                   alt={`${DOCTOR_NAME} - Odontólogo Especialista`}
-                  className="w-full h-auto max-h-[460px] sm:max-h-[500px] object-contain object-bottom drop-shadow-[0_20px_35px_rgba(132,99,30,0.25)] transition-transform duration-500 hover:scale-[1.015]"
+                  width={420}
+                  height={500}
+                  className="w-full h-auto max-h-[460px] sm:max-h-[500px] object-contain object-bottom drop-shadow-[0_20px_35px_rgba(132,99,30,0.18)] transition-transform duration-500 hover:scale-[1.01]"
+                  style={{
+                    maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
+                    WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
+                  }}
                   loading="lazy"
                   decoding="async"
                 />
               </div>
 
-              {/* Base de Escultura / Podio 3D de Alta Gama */}
-              <div className="relative w-full flex flex-col items-center z-15">
-                {/* Sombra de contacto del doctor sobre la plataforma superior */}
-                <div className="w-52 sm:w-60 h-3.5 bg-black/30 rounded-[100%] blur-xs -mb-2 z-20 pointer-events-none" />
-
-                {/* Superficie Superior del Podio (Plataforma Elíptica de Marfil Biselada con Oro) */}
-                <div className="relative w-[280px] sm:w-[330px] md:w-[360px] h-[34px] sm:h-[38px] rounded-[100%] bg-gradient-to-r from-[#FFFFFF] via-[#FAF7EE] to-[#F3E8CE] border-2 border-[#D4AF37]/75 shadow-[inset_0_2px_6px_rgba(255,255,255,0.9),0_6px_20px_rgba(212,175,55,0.3)] flex items-center justify-center overflow-hidden">
-                  {/* Anillo Concéntrico Interior Dorado */}
-                  <div className="w-[90%] h-[70%] rounded-[100%] border border-[#D4AF37]/50 bg-gradient-to-r from-transparent via-white/60 to-transparent" />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent pointer-events-none" />
-                </div>
-
-                {/* Faldón / Altura Cilíndrica del Podio con Reflejo Metálico */}
-                <div className="w-[276px] sm:w-[326px] md:w-[356px] h-4 sm:h-5 -mt-[17px] sm:-mt-[19px] rounded-b-[2rem] bg-gradient-to-b from-[#E2D2A4] via-[#D0BD8A] to-[#BFA76F] border-x border-b border-[#D4AF37]/80 shadow-[0_12px_25px_-4px_rgba(132,99,30,0.35)] relative overflow-hidden">
-                  <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.45)_25%,transparent_50%,rgba(255,255,255,0.4)_75%,transparent_100%)] pointer-events-none" />
-                </div>
-
-                {/* Sombra de Apoyo Atmosférico en el Piso */}
-                <div className="w-[300px] sm:w-[360px] md:w-[400px] h-5 sm:h-6 bg-black/20 rounded-[100%] blur-md -mt-2 pointer-events-none" />
-              </div>
-
-              {/* Identificación de Prestigio del Dr. Miranda (Limpia, elegante y sin tarjetas ni badges) */}
+              {/* Identificación de Autor del Dr. Gabriel Miranda (Solamente el nombre y cargo abajo) */}
               <div className="mt-4 sm:mt-5 text-center space-y-1 relative z-20 w-full max-w-sm px-2">
                 {/* Nombre del Doctor en Tipografía de Autor */}
                 <h3 className="text-2xl sm:text-3xl font-black text-[#0D0D0D] tracking-tight leading-tight">
@@ -280,12 +264,15 @@ export const DoctorProfileSection: React.FC = () => {
               <div className="relative w-full max-w-md rounded-t-[14rem] rounded-b-[3rem] overflow-hidden shadow-2xl p-1.5 bg-gradient-to-b from-[#D4AF37] via-[#F3E5AB] to-white">
                 <div className="relative w-full h-[320px] sm:h-[360px] rounded-t-[13.5rem] rounded-b-[2.6rem] overflow-hidden bg-stone-900 group">
                   <img
-                    src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop"
+                    src="/clinic/consultorio.webp"
                     alt="Consultorio Clínico Miranda Dental Studio"
-                    referrerPolicy="no-referrer"
+                    width={800}
+                    height={600}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 brightness-95"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/80 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/80 via-transparent to-transparent pointer-events-none" />
                   
                   <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded-2xl bg-white/95 backdrop-blur-md text-[#0D0D0D] text-center border border-[#D4AF37]/30 shadow-lg">
                     <p className="text-xs font-bold text-[#0D0D0D]">Consultorio Dental Ergonómico</p>
@@ -298,16 +285,19 @@ export const DoctorProfileSection: React.FC = () => {
               <motion.div
                 animate={{ y: [-6, 6, -6] }}
                 transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-                className="absolute -bottom-6 sm:-bottom-8 right-0 sm:-right-4 z-20 w-32 sm:w-44 h-32 sm:h-44 rounded-[2rem] sm:rounded-[2.5rem] rounded-tr-lg p-1.5 bg-gradient-to-br from-white via-[#F3E5AB] to-[#D4AF37] shadow-2xl shadow-amber-950/20"
+                className="absolute -bottom-6 sm:-bottom-8 right-0 sm:-right-4 z-20 w-32 sm:w-44 h-32 sm:h-44 rounded-[2rem] sm:rounded-[2.5rem] rounded-tr-lg p-1.5 bg-gradient-to-br from-white via-[#F3E5AB] to-[#D4AF37] shadow-2xl shadow-amber-950/20 transform-gpu will-change-transform"
               >
                 <div className="relative w-full h-full rounded-[2.2rem] rounded-tr-md overflow-hidden bg-stone-900 group">
                   <img
-                    src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=600&auto=format&fit=crop"
+                    src="/clinic/bioseguridad.webp"
                     alt="Equipamiento y Bioseguridad en Miranda Dental Studio"
-                    referrerPolicy="no-referrer"
+                    width={400}
+                    height={400}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-2.5">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-2.5 pointer-events-none">
                     <span className="text-[10px] font-bold text-white uppercase tracking-tight">
                       Bioseguridad
                     </span>

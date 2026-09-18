@@ -48,6 +48,8 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
           <img
             src="/clinica-miranda.webp"
             alt="Miranda Dental Studio — Dr. Gabriel Miranda"
+            width={1200}
+            height={800}
             className="w-full h-full object-cover object-center brightness-105 contrast-[1.05]"
             loading="lazy"
             decoding="async"

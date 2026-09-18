@@ -50,21 +50,21 @@ export const OrganicDentalRibbon: React.FC<OrganicDentalRibbonProps> = ({
       initial={{ opacity: 0 }}
       animate={{
         opacity: 1,
-        y: [-8, 8, -8],
-        rotate: [-1.5, 1.5, -1.5],
+        y: [-6, 6, -6],
+        rotate: [-1, 1, -1],
       }}
       transition={{
-        y: { repeat: Infinity, duration: 8, ease: 'easeInOut' },
-        rotate: { repeat: Infinity, duration: 10, ease: 'easeInOut' },
-        opacity: { duration: 1 },
+        y: { repeat: Infinity, duration: 9, ease: 'easeInOut' },
+        rotate: { repeat: Infinity, duration: 12, ease: 'easeInOut' },
+        opacity: { duration: 0.8 },
       }}
-      className={`absolute pointer-events-none select-none z-0 ${className}`}
+      className={`absolute pointer-events-none select-none z-0 transform-gpu will-change-transform ${className}`}
     >
       <svg
         viewBox="0 0 800 600"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full drop-shadow-[0_15px_25px_rgba(212,175,55,0.15)]"
+        className="w-full h-full drop-shadow-[0_12px_20px_rgba(212,175,55,0.12)]"
       >
         <defs>
           <linearGradient id={`ribbonGrad-${variant}`} x1="0%" y1="0%" x2="100%" y2="100%">
@@ -72,17 +72,12 @@ export const OrganicDentalRibbon: React.FC<OrganicDentalRibbonProps> = ({
             <stop offset="45%" stopColor={grad.mid} stopOpacity={grad.opacity * 1.2} />
             <stop offset="100%" stopColor={grad.stop} stopOpacity={grad.opacity * 0.7} />
           </linearGradient>
-          <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="10" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
         </defs>
 
         {/* 3D Organic Smooth Fluid Ribbon Ribbon Track */}
         <path
           d="M 50 320 C 180 180, 260 460, 420 280 C 580 100, 680 420, 780 240 C 720 380, 560 220, 410 400 C 250 560, 150 220, 50 320 Z"
           fill={`url(#ribbonGrad-${variant})`}
-          filter="url(#softGlow)"
         />
 
         {/* Dynamic Light Specular Edge */}
