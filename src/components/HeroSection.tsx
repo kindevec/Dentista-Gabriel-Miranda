@@ -254,7 +254,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               className="absolute -top-2 left-6 z-20 px-3 py-1.5 rounded-full bg-white/95 shadow-md shadow-amber-950/10 backdrop-blur-md border border-[#D4AF37]/40 pointer-events-none flex items-center gap-1.5 text-[11px] font-black text-[#84631E]"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
-              <span>Senescyt: 1042-2023-2642790</span>
+              <span>C.N.S.I.T.: 1042/2023/2642790</span>
             </motion.div>
 
             {/* 4. THE INTERACTIVE 3D TOOTH MOLAR SCULPTURE */}

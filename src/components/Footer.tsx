@@ -30,7 +30,7 @@ export const Footer: React.FC = () => {
 
             <div className="flex items-center gap-2 text-[#F3E5AB] text-xs font-semibold pt-1">
               <ShieldCheck className="w-4 h-4 text-[#D4AF37]" />
-              <span>Registro Oficial Senescyt: {DOCTOR_SENESCYT}</span>
+              <span>Registro Oficial C.N.S.I.T.: {DOCTOR_SENESCYT}</span>
             </div>
           </div>
 

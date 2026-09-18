@@ -82,7 +82,7 @@ export const DoctorProfileSection: React.FC = () => {
                   {/* Gradient Info Overlay */}
                   <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-[#0B0B0B] via-[#0B0B0B]/70 to-transparent p-7 text-white">
                     <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-[#D4AF37]/25 text-[#F3E5AB] text-[10px] font-mono font-bold uppercase mb-1 border border-[#D4AF37]/40">
-                      Senescyt: {DOCTOR_SENESCYT}
+                      C.N.S.I.T.: {DOCTOR_SENESCYT}
                     </div>
                     <h3 className="text-xl sm:text-2xl font-black text-white">{DOCTOR_NAME}</h3>
                     <p className="text-xs font-semibold text-[#D4AF37] mt-0.5">{DOCTOR_PROFILE.title}</p>
