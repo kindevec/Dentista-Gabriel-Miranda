@@ -4,7 +4,6 @@ import { Clock, CreditCard, Sparkles, ArrowRight, ShieldCheck } from 'lucide-rea
 import { DOCTOR_NAME, createWhatsAppLink, GENERAL_WA_MESSAGE, CLINIC_HOURS } from '../data/clinicData';
 import { WhatsAppIcon } from './OfficialSocialLogos';
 import { OrganicDentalRibbon } from './OrganicDentalRibbon';
-import { CurvedSectionDivider } from './CurvedSectionDivider';
 
 interface EmergencyBannerSectionProps {
   onOpenEmergency?: () => void;
@@ -16,27 +15,23 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1,
+        staggerChildren: 0.12,
+        delayChildren: 0.05,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 25 },
+    hidden: { opacity: 0, y: 15 },
     show: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" as const },
+      transition: { duration: 0.5, ease: "easeOut" as const },
     },
   };
 
   return (
-    <section id="urgencias" className="relative overflow-hidden py-14 sm:py-16 lg:py-20 text-white bg-[#0D0D0D] border-y border-[#D4AF37]/30">
-      {/* Top Organic Wave Transition from Specialties Section */}
-      <div className="absolute top-0 left-0 right-0 z-20 pointer-events-none">
-        <CurvedSectionDivider position="top" fillColor="#FFFFFF" variant="wave1" />
-      </div>
+    <section id="urgencias" className="relative overflow-hidden py-10 sm:py-12 text-white bg-[#0D0D0D] border-y border-[#D4AF37]/30">
 
       {/* Atmospheric Background with Warm Gold Light */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
@@ -89,40 +84,40 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
             </motion.h2>
 
             {/* Subtext */}
-            <motion.p variants={itemVariants} className="text-sm sm:text-base text-stone-300 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed text-justify">
-              Inicia tu tratamiento con total claridad: examen clínico detallado con el <strong className="text-white font-bold">{DOCTOR_NAME}</strong>, diagnóstico fotográfico de tu sonrisa y radiografías dentales por solo $15. Además, accede a nuestro <strong>Crédito Directo Dental</strong> de $400 a $2,000.
+            <motion.p variants={itemVariants} className="text-sm sm:text-base text-stone-300 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+              Diagnóstico clínico completo con el <strong className="text-white font-bold">{DOCTOR_NAME}</strong>, fotografías dentales y radiografías por solo $15. Crédito directo disponible de $400 a $2,000.
             </motion.p>
 
             {/* 3 Pillars: Valoración, Crédito Directo, Horarios */}
-            <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 pt-3">
-              <div className="text-left space-y-2 p-3.5 rounded-2xl bg-white/5 border border-[#D4AF37]/25 backdrop-blur-xs">
-                <ShieldCheck className="w-6 h-6 text-[#D4AF37]" />
+            <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+              <div className="text-left space-y-1.5 p-3 rounded-2xl bg-white/5 border border-[#D4AF37]/25 backdrop-blur-xs">
+                <ShieldCheck className="w-5 h-5 text-[#D4AF37]" />
                 <h3 className="text-xs sm:text-sm font-black text-[#F3E5AB] uppercase tracking-wider">1. Diagnóstico $15</h3>
-                <p className="text-[11px] sm:text-xs text-stone-300 leading-relaxed text-justify">Incluye diagnóstico clínico, fotografías y radiografías.</p>
+                <p className="text-[11px] sm:text-xs text-stone-300 leading-relaxed">Diagnóstico clínico, fotos y rayos X.</p>
               </div>
 
-              <div className="text-left space-y-2 p-3.5 rounded-2xl bg-white/5 border border-[#D4AF37]/25 backdrop-blur-xs">
-                <CreditCard className="w-6 h-6 text-[#D4AF37]" />
+              <div className="text-left space-y-1.5 p-3 rounded-2xl bg-white/5 border border-[#D4AF37]/25 backdrop-blur-xs">
+                <CreditCard className="w-5 h-5 text-[#D4AF37]" />
                 <h3 className="text-xs sm:text-sm font-black text-[#F3E5AB] uppercase tracking-wider">2. Crédito Directo</h3>
-                <p className="text-[11px] sm:text-xs text-stone-300 leading-relaxed text-justify">Financiamiento desde $400 hasta $2,000 sin intermediarios.</p>
+                <p className="text-[11px] sm:text-xs text-stone-300 leading-relaxed">Financiamiento de $400 a $2,000.</p>
               </div>
 
-              <div className="text-left space-y-2 p-3.5 rounded-2xl bg-white/5 border border-[#D4AF37]/25 backdrop-blur-xs">
-                <Clock className="w-6 h-6 text-[#D4AF37]" />
-                <h3 className="text-xs sm:text-sm font-black text-[#F3E5AB] uppercase tracking-wider">3. Lunes a Domingo</h3>
-                <p className="text-[11px] sm:text-xs text-stone-300 leading-relaxed text-justify">{CLINIC_HOURS}</p>
+              <div className="text-left space-y-1.5 p-3 rounded-2xl bg-white/5 border border-[#D4AF37]/25 backdrop-blur-xs">
+                <Clock className="w-5 h-5 text-[#D4AF37]" />
+                <h3 className="text-xs sm:text-sm font-black text-[#F3E5AB] uppercase tracking-wider">3. Lun a Dom</h3>
+                <p className="text-[11px] sm:text-xs text-stone-300 leading-relaxed">{CLINIC_HOURS}</p>
               </div>
             </motion.div>
 
             {/* CTA Button */}
-            <motion.div variants={itemVariants} className="pt-3 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+            <motion.div variants={itemVariants} className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
               <motion.a
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 href={createWhatsAppLink(GENERAL_WA_MESSAGE)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] hover:from-[#C5A059] hover:to-[#84631E] text-[#0B0B0B] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2.5 transition-all shadow-xl shadow-amber-950/30 cursor-pointer border border-[#D4AF37]/60"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] hover:from-[#C5A059] hover:to-[#84631E] text-[#0B0B0B] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2.5 transition-all shadow-xl shadow-amber-950/30 cursor-pointer border border-[#D4AF37]/60"
               >
                 <WhatsAppIcon className="w-4 h-4 text-[#0B0B0B]" />
                 <span>Reservar Valoración de $15 por WhatsApp</span>
@@ -132,11 +127,6 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
 
           </div>
         </motion.div>
-      </div>
-
-      {/* Bottom Wave Transition to Doctor Profile */}
-      <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none">
-        <CurvedSectionDivider position="bottom" fillColor="#FAF9F5" variant="smoothCurve" />
       </div>
     </section>
   );

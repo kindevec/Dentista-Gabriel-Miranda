@@ -4,7 +4,6 @@ import { HelpCircle, ChevronDown } from 'lucide-react';
 import { WhatsAppIcon } from './OfficialSocialLogos';
 import { FAQ_DATA, DOCTOR_NAME, createWhatsAppLink } from '../data/clinicData';
 import { OrganicDentalRibbon } from './OrganicDentalRibbon';
-import { CurvedSectionDivider } from './CurvedSectionDivider';
 
 export const FaqSection: React.FC = () => {
   const [openId, setOpenId] = useState<string | null>(FAQ_DATA[0].id);
@@ -33,28 +32,28 @@ export const FaqSection: React.FC = () => {
   };
 
   return (
-    <section id="preguntas" className="py-10 sm:py-12 bg-white relative overflow-hidden">
+    <section id="preguntas" className="py-8 sm:py-10 bg-white relative overflow-hidden">
       {/* Subtle organic ribbon accent in gold */}
       <OrganicDentalRibbon className="-top-10 -right-20 w-96 opacity-25" variant="gold" />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-2 sm:pb-3">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-2">
         
         {/* Header with Animation */}
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-5 sm:mb-7 space-y-2"
+          transition={{ duration: 0.5 }}
+          className="text-center mb-4 sm:mb-6 space-y-1.5"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/30 text-[#84631E] text-xs font-bold tracking-wider uppercase mb-2">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/30 text-[#84631E] text-xs font-bold tracking-wider uppercase mb-1">
             Preguntas Frecuentes
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
             Resolvemos tus Dudas sobre Tratamientos y Consultas
           </h2>
-          <p className="text-sm sm:text-base text-stone-600 max-w-2xl mx-auto text-justify">
-            Conoce los aspectos clave sobre el manejo del dolor, facilidades de pago con crédito directo y tiempos de atención en Miranda Dental Studio.
+          <p className="text-sm sm:text-base text-stone-600 max-w-2xl mx-auto">
+            Respuestas directas sobre valoraciones, opciones de financiamiento y confort clínico en Miranda Dental Studio.
           </p>
         </motion.div>
 
@@ -142,12 +141,6 @@ export const FaqSection: React.FC = () => {
             <span>Consultar directamente por WhatsApp</span>
           </motion.a>
         </motion.div>
-
-      </div>
-
-      {/* Organic Curved Wave Transition into Contact Section */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
-        <CurvedSectionDivider position="bottom" fillColor="#FAF9F5" variant="wave1" />
       </div>
     </section>
   );

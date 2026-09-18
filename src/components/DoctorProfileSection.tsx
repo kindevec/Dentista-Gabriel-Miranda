@@ -3,7 +3,6 @@ import { motion } from 'motion/react';
 import { DOCTOR_PROFILE, DOCTOR_NAME, createWhatsAppLink, GENERAL_WA_MESSAGE, DOCTOR_SENESCYT } from '../data/clinicData';
 import { Cpu, Shield, Heart, Calendar, CheckCircle2, Quote, ArrowRight, Award } from 'lucide-react';
 import { OrganicDentalRibbon } from './OrganicDentalRibbon';
-import { CurvedSectionDivider } from './CurvedSectionDivider';
 
 export const DoctorProfileSection: React.FC = () => {
   const containerVariants = {
@@ -26,7 +25,7 @@ export const DoctorProfileSection: React.FC = () => {
   };
 
   return (
-    <section id="nosotros" className="py-14 sm:py-20 relative overflow-hidden bg-[#FAF9F5]">
+    <section id="nosotros" className="py-8 sm:py-12 relative overflow-hidden bg-[#FAF9F5]">
       {/* Subtle Background Texture */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-b from-[#FAF9F5] via-white/80 to-[#FAF9F5]" />
@@ -35,15 +34,15 @@ export const DoctorProfileSection: React.FC = () => {
       {/* Floating 3D Curved Ribbon in Gold */}
       <OrganicDentalRibbon className="top-1/4 -left-16 w-96 md:w-[32rem] opacity-30" variant="gold" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-2 sm:pb-3">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-2">
         
         {/* Section Header with Animation */}
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-10 sm:mb-14 space-y-2.5"
+          transition={{ duration: 0.5 }}
+          className="text-center max-w-3xl mx-auto mb-5 sm:mb-7 space-y-2"
         >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/45 text-[#84631E] text-xs font-black uppercase tracking-wider shadow-2xs">
             <Award className="w-3.5 h-3.5 text-[#D4AF37]" />
@@ -52,8 +51,8 @@ export const DoctorProfileSection: React.FC = () => {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
             Conoce al <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#84631E]">{DOCTOR_NAME}</span>
           </h2>
-          <p className="text-sm sm:text-base text-stone-600 max-w-2xl mx-auto text-justify">
-            Especialista comprometido con la excelencia científica, la innovación tecnológica y un trato empático donde tu salud y confort son la máxima prioridad.
+          <p className="text-sm sm:text-base text-stone-600 max-w-2xl mx-auto">
+            Especialista con formación en rehabilitación oral y estética dental, enfocado en odontología biomimética y confort integral.
           </p>
         </motion.div>
 
@@ -63,16 +62,16 @@ export const DoctorProfileSection: React.FC = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.15 }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center mb-16 sm:mb-20"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center mb-8 sm:mb-10"
         >
           {/* Left Doctor Photo with Architectural Arch Frame in Gold & White */}
           <motion.div variants={itemVariants} className="lg:col-span-5 relative flex justify-center">
-            <div className="relative w-full max-w-[360px] sm:max-w-[400px]">
+            <div className="relative w-full max-w-[340px] sm:max-w-[380px]">
               {/* Outer Architectural Arch Frame with Gold & Champagne Gradient */}
-              <div className="p-2 rounded-t-[16rem] rounded-b-[3.5rem] bg-gradient-to-b from-[#D4AF37] via-[#F3E5AB] to-[#FFFFFF] shadow-[0_25px_60px_-15px_rgba(132,99,30,0.2)] relative group">
+              <div className="p-2 rounded-t-[16rem] rounded-b-[3.5rem] bg-gradient-to-b from-[#D4AF37] via-[#F3E5AB] to-[#FFFFFF] shadow-[0_20px_50px_-15px_rgba(132,99,30,0.18)] relative group">
                 
                 {/* Inner Masked Viewport */}
-                <div className="relative rounded-t-[15.5rem] rounded-b-[3rem] overflow-hidden bg-stone-900 h-[480px] sm:h-[530px]">
+                <div className="relative rounded-t-[15.5rem] rounded-b-[3rem] overflow-hidden bg-stone-900 h-[400px] sm:h-[450px]">
                   <img
                     src={DOCTOR_PROFILE.image}
                     alt={`${DOCTOR_NAME} - Odontólogo Especialista`}
@@ -226,7 +225,7 @@ export const DoctorProfileSection: React.FC = () => {
             <div className="lg:col-span-5 relative flex items-center justify-center pt-4 lg:pt-0">
               {/* Primary Architectural Arch Mask */}
               <div className="relative w-full max-w-md rounded-t-[14rem] rounded-b-[3rem] overflow-hidden shadow-2xl p-1.5 bg-gradient-to-b from-[#D4AF37] via-[#F3E5AB] to-white">
-                <div className="relative w-full h-[400px] sm:h-[440px] rounded-t-[13.5rem] rounded-b-[2.6rem] overflow-hidden bg-stone-900 group">
+                <div className="relative w-full h-[320px] sm:h-[360px] rounded-t-[13.5rem] rounded-b-[2.6rem] overflow-hidden bg-stone-900 group">
                   <img
                     src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop"
                     alt="Consultorio Clínico Miranda Dental Studio"
@@ -268,8 +267,6 @@ export const DoctorProfileSection: React.FC = () => {
         </div>
 
       </div>
-
-      <CurvedSectionDivider position="bottom" fillColor="#FFFFFF" variant="smoothCurve" />
     </section>
   );
 };

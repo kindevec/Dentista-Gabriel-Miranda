@@ -24,116 +24,76 @@ export const BOOKING_WA_MESSAGE = `Hola ${DOCTOR_NAME}, deseo agendar una cita e
 export const EMERGENCY_WA_MESSAGE = `¡URGENCIA DENTAL! Hola ${DOCTOR_NAME}, presento dolor agudo y requiero atención prioritaria en Miranda Dental Studio.`;
 
 /**
- * SERVICIOS BÁSICOS Y DE CONSULTORIO (Utilizados en la Rueda Interactiva de Servicios)
+ * SERVICIOS BÁSICOS OFICIALES (Nombrados explícitamente en el PDF del Dr. Gabriel Miranda)
  */
 export const SPECIALTIES_DATA: Specialty[] = [
   {
-    id: "profilaxis-profunda",
-    title: "Profilaxis Dental Profunda con Ultrasonido",
-    shortDesc: "Limpieza profesional con ultrasonido para eliminar sarro subgingival, placa bacteriana y manchas superficiales.",
-    fullDesc: "Higiene dental avanzada de grado clínico que desinflama encías, previene la enfermedad periodontal y devuelve la pureza y frescura a tu sonrisa.",
+    id: "profilaxis-dental",
+    title: "Profilaxis Dental Profunda",
+    shortDesc: "Limpieza ultrasónica para remover sarro, placa bacteriana y manchas superficiales.",
+    fullDesc: "Higiene clínica con ultrasonido y pulido suave que previene caries y desinflama encías.",
     iconName: "Droplets",
-    badge: "Cuidado Preventivo Esencial",
+    badge: "Servicio Básico",
     image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=800&auto=format&fit=crop",
     features: [
-      "Eliminación ultrasónica de cálculo y sarro",
-      "Pulido dental con pasta profiláctica suave",
-      "Control bacteriano y salud de encías",
-      "Revisión diagnóstica completa"
+      "Eliminación ultrasónica de sarro y placa",
+      "Pulido coronario profiláctico",
+      "Diagnóstico preventivo de encías"
     ],
-    waMessage: `Hola ${DOCTOR_NAME}, deseo agendar una Profilaxis Dental Profunda en Miranda Dental Studio.`,
-    estimatedTime: "40 a 45 minutos",
-    suitableFor: "Toda la familia como mantenimiento preventivo semestral."
+    waMessage: `Hola ${DOCTOR_NAME}, deseo agendar una Profilaxis Dental Profunda.`,
+    estimatedTime: "30 a 40 minutos",
+    suitableFor: "Mantenimiento preventivo periódico."
   },
   {
-    id: "restauraciones-esteticas",
-    title: "Restauraciones Estéticas Biomiméticas",
-    shortDesc: "Calzas y reconstrucciones invisibles en resina de alta densidad que imitan el color y textura natural del diente.",
-    fullDesc: "Reemplazo de restauraciones metálicas oscuras o reparación de caries y fracturas con resinas nanoparticuladas biocompatibles de larga duración.",
+    id: "restauraciones",
+    title: "Restauraciones Dentales",
+    shortDesc: "Calzas estéticas en resina compuesta de alta densidad con el color exacto del diente.",
+    fullDesc: "Eliminación de caries y reconstrucción anatómica duradera y biomimética sin metales.",
     iconName: "ShieldCheck",
-    badge: "Biomimética Dental",
+    badge: "Servicio Básico",
     image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=800&auto=format&fit=crop",
     features: [
-      "Estratificación de capas con color dental exacto",
-      "Aislamiento absoluto para máxima adhesión",
-      "Pulido de alto brillo inalterable",
-      "Preservación de la anatomía original"
+      "Resinas estéticas del tono dental exacto",
+      "Aislamiento para máxima adherencia",
+      "Acabado pulido y anatómico natural"
     ],
-    waMessage: `Hola ${DOCTOR_NAME}, quisiera agendar una cita para Restauraciones Estéticas en resina.`,
-    estimatedTime: "45 minutos por pieza",
-    suitableFor: "Pacientes con caries, fracturas o restauraciones antiguas deterioradas."
+    waMessage: `Hola ${DOCTOR_NAME}, deseo agendar una cita para Restauraciones Dentales.`,
+    estimatedTime: "30 a 45 minutos",
+    suitableFor: "Dientes con caries o fracturas leves."
   },
   {
-    id: "blanqueamiento-led",
-    title: "Blanqueamiento Dental Profesional LED",
-    shortDesc: "Aclara hasta 4 tonos el esmalte dental en una sesión con gel desensibilizante fotoactivado.",
-    fullDesc: "Tecnología de fotoactivación controlada que elimina pigmentos profundos por café, té o tabaco sin dañar la integridad de tu esmalte.",
-    iconName: "Smile",
-    badge: "Efecto Luminoso Inmediato",
-    image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=800&auto=format&fit=crop",
-    features: [
-      "Aclaramiento de 3 a 5 tonos en 1 sola cita",
-      "Protector gingival fotopolimerizable",
-      "Fórmula clínica con nitrato de potasio anti-sensibilidad",
-      "Brillo radiante y natural de tu sonrisa"
-    ],
-    waMessage: `Hola ${DOCTOR_NAME}, me gustaría agendar una sesión de Blanqueamiento Dental LED en consultorio.`,
-    estimatedTime: "50 minutos",
-    suitableFor: "Dientes oscurecidos o manchados que buscan una sonrisa rejuvenecida."
-  },
-  {
-    id: "microabrasion",
-    title: "Microabrasión Dental para Fluorosis",
-    shortDesc: "Tratamiento químico-mecánico especializado para eliminar manchas blancas o pardas causadas por fluorosis.",
-    fullDesc: "Técnica conservadora que pule y remueve las alteraciones de color superficiales del esmalte, devolviendo una tonalidad homogénea y natural a tus dientes frontales.",
-    iconName: "Activity",
-    badge: "Tratamiento de Manchas",
-    image: "https://images.unsplash.com/photo-1629909615184-74f495363b67?q=80&w=800&auto=format&fit=crop",
-    features: [
-      "Eliminación selectiva de manchas por fluorosis",
-      "Procedimiento mínimamente invasivo sin desgastes agresivos",
-      "Remineralización inmediata con flúor tópico",
-      "Resultados visibles en la misma sesión"
-    ],
-    waMessage: `Hola ${DOCTOR_NAME}, requiero una valoración para Microabrasión Dental y tratamiento de fluorosis.`,
-    estimatedTime: "45 a 60 minutos",
-    suitableFor: "Pacientes con manchas blancas o marrones congénitas o por exceso de flúor."
-  },
-  {
-    id: "extracciones-dentales",
-    title: "Cirugía y Extracciones Atraumáticas",
-    shortDesc: "Retiro seguro y libre de dolor de piezas dentales no restaurables o molares dañados.",
-    fullDesc: "Extracciones realizadas bajo técnicas de microcirugía atraumática que preservan el hueso alveolar para futuros implantes o rehabilitaciones fijas.",
+    id: "extracciones",
+    title: "Extracciones Dentales",
+    shortDesc: "Extracción dental simple y segura bajo técnica atraumática libre de dolor.",
+    fullDesc: "Retiro cuidadoso de piezas no restaurables protegiendo el hueso circundante.",
     iconName: "ShieldCheck",
-    badge: "Procedimiento Atraumático",
+    badge: "Servicio Básico",
     image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop",
     features: [
-      "Anestesia guiada 100% indolora",
-      "Preservación de reborde óseo",
-      "Técnicas mínimamente invasivas",
-      "Instrucciones y seguimiento postquirúrgico directo"
+      "Anestesia local guiada y confortable",
+      "Técnica atraumática preservadora",
+      "Recuperación rápida y protocolo postoperatorio"
     ],
-    waMessage: `Hola ${DOCTOR_NAME}, necesito información y cita para una Extracción Dental segura.`,
-    estimatedTime: "30 a 45 minutos",
-    suitableFor: "Dientes con fracturas severas o raíces no recuperables."
+    waMessage: `Hola ${DOCTOR_NAME}, solicito una cita para una Extracción Dental.`,
+    estimatedTime: "30 minutos",
+    suitableFor: "Piezas destruidas no viables."
   },
   {
-    id: "consulta-valoracion",
-    title: "Consulta de Valoración Médica Integral ($15)",
-    shortDesc: "Evaluación clínica exhaustiva con fotografías clínicas y radiografías dentales incluidas.",
-    fullDesc: "El punto de partida ideal para transformar tu sonrisa: diagnóstico clínico completo, fotografías intraorales y radiografías por solo $15 con el Dr. Gabriel Mateo Miranda.",
-    iconName: "Layers",
-    badge: "Solo $15 Incluye Rayos X",
-    image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=800&auto=format&fit=crop",
+    id: "blanqueamientos",
+    title: "Blanqueamientos Dentales",
+    shortDesc: "Aclaramiento dental clínico con gel fotoactivado para una sonrisa radiante.",
+    fullDesc: "Aclara varios tonos en una sola sesión protegiendo el esmalte de la sensibilidad.",
+    iconName: "Smile",
+    badge: "Servicio Básico",
+    image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=800&auto=format&fit=crop",
     features: [
-      "Diagnóstico clínico personalizado completo",
-      "Fotografías intraorales y extraorales de alta resolución",
-      "Radiografías dentales diagnósticas incluidas",
-      "Presupuesto honesto y plan de crédito directo"
+      "Aclaramiento inmediato en 1 sesión",
+      "Gel clínico con agente anti-sensibilidad",
+      "Protección de encías fotocurada"
     ],
-    waMessage: `Hola ${DOCTOR_NAME}, deseo reservar mi Consulta de Valoración de $15 con diagnóstico, fotos y radiografías.`,
-    estimatedTime: "30 a 45 minutos",
-    suitableFor: "Nuevos pacientes que buscan un diagnóstico certero y accesible."
+    waMessage: `Hola ${DOCTOR_NAME}, quisiera agendar una sesión de Blanqueamiento Dental.`,
+    estimatedTime: "45 minutos",
+    suitableFor: "Dientes manchados u oscurecidos."
   }
 ];
 

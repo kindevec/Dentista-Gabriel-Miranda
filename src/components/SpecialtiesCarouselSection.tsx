@@ -14,7 +14,6 @@ import {
 import { WhatsAppIcon } from './OfficialSocialLogos';
 import { createWhatsAppLink } from '../data/clinicData';
 import { CLINICAL_SPECIALTIES, DetailedClinicalSpecialty } from '../data/clinicalSpecialtiesData';
-import { CurvedSectionDivider } from './CurvedSectionDivider';
 
 interface SpecialtiesCarouselSectionProps {
   onSelectSpecialtyForBooking?: (specialtyId: string) => void;
@@ -133,7 +132,7 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
   return (
     <section
       id="especialidades"
-      className="relative w-full py-16 sm:py-24 bg-gradient-to-b from-[#FAF9F5] via-[#FFFFFF] to-[#FDFCF8] overflow-hidden scroll-mt-20 selection:bg-amber-500/20 selection:text-[#84631E]"
+      className="relative w-full py-8 sm:py-12 bg-gradient-to-b from-[#FAF9F5] via-[#FFFFFF] to-[#FAF9F5] overflow-hidden scroll-mt-20 selection:bg-amber-500/20 selection:text-[#84631E]"
     >
       {/* Ambient Gold Radial Accents */}
       <div
@@ -158,24 +157,24 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
         {/* ========================================================================= */}
         {/* SECTION HEADER: Editorial, Blanco & Dorado, Controles Ergonómicos         */}
         {/* ========================================================================= */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-4 sm:mb-6 gap-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-2xl space-y-2.5"
+            transition={{ duration: 0.5 }}
+            className="max-w-2xl space-y-2"
           >
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/45 text-[#84631E] text-xs font-black uppercase tracking-wider shadow-2xs">
               <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
-              <span>Disciplinas Clínicas de Autor</span>
+              <span>Disciplinas Clínicas Oficiales</span>
             </div>
             
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
               Especialidades <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#84631E]">Médicas</span>
             </h2>
             
-            <p className="text-sm sm:text-base text-stone-600 leading-relaxed text-justify">
+            <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
               Haz clic en cualquier tarjeta para descubrir sus detalles clínicos, técnicas aplicadas y beneficios directos sin salir de la página.
             </p>
           </motion.div>
@@ -236,7 +235,7 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
               <div
                 key={spec.id}
                 data-card-index={index}
-                className="w-[85vw] sm:w-[380px] md:w-[410px] lg:w-[430px] shrink-0 snap-center h-[520px] sm:h-[550px] [perspective:1200px]"
+                className="w-[85vw] sm:w-[350px] md:w-[380px] lg:w-[400px] shrink-0 snap-center h-[460px] sm:h-[480px] [perspective:1200px]"
               >
                 {/* 3D Flip Card Container */}
                 <div
@@ -433,13 +432,6 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
           </div>
         </div>
       </div>
-
-      {/* Decorative Bottom Curved Divider */}
-      <CurvedSectionDivider
-        position="bottom"
-        fillColor="#FFFFFF"
-        variant="smoothCurve"
-      />
     </section>
   );
 };

@@ -15,7 +15,6 @@ import {
   CLINIC_HOURS
 } from '../data/clinicData';
 import { OrganicDentalRibbon } from './OrganicDentalRibbon';
-import { CurvedSectionDivider } from './CurvedSectionDivider';
 
 interface HeroSectionProps {
   onOpenBooking?: () => void;
@@ -79,15 +78,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   return (
     <section
       id="inicio"
-      className="relative overflow-hidden pt-20 pb-12 sm:pt-28 sm:pb-16 bg-gradient-to-b from-[#FDFCF8] via-[#FAF9F5] to-[#F5F2EB]"
+      className="relative overflow-hidden pt-16 pb-6 sm:pt-20 sm:pb-8 bg-gradient-to-b from-[#FDFCF8] via-[#FAF9F5] to-[#FAF9F5]"
     >
       {/* Subtle Organic Golden Dental Ribbons for Atmospheric Depth */}
-      <OrganicDentalRibbon className="-top-12 -left-16 w-[36rem] opacity-30" variant="gold" />
-      <OrganicDentalRibbon className="top-1/3 -right-20 w-[32rem] opacity-25" variant="champagne" />
+      <OrganicDentalRibbon className="-top-12 -left-16 w-[32rem] opacity-25" variant="gold" />
+      <OrganicDentalRibbon className="top-1/3 -right-20 w-[28rem] opacity-20" variant="champagne" />
 
       {/* Main Canvas - 100% Open Space (Zero Box-in-Box) */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           
           {/* ============================================================== */}
           {/* LEFT COLUMN: Clean Typography, Proposition & Direct CTAs */}
@@ -96,7 +95,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             variants={containerVariants}
             initial="hidden"
             animate="show"
-            className="lg:col-span-7 space-y-5 text-center lg:text-left"
+            className="lg:col-span-7 space-y-4 text-center lg:text-left"
           >
             {/* Doctor & Studio Pre-Badge */}
             <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/45 text-[#84631E] text-xs font-black uppercase tracking-wider shadow-2xs">
@@ -107,7 +106,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             {/* H1 Main Heading */}
             <motion.h1
               variants={itemVariants}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.35rem] font-black text-[#0D0D0D] tracking-tight leading-[1.14]"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.2rem] font-black text-[#0D0D0D] tracking-tight leading-[1.14]"
             >
               Odontología de Autor y{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#84631E]">
@@ -116,12 +115,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               de Alta Gama
             </motion.h1>
 
-            {/* Clean Subtitle */}
+            {/* Clean Subtitle - Pruned & Concise */}
             <motion.p
               variants={itemVariants}
-              className="text-base sm:text-lg text-stone-600 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal text-justify"
+              className="text-sm sm:text-base text-stone-600 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal"
             >
-              Excelencia clínica, tecnología y calidez humana. Especialistas en prótesis fijas, carillas biomiméticas, endodoncia mecanizada y armonización facial. Reserva tu valoración médica completa con diagnóstico, fotografías y radiografías por solo <strong>$15</strong>.
+              Excelencia clínica, tecnología y calidez humana. Especialistas en rehabilitación oral y estética dental. Consulta de valoración integral con fotos y radiografías por solo <strong>$15</strong>.
             </motion.p>
 
             {/* Minimalist Feature Bullet Points (Gold & White) */}
@@ -278,13 +277,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   ? { duration: 0.3 }
                   : { repeat: Infinity, duration: 6, ease: 'easeInOut' }
               }
-              className="relative z-10 w-full max-w-[360px] sm:max-w-[440px] lg:max-w-[480px]"
+              className="relative z-10 w-full max-w-[280px] sm:max-w-[340px] lg:max-w-[380px]"
             >
               <div className="relative w-full aspect-square flex items-center justify-center overflow-hidden">
                 <img
                   src="/hero-3d-tooth.png"
                   alt="Escultura dental 3D de alta estética"
-                  className="w-full h-full object-contain filter contrast-[1.03] drop-shadow-[0_25px_45px_rgba(180,140,50,0.25)] transition-all duration-300"
+                  className="w-full h-full object-contain filter contrast-[1.03] drop-shadow-[0_20px_35px_rgba(180,140,50,0.2)] transition-all duration-300"
                   loading="eager"
                 />
 
@@ -308,11 +307,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
 
         </div>
-      </div>
-
-      {/* Organic Curved Wave Transition into Services */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
-        <CurvedSectionDivider position="bottom" fillColor="#FAF9F5" variant="smoothCurve" />
       </div>
     </section>
   );

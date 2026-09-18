@@ -22,17 +22,14 @@ interface SpecialtiesSectionProps {
   onSelectSpecialtyForBooking?: (specialtyId: string) => void;
 }
 
-const ITEM_HEIGHT = 68;
-const VIRTUAL_OFFSETS = [-3, -2, -1, 0, 1, 2, 3];
+const ITEM_HEIGHT = 64;
+const VIRTUAL_OFFSETS = [-2, -1, 0, 1, 2];
 
 const SPECIALTY_SHORT_TITLES: Record<string, string> = {
-  ortodoncia: 'Ortodoncia 3D',
-  'diseno-sonrisa': 'Diseño de Sonrisa',
-  implantes: 'Implantes Guiados',
-  endodoncia: 'Endodoncia',
-  'limpieza-profilaxis': 'Limpieza Ultrasónica',
-  blanqueamiento: 'Blanqueamiento Láser',
-  odontopediatria: 'Odontopediatría',
+  'profilaxis-dental': 'Profilaxis Profunda',
+  'restauraciones': 'Restauraciones',
+  'extracciones': 'Extracciones',
+  'blanqueamientos': 'Blanqueamientos',
 };
 
 export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
@@ -178,30 +175,30 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
   };
 
   return (
-    <section id="servicios" className="py-12 sm:py-16 relative overflow-hidden bg-gradient-to-b from-[#F5F2EB] via-[#FAF9F5] to-[#FAF9F5]">
+    <section id="servicios" className="py-8 sm:py-10 relative overflow-hidden bg-gradient-to-b from-[#FAF9F5] via-[#FAF9F5] to-[#FAF9F5]">
       {/* Fondo cálido marfil y perla para máximo contraste de relieves dorados y sombras neumórficas */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#F5F2EB] via-[#FAF9F5] to-[#FAF9F5] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#FAF9F5] via-[#FAF9F5] to-[#FAF9F5] pointer-events-none" />
 
       {/* 2. Floating 3D Curved Ribbon */}
       <OrganicDentalRibbon className="top-12 -right-16 w-96 md:w-[32rem] opacity-35" variant="gold" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-2 sm:pb-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-2">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-6 sm:mb-10 space-y-2.5"
+          transition={{ duration: 0.5 }}
+          className="text-center max-w-3xl mx-auto mb-4 sm:mb-6 space-y-2"
         >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/45 text-[#84631E] text-xs font-black uppercase tracking-wider shadow-2xs">
             <span>Atención Odontológica Personalizada</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
-            Servicios <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#84631E]">Clínicos & Básicos</span>
+            Servicios <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#84631E]">Básicos & Clínicos</span>
           </h2>
           <p className="text-sm sm:text-base text-stone-600 max-w-xl mx-auto">
-            Tratamientos preventivos y restauradores con mínima invasión, confort total y tecnología biomimética en Quito.
+            Tratamientos preventivos y restauradores con mínima invasión, calidez y tecnología de vanguardia.
           </p>
         </motion.div>
 
@@ -210,14 +207,14 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
           {/* ========================================================================= */}
           {/* DESKTOP EXPERIENCE (lg:grid) — SOBRE EL LIENZO DIRECTAMENTE (SIN BOX-IN-BOX) */}
           {/* ========================================================================= */}
-          <div className="hidden lg:grid grid-cols-12 gap-8 xl:gap-12 items-center min-h-[620px] py-4">
+          <div className="hidden lg:grid grid-cols-12 gap-8 xl:gap-12 items-center min-h-[460px] py-2">
             {/* Left Column: Interactive Wheel of Specialties sobre el lienzo (Sin contenedor box-in-box) */}
             <div className="col-span-5 relative z-20 flex flex-col justify-center my-auto">
 
               {/* Desktop Infinite Loop Wheel sobre el lienzo (Cero Contenedor, Cero Sombras de Máscara) */}
               <div
                 onWheel={handleWheel}
-                className="relative w-full h-[470px] flex items-center justify-start overflow-hidden select-none my-auto cursor-grab active:cursor-grabbing contain-paint"
+                className="relative w-full h-[320px] flex items-center justify-start overflow-hidden select-none my-auto cursor-grab active:cursor-grabbing contain-paint"
               >
                 {/* Infinite Continuous Virtual Track con Arrastre Físico e Inercia */}
                 <motion.div
@@ -225,7 +222,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                   dragConstraints={{ top: 0, bottom: 0 }}
                   dragElastic={0.25}
                   onDragEnd={handleTrackDragEnd}
-                  animate={{ y: 201 - step * ITEM_HEIGHT }}
+                  animate={{ y: 128 - step * ITEM_HEIGHT }}
                   transition={{
                     type: 'spring',
                     stiffness: 280,
@@ -340,8 +337,8 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
             </div>
 
             {/* Right Column: 3D Stack / Card Perspective Showcase sobre el lienzo */}
-            <div className="col-span-7 relative flex flex-col items-center justify-center py-4">
-              <div className="relative w-full max-w-[480px] h-[560px] flex items-center justify-center">
+            <div className="col-span-7 relative flex flex-col items-center justify-center py-2">
+              <div className="relative w-full max-w-[440px] h-[450px] flex items-center justify-center">
                 <AnimatePresence initial={false}>
                   {SPECIALTIES_DATA.filter((_, idx) => getCardStatus(idx) !== 'hidden').map((spec) => {
                     const status = getCardStatus(SPECIALTIES_DATA.findIndex((s) => s.id === spec.id));
@@ -542,7 +539,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
 
             {/* 2. Interactive Card with Full Touch Gestures and Floating Chevrons */}
             <div
-              className="relative w-full max-w-[440px] mx-auto min-h-[500px] sm:min-h-[540px] flex items-center justify-center"
+              className="relative w-full max-w-[440px] mx-auto min-h-[420px] sm:min-h-[450px] flex items-center justify-center"
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
@@ -574,7 +571,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.97 }}
                       transition={{ duration: 0.24, ease: 'easeOut' }}
-                      className="w-full min-h-[500px] sm:min-h-[540px] rounded-[2.2rem] overflow-hidden border-2 border-[#D4AF37]/60 shadow-2xl shadow-black/40 bg-slate-950 flex flex-col justify-between select-none relative transform-gpu will-change-transform"
+                      className="w-full min-h-[420px] sm:min-h-[450px] rounded-[2.2rem] overflow-hidden border-2 border-[#D4AF37]/60 shadow-2xl shadow-black/40 bg-slate-950 flex flex-col justify-between select-none relative transform-gpu will-change-transform"
                     >
                       {/* Full-bleed photo with zero padding */}
                       <img

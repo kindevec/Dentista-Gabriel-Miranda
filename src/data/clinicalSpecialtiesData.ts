@@ -17,146 +17,138 @@ export interface DetailedClinicalSpecialty {
 export const CLINICAL_SPECIALTIES: DetailedClinicalSpecialty[] = [
   {
     id: "rehabilitacion-oral",
-    title: "Rehabilitación Oral & Prótesis",
-    category: "Residencia Univ. de los Hemisferios",
-    badge: "Prótesis & Coronas de Circonio",
-    tagline: "Prótesis totales o parciales, coronas cerámicas y prótesis sobre implantes.",
-    summary: "Reconstrucción anatómica y funcional completa de la cavidad oral. Devolvemos la capacidad de masticar con firmeza y sonreír con naturalidad mediante prótesis fijas o removibles de alta resistencia y coronas de circonio translúcido biocompatible.",
+    title: "Rehabilitación Oral",
+    category: "Residencia Univ. Hemisferios",
+    badge: "Prótesis & Coronas",
+    tagline: "Prótesis totales o parciales, coronas y prótesis sobre implantes.",
+    summary: "Reconstrucción anatómica y masticatoria integral con prótesis fijas, removibles y coronas de alta resistencia.",
     image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=1000&auto=format&fit=crop",
     features: [
-      "Prótesis fijas totales o parciales y coronas estéticas",
-      "Coronas sobre implantes con ajuste oclusal perfecto",
-      "Materiales de alta durabilidad y apariencia biológica",
-      "Recuperación integral de la fuerza masticatoria"
+      "Prótesis totales, parciales y coronas estéticas",
+      "Coronas sobre implantes de ajuste exacto",
+      "Recuperación de la fuerza masticatoria"
     ],
-    patientTarget: "Pacientes con ausencia de una o varias piezas dentales o desgaste oclusal severo.",
-    estimatedDuration: "2 a 4 sesiones con provisionales estéticos inmediatos.",
-    waMessage: `Hola ${DOCTOR_NAME}, deseo solicitar una valoración especializada para Rehabilitación Oral y Prótesis en Miranda Dental Studio.`
+    patientTarget: "Pérdida o desgaste de piezas dentales.",
+    estimatedDuration: "2 a 4 sesiones con provisionales inmediatos.",
+    waMessage: `Hola ${DOCTOR_NAME}, deseo una valoración para Rehabilitación Oral en Miranda Dental Studio.`
   },
   {
-    id: "estetica-carillas",
-    title: "Estética Dental & Carillas",
-    category: "Diplomado 'Arte en Resinas' (Perú)",
-    badge: "Carillas Directas & Indirectas",
-    tagline: "Carillas cerámicas, resinas estratificadas y microabrasión para fluorosis.",
-    summary: "Diseño de sonrisa personalizado basado en tus facciones. Corregimos manchas, fracturas, diastemas y esmalte con fluorosis mediante carillas directas de alta estética, carillas indirectas y microabrasión conservadora que respeta al máximo la estructura de tu diente.",
+    id: "estetica-dental",
+    title: "Estética Dental",
+    category: "Diplomado en Perú",
+    badge: "Carillas & Microabrasión",
+    tagline: "Carillas directas o indirectas y microabrasión para fluorosis.",
+    summary: "Diseño de sonrisa armónico con carillas de resina o cerámica y microabrasión para remover manchas de fluorosis.",
     image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=1000&auto=format&fit=crop",
     features: [
-      "Carillas directas en resina estratificada y carillas cerámicas",
-      "Microabrasión especializada para fluorosis y manchas rebeldes",
-      "Planificación previa de sonrisa adaptada a tu fisonomía",
-      "Preservación máxima y respeto del esmalte dental natural"
+      "Carillas directas e indirectas personalizadas",
+      "Microabrasión conservadora para fluorosis",
+      "Máximo respeto al esmalte natural"
     ],
-    patientTarget: "Personas con dientes manchados, fluorosis, bordes desgastados o asimetrías de sonrisa.",
-    estimatedDuration: "1 a 3 citas con prueba previa en boca.",
-    waMessage: `Hola ${DOCTOR_NAME}, me gustaría agendar una valoración para Estética Dental, Carillas o Microabrasión.`
+    patientTarget: "Dientes manchados, fluorosis o asimetrías de sonrisa.",
+    estimatedDuration: "1 a 3 citas clínicas.",
+    waMessage: `Hola ${DOCTOR_NAME}, solicito una cita para Estética Dental y Carillas.`
   },
   {
-    id: "endodoncia-mecanizada",
-    title: "Endodoncia Mecanizada",
-    category: "Diplomado en CPO BRASIL",
-    badge: "Alivio del Dolor en 1 Sesión",
-    tagline: "Tratamiento de conductos rotatorio indoloro para salvar tu diente natural.",
-    summary: "Tratamiento pulpar de alta precisión con tecnología rotatoria mecanizada bajo estándares internacionales de CPO Brasil. Eliminamos el dolor agudo y la infección de forma inmediata, logrando un sellado hermético en una sola sesión confortable.",
+    id: "endodoncia",
+    title: "Endodoncia",
+    category: "Diplomado CPO Brasil",
+    badge: "Tratamiento de Conductos",
+    tagline: "Tratamiento de conductos mecanizado y rotatorio en 1 sola sesión.",
+    summary: "Alivio del dolor pulpar y erradicación de infecciones mediante limas rotatorias de alta precisión para salvar tu diente natural.",
     image: "https://images.unsplash.com/photo-1629909615184-74f495363b67?q=80&w=1000&auto=format&fit=crop",
     features: [
-      "Limas rotatorias de níquel-titanio termotratadas",
-      "Localizador apical digital de máxima precisión",
-      "Eliminación inmediata de la infección y el dolor",
-      "Preservación de la raíz original evitando extracciones"
+      "Tecnología rotatoria mecanizada CPO Brasil",
+      "Localizador apical de alta exactitud",
+      "Alivio inmediato del dolor en 1 cita"
     ],
-    patientTarget: "Dolor pulsátil intenso, sensibilidad persistente al frío/calor o caries profundas.",
-    estimatedDuration: "1 sola sesión clínica de 45 a 60 minutos.",
-    waMessage: `¡URGENCIA! Hola ${DOCTOR_NAME}, tengo un dolor dental intenso y solicito atención para Endodoncia Mecanizada.`
+    patientTarget: "Dolor dental agudo, caries profundas o infección pulpar.",
+    estimatedDuration: "1 sesión de 45 a 60 minutos.",
+    waMessage: `¡Urgencia! Hola ${DOCTOR_NAME}, presento dolor y requiero atención para Endodoncia.`
   },
   {
     id: "implantologia",
-    title: "Implantología Dental",
+    title: "Implantología",
     category: "Especialidad Implanto-Asistida",
-    badge: "Titanio Biocompatible Seguro",
-    tagline: "Reposición fija y definitiva de raíces perdidas con integración ósea de por vida.",
-    summary: "Cirugía de colocación de implantes de titanio grado médico para restaurar dientes perdidos de manera fija y definitiva. Restaura la función masticatoria con la firmeza de un diente propio, impidiendo la pérdida de hueso y mejorando tu estética facial.",
+    badge: "Titanio Oseointegrado",
+    tagline: "Reposición fija y definitiva de raíces dentales perdidas.",
+    summary: "Colocación de implantes de titanio grado médico que devuelven la firmeza y función natural de tus dientes sin desgastar piezas vecinas.",
     image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1000&auto=format&fit=crop",
     features: [
       "Implantes de titanio biocompatible de alta gama",
-      "Planificación digital para inserción precisa y segura",
-      "Fijación sólida sin desgastar los dientes adyacentes",
-      "Rehabilitación fija con coronas estéticas de circonio"
+      "Fijación sólida y duradera de por vida",
+      "Rehabilitación fija con coronas estéticas"
     ],
-    patientTarget: "Pacientes con pérdida de una o múltiples piezas dentales o prótesis flojas.",
-    estimatedDuration: "Fijación quirúrgica en 1 cita con protocolo de oseointegración.",
-    waMessage: `Hola ${DOCTOR_NAME}, deseo solicitar información y una consulta para Implantes Dentales en Miranda Dental Studio.`
+    patientTarget: "Ausencia de una o varias piezas dentales.",
+    estimatedDuration: "Cirugía en 1 cita con protocolo de oseointegración.",
+    waMessage: `Hola ${DOCTOR_NAME}, deseo solicitar información para Implantes Dentales.`
   },
   {
-    id: "cirugia-terceros-molares",
-    title: "Cirugía Oral (Muelas del Juicio)",
+    id: "cirugia-oral",
+    title: "Cirugía Oral",
     category: "Cirugía Oral Menor",
-    badge: "Extracción Atraumática & Segura",
-    tagline: "Extracción quirúrgica de terceros molares con anestesia guiada y rápida recuperación.",
-    summary: "Extracción especializada de muelas del juicio impactadas, retenidas o en mala posición. Procedimiento seguro, rápido y 100% indoloro que previene apiñamientos dentales, infecciones severas y daño a las piezas vecinas.",
+    badge: "Terceros Molares",
+    tagline: "Extracción quirúrgica de terceros molares (muelas del juicio).",
+    summary: "Extracción segura, rápida y sin dolor de muelas del juicio impactadas o retenidas, previniendo apiñamientos e infecciones.",
     image: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=1000&auto=format&fit=crop",
     features: [
-      "Extracción libre de dolor con técnica quirúrgica atraumática",
-      "Prevención de infecciones pericoronarias y apiñamientos",
-      "Suturas reabsorbibles y protocolo analgésico postoperatorio",
-      "Recuperación confortable en pocos días"
+      "Técnica quirúrgica atraumática sin dolor",
+      "Prevención de apiñamientos e infecciones",
+      "Recuperación cómoda en pocos días"
     ],
-    patientTarget: "Jóvenes y adultos con dolor, inflamación o muelas del juicio retenidas.",
+    patientTarget: "Muelas del juicio retenidas, inclinadas o con dolor.",
     estimatedDuration: "30 a 45 minutos en consulta ambulatoria.",
-    waMessage: `Hola ${DOCTOR_NAME}, necesito agendar una valoración para extracción de Terceros Molares (Muelas del Juicio).`
+    waMessage: `Hola ${DOCTOR_NAME}, solicito valoración para extracción de Terceros Molares.`
   },
   {
     id: "ortodoncia",
-    title: "Ortodoncia Integral",
-    category: "Alineación Dental & Oclusión",
-    badge: "Convencional, Autoligado & Estéticos",
-    tagline: "Alineación estética y corrección de mordida con brackets de baja fricción.",
-    summary: "Corrección de apiñamientos, mordidas abiertas o cruzadas. Contamos con brackets convencionales, brackets de autoligado pasivo (que acortan los tiempos y reducen molestias) y brackets estéticos para una sonrisa perfectamente alineada.",
+    title: "Ortodoncia",
+    category: "Alineación & Oclusión",
+    badge: "Brackets Autoligado & Estéticos",
+    tagline: "Brackets convencionales, autoligado y estéticos para tu mordida.",
+    summary: "Corrección de apiñamientos y problemas de oclusión mediante aparatología de baja fricción y brackets estéticos.",
     image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1000&auto=format&fit=crop",
     features: [
-      "Brackets de autoligado pasivo de baja fricción",
-      "Opciones de brackets estéticos cerámicos discretos",
-      "Corrección de mordidas funcionales y estética dental",
-      "Planes con financiamiento y crédito directo propio"
+      "Brackets de autoligado pasivo y convencionales",
+      "Opciones estéticas de alta discreción",
+      "Facilidades con crédito directo propio"
     ],
-    patientTarget: "Niños, jóvenes y adultos con dientes desalineados o problemas de mordida.",
-    estimatedDuration: "12 a 18 meses con controles mensuales programados.",
-    waMessage: `Hola ${DOCTOR_NAME}, me gustaría agendar una valoración para Ortodoncia y conocer las opciones de brackets.`
+    patientTarget: "Dientes apiñados, espacios o mordidas inadecuadas.",
+    estimatedDuration: "12 a 18 meses con controles mensuales.",
+    waMessage: `Hola ${DOCTOR_NAME}, deseo una valoración para Ortodoncia.`
   },
   {
     id: "armonizacion-facial",
-    title: "Armonización Facial (Botox & Hialurónico)",
-    category: "Congreso Río de Janeiro SMILE & HOF 2026",
-    badge: "Bichectomía, Botox & Relleno Labial",
-    tagline: "Perfilamiento facial, atenuación de líneas de expresión y volumen labial armónico.",
-    summary: "Procedimientos médico-estéticos avanzados para realzar la belleza natural de tu rostro. Bichectomía para estilizar mejillas, toxina botulínica (Botox) para bruxismo y arrugas de expresión, y ácido hialurónico para hidratación y perfilado labial armónico.",
+    title: "Armonización Facial",
+    category: "Certificación SMILE & HOF 2026",
+    badge: "Botox, Hialurónico & Bichectomía",
+    tagline: "Bichectomía, Ácido Hialurónico y Botox para equilibrar tu rostro.",
+    summary: "Procedimientos médico-estéticos para estilizar mejillas, aliviar bruxismo y perfilar labios de manera natural.",
     image: "https://images.unsplash.com/photo-1512290900672-1f5586616262?q=80&w=1000&auto=format&fit=crop",
     features: [
-      "Bichectomía ambulatoria para perfilar el tercio inferior del rostro",
-      "Toxina botulínica (Botox) para bruxismo y líneas de expresión",
-      "Ácido hialurónico reticulado para perfilado e hidratación labial",
-      "Resultados naturales que armonizan tu sonrisa con tu rostro"
+      "Bichectomía ambulatoria para perfilar mejillas",
+      "Botox para bruxismo y líneas de expresión",
+      "Ácido hialurónico para perfilado e hidratación labial"
     ],
-    patientTarget: "Pacientes con bruxismo, tensión muscular mandibular o que desean rejuvenecer y armonizar su rostro.",
-    estimatedDuration: "30 a 45 minutos por sesión ambulatoria.",
-    waMessage: `Hola ${DOCTOR_NAME}, deseo solicitar una consulta de valoración para Armonización Facial (Botox / Ácido Hialurónico / Bichectomía).`
+    patientTarget: "Pacientes con bruxismo o que buscan armonía facial.",
+    estimatedDuration: "30 a 45 minutos por sesión.",
+    waMessage: `Hola ${DOCTOR_NAME}, deseo consultar sobre Armonización Facial (Botox / Hialurónico / Bichectomía).`
   },
   {
     id: "periodoncia",
-    title: "Periodoncia & Plástica Gingival",
-    category: "Salud Periodontal & Estética Rosa",
-    badge: "Gingivectomía & Salud de Encías",
-    tagline: "Gingivectomía para sonrisa gingival, detartrajes profundos y frenectomía.",
-    summary: "Tratamiento de la encía y tejidos que soportan tus dientes. Realizamos gingivectomía estética para armonizar el tamaño de tus dientes cuando se muestra demasiada encía, detartrajes / retartrajes con ultrasonido para detener el sangrado, y frenectomía.",
+    title: "Periodoncia",
+    category: "Salud Periodontal",
+    badge: "Gingivectomía & Salud Gingival",
+    tagline: "Gingivectomía, tartrectomía (retartrajes) y frenectomía.",
+    summary: "Tratamiento de encías para corregir sonrisa gingival mediante gingivectomía, detener el sangrado con tartrectomías y frenectomías.",
     image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1000&auto=format&fit=crop",
     features: [
-      "Gingivectomía y remodelado estético del contorno de encías",
-      "Detartrajes y retartrajes ultrasónicos indoloros",
-      "Frenectomía labial o lingual mínimamente invasiva",
-      "Eliminación del sangrado, inflamación y mal aliento de raíz"
+      "Gingivectomía para armonizar sonrisa gingival",
+      "Detartrajes y retartrajes ultrasónicos",
+      "Frenectomía conservadora de rápida sanación"
     ],
-    patientTarget: "Pacientes con sonrisa gingival (dientes pequeños), encías sangrantes o frenillos tensos.",
-    estimatedDuration: "1 a 2 citas clínicas con rápida cicatrización.",
-    waMessage: `Hola ${DOCTOR_NAME}, deseo agendar una valoración para Periodoncia, Gingivectomía o tratamiento de encías.`
+    patientTarget: "Encías inflamadas, sangrantes o sonrisa gingival.",
+    estimatedDuration: "1 a 2 citas de rápida recuperación.",
+    waMessage: `Hola ${DOCTOR_NAME}, solicito valoración para Periodoncia y encías.`
   }
 ];

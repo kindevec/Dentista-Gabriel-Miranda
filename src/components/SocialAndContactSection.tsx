@@ -13,6 +13,7 @@ import {
   VALUATION_PRICE,
   FINANCING_INFO
 } from '../data/clinicData';
+import { CLINICAL_SPECIALTIES } from '../data/clinicalSpecialtiesData';
 import {
   MapPin,
   Phone,
@@ -30,7 +31,6 @@ import {
   OfficialFacebookLogo,
   WhatsAppIcon
 } from './OfficialSocialLogos';
-import { CurvedSectionDivider } from './CurvedSectionDivider';
 
 interface SocialAndContactSectionProps {
   preselectedSpecialty?: string;
@@ -61,7 +61,8 @@ export const SocialAndContactSection: React.FC<SocialAndContactSectionProps> = (
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const matchedService = SPECIALTIES_DATA.find((s) => s.id === formData.specialtyId);
+    const matchedService = SPECIALTIES_DATA.find((s) => s.id === formData.specialtyId)
+      || CLINICAL_SPECIALTIES.find((s) => s.id === formData.specialtyId);
     const serviceName = matchedService ? matchedService.title : 'Consulta de Valoración Médica';
 
     const messageLines = [
@@ -89,16 +90,16 @@ export const SocialAndContactSection: React.FC<SocialAndContactSectionProps> = (
   };
 
   return (
-    <section id="contacto" className="py-14 sm:py-20 relative overflow-hidden bg-gradient-to-b from-white via-[#FAF9F5] to-white scroll-mt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-4 sm:pb-5">
+    <section id="contacto" className="py-8 sm:py-12 relative overflow-hidden bg-gradient-to-b from-white via-[#FAF9F5] to-white scroll-mt-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-2 sm:pb-3">
         
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-10 sm:mb-14 space-y-2.5"
+          transition={{ duration: 0.5 }}
+          className="text-center max-w-3xl mx-auto mb-5 sm:mb-7 space-y-2"
         >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/45 text-[#84631E] text-xs font-black uppercase tracking-wider shadow-2xs">
             <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
@@ -107,31 +108,31 @@ export const SocialAndContactSection: React.FC<SocialAndContactSectionProps> = (
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
             Agenda tu <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#84631E]">Valoración de $15</span>
           </h2>
-          <p className="text-sm sm:text-base text-stone-600 max-w-xl mx-auto text-justify">
-            Incluye diagnóstico clínico completo, fotografías y radiografías dentales con el {DOCTOR_NAME}. Atendemos de Lunes a Domingo.
+          <p className="text-sm sm:text-base text-stone-600 max-w-xl mx-auto">
+            Diagnóstico clínico completo, fotografías y radiografías dentales con el {DOCTOR_NAME}. Atendemos de Lunes a Domingo.
           </p>
         </motion.div>
 
         {/* Split Layout: Booking Form + Location & Financing */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           
           {/* Left Column (7 cols): Formulario directo sobre el lienzo */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
             className="lg:col-span-7 flex flex-col justify-between"
           >
-            <div className="mb-6">
-              <span className="text-xs font-black tracking-widest text-[#84631E] uppercase mb-1.5 block">
+            <div className="mb-4">
+              <span className="text-xs font-black tracking-widest text-[#84631E] uppercase mb-1 block">
                 Agendamiento Inmediato • Miranda Dental Studio
               </span>
               <h3 className="text-2xl sm:text-3xl font-black text-[#0D0D0D] tracking-tight">
                 Reserva tu Cita en Línea
               </h3>
-              <p className="text-xs sm:text-sm text-stone-600 mt-1.5 leading-relaxed">
-                Completa tus datos y serás transferido a nuestro WhatsApp verificado con tu cita preparada.
+              <p className="text-xs sm:text-sm text-stone-600 mt-1 leading-relaxed">
+                Completa tus datos y serás transferido a nuestro WhatsApp oficial con tu cita preparada.
               </p>
             </div>
 
@@ -190,17 +191,23 @@ export const SocialAndContactSection: React.FC<SocialAndContactSectionProps> = (
                   onChange={(e) => setFormData({ ...formData, specialtyId: e.target.value })}
                   className="w-full px-5 py-3.5 rounded-2xl bg-white border border-stone-300 shadow-xs focus:border-[#D4AF37] focus:ring-3 focus:ring-[#D4AF37]/20 text-stone-800 text-sm transition-all outline-none"
                 >
-                  <option value="consulta-valoracion">Consulta de Valoración Integral ($15 - Incluye Diagnóstico, Fotos y Rayos X)</option>
-                  <option value="rehabilitacion-oral">Rehabilitación Oral & Prótesis (Coronas de Circonio e Implanto-Asistida)</option>
-                  <option value="estetica-carillas">Estética Dental & Carillas (Arte en Resinas / Microabrasión Fluorosis)</option>
-                  <option value="endodoncia-mecanizada">Endodoncia Mecanizada (CPO Brasil - Alivio en 1 Sesión)</option>
-                  <option value="implantologia">Implantología Dental (Titanio Biocompatible)</option>
-                  <option value="cirugia-terceros-molares">Cirugía Oral & Extracción de Terceros Molares (Muelas del Juicio)</option>
-                  <option value="ortodoncia">Ortodoncia Integral (Autoligado Pasivo & Estéticos)</option>
-                  <option value="armonizacion-facial">Armonización Facial (Bichectomía, Botox & Ácido Hialurónico)</option>
-                  <option value="periodoncia">Periodoncia & Plástica Gingival (Gingivectomía & Detartrajes)</option>
-                  <option value="profilaxis-profunda">Profilaxis Dental Profunda con Ultrasonido</option>
-                  <option value="blanqueamiento-led">Blanqueamiento Dental Profesional LED</option>
+                  <option value="consulta-valoracion">Consulta de Valoración ($15 - Diagnóstico, Fotos y Rayos X)</option>
+                  <optgroup label="Servicios Básicos">
+                    <option value="profilaxis-dental">Profilaxis dental profunda</option>
+                    <option value="restauraciones">Restauraciones</option>
+                    <option value="extracciones">Extracciones</option>
+                    <option value="blanqueamientos">Blanqueamientos</option>
+                  </optgroup>
+                  <optgroup label="Especialidades Clínicas">
+                    <option value="rehabilitacion-oral">Rehabilitación Oral (Prótesis y Coronas)</option>
+                    <option value="estetica">Estética (Carillas y Microabrasión)</option>
+                    <option value="endodoncia">Endodoncia (Tratamiento de conductos mecanizado)</option>
+                    <option value="implantologia">Implantología</option>
+                    <option value="cirugia">Cirugía (Terceros molares)</option>
+                    <option value="ortodoncia">Ortodoncia (Convencionales, autoligado, estéticos)</option>
+                    <option value="armonizacion-facial">Armonización Facial (Bichectomía, Ácido Hialurónico, Botox)</option>
+                    <option value="periodoncia">Periodoncia (Gingivectomía, detartrajes, frenectomía)</option>
+                  </optgroup>
                 </select>
               </div>
 
@@ -430,12 +437,6 @@ export const SocialAndContactSection: React.FC<SocialAndContactSectionProps> = (
           </motion.div>
 
         </div>
-
-      </div>
-
-      {/* Curved Divider into Footer */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
-        <CurvedSectionDivider position="bottom" fillColor="#0D0D0D" variant="smoothCurve" />
       </div>
     </section>
   );
