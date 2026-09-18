@@ -33,8 +33,10 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
   const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [activeCardIndex, setActiveCardIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeftState, setScrollLeftState] = useState(0);
+  const isMouseDownRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollLeftRef = useRef(0);
+  const hasDraggedRef = useRef(false);
   const [flippedCardId, setFlippedCardId] = useState<string | null>(null);
 
   const totalCards = CLINICAL_SPECIALTIES.length;
@@ -148,31 +150,44 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
     el.scrollBy({ left: cardUnit, behavior: 'smooth' });
   };
 
-  // Drag-to-scroll functionality for mouse/desktop
+  // Drag-to-scroll functionality for mouse/desktop con umbral de arrastre estricto
   const handleMouseDown = (e: React.MouseEvent) => {
+    if (e.button !== 0) return; // Solo clic izquierdo principal
     const el = scrollContainerRef.current;
     if (!el) return;
-    setIsDragging(true);
-    setStartX(e.pageX - el.offsetLeft);
-    setScrollLeftState(el.scrollLeft);
+    isMouseDownRef.current = true;
+    hasDraggedRef.current = false;
+    startXRef.current = e.pageX - el.offsetLeft;
+    scrollLeftRef.current = el.scrollLeft;
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging) return;
-    e.preventDefault();
+    if (!isMouseDownRef.current) return;
     const el = scrollContainerRef.current;
     if (!el) return;
-    const x = e.pageX - el.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    el.scrollLeft = scrollLeftState - walk;
+    const currentX = e.pageX - el.offsetLeft;
+    const diff = currentX - startXRef.current;
+
+    // Solo activar arrastre si supera 7px para permitir clicks y hovers normales
+    if (Math.abs(diff) > 7) {
+      hasDraggedRef.current = true;
+      setIsDragging(true);
+      el.scrollLeft = scrollLeftRef.current - diff * 1.2;
+    }
   };
 
   const handleMouseUpOrLeave = () => {
-    setIsDragging(false);
+    isMouseDownRef.current = false;
+    setTimeout(() => {
+      setIsDragging(false);
+      hasDraggedRef.current = false;
+    }, 60);
   };
 
   const toggleCardFlip = (specId: string, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
+    // Si se realizó un desplazamiento por arrastre, no voltear la tarjeta
+    if (hasDraggedRef.current) return;
     setFlippedCardId((prev) => (prev === specId ? null : specId));
   };
 
@@ -266,7 +281,7 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
             onMouseUp={handleMouseUpOrLeave}
             onMouseLeave={handleMouseUpOrLeave}
             className={`flex gap-6 overflow-x-auto pb-6 pt-2 snap-x snap-mandatory scroll-smooth no-scrollbar select-none ${
-              isDragging ? 'cursor-grabbing' : 'cursor-grab'
+              isDragging ? 'cursor-grabbing' : ''
             }`}
             style={{
               scrollbarWidth: 'none',
@@ -284,7 +299,11 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
                 >
                   {/* 3D Flip Card Container */}
                   <div
-                    onClick={() => toggleCardFlip(spec.id)}
+                    onClick={(e) => {
+                      if (!isFlipped) {
+                        toggleCardFlip(spec.id, e);
+                      }
+                    }}
                     className={`relative w-full h-full rounded-[2.5rem] transition-transform duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] [transform-style:preserve-3d] cursor-pointer ${
                       isFlipped ? '[transform:rotateY(180deg)]' : ''
                     }`}
@@ -292,7 +311,13 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
                     {/* ========================================================= */}
                     {/* CARA FRONTAL: FOTO CINEMÁTICA Y TIPOGRAFÍA EDITORIAL       */}
                     {/* ========================================================= */}
-                    <div className="absolute inset-0 w-full h-full rounded-[2.5rem] overflow-hidden bg-stone-900 border border-[#D4AF37]/40 shadow-xl shadow-amber-950/10 [backface-visibility:hidden] flex flex-col justify-between group">
+                    <div
+                      className={`absolute inset-0 w-full h-full rounded-[2.5rem] overflow-hidden bg-stone-900 border border-[#D4AF37]/40 shadow-xl shadow-amber-950/10 [backface-visibility:hidden] flex flex-col justify-between group transition-all duration-300 ${
+                        isFlipped
+                          ? 'pointer-events-none opacity-0 z-0'
+                          : 'pointer-events-auto opacity-100 z-10'
+                      }`}
+                    >
                       {/* Full-Bleed Large Cinematic Image */}
                       <img
                         src={spec.image}
@@ -334,7 +359,13 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
                     {/* ========================================================= */}
                     {/* CARA TRASERA: INFORMACIÓN CLÍNICA DETALLADA                */}
                     {/* ========================================================= */}
-                    <div className="absolute inset-0 w-full h-full rounded-[2.5rem] bg-gradient-to-b from-[#FFFFFF] via-[#FAF9F6] to-[#F7F4EA] border-2 border-[#D4AF37]/50 shadow-2xl shadow-amber-950/15 p-6 sm:p-7 flex flex-col justify-between [transform:rotateY(180deg)] [backface-visibility:hidden] overflow-y-auto no-scrollbar select-text">
+                    <div
+                      className={`absolute inset-0 w-full h-full rounded-[2.5rem] bg-gradient-to-b from-[#FFFFFF] via-[#FAF9F6] to-[#F7F4EA] border-2 border-[#D4AF37]/50 shadow-2xl shadow-amber-950/15 p-6 sm:p-7 flex flex-col justify-between [transform:rotateY(180deg)] [backface-visibility:hidden] overflow-y-auto no-scrollbar select-text transition-all duration-300 ${
+                        isFlipped
+                          ? 'pointer-events-auto opacity-100 z-10'
+                          : 'pointer-events-none opacity-0 z-0'
+                      }`}
+                    >
                       <div className="space-y-4">
                         {/* Top Bar with Close/Flip-Back Button */}
                         <div className="flex items-center justify-between pb-2.5 border-b border-stone-200/60">
