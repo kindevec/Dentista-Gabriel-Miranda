@@ -41,7 +41,7 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
         <div className="absolute top-0 bottom-0 right-0 w-full lg:w-1/2 h-full opacity-35 lg:opacity-60">
           <img
             src="https://images.unsplash.com/photo-1629909615184-74f495363b67?q=85&w=1600&auto=format&fit=crop"
-            alt="Miranda Dental Studio — Dr. Gabriel Mateo Miranda"
+            alt="Miranda Dental Studio — Dr. Gabriel Miranda"
             referrerPolicy="no-referrer"
             className="w-full h-full object-cover object-center brightness-90 contrast-[1.05]"
           />

@@ -57,7 +57,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <a href="#nosotros" className="hover:text-[#D4AF37] transition-colors">
-                  Dr. Gabriel Mateo Miranda
+                  Dr. Gabriel Miranda
                 </a>
               </li>
               <li>
@@ -133,7 +133,7 @@ export const Footer: React.FC = () => {
         {/* Bottom Bar: Copyright & Back to Top */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-400">
           <div>
-            © {currentYear} <strong>Miranda Dental Studio</strong>. Todos los derechos reservados. Dr. Gabriel Mateo Miranda Hormaza.
+            © {currentYear} <strong>Miranda Dental Studio</strong>. Todos los derechos reservados. Dr. Gabriel Miranda.
           </div>
 
           <div className="flex items-center gap-6">

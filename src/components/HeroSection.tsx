@@ -100,7 +100,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             {/* Doctor & Studio Pre-Badge */}
             <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/45 text-[#84631E] text-xs font-black uppercase tracking-wider shadow-2xs">
               <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
-              <span>Miranda Dental Studio • Dr. Gabriel Mateo Miranda</span>
+              <span>Miranda Dental Studio • Dr. Gabriel Miranda</span>
             </motion.div>
 
             {/* H1 Main Heading */}
@@ -171,7 +171,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <motion.a
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                href={createWhatsAppLink("Hola Dr. Gabriel Mateo Miranda, quisiera información sobre las formas de pago y el Crédito Directo Dental.")}
+                href={createWhatsAppLink("Hola Dr. Gabriel Miranda, quisiera información sobre las formas de pago y el Crédito Directo Dental.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto px-7 py-3.5 rounded-full border border-stone-300 text-stone-800 bg-white/90 hover:bg-[#FAF7EE] hover:border-[#D4AF37]/60 font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-xs flex items-center justify-center gap-2 group cursor-pointer"

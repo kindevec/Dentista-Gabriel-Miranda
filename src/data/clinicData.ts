@@ -2,7 +2,7 @@ import { Specialty, DoctorProfile, SocialNetwork, FaqItem } from '../types';
 
 export const CLINIC_NAME = "Miranda Dental Studio";
 export const CLINIC_TAGLINE = "Rehabilitación Oral y Estética";
-export const DOCTOR_NAME = "Dr. Gabriel Mateo Miranda Hormaza";
+export const DOCTOR_NAME = "Dr. Gabriel Miranda";
 export const DOCTOR_TITLE = "Odontólogo — Rehabilitación Oral y Estética";
 export const DOCTOR_SENESCYT = "1042/2023/2642790";
 export const DOCTOR_CNSIT = "1042/2023/2642790";
@@ -99,13 +99,13 @@ export const SPECIALTIES_DATA: Specialty[] = [
 ];
 
 export const DOCTOR_PROFILE: DoctorProfile = {
-  name: "Dr. Gabriel Mateo Miranda Hormaza",
+  name: "Dr. Gabriel Miranda",
   title: "Odontólogo — Especialista en Rehabilitación Oral y Estética",
   role: "Director Clínico y Fundador de Miranda Dental Studio",
   specialty: "Rehabilitación Oral, Prótesis Implanto-Asistida, Estética Dental y Armonización Facial",
   experienceYears: 3,
   image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1000&auto=format&fit=crop",
-  bio: "El Dr. Gabriel Mateo Miranda Hormaza (Graduado en 2023, con 3 años de trayectoria clínica) es egresado de la prestigiosa Universidad de los Andes y actualmente cursa su 2do año de Residencia en la especialidad de Rehabilitación Oral y Prótesis implanto asistida en la Universidad de los Hemisferios. Con residencia internacional en la Universidad Cayetano Heredia de Perú, diplomado en Carillas 'Arte en Resinas' (Perú), diplomado en Endodoncia mecanizada en CPO BRASIL y formación continua en congresos internacionales como SMILE & HOF 2026 en Río de Janeiro (Brasil), fusiona la máxima precisión biomecánica con la armonía estética natural.",
+  bio: "El Dr. Gabriel Miranda (Graduado en 2023, con 3 años de trayectoria clínica) es egresado de la prestigiosa Universidad de los Andes y actualmente cursa su 2do año de Residencia en la especialidad de Rehabilitación Oral y Prótesis implanto asistida en la Universidad de los Hemisferios. Con residencia internacional en la Universidad Cayetano Heredia de Perú, diplomado en Carillas 'Arte en Resinas' (Perú), diplomado en Endodoncia mecanizada en CPO BRASIL y formación continua en congresos internacionales como SMILE & HOF 2026 en Río de Janeiro (Brasil), fusiona la máxima precisión biomecánica con la armonía estética natural.",
   credentials: [
     "Registro Oficial C.N.S.I.T.: 1042/2023/2642790",
     "Cursando 2do año de Residencia en Rehabilitación Oral y Prótesis Implanto Asistida (Universidad de los Hemisferios)",
@@ -125,7 +125,7 @@ export const FAQ_DATA: FaqItem[] = [
   {
     id: "faq-1",
     question: "¿Qué incluye la consulta de valoración de $15?",
-    answer: "La consulta de valoración de $15 es integral: incluye diagnóstico clínico minucioso con el Dr. Gabriel Mateo Miranda, registro fotográfico de tu sonrisa y radiografías dentales diagnósticas. Además, recibirás tu plan de tratamiento personalizado con presupuesto claro y opciones de financiamiento.",
+    answer: "La consulta de valoración de $15 es integral: incluye diagnóstico clínico minucioso con el Dr. Gabriel Miranda, registro fotográfico de tu sonrisa y radiografías dentales diagnósticas. Además, recibirás tu plan de tratamiento personalizado con presupuesto claro y opciones de financiamiento.",
     category: "general"
   },
   {
@@ -168,10 +168,10 @@ export const SOCIAL_NETWORKS: SocialNetwork[] = [
     iconType: "whatsapp",
     color: "#25D366",
     bgColor: "bg-emerald-50 border-emerald-200 text-[#25D366]",
-    description: "Canal de atención directa y agendamiento médico con el Dr. Gabriel Mateo Miranda. Reserva tu valoración de $15 o consulta sobre tratamientos.",
+    description: "Canal de atención directa y agendamiento médico con el Dr. Gabriel Miranda. Reserva tu valoración de $15 o consulta sobre tratamientos.",
     actionText: "Chatear por WhatsApp",
-    url: createWhatsAppLink("Hola Dr. Gabriel Mateo Miranda, deseo agendar una consulta de valoración de $15 en Miranda Dental Studio."),
-    waMessage: "Hola Dr. Gabriel Mateo Miranda, deseo información para una cita.",
+    url: createWhatsAppLink("Hola Dr. Gabriel Miranda, deseo agendar una consulta de valoración de $15 en Miranda Dental Studio."),
+    waMessage: "Hola Dr. Gabriel Miranda, deseo información para una cita.",
     image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=800&auto=format&fit=crop"
   },
   {
@@ -184,7 +184,7 @@ export const SOCIAL_NETWORKS: SocialNetwork[] = [
     description: "Casos clínicos reales de Rehabilitación Oral, Diseño de Sonrisa y Estética en Miranda Dental Studio.",
     actionText: "Seguir en Instagram",
     url: "https://www.instagram.com/odontologia_miranda/",
-    waMessage: "Hola Dr. Gabriel Mateo Miranda, vi su Instagram oficial y deseo agendar una valoración.",
+    waMessage: "Hola Dr. Gabriel Miranda, vi su Instagram oficial y deseo agendar una valoración.",
     image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=800&auto=format&fit=crop"
   },
   {
@@ -197,7 +197,7 @@ export const SOCIAL_NETWORKS: SocialNetwork[] = [
     description: "Comunidad de pacientes y testimonios sobre nuestros tratamientos dentales en Quito.",
     actionText: "Visitar Facebook",
     url: "https://facebook.com/odontologiagabrielmiranda",
-    waMessage: "Hola Dr. Gabriel Mateo Miranda, vi su página oficial de Facebook y deseo una cita.",
+    waMessage: "Hola Dr. Gabriel Miranda, vi su página oficial de Facebook y deseo una cita.",
     image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop"
   }
 ];
