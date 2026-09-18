@@ -13,17 +13,17 @@ export const Logo: React.FC<LogoProps> = ({
   showText = true,
   size = 'md',
   variant = 'light',
-  neumorphic = false,
+  neumorphic: _neumorphic = false,
 }) => {
   const iconSizes = {
-    sm: 'w-10 h-10 sm:w-11 sm:h-11',
-    md: 'w-13 h-13 sm:w-15 sm:h-15 lg:w-16 lg:h-16',
-    lg: 'w-16 h-16 sm:w-20 sm:h-20 lg:w-22 lg:h-22',
+    sm: 'w-11 h-11 sm:w-12 sm:h-12',
+    md: 'w-14 h-14 sm:w-16 sm:h-16 lg:w-[70px] lg:h-[70px]',
+    lg: 'w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28',
   };
 
   const titleSizes = {
     sm: 'text-base sm:text-lg tracking-[0.18em]',
-    md: 'text-lg sm:text-xl lg:text-[1.4rem] tracking-[0.2em]',
+    md: 'text-lg sm:text-xl lg:text-[1.35rem] tracking-[0.2em]',
     lg: 'text-2xl sm:text-3xl lg:text-4xl tracking-[0.22em]',
   };
 
@@ -41,18 +41,14 @@ export const Logo: React.FC<LogoProps> = ({
 
   return (
     <div className={`inline-flex items-center gap-3 sm:gap-4 select-none group cursor-pointer ${className}`}>
-      {/* Miranda Dental Studio Official 3D Gold Wire Emblem (Pure Gold Threads, Transparent) */}
+      {/* Miranda Dental Studio Official Circular Emblem (Sin marcos ni aros adicionales) */}
       <div
-        className={`relative flex items-center justify-center transition-all duration-300 group-hover:scale-105 shrink-0 ${iconSizes[size]} ${
-          neumorphic
-            ? 'p-2 sm:p-2.5 rounded-2xl bg-gradient-to-br from-[#FFFFFF] via-[#FAF9F5] to-[#F3EDE1] shadow-[-3px_-3px_9px_rgba(255,255,255,0.95),4px_4px_12px_rgba(180,140,50,0.18)] border border-[#D4AF37]/40 ring-1 ring-white/80'
-            : ''
-        }`}
+        className={`relative flex items-center justify-center transition-all duration-300 group-hover:scale-105 shrink-0 rounded-full aspect-square ${iconSizes[size]}`}
       >
         <img
-          src="/logo-miranda.png"
+          src="/logo-miranda.webp"
           alt="Miranda Dental Studio Emblem"
-          className="w-full h-full object-contain select-none pointer-events-none drop-shadow-[0_2px_5px_rgba(212,175,55,0.25)]"
+          className="w-full h-full object-contain rounded-full select-none pointer-events-none drop-shadow-[0_3px_8px_rgba(212,175,55,0.28)]"
           loading="eager"
           decoding="async"
         />

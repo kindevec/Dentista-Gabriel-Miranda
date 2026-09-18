@@ -30,6 +30,12 @@ import {
   OfficialFacebookLogo,
   WhatsAppIcon
 } from './OfficialSocialLogos';
+import {
+  LuxuryTreatmentSelect,
+  LuxuryTimeSelect,
+  LuxuryDatePicker,
+  TREATMENT_OPTIONS
+} from './ui/LuxuryFormControls';
 
 interface SocialAndContactSectionProps {
   preselectedSpecialty?: string;
@@ -60,9 +66,10 @@ export const SocialAndContactSection: React.FC<SocialAndContactSectionProps> = (
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    const matchedTreatment = TREATMENT_OPTIONS.find((t) => t.id === formData.specialtyId);
     const matchedService = SPECIALTIES_DATA.find((s) => s.id === formData.specialtyId)
       || CLINICAL_SPECIALTIES.find((s) => s.id === formData.specialtyId);
-    const serviceName = matchedService ? matchedService.title : 'Consulta de Valoración Médica';
+    const serviceName = matchedTreatment ? matchedTreatment.title : (matchedService ? matchedService.title : 'Consulta de Valoración Médica');
 
     const messageLines = [
       `*SOLICITUD DE CITA EN MIRANDA DENTAL STUDIO*`,
@@ -176,63 +183,36 @@ export const SocialAndContactSection: React.FC<SocialAndContactSectionProps> = (
                 </div>
               </div>
 
-              {/* Specialty Select */}
+              {/* Specialty Select (Custom Luxury Dropdown) */}
               <div>
                 <label className="block text-[11px] font-bold text-[#0D0D0D] uppercase tracking-wider mb-1.5 pl-1">
                   Tratamiento o Motivo de Consulta *
                 </label>
-                <select
+                <LuxuryTreatmentSelect
                   value={formData.specialtyId}
-                  onChange={(e) => setFormData({ ...formData, specialtyId: e.target.value })}
-                  className="w-full px-5 py-3.5 rounded-2xl bg-white border border-stone-300 shadow-xs focus:border-[#D4AF37] focus:ring-3 focus:ring-[#D4AF37]/20 text-stone-800 text-sm transition-all outline-none"
-                >
-                  <option value="consulta-valoracion">Consulta de Valoración ($15 - Diagnóstico, Fotos y Rayos X)</option>
-                  <optgroup label="Servicios Básicos">
-                    <option value="profilaxis-dental">Profilaxis dental profunda</option>
-                    <option value="restauraciones">Restauraciones</option>
-                    <option value="extracciones">Extracciones</option>
-                    <option value="blanqueamientos">Blanqueamientos</option>
-                  </optgroup>
-                  <optgroup label="Especialidades Clínicas">
-                    <option value="rehabilitacion-oral">Rehabilitación Oral (Prótesis y Coronas)</option>
-                    <option value="estetica">Estética (Carillas y Microabrasión)</option>
-                    <option value="endodoncia">Endodoncia (Tratamiento de conductos mecanizado)</option>
-                    <option value="implantologia">Implantología</option>
-                    <option value="cirugia">Cirugía (Terceros molares)</option>
-                    <option value="ortodoncia">Ortodoncia (Convencionales, autoligado, estéticos)</option>
-                    <option value="armonizacion-facial">Armonización Facial (Bichectomía, Ácido Hialurónico, Botox)</option>
-                    <option value="periodoncia">Periodoncia (Gingivectomía, detartrajes, frenectomía)</option>
-                  </optgroup>
-                </select>
+                  onChange={(val) => setFormData({ ...formData, specialtyId: val })}
+                />
               </div>
 
-              {/* Preferred Date & Time */}
+              {/* Preferred Date & Time (Custom Luxury Dropdowns) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[11px] font-bold text-[#0D0D0D] uppercase tracking-wider mb-1.5 pl-1">
                     Fecha Deseada
                   </label>
-                  <input
-                    type="date"
+                  <LuxuryDatePicker
                     value={formData.preferredDate}
-                    onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
-                    className="w-full px-5 py-3.5 rounded-2xl bg-white border border-stone-300 shadow-xs focus:border-[#D4AF37] focus:ring-3 focus:ring-[#D4AF37]/20 text-stone-800 text-sm transition-all outline-none"
+                    onChange={(val) => setFormData({ ...formData, preferredDate: val })}
                   />
                 </div>
                 <div>
                   <label className="block text-[11px] font-bold text-[#0D0D0D] uppercase tracking-wider mb-1.5 pl-1">
                     Horario Preferido
                   </label>
-                  <select
+                  <LuxuryTimeSelect
                     value={formData.preferredTime}
-                    onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
-                    className="w-full px-5 py-3.5 rounded-2xl bg-white border border-stone-300 shadow-xs focus:border-[#D4AF37] focus:ring-3 focus:ring-[#D4AF37]/20 text-stone-800 text-sm transition-all outline-none"
-                  >
-                    <option value="Mañana (09:00 - 12:00)">Mañana (09:00 AM - 12:00 PM)</option>
-                    <option value="Mediodía (12:00 - 15:00)">Mediodía (12:00 PM - 15:00 PM)</option>
-                    <option value="Tarde (15:00 - 19:00)">Tarde (15:00 PM - 19:00 PM)</option>
-                    <option value="Domingo (09:00 - 14:00)">Domingo Especial (09:00 AM - 14:00 PM)</option>
-                  </select>
+                    onChange={(val) => setFormData({ ...formData, preferredTime: val })}
+                  />
                 </div>
               </div>
 

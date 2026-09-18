@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence, type PanInfo } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import {
   Layers,
   Smile,
@@ -12,6 +12,7 @@ import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
+  Clock,
 } from 'lucide-react';
 import { WhatsAppIcon } from './OfficialSocialLogos';
 import { SPECIALTIES_DATA, createWhatsAppLink, DOCTOR_NAME } from '../data/clinicData';
@@ -21,9 +22,6 @@ import { cn } from '../lib/utils';
 interface SpecialtiesSectionProps {
   onSelectSpecialtyForBooking?: (specialtyId: string) => void;
 }
-
-const ITEM_HEIGHT = 64;
-const VIRTUAL_OFFSETS = [-2, -1, 0, 1, 2];
 
 const SPECIALTY_SHORT_TITLES: Record<string, string> = {
   'profilaxis-dental': 'Profilaxis Profunda',
@@ -72,50 +70,6 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
     if (diff < -totalItems / 2) diff += totalItems;
     if (diff !== 0) setStep((s) => s + diff);
   }, [currentIndex, totalItems]);
-
-  const wheelAccumulatorRef = useRef<number>(0);
-  const wheelTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const isWheelLockedRef = useRef<boolean>(false);
-
-  // Deslizamiento fluido, controlado y de alto rendimiento por rueda de ratón
-  const handleWheel = useCallback((e: React.WheelEvent) => {
-    e.stopPropagation();
-    wheelAccumulatorRef.current += e.deltaY;
-
-    if (wheelTimerRef.current) {
-      clearTimeout(wheelTimerRef.current);
-    }
-
-    const threshold = 40;
-    if (!isWheelLockedRef.current && Math.abs(wheelAccumulatorRef.current) >= threshold) {
-      const direction = wheelAccumulatorRef.current > 0 ? 1 : -1;
-      setStep((s) => s + direction);
-      wheelAccumulatorRef.current = 0;
-      isWheelLockedRef.current = true;
-      setTimeout(() => {
-        isWheelLockedRef.current = false;
-      }, 90);
-    }
-
-    wheelTimerRef.current = setTimeout(() => {
-      wheelAccumulatorRef.current = 0;
-      isWheelLockedRef.current = false;
-    }, 140);
-  }, []);
-
-  // Arrastre físico táctil interactivo con mouse o touch con inercia optimizada
-  const handleTrackDragEnd = useCallback((
-    _event: MouseEvent | TouchEvent | PointerEvent,
-    info: PanInfo
-  ) => {
-    const deltaY = info.offset.y;
-    const velocityY = info.velocity.y;
-    const projectedDistance = deltaY + velocityY * 0.15;
-    const stepsMoved = -Math.round(projectedDistance / ITEM_HEIGHT);
-    if (stepsMoved !== 0) {
-      setStep((s) => s + stepsMoved);
-    }
-  }, []);
 
   const getCardStatus = useCallback((index: number) => {
     const diff = index - currentIndex;
@@ -180,7 +134,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
       <div className="absolute inset-0 bg-gradient-to-b from-[#FAF9F5] via-[#FAF9F5] to-[#FAF9F5] pointer-events-none" />
 
       {/* 2. Floating 3D Curved Ribbon */}
-      <OrganicDentalRibbon className="top-12 -right-16 w-96 md:w-[32rem] opacity-35" variant="gold" />
+      <OrganicDentalRibbon className="absolute top-12 -right-16 w-96 md:w-[32rem] opacity-35" variant="gold" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-2">
         {/* Section Header */}
@@ -201,149 +155,176 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
         </motion.div>
 
         {/* 3. Luxury 3D Feature Carousel Showcase */}
-        <div id="servicios" className="w-full max-w-6xl mx-auto scroll-mt-24">
+        <div className="w-full max-w-6xl mx-auto scroll-mt-24">
           {/* ========================================================================= */}
           {/* DESKTOP EXPERIENCE (lg:grid) — SOBRE EL LIENZO DIRECTAMENTE (SIN BOX-IN-BOX) */}
           {/* ========================================================================= */}
-          <div className="hidden lg:grid grid-cols-12 gap-8 xl:gap-12 items-center min-h-[460px] py-2">
-            {/* Left Column: Interactive Wheel of Specialties sobre el lienzo (Sin contenedor box-in-box) */}
-            <div className="col-span-5 relative z-20 flex flex-col justify-center my-auto">
+          <div className="hidden lg:grid grid-cols-12 gap-8 xl:gap-12 items-center min-h-[520px] py-2">
+            {/* Left Column: Interactive Executive Service Dock + Rich Clinical Dossier */}
+            <div className="col-span-5 relative z-20 flex flex-col justify-center space-y-3.5 my-auto">
+              {/* Executive 4-Service Interactive Selection Dock */}
+              <div className="space-y-2">
+                {SPECIALTIES_DATA.map((spec, idx) => {
+                  const isActive = idx === currentIndex;
+                  return (
+                    <button
+                      key={spec.id}
+                      type="button"
+                      onClick={() => handleChipClick(idx)}
+                      className={cn(
+                        'relative flex items-center gap-3 w-full px-4 py-2.5 rounded-2xl transition-all duration-300 text-left group cursor-pointer select-none',
+                        isActive
+                          ? 'bg-gradient-to-r from-[#FAF7EE] via-white to-[#F8F3E5] border-2 border-[#D4AF37] shadow-[0_8px_25px_-6px_rgba(212,175,55,0.3)] z-10 scale-[1.01]'
+                          : 'bg-white/80 hover:bg-white border border-stone-200/80 hover:border-[#D4AF37]/50 shadow-2xs hover:shadow-xs scale-100'
+                      )}
+                    >
+                      {/* Active Left Gold Accent Bar */}
+                      {isActive && (
+                        <motion.div
+                          layoutId="activeServiceBar"
+                          className="absolute -left-1 top-2 bottom-2 w-1.5 rounded-full bg-gradient-to-b from-[#D4AF37] to-[#84631E] shadow-[0_0_10px_rgba(212,175,55,0.7)]"
+                        />
+                      )}
 
-              {/* Desktop Infinite Loop Wheel sobre el lienzo (Cero Contenedor, Cero Sombras de Máscara) */}
-              <div
-                onWheel={handleWheel}
-                className="relative w-full h-[320px] flex items-center justify-start overflow-hidden select-none my-auto cursor-grab active:cursor-grabbing contain-paint"
-              >
-                {/* Infinite Continuous Virtual Track con Arrastre Físico e Inercia */}
-                <motion.div
-                  drag="y"
-                  dragConstraints={{ top: 0, bottom: 0 }}
-                  dragElastic={0.25}
-                  onDragEnd={handleTrackDragEnd}
-                  animate={{ y: 128 - step * ITEM_HEIGHT }}
-                  transition={{
-                    type: 'spring',
-                    stiffness: 280,
-                    damping: 28,
-                    mass: 0.6,
-                  }}
-                  className="relative w-full h-full z-20 will-change-transform transform-gpu"
-                >
-                  {VIRTUAL_OFFSETS.map((offset) => {
-                    const absIndex = step + offset;
-                    const specIndex = ((absIndex % totalItems) + totalItems) % totalItems;
-                    const spec = SPECIALTIES_DATA[specIndex];
-                    const isActive = offset === 0;
-                    const distance = Math.abs(offset);
-
-                    // Desvanecimiento suave y progresivo en 7 posiciones visibles
-                    const opacity = isActive
-                      ? 1
-                      : distance === 1
-                      ? 0.92
-                      : distance === 2
-                      ? 0.58
-                      : 0.18;
-
-                    const scale = isActive
-                      ? 1.03
-                      : distance === 1
-                      ? 0.98
-                      : distance === 2
-                      ? 0.94
-                      : 0.90;
-
-                    return (
-                      <div
-                        key={absIndex}
-                        style={{
-                          position: 'absolute',
-                          top: absIndex * ITEM_HEIGHT,
-                          left: 0,
-                          right: 0,
-                          height: ITEM_HEIGHT,
-                        }}
-                        className="flex items-center justify-start w-full py-1.5 px-4"
+                      {/* Number Index */}
+                      <span
+                        className={cn(
+                          'font-mono text-xs font-black transition-colors shrink-0',
+                          isActive ? 'text-[#84631E]' : 'text-stone-400 group-hover:text-stone-600'
+                        )}
                       >
-                        <button
-                          type="button"
-                          onClick={() => {
-                            if (offset !== 0) {
-                              setStep((s) => s + offset);
-                            }
-                          }}
-                          className={cn(
-                            'relative flex items-center gap-3.5 w-full h-full px-5 py-3 rounded-2xl transition-all duration-200 text-left group cursor-pointer select-none',
-                            isActive
-                              ? 'bg-white border-2 border-[#D4AF37] z-20'
-                              : 'bg-white/80 hover:bg-white border border-stone-200/80 hover:border-[#D4AF37]/50'
-                          )}
-                          style={{
-                            opacity,
-                            transform: `scale(${scale}) translateZ(0)`,
-                            pointerEvents: distance <= 2 ? 'auto' : 'none',
-                            willChange: 'transform, opacity',
-                          }}
-                        >
-                          {/* Pozo de Icono Dorado Limpio */}
-                          <div
-                            className={cn(
-                              'w-9 h-9 rounded-xl flex items-center justify-center transition-colors duration-200 shrink-0',
-                              isActive
-                                ? 'bg-gradient-to-br from-[#D4AF37] via-[#AA7C11] to-[#84631E] text-white'
-                                : 'bg-[#FAF7EE] text-[#84631E] group-hover:bg-[#D4AF37] group-hover:text-white'
-                            )}
-                          >
-                            {getSpecialtyIcon(spec.iconName, isActive ? 'w-5 h-5 text-white' : 'w-5 h-5 text-[#84631E] group-hover:text-white transition-colors')}
-                          </div>
+                        {String(idx + 1).padStart(2, '0')}
+                      </span>
 
-                          <div className="flex flex-col min-w-0">
-                            <span
-                              className={cn(
-                                'font-extrabold text-sm tracking-tight truncate transition-colors',
-                                isActive ? 'text-[#84631E] font-black' : 'text-stone-800 group-hover:text-[#AA7C11]'
-                              )}
-                            >
-                              {spec.title}
-                            </span>
-                            <span
-                              className={cn(
-                                'text-[11px] truncate font-semibold transition-colors',
-                                isActive ? 'text-[#AA7C11] font-bold' : 'text-stone-500'
-                              )}
-                            >
-                              {spec.estimatedTime || 'Evaluación'}
-                            </span>
-                          </div>
-
-                          {isActive ? (
-                            <span className="ml-auto flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/50 shrink-0">
-                              <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />
-                              <span className="text-[10px] font-black text-[#84631E] uppercase tracking-wider">Activo</span>
-                            </span>
-                          ) : (
-                            <span className="ml-auto opacity-0 group-hover:opacity-100 text-[#AA7C11] transition-opacity shrink-0">
-                              <ArrowRight className="w-3.5 h-3.5" />
-                            </span>
-                          )}
-                        </button>
+                      {/* 3D Embossed Icon */}
+                      <div
+                        className={cn(
+                          'w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-300 shrink-0',
+                          isActive
+                            ? 'bg-gradient-to-br from-[#D4AF37] via-[#AA7C11] to-[#84631E] text-white shadow-[0_4px_12px_rgba(212,175,55,0.35)]'
+                            : 'bg-[#FAF7EE] text-[#84631E] group-hover:bg-[#D4AF37] group-hover:text-white group-hover:shadow-xs'
+                        )}
+                      >
+                        {getSpecialtyIcon(spec.iconName, isActive ? 'w-4 h-4 text-white' : 'w-4 h-4 text-[#84631E] group-hover:text-white transition-colors')}
                       </div>
+
+                      {/* Title & Timing */}
+                      <div className="flex flex-col min-w-0 flex-1">
+                        <span
+                          className={cn(
+                            'text-sm font-extrabold tracking-tight truncate transition-colors',
+                            isActive ? 'text-[#0D0D0D]' : 'text-stone-700 group-hover:text-[#0D0D0D]'
+                          )}
+                        >
+                          {spec.title}
+                        </span>
+                        <span
+                          className={cn(
+                            'text-[11px] truncate font-semibold transition-colors',
+                            isActive ? 'text-[#AA7C11] font-bold' : 'text-stone-400'
+                          )}
+                        >
+                          {spec.estimatedTime || 'Evaluación personalizada'}
+                        </span>
+                      </div>
+
+                      {/* Active / Hover Arrow */}
+                      <div className="shrink-0">
+                        <ArrowRight
+                          className={cn(
+                            'w-4 h-4 transition-all',
+                            isActive
+                              ? 'text-[#84631E] translate-x-0 opacity-100'
+                              : 'text-stone-300 group-hover:text-[#D4AF37] opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0'
+                          )}
+                        />
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Active Service Detailed Clinical Information (Ficha Dossier Enriquecida) */}
+              <div className="relative min-h-[200px]">
+                <AnimatePresence mode="wait">
+                  {(() => {
+                    const activeSpec = SPECIALTIES_DATA[currentIndex];
+                    return (
+                      <motion.div
+                        key={activeSpec.id}
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -6 }}
+                        transition={{ duration: 0.2 }}
+                        className="relative rounded-3xl bg-white/90 backdrop-blur-md border border-[#D4AF37]/35 shadow-[0_10px_30px_-10px_rgba(180,140,50,0.12)] p-6 space-y-3.5 overflow-hidden"
+                      >
+                        {/* Ambient Gold Sheen */}
+                        <div className="absolute -top-12 -right-12 w-32 h-32 bg-[#D4AF37]/10 rounded-full blur-2xl pointer-events-none" />
+
+                        {/* Header: Title and Time Duration without inner boxes */}
+                        <div className="flex items-center justify-between gap-3 border-b border-stone-200/60 pb-3 relative z-10">
+                          <div>
+                            <span className="text-[10px] font-black uppercase tracking-widest text-[#84631E] block">
+                              Detalles del Tratamiento
+                            </span>
+                            <h4 className="text-base font-black text-[#0D0D0D] tracking-tight">
+                              {activeSpec.title}
+                            </h4>
+                          </div>
+
+                          {activeSpec.estimatedTime && (
+                            <div className="flex items-center gap-1.5 text-xs font-bold text-[#84631E] bg-[#FAF7EE] border border-[#D4AF37]/30 px-3 py-1 rounded-full shrink-0 shadow-2xs">
+                              <Clock className="w-3.5 h-3.5 text-[#84631E]" />
+                              <span>{activeSpec.estimatedTime}</span>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Description */}
+                        <p className="text-xs sm:text-[13px] text-stone-600 leading-relaxed text-justify relative z-10">
+                          {activeSpec.fullDesc || activeSpec.shortDesc}
+                        </p>
+
+                        {/* Features List: Pure open typography with gold circle checks, ZERO nested boxes */}
+                        <ul className="space-y-2.5 pt-1 relative z-10">
+                          {activeSpec.features.map((feat, fIdx) => (
+                            <li key={fIdx} className="flex items-start gap-2.5 text-xs sm:text-[12.5px] text-stone-700 font-medium">
+                              <div className="w-4 h-4 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/50 text-[#84631E] flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
+                                <Check className="w-2.5 h-2.5 stroke-[3]" />
+                              </div>
+                              <span className="leading-snug">{feat}</span>
+                            </li>
+                          ))}
+                        </ul>
+
+                        {/* Clinical Indication footnote, ZERO nested boxes */}
+                        {activeSpec.suitableFor && (
+                          <div className="pt-2.5 border-t border-stone-200/60 flex items-start gap-1.5 text-xs text-stone-500 relative z-10">
+                            <span className="font-extrabold text-[#84631E] uppercase tracking-wider text-[10px] shrink-0 mt-0.5">
+                              Indicado para:
+                            </span>
+                            <span className="font-medium text-stone-700 leading-snug">
+                              {activeSpec.suitableFor}
+                            </span>
+                          </div>
+                        )}
+                      </motion.div>
                     );
-                  })}
-                </motion.div>
+                  })()}
+                </AnimatePresence>
               </div>
             </div>
 
-            {/* Right Column: 3D Stack / Card Perspective Showcase sobre el lienzo */}
+            {/* Right Column: 3D Stack / Card Perspective Showcase (HD Visuals, Sin Contenedor Obstructivo) */}
             <div className="col-span-7 relative flex flex-col items-center justify-center py-2">
-              <div className="relative w-full max-w-[440px] h-[450px] flex items-center justify-center">
+              <div className="relative w-full max-w-[480px] xl:max-w-[500px] h-[510px] xl:h-[530px] flex items-center justify-center">
                 <AnimatePresence initial={false}>
                   {SPECIALTIES_DATA.filter((_, idx) => getCardStatus(idx) !== 'hidden').map((spec) => {
                     const status = getCardStatus(SPECIALTIES_DATA.findIndex((s) => s.id === spec.id));
                     const isActive = status === 'active';
                     const isPrev = status === 'prev';
                     const isNext = status === 'next';
-                    const sideOffset = 85;
+                    const sideOffset = 90;
 
                     return (
                       <motion.div
@@ -378,96 +359,83 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                           if (isNext) nextStep();
                         }}
                         className={cn(
-                          'absolute inset-0 rounded-[2.5rem] overflow-hidden border-2 shadow-2xl transition-[box-shadow,border-color] duration-300 bg-slate-950 flex flex-col justify-between select-none cursor-default transform-gpu will-change-transform',
+                          'absolute inset-0 rounded-[2.5rem] overflow-hidden border-2 shadow-2xl transition-[box-shadow,border-color] duration-300 bg-slate-950 flex flex-col justify-end select-none cursor-default transform-gpu will-change-transform',
                           isActive
-                            ? 'border-[#D4AF37]/80 shadow-[0_10px_35px_rgba(212,175,55,0.25)]'
+                            ? 'border-[#D4AF37]/80 shadow-[0_15px_45px_rgba(212,175,55,0.28)]'
                             : 'border-white/10 hover:border-[#D4AF37]/50 cursor-pointer'
                         )}
                       >
-                        {/* Full-bleed clinical image optimized */}
-                        <img
-                          src={spec.image || 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=800&auto=format&fit=crop'}
-                          alt={spec.title}
-                          loading="lazy"
-                          decoding="async"
-                          width={480}
-                          height={560}
-                          referrerPolicy="no-referrer"
-                          className={cn(
-                            'absolute inset-0 w-full h-full object-cover transition-opacity duration-300 pointer-events-none transform-gpu',
-                            isActive ? 'brightness-100 opacity-100' : 'brightness-75 opacity-80'
-                          )}
-                        />
-
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 via-55% to-slate-950/35 pointer-events-none" />
-
-                        {/* Top Bar inside Card */}
-                        <div className="relative z-20 p-6 flex items-center">
-                          <div className="w-11 h-11 rounded-2xl bg-[#0D0D0D]/60 backdrop-blur-md border border-[#D4AF37]/40 flex items-center justify-center text-[#F3E5AB] shadow-md">
-                            {getSpecialtyIcon(spec.iconName, 'w-5 h-5 text-[#F3E5AB]')}
+                        {/* Imagen Clínica en Alta Definición (Con alejamiento para restauraciones para ver diente dañado y restaurado completos) */}
+                        {spec.id === 'restauraciones' ? (
+                          <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+                            {/* Fondo ambiental difuminado para envolver el card de manera orgánica */}
+                            <img
+                              src={spec.image}
+                              alt=""
+                              aria-hidden="true"
+                              className="absolute inset-0 w-full h-full object-cover object-center blur-2xl opacity-40 scale-110"
+                            />
+                            {/* Imagen de caso clínico completa y alejada (100% visible sin recorte lateral) */}
+                            <div className="absolute inset-x-0 top-0 h-[64%] flex items-center justify-center p-4 sm:p-5">
+                              <img
+                                src={spec.image}
+                                alt={spec.title}
+                                loading="eager"
+                                decoding="async"
+                                className={cn(
+                                  'w-full h-full object-contain rounded-2xl shadow-2xl transition-all duration-500 transform-gpu',
+                                  isActive ? 'brightness-105 contrast-[1.03] scale-100' : 'brightness-80 opacity-70 scale-95'
+                                )}
+                              />
+                            </div>
                           </div>
-                        </div>
+                        ) : (
+                          <img
+                            src={spec.image || 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=800&auto=format&fit=crop'}
+                            alt={spec.title}
+                            loading="eager"
+                            decoding="async"
+                            width={600}
+                            height={700}
+                            className={cn(
+                              'absolute inset-0 w-full h-full object-cover object-center transition-all duration-500 pointer-events-none transform-gpu',
+                              isActive ? 'brightness-105 contrast-[1.03] opacity-100 scale-100' : 'brightness-80 opacity-70 scale-95'
+                            )}
+                          />
+                        )}
 
-                        {/* Bottom Content inside Card */}
-                        <div className="relative z-20 p-6 pt-0 flex flex-col justify-end">
+                        {/* Degradado Sutil Únicamente Inferior (El 70% superior queda 100% nítido, claro y HD) */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 via-35% to-transparent pointer-events-none" />
+
+                        {/* Contenido Inferior del Card: Únicamente Título y Botón de WhatsApp */}
+                        <div className="relative z-20 p-6 sm:p-7 flex flex-col justify-end">
                           <AnimatePresence mode="wait">
                             {isActive && (
                               <motion.div
-                                initial={{ opacity: 0, y: 12 }}
+                                initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -8 }}
-                                transition={{ duration: 0.25 }}
+                                exit={{ opacity: 0, y: -6 }}
+                                transition={{ duration: 0.22 }}
+                                className="space-y-3.5"
                               >
-                                <h3 className="text-2xl font-black text-white leading-tight mb-2">
+                                <h3 className="text-2xl sm:text-[1.7rem] font-black text-white leading-tight drop-shadow-md">
                                   {spec.title}
                                 </h3>
-
-                                <p className="text-[13px] text-slate-200 mb-3.5 line-clamp-2 leading-relaxed text-justify">
-                                  {spec.shortDesc}
-                                </p>
-
-                                <div className="space-y-1.5 mb-4">
-                                  {spec.features.slice(0, 3).map((feat, fIdx) => (
-                                    <motion.div
-                                      key={fIdx}
-                                      initial={{ opacity: 0, x: -10 }}
-                                      animate={{ opacity: 1, x: 0 }}
-                                      transition={{ delay: 0.1 + fIdx * 0.08, duration: 0.25 }}
-                                      className="flex items-center gap-2 text-xs text-slate-100 font-medium"
-                                    >
-                                      <div className="w-4 h-4 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/60 text-[#F3E5AB] flex items-center justify-center shrink-0 shadow-2xs">
-                                        <Check className="w-2.5 h-2.5 stroke-[3]" />
-                                      </div>
-                                      <span className="truncate">{feat}</span>
-                                    </motion.div>
-                                  ))}
-                                </div>
-
-                                {spec.suitableFor && (
-                                  <motion.p
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    transition={{ delay: 0.35, duration: 0.25 }}
-                                    className="text-[11px] text-[#F3E5AB]/85 italic mb-4 line-clamp-1"
-                                  >
-                                    Ideal para: {spec.suitableFor}
-                                  </motion.p>
-                                )}
 
                                 <motion.a
                                   initial={{ opacity: 0, y: 6 }}
                                   animate={{ opacity: 1, y: 0 }}
-                                  transition={{ delay: 0.4, duration: 0.25 }}
+                                  transition={{ delay: 0.08, duration: 0.2 }}
                                   whileHover={{ scale: 1.02, y: -2 }}
                                   whileTap={{ scale: 0.98 }}
                                   href={createWhatsAppLink(spec.waMessage || `Hola ${DOCTOR_NAME}, deseo información y solicitar una cita sobre el tratamiento de ${spec.title}.`)}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="w-full py-3 px-5 rounded-full bg-gradient-to-r from-[#25D366] via-[#20BA5A] to-[#128C7E] hover:from-[#20BA5A] hover:to-[#0f7a6d] text-white font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-lg shadow-emerald-950/40 hover:shadow-emerald-500/30 group/btn cursor-pointer"
+                                  className="w-full py-3.5 px-5 rounded-full bg-gradient-to-r from-[#25D366] via-[#20BA5A] to-[#128C7E] hover:from-[#20BA5A] hover:to-[#0f7a6d] text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2.5 transition-all duration-300 shadow-lg shadow-emerald-950/60 hover:shadow-emerald-500/30 group/btn cursor-pointer"
                                 >
-                                  <WhatsAppIcon className="w-4 h-4 text-white group-hover/btn:scale-110 transition-transform" />
+                                  <WhatsAppIcon className="w-5 h-5 text-white group-hover/btn:scale-110 transition-transform drop-shadow-xs" />
                                   <span>Consultar por WhatsApp</span>
-                                  <ArrowRight className="w-3.5 h-3.5 text-white/80 group-hover/btn:translate-x-1 transition-transform" />
+                                  <ArrowRight className="w-4 h-4 text-white/80 group-hover/btn:translate-x-1 transition-transform" />
                                 </motion.a>
                               </motion.div>
                             )}
@@ -478,30 +446,13 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                   })}
                 </AnimatePresence>
               </div>
-
-              {/* Dot Position Indicators */}
-              <div className="flex items-center gap-1.5 mt-6 justify-center">
-                {SPECIALTIES_DATA.map((_, dotIdx) => (
-                  <button
-                    key={dotIdx}
-                    onClick={() => handleChipClick(dotIdx)}
-                    aria-label={`Ir a especialidad ${dotIdx + 1}`}
-                    className={cn(
-                      'rounded-full transition-all duration-300 cursor-pointer',
-                      dotIdx === currentIndex
-                        ? 'w-6 h-2 bg-gradient-to-r from-[#D4AF37] to-[#84631E]'
-                        : 'w-2 h-2 bg-stone-300 hover:bg-stone-400'
-                    )}
-                  />
-                ))}
-              </div>
             </div>
           </div>
 
           {/* ========================================================= */}
           {/* MOBILE EXPERIENCE (lg:hidden) — ERGONOMIC, CLEAN, NO JUMP */}
           {/* ========================================================= */}
-          <div className="lg:hidden flex flex-col gap-3.5">
+          <div className="lg:hidden flex flex-col gap-4">
             {/* 1. Horizontal Category Pill Navigation with Full Readable Names */}
             <div
               ref={mobilePillsRef}
@@ -537,7 +488,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
 
             {/* 2. Interactive Card with Full Touch Gestures and Floating Chevrons */}
             <div
-              className="relative w-full max-w-[440px] mx-auto min-h-[420px] sm:min-h-[450px] flex items-center justify-center"
+              className="relative w-full max-w-[440px] mx-auto min-h-[440px] sm:min-h-[470px] flex items-center justify-center"
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
@@ -545,15 +496,15 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
               {/* Floating Ergonomic Navigation Chevrons on Mobile Edges */}
               <button
                 onClick={prevStep}
-                aria-label="Especialidad anterior"
-                className="absolute left-2 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-slate-950/75 backdrop-blur-md border border-white/20 text-white flex items-center justify-center shadow-lg shadow-black/30 active:scale-90 transition-transform cursor-pointer"
+                aria-label="Servicio anterior"
+                className="absolute left-2.5 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white flex items-center justify-center shadow-lg shadow-black/40 active:scale-90 transition-transform cursor-pointer"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
               <button
                 onClick={nextStep}
-                aria-label="Especialidad siguiente"
-                className="absolute right-2 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-slate-950/75 backdrop-blur-md border border-white/20 text-white flex items-center justify-center shadow-lg shadow-black/30 active:scale-90 transition-transform cursor-pointer"
+                aria-label="Servicio siguiente"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white flex items-center justify-center shadow-lg shadow-black/40 active:scale-90 transition-transform cursor-pointer"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
@@ -569,65 +520,54 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.97 }}
                       transition={{ duration: 0.24, ease: 'easeOut' }}
-                      className="w-full min-h-[420px] sm:min-h-[450px] rounded-[2.2rem] overflow-hidden border-2 border-[#D4AF37]/60 shadow-2xl shadow-black/40 bg-slate-950 flex flex-col justify-between select-none relative transform-gpu will-change-transform"
+                      className="w-full min-h-[440px] sm:min-h-[470px] rounded-[2.2rem] overflow-hidden border-2 border-[#D4AF37]/60 shadow-2xl shadow-black/40 bg-slate-950 flex flex-col justify-end select-none relative transform-gpu will-change-transform"
                     >
-                      {/* Full-bleed photo with zero padding */}
-                      <img
-                        src={spec.image || 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=800&auto=format&fit=crop'}
-                        alt={spec.title}
-                        loading="lazy"
-                        decoding="async"
-                        referrerPolicy="no-referrer"
-                        className="absolute inset-0 w-full h-full object-cover pointer-events-none transform-gpu"
-                      />
-
-                      {/* Contrast Gradient Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/85 via-50% to-slate-950/40 pointer-events-none" />
-
-                      {/* Card Top Bar */}
-                      <div className="relative z-20 p-4 sm:p-5 flex items-center">
-                        <div className="w-9 h-9 rounded-xl bg-[#0D0D0D]/60 backdrop-blur-md border border-[#D4AF37]/40 flex items-center justify-center text-[#F3E5AB] shadow-md">
-                          {getSpecialtyIcon(spec.iconName, 'w-4 h-4 text-[#F3E5AB]')}
+                      {/* Full-bleed photo with zero padding (Con alejamiento para restauraciones) */}
+                      {spec.id === 'restauraciones' ? (
+                        <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+                          {/* Fondo ambiental difuminado */}
+                          <img
+                            src={spec.image}
+                            alt=""
+                            aria-hidden="true"
+                            className="absolute inset-0 w-full h-full object-cover object-center blur-2xl opacity-40 scale-110"
+                          />
+                          {/* Imagen de caso clínico completa y alejada (100% visible sin recorte lateral) */}
+                          <div className="absolute inset-x-0 top-0 h-[62%] sm:h-[65%] flex items-center justify-center p-3 sm:p-4">
+                            <img
+                              src={spec.image}
+                              alt={spec.title}
+                              loading="eager"
+                              decoding="async"
+                              className="w-full h-full object-contain rounded-2xl shadow-xl brightness-105 contrast-[1.03] pointer-events-none transform-gpu"
+                            />
+                          </div>
                         </div>
-                      </div>
+                      ) : (
+                        <img
+                          src={spec.image || 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=800&auto=format&fit=crop'}
+                          alt={spec.title}
+                          loading="eager"
+                          decoding="async"
+                          className="absolute inset-0 w-full h-full object-cover object-center brightness-105 contrast-[1.03] pointer-events-none transform-gpu"
+                        />
+                      )}
 
-                      {/* Card Bottom Content */}
-                      <div className="relative z-20 p-4 sm:p-5 pt-0 flex flex-col justify-end">
-                        <h3 className="text-lg sm:text-xl font-black text-white leading-snug mb-1.5">
+                      {/* Subtle bottom-only gradient (Top 70% remains clear and HD) */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 via-35% to-transparent pointer-events-none" />
+
+                      {/* Card Bottom Content: Title + WhatsApp CTA only */}
+                      <div className="relative z-20 p-5 sm:p-6 flex flex-col justify-end space-y-3">
+                        <h3 className="text-xl sm:text-2xl font-black text-white leading-tight drop-shadow-md">
                           {spec.title}
                         </h3>
-
-                        <p className="text-[11.5px] sm:text-xs text-slate-200 mb-2.5 line-clamp-2 leading-relaxed text-justify">
-                          {spec.shortDesc}
-                        </p>
-
-                        {/* Highlights Bullet Points */}
-                        <div className="space-y-1 mb-2.5">
-                          {spec.features.slice(0, 3).map((feat, fIdx) => (
-                            <div
-                              key={fIdx}
-                              className="flex items-center gap-2 text-[11px] text-slate-100 font-medium"
-                            >
-                              <div className="w-3.5 h-3.5 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/60 text-[#F3E5AB] flex items-center justify-center shrink-0">
-                                <Check className="w-2 h-2 stroke-[3]" />
-                              </div>
-                              <span className="truncate">{feat}</span>
-                            </div>
-                          ))}
-                        </div>
-
-                        {spec.suitableFor && (
-                          <p className="text-[10px] text-[#F3E5AB]/85 italic mb-3 line-clamp-1">
-                            Ideal para: {spec.suitableFor}
-                          </p>
-                        )}
 
                         {/* Direct WhatsApp CTA Button */}
                         <a
                           href={createWhatsAppLink(spec.waMessage || `Hola ${DOCTOR_NAME}, deseo información y solicitar una cita sobre el tratamiento de ${spec.title}.`)}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-full py-2.5 px-4 rounded-full bg-gradient-to-r from-[#25D366] via-[#20BA5A] to-[#128C7E] active:brightness-95 text-white font-extrabold text-[11px] uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-lg shadow-emerald-950/40 cursor-pointer"
+                          className="w-full py-3 px-4 rounded-full bg-gradient-to-r from-[#25D366] via-[#20BA5A] to-[#128C7E] active:brightness-95 text-white font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-lg shadow-emerald-950/50 cursor-pointer"
                         >
                           <WhatsAppIcon className="w-4 h-4 text-white" />
                           <span>Consultar por WhatsApp</span>
@@ -640,7 +580,76 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
               </AnimatePresence>
             </div>
 
-            {/* 3. Bottom Controls & Progress (Mobile) */}
+            {/* 3. Mobile Detailed Info Card (Ficha Clínica Enriquecida) */}
+            <div className="max-w-[440px] mx-auto w-full px-1">
+              <AnimatePresence mode="wait">
+                {(() => {
+                  const activeSpec = SPECIALTIES_DATA[currentIndex];
+                  return (
+                    <motion.div
+                      key={activeSpec.id}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
+                      transition={{ duration: 0.2 }}
+                      className="relative rounded-3xl bg-white/95 backdrop-blur-md border border-[#D4AF37]/35 shadow-sm p-5 space-y-3.5 overflow-hidden"
+                    >
+                      {/* Ambient Glow */}
+                      <div className="absolute -top-8 -right-8 w-28 h-28 bg-[#D4AF37]/10 rounded-full blur-xl pointer-events-none" />
+
+                      {/* Header: Title and Time Duration without inner boxes */}
+                      <div className="flex items-center justify-between gap-2 border-b border-stone-200/60 pb-2.5 relative z-10">
+                        <div>
+                          <span className="text-[10px] font-black uppercase tracking-widest text-[#84631E] block">
+                            Detalles del Tratamiento
+                          </span>
+                          <h4 className="text-sm font-black text-[#0D0D0D] tracking-tight">
+                            {activeSpec.title}
+                          </h4>
+                        </div>
+                        {activeSpec.estimatedTime && (
+                          <div className="flex items-center gap-1 text-[11px] font-bold text-[#84631E] bg-[#FAF7EE] border border-[#D4AF37]/30 px-2.5 py-0.5 rounded-full shrink-0 shadow-2xs">
+                            <Clock className="w-3 h-3 text-[#84631E]" />
+                            <span>{activeSpec.estimatedTime}</span>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Description */}
+                      <p className="text-xs text-stone-600 leading-relaxed text-justify relative z-10">
+                        {activeSpec.fullDesc || activeSpec.shortDesc}
+                      </p>
+
+                      {/* Features List: Pure open typography with gold circle checks, ZERO nested boxes */}
+                      <ul className="space-y-2 pt-0.5 relative z-10">
+                        {activeSpec.features.map((feat, fIdx) => (
+                          <li key={fIdx} className="flex items-start gap-2.5 text-xs text-stone-700 font-medium">
+                            <div className="w-4 h-4 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/50 text-[#84631E] flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
+                              <Check className="w-2.5 h-2.5 stroke-[3]" />
+                            </div>
+                            <span className="leading-snug">{feat}</span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      {/* Clinical Indication footnote, ZERO nested boxes */}
+                      {activeSpec.suitableFor && (
+                        <div className="pt-2 border-t border-stone-200/60 flex items-start gap-1.5 text-xs text-stone-500 relative z-10">
+                          <span className="font-extrabold text-[#84631E] uppercase tracking-wider text-[9.5px] shrink-0 mt-0.5">
+                            Indicado para:
+                          </span>
+                          <span className="font-medium text-stone-700 leading-snug">
+                            {activeSpec.suitableFor}
+                          </span>
+                        </div>
+                      )}
+                    </motion.div>
+                  );
+                })()}
+              </AnimatePresence>
+            </div>
+
+            {/* 4. Bottom Controls & Progress (Mobile) */}
             <div className="flex flex-col items-center gap-2 max-w-[440px] mx-auto w-full px-2 pt-1">
               <div className="flex items-center justify-between w-full text-xs text-slate-500 font-medium">
                 <div className="flex items-center gap-1.5 font-mono">

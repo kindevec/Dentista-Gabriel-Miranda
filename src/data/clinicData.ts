@@ -35,7 +35,7 @@ export const SPECIALTIES_DATA: Specialty[] = [
     fullDesc: "Higiene clínica con ultrasonido y pulido suave que previene caries y desinflama encías.",
     iconName: "Droplets",
     badge: "Servicio Básico",
-    image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=800&auto=format&fit=crop",
+    image: "/services/profilaxis.webp",
     features: [
       "Eliminación ultrasónica de sarro y placa",
       "Pulido coronario profiláctico",
@@ -52,7 +52,7 @@ export const SPECIALTIES_DATA: Specialty[] = [
     fullDesc: "Eliminación de caries y reconstrucción anatómica duradera y biomimética sin metales.",
     iconName: "ShieldCheck",
     badge: "Servicio Básico",
-    image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=800&auto=format&fit=crop",
+    image: "/services/restauraciones.webp",
     features: [
       "Resinas estéticas del tono dental exacto",
       "Aislamiento para máxima adherencia",
@@ -69,7 +69,7 @@ export const SPECIALTIES_DATA: Specialty[] = [
     fullDesc: "Retiro cuidadoso de piezas no restaurables protegiendo el hueso circundante.",
     iconName: "ShieldCheck",
     badge: "Servicio Básico",
-    image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop",
+    image: "/services/extracciones.webp",
     features: [
       "Anestesia local guiada y confortable",
       "Técnica atraumática preservadora",
@@ -86,7 +86,7 @@ export const SPECIALTIES_DATA: Specialty[] = [
     fullDesc: "Aclara varios tonos en una sola sesión protegiendo el esmalte de la sensibilidad.",
     iconName: "Smile",
     badge: "Servicio Básico",
-    image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=800&auto=format&fit=crop",
+    image: "/services/blanqueamientos.webp",
     features: [
       "Aclaramiento inmediato en 1 sesión",
       "Gel clínico con agente anti-sensibilidad",
@@ -104,7 +104,7 @@ export const DOCTOR_PROFILE: DoctorProfile = {
   role: "Director Clínico y Fundador de Miranda Dental Studio",
   specialty: "Rehabilitación Oral, Prótesis Implanto-Asistida, Estética Dental y Armonización Facial",
   experienceYears: 3,
-  image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1000&auto=format&fit=crop",
+  image: "/dr-gabriel-miranda.webp",
   bio: "El Dr. Gabriel Miranda (Graduado en 2023, con 3 años de trayectoria clínica) es egresado de la prestigiosa Universidad de los Andes y actualmente cursa su 2do año de Residencia en la especialidad de Rehabilitación Oral y Prótesis implanto asistida en la Universidad de los Hemisferios. Con residencia internacional en la Universidad Cayetano Heredia de Perú, diplomado en Carillas 'Arte en Resinas' (Perú), diplomado en Endodoncia mecanizada en CPO BRASIL y formación continua en congresos internacionales como SMILE & HOF 2026 en Río de Janeiro (Brasil), fusiona la máxima precisión biomecánica con la armonía estética natural.",
   credentials: [
     "Cursando 2do año de Residencia en Rehabilitación Oral y Prótesis Implanto Asistida (Universidad de los Hemisferios)",
@@ -129,32 +129,14 @@ export const FAQ_DATA: FaqItem[] = [
   },
   {
     id: "faq-2",
-    question: "¿Qué formas de pago y crédito directo tienen?",
-    answer: "Aceptamos efectivo, transferencias bancarias y todas las tarjetas de crédito y débito. Adicionalmente, contamos con nuestro Crédito Directo Dental propio para tratamientos desde $400 hasta $2,000 sin trámites engorrosos.",
+    question: "¿Cómo funciona el Crédito Directo y formas de pago?",
+    answer: "Aceptamos efectivo, transferencias bancarias y todas las tarjetas de crédito y débito. Adicionalmente, contamos con nuestro Crédito Directo Dental propio para tratamientos desde $400 hasta $2,000 sin trámites engorrosos ni intermediarios.",
     category: "pagos"
   },
   {
     id: "faq-3",
-    question: "¿Atienden los fines de semana y domingos?",
-    answer: "¡Sí! En Miranda Dental Studio comprendemos los horarios laborales de nuestros pacientes. Atendemos de Lunes a Sábado de 9:00 am a 7:00 pm, y los Domingos de 9:00 am a 2:00 pm con cita previa o urgencias.",
-    category: "general"
-  },
-  {
-    id: "faq-4",
-    question: "¿Tienen parqueadero para pacientes?",
-    answer: "Sí, nuestras instalaciones en Av. 19 de Mayo y Velasco Ibarra (Edificio color gris, planta baja) cuentan con parqueadero propio y exclusivo para la total comodidad de nuestros pacientes.",
-    category: "general"
-  },
-  {
-    id: "faq-5",
-    question: "¿Qué especialidades atienden en el consultorio?",
-    answer: "Ofrecemos Rehabilitación Oral (prótesis y coronas), Estética Dental y Carillas, Endodoncia mecanizada (CPO Brasil), Implantología, Cirugía de terceros molares, Ortodoncia (autoligado y estéticos), Armonización Facial (Botox, Ácido Hialurónico, Bichectomía) y Periodoncia.",
-    category: "tratamientos"
-  },
-  {
-    id: "faq-6",
-    question: "¿Los tratamientos causan dolor?",
-    answer: "No. En Miranda Dental Studio aplicamos técnicas de anestesia guiada, odontología de mínima invasión y enfoque biológico respetuoso para que cada procedimiento sea completamente confortable y relajado.",
+    question: "¿Los tratamientos causan dolor o molestias?",
+    answer: "No. En Miranda Dental Studio aplicamos técnicas de anestesia guiada, odontología de mínima invasión y enfoque biológico respetuoso para que cada procedimiento sea completamente confortable, indoloro y sin estrés.",
     category: "general"
   }
 ];

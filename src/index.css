@@ -64,6 +64,32 @@ h1, h2, h3, h4, h5, h6 {
   border-bottom: 1px solid rgba(212, 175, 55, 0.2);
 }
 
+/* Organic Clinical SVG Mask Classes */
+.mask-arch-portal {
+  clip-path: url(#mask-arch-portal);
+  -webkit-clip-path: url(#mask-arch-portal);
+}
+
+.mask-enamel-pebble {
+  clip-path: url(#mask-enamel-pebble);
+  -webkit-clip-path: url(#mask-enamel-pebble);
+}
+
+.mask-wave-cut {
+  clip-path: url(#mask-wave-cut);
+  -webkit-clip-path: url(#mask-wave-cut);
+}
+
+.mask-capsule-lens {
+  clip-path: url(#mask-capsule-lens);
+  -webkit-clip-path: url(#mask-capsule-lens);
+}
+
+.mask-fluid-squircle {
+  clip-path: url(#mask-fluid-squircle);
+  -webkit-clip-path: url(#mask-fluid-squircle);
+}
+
 /* Gradient Text Utilities */
 .gradient-text-gold {
   background: linear-gradient(135deg, #84631E 0%, #D4AF37 50%, #C5A059 100%);

@@ -1,10 +1,12 @@
-import React from 'react';
-import { motion } from 'motion/react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { DOCTOR_PROFILE, DOCTOR_NAME, createWhatsAppLink, GENERAL_WA_MESSAGE } from '../data/clinicData';
-import { Cpu, Shield, Heart, Calendar, CheckCircle2, Quote, ArrowRight } from 'lucide-react';
+import { Cpu, Shield, Heart, Calendar, CheckCircle2, Quote, ArrowRight, ChevronDown, Award } from 'lucide-react';
 import { OrganicDentalRibbon } from './OrganicDentalRibbon';
 
 export const DoctorProfileSection: React.FC = () => {
+  const [showCredentials, setShowCredentials] = useState(false);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     show: {
@@ -32,7 +34,7 @@ export const DoctorProfileSection: React.FC = () => {
       </div>
 
       {/* Floating 3D Curved Ribbon in Gold */}
-      <OrganicDentalRibbon className="top-1/4 -left-16 w-96 md:w-[32rem] opacity-30" variant="gold" />
+      <OrganicDentalRibbon className="absolute top-1/4 -left-16 w-96 md:w-[32rem] opacity-30" variant="gold" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-2">
         
@@ -60,80 +62,138 @@ export const DoctorProfileSection: React.FC = () => {
           viewport={{ once: true, amount: 0.15 }}
           className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center mb-8 sm:mb-10"
         >
-          {/* Left Doctor Photo with Architectural Arch Frame in Gold & White */}
-          <motion.div variants={itemVariants} className="lg:col-span-5 relative flex justify-center">
-            <div className="relative w-full max-w-[340px] sm:max-w-[380px]">
-              {/* Outer Architectural Arch Frame with Gold & Champagne Gradient */}
-              <div className="p-2 rounded-t-[16rem] rounded-b-[3.5rem] bg-gradient-to-b from-[#D4AF37] via-[#F3E5AB] to-[#FFFFFF] shadow-[0_20px_50px_-15px_rgba(132,99,30,0.18)] relative group">
-                
-                {/* Inner Masked Viewport */}
-                <div className="relative rounded-t-[15.5rem] rounded-b-[3rem] overflow-hidden bg-stone-900 h-[400px] sm:h-[450px]">
-                  <img
-                    src={DOCTOR_PROFILE.image}
-                    alt={`${DOCTOR_NAME} - Odontólogo Especialista`}
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                  />
+          {/* Left Doctor Photo — Freestanding Cutout sobre Base Arquitectónica de Lujo */}
+          <motion.div variants={itemVariants} className="lg:col-span-5 relative flex flex-col items-center justify-center">
+            {/* Studio Radial Ambient Aura */}
+            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 sm:w-96 h-80 sm:h-96 rounded-full bg-gradient-to-tr from-[#D4AF37]/25 via-[#F3E5AB]/15 to-transparent blur-3xl pointer-events-none -z-10" />
 
-                  {/* Gradient Info Overlay */}
-                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-[#0B0B0B] via-[#0B0B0B]/70 to-transparent p-7 text-white">
-                    <h3 className="text-xl sm:text-2xl font-black text-white">{DOCTOR_NAME}</h3>
-                    <p className="text-xs font-semibold text-[#D4AF37] mt-0.5">{DOCTOR_PROFILE.title}</p>
-                  </div>
+
+            <div className="relative w-full max-w-[340px] sm:max-w-[390px] md:max-w-[420px] flex flex-col items-center">
+              {/* Doctor Cutout Image (Desde la cintura, posado naturalmente sobre la base) */}
+              <div className="relative z-10 w-full flex justify-center -mb-4 sm:-mb-5">
+                <img
+                  src={DOCTOR_PROFILE.image}
+                  alt={`${DOCTOR_NAME} - Odontólogo Especialista`}
+                  className="w-full h-auto max-h-[460px] sm:max-h-[500px] object-contain object-bottom drop-shadow-[0_20px_35px_rgba(132,99,30,0.25)] transition-transform duration-500 hover:scale-[1.015]"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+
+              {/* Base de Escultura / Podio 3D de Alta Gama */}
+              <div className="relative w-full flex flex-col items-center z-15">
+                {/* Sombra de contacto del doctor sobre la plataforma superior */}
+                <div className="w-52 sm:w-60 h-3.5 bg-black/30 rounded-[100%] blur-xs -mb-2 z-20 pointer-events-none" />
+
+                {/* Superficie Superior del Podio (Plataforma Elíptica de Marfil Biselada con Oro) */}
+                <div className="relative w-[280px] sm:w-[330px] md:w-[360px] h-[34px] sm:h-[38px] rounded-[100%] bg-gradient-to-r from-[#FFFFFF] via-[#FAF7EE] to-[#F3E8CE] border-2 border-[#D4AF37]/75 shadow-[inset_0_2px_6px_rgba(255,255,255,0.9),0_6px_20px_rgba(212,175,55,0.3)] flex items-center justify-center overflow-hidden">
+                  {/* Anillo Concéntrico Interior Dorado */}
+                  <div className="w-[90%] h-[70%] rounded-[100%] border border-[#D4AF37]/50 bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent pointer-events-none" />
                 </div>
+
+                {/* Faldón / Altura Cilíndrica del Podio con Reflejo Metálico */}
+                <div className="w-[276px] sm:w-[326px] md:w-[356px] h-4 sm:h-5 -mt-[17px] sm:-mt-[19px] rounded-b-[2rem] bg-gradient-to-b from-[#E2D2A4] via-[#D0BD8A] to-[#BFA76F] border-x border-b border-[#D4AF37]/80 shadow-[0_12px_25px_-4px_rgba(132,99,30,0.35)] relative overflow-hidden">
+                  <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.45)_25%,transparent_50%,rgba(255,255,255,0.4)_75%,transparent_100%)] pointer-events-none" />
+                </div>
+
+                {/* Sombra de Apoyo Atmosférico en el Piso */}
+                <div className="w-[300px] sm:w-[360px] md:w-[400px] h-5 sm:h-6 bg-black/20 rounded-[100%] blur-md -mt-2 pointer-events-none" />
+              </div>
+
+              {/* Identificación de Prestigio del Dr. Miranda (Limpia, elegante y sin tarjetas ni badges) */}
+              <div className="mt-4 sm:mt-5 text-center space-y-1 relative z-20 w-full max-w-sm px-2">
+                {/* Nombre del Doctor en Tipografía de Autor */}
+                <h3 className="text-2xl sm:text-3xl font-black text-[#0D0D0D] tracking-tight leading-tight">
+                  {DOCTOR_NAME}
+                </h3>
+
+                {/* Título & Especialidad Clínica */}
+                <p className="text-xs sm:text-sm font-semibold text-[#84631E]">
+                  Director Clínico — Especialista en Rehabilitación Oral y Estética
+                </p>
               </div>
             </div>
           </motion.div>
 
           {/* Right Doctor Bio, Credentials & Official Philosophy */}
-          <div className="lg:col-span-7 space-y-6">
-            <motion.div variants={itemVariants} className="space-y-2">
+          <div className="lg:col-span-7 space-y-4 sm:space-y-5">
+            <motion.div variants={itemVariants} className="space-y-1.5">
               <span className="text-xs font-black uppercase tracking-wider text-[#84631E]">
                 {DOCTOR_PROFILE.role}
               </span>
               <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0D0D0D] tracking-tight">
                 Salud, Estética y Armonía Natural
               </h3>
-              <p className="text-sm sm:text-base text-stone-600 leading-relaxed pt-2 text-justify">
+              <p className="text-sm sm:text-base text-stone-600 leading-relaxed pt-1.5 text-justify">
                 {DOCTOR_PROFILE.bio}
               </p>
             </motion.div>
 
-            {/* Academic Credentials List with Animation */}
-            <motion.div variants={itemVariants} className="space-y-2.5 pt-1">
-              <p className="text-xs font-black uppercase tracking-wider text-[#84631E]">
-                Formación Académica & Residencias Internacionales:
-              </p>
-              {DOCTOR_PROFILE.credentials.map((cred, idx) => (
-                <motion.div
-                  key={idx}
-                  whileHover={{ x: 4 }}
-                  className="flex items-start gap-3 transition-transform"
-                >
-                  <CheckCircle2 className="w-4 h-4 text-[#84631E] shrink-0 mt-0.5" />
-                  <span className="text-xs sm:text-sm text-stone-700 font-medium">{cred}</span>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            {/* Official Philosophy Card (Cita Textual del PDF) */}
+            {/* Official Philosophy Card (La Frase Oficial del Dr. Miranda - Se Mantiene) */}
             <motion.div
               variants={itemVariants}
-              className="p-5 sm:p-6 rounded-2xl bg-[#FAF7EE] border border-[#D4AF37]/40 relative shadow-xs"
+              className="p-4 sm:p-5 rounded-2xl bg-[#FAF7EE] border border-[#D4AF37]/40 relative shadow-2xs"
             >
-              <Quote className="w-7 h-7 text-[#D4AF37]/35 absolute top-3 right-4" />
+              <Quote className="w-6 h-6 text-[#D4AF37]/30 absolute top-3 right-4" />
               <p className="text-xs sm:text-sm font-serif italic text-stone-700 leading-relaxed text-justify relative z-10">
                 {DOCTOR_PROFILE.philosophy}
               </p>
-              <div className="mt-3 flex items-center justify-between pt-2 border-t border-[#D4AF37]/20">
-                <span className="text-xs font-black text-[#84631E] uppercase tracking-wider">
+              <div className="mt-2.5 flex items-center justify-between pt-2 border-t border-[#D4AF37]/20">
+                <span className="text-[11px] font-black text-[#84631E] uppercase tracking-wider">
                   — Filosofía de Atención de Miranda Dental Studio
                 </span>
               </div>
             </motion.div>
 
+            {/* Collapsible Credentials "Ver más" Toggle */}
+            <motion.div variants={itemVariants} className="space-y-3">
+              <button
+                type="button"
+                onClick={() => setShowCredentials(!showCredentials)}
+                className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#FAF7EE] hover:bg-[#F4EDD6] border border-[#D4AF37]/40 text-[#84631E] hover:text-[#5C420D] text-xs font-bold transition-all shadow-2xs cursor-pointer group"
+                aria-expanded={showCredentials}
+              >
+                <Award className="w-4 h-4 text-[#D4AF37]" />
+                <span className="underline decoration-[#D4AF37]/60 underline-offset-4 group-hover:decoration-[#84631E]">
+                  {showCredentials ? 'Ocultar formación académica y credenciales' : 'Ver formación académica, residencias y diplomados (8)'}
+                </span>
+                <div
+                  className={`w-5 h-5 rounded-full bg-white/90 border border-[#D4AF37]/30 flex items-center justify-center text-[#84631E] transition-transform duration-300 ${
+                    showCredentials ? 'rotate-180 bg-[#D4AF37] text-white' : ''
+                  }`}
+                >
+                  <ChevronDown className="w-3.5 h-3.5" />
+                </div>
+              </button>
+
+              <AnimatePresence initial={false}>
+                {showCredentials && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.35, ease: [0.04, 0.62, 0.23, 0.98] }}
+                    className="overflow-hidden"
+                  >
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                      {DOCTOR_PROFILE.credentials.map((cred, idx) => (
+                        <div
+                          key={idx}
+                          className="flex items-start gap-2.5 p-3 rounded-xl bg-white border border-[#D4AF37]/30 shadow-2xs hover:border-[#D4AF37]/60 transition-colors"
+                        >
+                          <CheckCircle2 className="w-4 h-4 text-[#AA7C11] shrink-0 mt-0.5" />
+                          <span className="text-xs text-stone-700 font-medium leading-snug">{cred}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+
             {/* Direct CTA */}
-            <motion.div variants={itemVariants} className="pt-2 flex flex-col sm:flex-row gap-3.5">
+            <motion.div variants={itemVariants} className="pt-1 flex flex-col sm:flex-row gap-3.5">
               <a
                 href={createWhatsAppLink(GENERAL_WA_MESSAGE)}
                 target="_blank"
@@ -141,7 +201,7 @@ export const DoctorProfileSection: React.FC = () => {
                 className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] hover:from-[#C5A059] hover:to-[#84631E] text-[#0B0B0B] font-black text-xs uppercase tracking-wider transition-all shadow-md shadow-amber-950/15 cursor-pointer border border-[#D4AF37]/50 active:scale-98"
               >
                 <Calendar className="w-4 h-4 text-[#0B0B0B]" />
-                <span>Agendar Valoración $15 con el Dr. Miranda</span>
+                <span>Agendar Cita</span>
                 <ArrowRight className="w-3.5 h-3.5 text-[#0B0B0B]" />
               </a>
             </motion.div>

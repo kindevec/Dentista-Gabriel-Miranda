@@ -58,7 +58,7 @@ export const OrganicDentalRibbon: React.FC<OrganicDentalRibbonProps> = ({
         rotate: { repeat: Infinity, duration: 10, ease: 'easeInOut' },
         opacity: { duration: 1 },
       }}
-      className={`pointer-events-none ${className}`}
+      className={`absolute pointer-events-none select-none z-0 ${className}`}
     >
       <svg
         viewBox="0 0 800 600"

@@ -13,12 +13,16 @@ export const Navbar: React.FC<NavbarProps> = ({
   setActiveSection,
   onOpenBooking: _onOpenBooking,
 }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 15);
+      // 0 en la parte superior (100% transparente), progresando suavemente hasta 1.0 (100% materializado) al llegar a 80px de scroll
+      const currentScroll = window.scrollY;
+      const progress = Math.min(Math.max(currentScroll / 80, 0), 1);
+      setScrollProgress(progress);
     };
+
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -44,12 +48,21 @@ export const Navbar: React.FC<NavbarProps> = ({
     }
   };
 
+  const isTop = scrollProgress === 0;
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ease-in-out ${
-        isScrolled
-          ? 'bg-white/95 backdrop-blur-xl shadow-lg shadow-amber-950/5 border-b border-[#D4AF37]/30 py-2 sm:py-2.5'
-          : 'bg-white/70 backdrop-blur-md border-b border-transparent shadow-none py-2.5 sm:py-3.5'
+      style={{
+        backgroundColor: isTop ? 'transparent' : `rgba(255, 255, 255, ${scrollProgress * 0.95})`,
+        backdropFilter: isTop ? 'none' : `blur(${scrollProgress * 18}px)`,
+        WebkitBackdropFilter: isTop ? 'none' : `blur(${scrollProgress * 18}px)`,
+        borderBottom: isTop ? '1px solid transparent' : `1px solid rgba(212, 175, 55, ${scrollProgress * 0.3})`,
+        boxShadow: isTop ? 'none' : `0 ${10 * scrollProgress}px ${25 * scrollProgress}px -5px rgba(132, 99, 30, ${scrollProgress * 0.08})`,
+      }}
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ease-out ${
+        isTop
+          ? 'py-3 sm:py-4 border-b border-transparent'
+          : 'py-2 sm:py-2.5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -96,7 +109,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             rel="noopener noreferrer"
             className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] hover:from-[#C5A059] hover:to-[#997328] text-[#0B0B0B] font-black text-xs uppercase tracking-wider transition-all duration-300 shadow-md shadow-amber-950/15 hover:scale-[1.02] active:scale-98 cursor-pointer inline-flex items-center justify-center border border-[#D4AF37]/50"
           >
-            Agendar Valoración $15
+            Agendar Cita
           </a>
         </div>
 

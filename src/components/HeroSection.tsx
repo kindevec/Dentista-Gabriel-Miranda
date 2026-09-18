@@ -59,8 +59,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
+        staggerChildren: 0.08,
+        delayChildren: 0.05,
       },
     },
   };
@@ -77,18 +77,20 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   return (
     <section
       id="inicio"
-      className="relative overflow-hidden pt-16 pb-6 sm:pt-20 sm:pb-8 bg-gradient-to-b from-[#FDFCF8] via-[#FAF9F5] to-[#FAF9F5]"
+      className="relative overflow-hidden pt-24 sm:pt-28 lg:pt-32 pb-10 sm:pb-14 lg:pb-16 bg-gradient-to-b from-[#FDFCF8] via-[#FAF9F5] to-[#FAF9F5]"
     >
-      {/* Subtle Organic Golden Dental Ribbons for Atmospheric Depth */}
+      {/* ============================================================== */}
+      {/* LAYER 0: Subtle Organic Golden Dental Ribbons (Atmospheric Background) */}
+      {/* ============================================================== */}
       <OrganicDentalRibbon className="-top-12 -left-16 w-[32rem] opacity-25" variant="gold" />
-      <OrganicDentalRibbon className="top-1/3 -right-20 w-[28rem] opacity-20" variant="champagne" />
+      <OrganicDentalRibbon className="top-1/4 -right-20 w-[28rem] opacity-20" variant="champagne" />
 
-      {/* Main Canvas - 100% Open Space (Zero Box-in-Box) */}
+      {/* Main Canvas - Open Space adhering strictly to Kindev Elite Standard */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* ============================================================== */}
-          {/* LEFT COLUMN: Clean Typography, Proposition & Direct CTAs */}
+          {/* LEFT COLUMN: Clean Typography, Proposition & Direct CTAs       */}
           {/* ============================================================== */}
           <motion.div
             variants={containerVariants}
@@ -113,10 +115,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               variants={itemVariants}
               className="text-sm sm:text-base text-stone-600 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal"
             >
-              Excelencia clínica, tecnología y calidez humana. Especialistas en rehabilitación oral y estética dental. Consulta de valoración integral con fotos y radiografías por solo <strong>$15</strong>.
+              Excelencia clínica, tecnología diagnóstica 3D y calidez humana. Especialistas en rehabilitación oral y estética biomimética. Consulta de valoración integral con fotos y radiografías dentales por solo <strong>$15</strong>.
             </motion.p>
 
-            {/* Minimalist Feature Bullet Points (Gold & White) */}
+            {/* Minimalist Feature Bullet Points (Clean Typography, Zero Clutter) */}
             <motion.div
               variants={itemVariants}
               className="flex flex-wrap items-center justify-center lg:justify-start gap-y-2.5 gap-x-6 text-xs sm:text-sm font-semibold text-stone-700 pt-1"
@@ -141,6 +143,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               </div>
             </motion.div>
 
+
             {/* CTA Buttons */}
             <motion.div
               variants={itemVariants}
@@ -156,7 +159,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] hover:from-[#C5A059] hover:to-[#84631E] text-[#0B0B0B] font-black text-xs uppercase tracking-wider shadow-xl shadow-amber-950/15 flex items-center justify-center gap-2.5 group cursor-pointer transition-all duration-300 border border-[#D4AF37]/50"
               >
                 <Calendar className="w-4 h-4 text-[#0B0B0B] group-hover:scale-110 transition-transform" />
-                <span>Agendar Valoración $15</span>
+                <span>Agendar Cita</span>
                 <ArrowRight className="w-3.5 h-3.5 text-[#0B0B0B] group-hover:translate-x-1 transition-transform" />
               </motion.a>
 
@@ -201,31 +204,31 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             className="lg:col-span-5 relative flex items-center justify-center py-4 sm:py-6 cursor-pointer select-none overflow-hidden sm:overflow-visible"
             style={{ perspective: 1000 }}
           >
-            {/* 1. Dynamic Champagne Glow Waves Radiating Outward */}
+            {/* 1. Subtle Golden Ring Pulse — Confined to Center, Half-Radius Max */}
             <motion.div
               animate={{
-                scale: [0.85, 1.25, 0.85],
-                opacity: [0.2, 0.45, 0.2],
+                scale: [0.25, 1.0, 0.25],
+                opacity: [0.1, 0.45, 0.1],
               }}
               transition={{
                 repeat: Infinity,
-                duration: 5,
+                duration: 4.5,
                 ease: 'easeInOut',
               }}
-              className="absolute w-60 sm:w-88 h-60 sm:h-88 rounded-full border-2 border-[#D4AF37]/30 pointer-events-none -z-10"
+              className="absolute w-44 sm:w-56 lg:w-64 xl:w-72 h-44 sm:h-56 lg:h-64 xl:h-72 rounded-full border-2 border-[#D4AF37]/35 pointer-events-none -z-10"
             />
             <motion.div
               animate={{
-                scale: [1.2, 0.9, 1.2],
-                opacity: [0.15, 0.35, 0.15],
+                scale: [0.35, 0.85, 0.35],
+                opacity: [0.05, 0.3, 0.05],
               }}
               transition={{
                 repeat: Infinity,
-                duration: 6,
+                duration: 5.5,
                 ease: 'easeInOut',
-                delay: 1.5,
+                delay: 1.2,
               }}
-              className="absolute w-72 sm:w-96 h-72 sm:h-96 rounded-full border border-[#C5A059]/20 pointer-events-none -z-10"
+              className="absolute w-48 sm:w-60 lg:w-68 xl:w-76 h-48 sm:h-60 lg:h-68 xl:h-76 rounded-full border border-[#C5A059]/25 pointer-events-none -z-10"
             />
 
             {/* 2. Interactive Ambient Glowing Halo (Follows Mouse Parallax) */}
@@ -234,10 +237,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 x: glowX,
                 y: glowY,
               }}
-              className="absolute w-64 sm:w-96 h-64 sm:h-96 bg-gradient-to-tr from-[#D4AF37]/25 via-[#F3E5AB]/20 to-amber-200/10 rounded-full blur-3xl pointer-events-none -z-10 scale-110"
+              className="absolute w-60 sm:w-72 lg:w-80 xl:w-96 h-60 sm:h-72 lg:h-80 xl:h-96 bg-gradient-to-tr from-[#D4AF37]/20 via-[#F3E5AB]/15 to-transparent rounded-full blur-3xl pointer-events-none -z-10"
             />
 
-            {/* 3. THE INTERACTIVE 3D TOOTH MOLAR SCULPTURE */}
+            {/* 3. THE INTERACTIVE 3D TOOTH MOLAR SCULPTURE (Grand Scale, Full Visual Presence) */}
             <motion.div
               style={{
                 rotateX,
@@ -257,13 +260,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   ? { duration: 0.3 }
                   : { repeat: Infinity, duration: 6, ease: 'easeInOut' }
               }
-              className="relative z-10 w-full max-w-[280px] sm:max-w-[340px] lg:max-w-[380px]"
+              className="relative z-10 w-full max-w-[340px] sm:max-w-[440px] md:max-w-[480px] lg:max-w-[520px] xl:max-w-[560px]"
             >
-              <div className="relative w-full aspect-square flex items-center justify-center overflow-hidden">
+              <div className="relative w-full aspect-square flex items-center justify-center">
                 <img
-                  src="/hero-3d-tooth.png"
+                  src="/hero-3d-tooth.webp"
                   alt="Escultura dental 3D de alta estética"
-                  className="w-full h-full object-contain filter contrast-[1.03] drop-shadow-[0_20px_35px_rgba(180,140,50,0.2)] transition-all duration-300"
+                  className="w-full h-full object-contain filter contrast-[1.03] drop-shadow-[0_25px_45px_rgba(180,140,50,0.25)] transition-all duration-300"
                   loading="eager"
                 />
 
@@ -279,12 +282,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     repeatDelay: 3,
                     ease: 'easeInOut',
                   }}
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-100/30 to-transparent skew-x-[-25deg] pointer-events-none"
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-100/30 to-transparent skew-x-[-25deg] pointer-events-none overflow-hidden rounded-full"
                 />
               </div>
             </motion.div>
 
           </div>
+
 
         </div>
       </div>

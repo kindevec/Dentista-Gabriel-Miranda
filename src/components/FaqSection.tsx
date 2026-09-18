@@ -34,7 +34,7 @@ export const FaqSection: React.FC = () => {
   return (
     <section id="preguntas" className="py-8 sm:py-10 bg-white relative overflow-hidden">
       {/* Subtle organic ribbon accent in gold */}
-      <OrganicDentalRibbon className="-top-10 -right-20 w-96 opacity-25" variant="gold" />
+      <OrganicDentalRibbon className="absolute -top-10 -right-20 w-96 opacity-25" variant="gold" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-2">
         

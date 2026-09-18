@@ -1,9 +1,10 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Clock, CreditCard, ArrowRight, ShieldCheck } from 'lucide-react';
-import { DOCTOR_NAME, createWhatsAppLink, GENERAL_WA_MESSAGE, CLINIC_HOURS } from '../data/clinicData';
+import { DOCTOR_NAME, createWhatsAppLink, GENERAL_WA_MESSAGE } from '../data/clinicData';
 import { WhatsAppIcon } from './OfficialSocialLogos';
 import { OrganicDentalRibbon } from './OrganicDentalRibbon';
+import { CurvedSectionDivider } from './CurvedSectionDivider';
 
 interface EmergencyBannerSectionProps {
   onOpenEmergency?: () => void;
@@ -31,24 +32,30 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
   };
 
   return (
-    <section id="urgencias" className="relative overflow-hidden py-10 sm:py-12 text-white bg-[#0D0D0D] border-y border-[#D4AF37]/30">
+    <section id="urgencias" className="relative overflow-hidden py-16 sm:py-20 lg:py-24 text-white bg-[#0D0D0D]">
 
-      {/* Atmospheric Background with Warm Gold Light */}
+      {/* Top Organic Wave Transition from Specialties Section (Masks background & photo) */}
+      <div className="absolute top-0 left-0 right-0 z-20 pointer-events-none">
+        <CurvedSectionDivider position="top" fillColor="#FAF9F5" variant="wave1" />
+      </div>
+
+      {/* Atmospheric Background with Warm Gold Light & Clinical Photography */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <div className="absolute inset-0 bg-[#0D0D0D]" />
 
-        {/* Right Half Clinical High-Aesthetic Image with Golden Shadowing */}
-        <div className="absolute top-0 bottom-0 right-0 w-full lg:w-1/2 h-full opacity-35 lg:opacity-60">
+        {/* Right Half Clinical High-Aesthetic Image with Organic Blending */}
+        <div className="absolute top-0 bottom-0 right-0 w-full lg:w-7/12 h-full opacity-85 lg:opacity-95">
           <img
-            src="https://images.unsplash.com/photo-1629909615184-74f495363b67?q=85&w=1600&auto=format&fit=crop"
+            src="/clinica-miranda.webp"
             alt="Miranda Dental Studio — Dr. Gabriel Miranda"
-            referrerPolicy="no-referrer"
-            className="w-full h-full object-cover object-center brightness-90 contrast-[1.05]"
+            className="w-full h-full object-cover object-center brightness-105 contrast-[1.05]"
+            loading="lazy"
+            decoding="async"
           />
-          {/* Mobile Overlay */}
-          <div className="lg:hidden absolute inset-0 bg-[#0D0D0D]/85" />
+          {/* Mobile Overlay (protects text legibility while keeping photo luminous) */}
+          <div className="lg:hidden absolute inset-0 bg-gradient-to-t from-[#0D0D0D]/95 via-[#0D0D0D]/65 to-[#0D0D0D]/25" />
           {/* Desktop Blend */}
-          <div className="hidden lg:block absolute inset-y-0 left-0 w-36 bg-gradient-to-r from-[#0D0D0D] via-[#0D0D0D]/90 to-transparent" />
+          <div className="hidden lg:block absolute inset-y-0 left-0 w-40 xl:w-56 bg-gradient-to-r from-[#0D0D0D] via-[#0D0D0D]/80 via-35% to-transparent" />
         </div>
 
         {/* Gold Atmospheric Radial Glow */}
@@ -56,7 +63,7 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
       </div>
 
       {/* Floating 3D Curved Ribbon in Gold */}
-      <OrganicDentalRibbon className="-top-12 -left-16 w-96 md:w-[32rem] opacity-40" variant="gold" />
+      <OrganicDentalRibbon className="absolute -top-12 -left-16 w-96 md:w-[32rem] opacity-40" variant="gold" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-2 sm:pb-3">
         <motion.div
@@ -84,24 +91,51 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
               Diagnóstico clínico completo con el <strong className="text-white font-bold">{DOCTOR_NAME}</strong>, fotografías dentales y radiografías por solo $15. Crédito directo disponible de $400 a $2,000.
             </motion.p>
 
-            {/* 3 Pillars: Valoración, Crédito Directo, Horarios */}
-            <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-              <div className="text-left space-y-1.5 p-3 rounded-2xl bg-white/5 border border-[#D4AF37]/25 backdrop-blur-xs">
-                <ShieldCheck className="w-5 h-5 text-[#D4AF37]" />
-                <h3 className="text-xs sm:text-sm font-black text-[#F3E5AB] uppercase tracking-wider">1. Diagnóstico $15</h3>
-                <p className="text-[11px] sm:text-xs text-stone-300 leading-relaxed">Diagnóstico clínico, fotos y rayos X.</p>
+            {/* 3 Pillars: Valoración, Crédito Directo, Horarios (Esbeltos, Mismo Tamaño, Cero Espacio Excesivo) */}
+            <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 pt-1">
+              {/* 1. Diagnóstico */}
+              <div className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-white/[0.05] border border-[#D4AF37]/25 backdrop-blur-xs text-left h-full">
+                <div className="w-8 h-8 rounded-lg bg-[#D4AF37]/15 border border-[#D4AF37]/35 flex items-center justify-center shrink-0 text-[#D4AF37]">
+                  <ShieldCheck className="w-4 h-4" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-xs font-black text-[#F3E5AB] uppercase tracking-wide truncate">
+                    1. Diagnóstico $15
+                  </h3>
+                  <p className="text-[11px] text-stone-300 leading-snug truncate sm:whitespace-normal">
+                    Clínico, fotos y rayos X.
+                  </p>
+                </div>
               </div>
 
-              <div className="text-left space-y-1.5 p-3 rounded-2xl bg-white/5 border border-[#D4AF37]/25 backdrop-blur-xs">
-                <CreditCard className="w-5 h-5 text-[#D4AF37]" />
-                <h3 className="text-xs sm:text-sm font-black text-[#F3E5AB] uppercase tracking-wider">2. Crédito Directo</h3>
-                <p className="text-[11px] sm:text-xs text-stone-300 leading-relaxed">Financiamiento de $400 a $2,000.</p>
+              {/* 2. Crédito Directo */}
+              <div className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-white/[0.05] border border-[#D4AF37]/25 backdrop-blur-xs text-left h-full">
+                <div className="w-8 h-8 rounded-lg bg-[#D4AF37]/15 border border-[#D4AF37]/35 flex items-center justify-center shrink-0 text-[#D4AF37]">
+                  <CreditCard className="w-4 h-4" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-xs font-black text-[#F3E5AB] uppercase tracking-wide truncate">
+                    2. Crédito Directo
+                  </h3>
+                  <p className="text-[11px] text-stone-300 leading-snug truncate sm:whitespace-normal">
+                    Financiamiento $400-$2,000.
+                  </p>
+                </div>
               </div>
 
-              <div className="text-left space-y-1.5 p-3 rounded-2xl bg-white/5 border border-[#D4AF37]/25 backdrop-blur-xs">
-                <Clock className="w-5 h-5 text-[#D4AF37]" />
-                <h3 className="text-xs sm:text-sm font-black text-[#F3E5AB] uppercase tracking-wider">3. Lun a Dom</h3>
-                <p className="text-[11px] sm:text-xs text-stone-300 leading-relaxed">{CLINIC_HOURS}</p>
+              {/* 3. Lun a Dom */}
+              <div className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-white/[0.05] border border-[#D4AF37]/25 backdrop-blur-xs text-left h-full">
+                <div className="w-8 h-8 rounded-lg bg-[#D4AF37]/15 border border-[#D4AF37]/35 flex items-center justify-center shrink-0 text-[#D4AF37]">
+                  <Clock className="w-4 h-4" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-xs font-black text-[#F3E5AB] uppercase tracking-wide truncate">
+                    3. Lun a Dom
+                  </h3>
+                  <p className="text-[11px] text-stone-300 leading-snug truncate sm:whitespace-normal">
+                    Lun-Sáb 9-19h | Dom 9-14h.
+                  </p>
+                </div>
               </div>
             </motion.div>
 
@@ -123,6 +157,11 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
 
           </div>
         </motion.div>
+      </div>
+
+      {/* Bottom Organic Wave Transition into Doctor Profile Section (Masks background & photo) */}
+      <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none">
+        <CurvedSectionDivider position="bottom" fillColor="#FAF9F5" variant="wave1" />
       </div>
     </section>
   );
