@@ -100,21 +100,13 @@ export const MobileEmergency: React.FC<MobileEmergencyProps> = ({ onOpenEmergenc
 
         {/* High Conversion WhatsApp SOS CTA with pulsating glow and PC color shift */}
         <motion.a
-          animate={{
-            boxShadow: [
-              "0 10px 25px -5px rgba(37, 211, 102, 0.35)",
-              "0 14px 38px 4px rgba(37, 211, 102, 0.65)",
-              "0 10px 25px -5px rgba(37, 211, 102, 0.35)",
-            ],
-          }}
-          transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.95 }}
           href={createWhatsAppLink(EMERGENCY_WA_MESSAGE)}
           onClick={handleEmergencyClick}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full py-4 px-4 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#1EBE5D] hover:from-[#1EBE5D] hover:to-[#179B4B] text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer transition-all duration-300 group"
+          className="w-full py-4 px-4 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#1EBE5D] hover:from-[#1EBE5D] hover:to-[#179B4B] text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer transition-all duration-300 group shadow-lg shadow-emerald-500/30 animate-halo-whatsapp"
         >
           <WhatsAppIcon className="w-4.5 h-4.5 fill-current group-hover:scale-110 transition-transform" />
           <span>Contactar Urgencia por WhatsApp</span>

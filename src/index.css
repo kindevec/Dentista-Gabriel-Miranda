@@ -140,6 +140,21 @@ h1, h2, h3, h4, h5, h6 {
   animation: emergencyPulse 2s infinite cubic-bezier(0.66, 0, 0, 1);
 }
 
+/* GPU-Accelerated 60fps compositor float (Zero JS thread overhead) */
+@keyframes subtleFloat {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -6px, 0);
+  }
+}
+
+.animate-subtle-float {
+  animation: subtleFloat 5s ease-in-out infinite;
+  will-change: transform;
+}
+
 /* Mobile viewport bottom safe area */
 .pb-safe {
   padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));

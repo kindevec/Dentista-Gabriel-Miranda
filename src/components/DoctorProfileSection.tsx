@@ -281,11 +281,9 @@ export const DoctorProfileSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Secondary Floating Overlapping Window */}
-              <motion.div
-                animate={{ y: [-6, 6, -6] }}
-                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-                className="absolute -bottom-6 sm:-bottom-8 right-0 sm:-right-4 z-20 w-32 sm:w-44 h-32 sm:h-44 rounded-[2rem] sm:rounded-[2.5rem] rounded-tr-lg p-1.5 bg-gradient-to-br from-white via-[#F3E5AB] to-[#D4AF37] shadow-2xl shadow-amber-950/20 transform-gpu will-change-transform"
+              {/* Secondary Floating Overlapping Window (GPU Accelerated) */}
+              <div
+                className="absolute -bottom-6 sm:-bottom-8 right-0 sm:-right-4 z-20 w-32 sm:w-44 h-32 sm:h-44 rounded-[2rem] sm:rounded-[2.5rem] rounded-tr-lg p-1.5 bg-gradient-to-br from-white via-[#F3E5AB] to-[#D4AF37] shadow-2xl shadow-amber-950/20 transform-gpu animate-subtle-float"
               >
                 <div className="relative w-full h-full rounded-[2.2rem] rounded-tr-md overflow-hidden bg-stone-900 group">
                   <img
@@ -303,7 +301,7 @@ export const DoctorProfileSection: React.FC = () => {
                     </span>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </div>
 
           </div>

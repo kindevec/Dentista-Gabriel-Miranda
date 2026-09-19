@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'motion/react';
 
 interface OrganicDentalRibbonProps {
   className?: string;
@@ -46,19 +45,8 @@ export const OrganicDentalRibbon: React.FC<OrganicDentalRibbonProps> = ({
   const grad = getGradients();
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{
-        opacity: 1,
-        y: [-6, 6, -6],
-        rotate: [-1, 1, -1],
-      }}
-      transition={{
-        y: { repeat: Infinity, duration: 9, ease: 'easeInOut' },
-        rotate: { repeat: Infinity, duration: 12, ease: 'easeInOut' },
-        opacity: { duration: 0.8 },
-      }}
-      className={`absolute pointer-events-none select-none z-0 transform-gpu will-change-transform ${className}`}
+    <div
+      className={`absolute pointer-events-none select-none z-0 transform-gpu animate-subtle-float ${className}`}
     >
       <svg
         viewBox="0 0 800 600"
@@ -89,6 +77,6 @@ export const OrganicDentalRibbon: React.FC<OrganicDentalRibbonProps> = ({
           strokeOpacity={0.6}
         />
       </svg>
-    </motion.div>
+    </div>
   );
 };

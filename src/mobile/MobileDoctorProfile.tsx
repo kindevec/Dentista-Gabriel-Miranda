@@ -55,36 +55,24 @@ export const MobileDoctorProfile: React.FC<MobileDoctorProfileProps> = ({ onOpen
           </p>
         </div>
 
-        {/* Doctor Photo with Golden Halos & Pulsing Ring from PC */}
+        {/* Doctor Photo with Golden Halos & Pulsing Ring from PC (GPU Accelerated) */}
         <div className="relative w-44 h-44 mx-auto mb-6 flex items-center justify-center">
           {/* Subtle Golden Ring Pulse from PC */}
-          <motion.div
-            animate={{
-              scale: [0.95, 1.08, 0.95],
-              opacity: [0.25, 0.5, 0.25],
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 4.5,
-              ease: 'easeInOut',
-            }}
-            className="absolute inset-0 rounded-full border-2 border-[#D4AF37]/40 pointer-events-none"
-          />
+          <div className="absolute inset-0 rounded-full border-2 border-[#D4AF37]/40 pointer-events-none animate-pulse" />
 
           <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#D4AF37]/35 via-[#F3E5AB]/20 to-transparent blur-xl -z-10" />
 
-          <motion.div
-            animate={{ y: [-3, 3, -3] }}
-            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-            className="w-full h-full"
-          >
+          <div className="w-full h-full animate-subtle-float">
             <img
               src="/dr-gabriel-miranda.webp"
               alt={DOCTOR_NAME}
+              width={176}
+              height={176}
               loading="lazy"
+              decoding="async"
               className="w-full h-full rounded-full object-cover object-top ring-4 ring-[#D4AF37]/50 ring-offset-4 ring-offset-white shadow-xl transition-transform duration-500 hover:scale-105 active:scale-98"
             />
-          </motion.div>
+          </div>
         </div>
 
         {/* Doctor Bio (Justified text, 3-4 lines clamped initially) */}
@@ -162,7 +150,10 @@ export const MobileDoctorProfile: React.FC<MobileDoctorProfileProps> = ({ onOpen
               <img
                 src="/clinic/consultorio.webp"
                 alt="Consultorio Odontológico"
+                width={300}
+                height={300}
                 loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 active:scale-105"
               />
             </div>
@@ -170,7 +161,10 @@ export const MobileDoctorProfile: React.FC<MobileDoctorProfileProps> = ({ onOpen
               <img
                 src="/clinic/bioseguridad.webp"
                 alt="Bioseguridad Certificada"
+                width={300}
+                height={300}
                 loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 active:scale-105"
               />
             </div>
