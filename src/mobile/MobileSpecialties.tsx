@@ -258,8 +258,21 @@ export const MobileSpecialties: React.FC<MobileSpecialtiesProps> = ({ onSelectSp
                     }}
                   >
                     <div className="w-full h-full rounded-[2rem] overflow-hidden bg-gradient-to-b from-white via-[#FAF9F6] to-[#F7F4EA] border-2 border-[#D4AF37]/50 shadow-2xl shadow-amber-950/15 p-5 xs:p-6 flex flex-col justify-between relative select-none">
+                      {/* Textura de Fondo Enriquecida: Fotografía clínica como marca de agua + trama sutil de lujo */}
+                      <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[2rem]">
+                        <img
+                          src={spec.image}
+                          alt=""
+                          aria-hidden="true"
+                          className="absolute inset-0 w-full h-full object-cover object-center opacity-[0.09] filter grayscale contrast-125 select-none"
+                        />
+                        <div className="absolute inset-0 opacity-[0.045] bg-[radial-gradient(#84631E_1.2px,transparent_1.2px)] [background-size:18px_18px]" />
+                        <div className="absolute -top-12 -right-12 w-36 h-36 bg-gradient-to-br from-[#D4AF37]/25 to-transparent rounded-full blur-2xl" />
+                        <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-gradient-to-tr from-[#C5A059]/20 to-transparent rounded-full blur-xl" />
+                      </div>
+
                       {/* Cabecera con Título Protagónico y Botón Girar */}
-                      <div className="shrink-0 flex items-start justify-between gap-3 pt-0.5">
+                      <div className="shrink-0 flex items-start justify-between gap-3 pt-0.5 relative z-10">
                         <h3 className="text-2xl xs:text-[1.65rem] font-black tracking-tight leading-[1.15] text-transparent bg-clip-text bg-gradient-to-r from-[#0D0D0D] via-[#74541B] to-[#C5A059]">
                           {spec.title}
                         </h3>
@@ -274,7 +287,7 @@ export const MobileSpecialties: React.FC<MobileSpecialtiesProps> = ({ onSelectSp
                       </div>
 
                       {/* Contenido Clínico con Tipografía Grande y Espaciado Armónico */}
-                      <div className="flex-1 flex flex-col justify-evenly py-2 min-h-0 space-y-3">
+                      <div className="flex-1 flex flex-col justify-evenly py-2 min-h-0 space-y-3 relative z-10">
                         {/* Resumen Clínico Directo y Legible */}
                         <p className="text-sm xs:text-[15px] text-stone-700 font-medium leading-relaxed">
                           {spec.summary}
@@ -305,7 +318,7 @@ export const MobileSpecialties: React.FC<MobileSpecialtiesProps> = ({ onSelectSp
                       </div>
 
                       {/* Botón WhatsApp CTA */}
-                      <div className="pt-2 shrink-0">
+                      <div className="pt-2 shrink-0 relative z-10">
                         <a
                           href={createWhatsAppLink(spec.waMessage)}
                           target="_blank"

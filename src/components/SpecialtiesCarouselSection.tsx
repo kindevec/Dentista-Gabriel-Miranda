@@ -406,15 +406,28 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
                       onClick={(e) => toggleCardFlip(spec.id, e)}
                     >
                       <div className="w-full h-full rounded-[2.5rem] overflow-hidden bg-gradient-to-b from-white via-[#FAF9F6] to-[#F7F4EA] border-2 border-[#D4AF37]/50 shadow-2xl shadow-amber-950/15 p-6 sm:p-7 flex flex-col justify-between relative select-none">
+                        {/* Textura de Fondo Enriquecida: Fotografía clínica como marca de agua + trama sutil de lujo */}
+                        <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[2.5rem]">
+                          <img
+                            src={spec.image}
+                            alt=""
+                            aria-hidden="true"
+                            className="absolute inset-0 w-full h-full object-cover object-center opacity-[0.09] filter grayscale contrast-125 select-none"
+                          />
+                          <div className="absolute inset-0 opacity-[0.045] bg-[radial-gradient(#84631E_1.2px,transparent_1.2px)] [background-size:18px_18px]" />
+                          <div className="absolute -top-12 -right-12 w-44 h-44 bg-gradient-to-br from-[#D4AF37]/25 to-transparent rounded-full blur-2xl" />
+                          <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-gradient-to-tr from-[#C5A059]/20 to-transparent rounded-full blur-xl" />
+                        </div>
+
                         {/* Cabecera Superior: Título Protagónico Grande en Negro y Dorado */}
-                        <div className="shrink-0 pt-1">
+                        <div className="shrink-0 pt-1 relative z-10">
                           <h3 className="text-2xl sm:text-3xl lg:text-[2rem] font-black tracking-tight leading-tight text-transparent bg-clip-text bg-gradient-to-r from-[#0D0D0D] via-[#74541B] to-[#C5A059]">
                             {spec.title}
                           </h3>
                         </div>
 
                         {/* Contenido Clínico Esencial: Letras más grandes, resumido, sin box-in-box */}
-                        <div className="flex-1 flex flex-col justify-center space-y-4 py-2 min-h-0">
+                        <div className="flex-1 flex flex-col justify-center space-y-4 py-2 min-h-0 relative z-10">
                           {/* Resumen Clínico Directo y Legible */}
                           <p className="text-sm sm:text-[15px] text-stone-700 font-medium leading-relaxed">
                             {spec.summary}
@@ -445,7 +458,7 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
                         </div>
 
                         {/* Botón de Consulta Único (WhatsApp) - Intacto */}
-                        <div className="pt-2 shrink-0">
+                        <div className="pt-2 shrink-0 relative z-10">
                           <a
                             href={createWhatsAppLink(spec.waMessage)}
                             target="_blank"
