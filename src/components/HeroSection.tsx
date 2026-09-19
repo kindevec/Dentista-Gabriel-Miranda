@@ -123,13 +123,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <motion.div
                   animate={{
                     y: [-5, 5, -5],
-                    rotate: [0, 360],
                   }}
                   transition={{
-                    y: { duration: 3, repeat: Infinity, ease: 'easeInOut' },
-                    rotate: { duration: 6, repeat: Infinity, ease: 'linear' },
+                    y: { duration: 3.5, repeat: Infinity, ease: 'easeInOut' },
                   }}
-                  className="w-full h-full flex items-center justify-center relative z-10 transform-gpu"
+                  whileHover={{ scale: 1.05 }}
+                  className="w-full h-full flex items-center justify-center relative z-10 transform-gpu cursor-pointer"
                 >
                   <img
                     alt="Escultura dental 3D de alta estética"
@@ -138,7 +137,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     loading="eager"
                     fetchPriority="high"
                     decoding="async"
-                    className="w-full h-full object-contain filter contrast-[1.03] drop-shadow-[0_25px_45px_rgba(180,140,50,0.25)] transition-all duration-300 hover:scale-105"
+                    className="w-full h-full object-contain filter contrast-[1.03] drop-shadow-[0_25px_45px_rgba(180,140,50,0.25)] transition-transform duration-300"
                     src="/hero-3d-tooth.webp"
                   />
                 </motion.div>

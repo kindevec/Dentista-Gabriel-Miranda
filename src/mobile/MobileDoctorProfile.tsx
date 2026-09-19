@@ -21,7 +21,7 @@ interface MobileDoctorProfileProps {
 }
 
 export const MobileDoctorProfile: React.FC<MobileDoctorProfileProps> = ({ onOpenBooking }) => {
-  const [showCredentials, setShowCredentials] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const handleBooking = () => {
     if (onOpenBooking) {
@@ -44,8 +44,11 @@ export const MobileDoctorProfile: React.FC<MobileDoctorProfileProps> = ({ onOpen
       <div className="max-w-md mx-auto relative z-10">
         {/* Header */}
         <div className="text-center mb-6">
-          <h2 className="text-2xl xs:text-3xl font-black text-[#0D0D0D] tracking-tight leading-tight">
-            {DOCTOR_NAME}
+          <h2 className="text-2xl xs:text-3xl font-black tracking-tight leading-tight text-stone-900">
+            Conoce al{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#C5A059] to-[#84631E]">
+              {DOCTOR_NAME}
+            </span>
           </h2>
           <p className="text-xs text-[#84631E] font-bold mt-0.5">
             {DOCTOR_PROFILE.title}
@@ -84,69 +87,74 @@ export const MobileDoctorProfile: React.FC<MobileDoctorProfileProps> = ({ onOpen
           </motion.div>
         </div>
 
-        {/* Philosophy Quote */}
-        <div className="bg-[#FAF9F5] rounded-2xl p-4 border border-[#D4AF37]/25 mb-5 relative">
-          <span className="absolute -top-3 left-4 text-3xl text-[#D4AF37] font-serif leading-none bg-[#FAF9F5] px-1">
-            “
-          </span>
-          <p className="text-xs italic text-stone-700 leading-relaxed mt-1 text-center">
-            {DOCTOR_PROFILE.philosophy}
+        {/* Doctor Bio (Justified text, 3-4 lines clamped initially) */}
+        <div className="relative mb-2">
+          <p className={`text-xs xs:text-sm text-stone-700 leading-relaxed text-justify ${!isExpanded ? 'line-clamp-4' : ''}`}>
+            {DOCTOR_PROFILE.bio}
           </p>
-        </div>
-
-        {/* Short Bio */}
-        <p className="text-xs text-stone-600 leading-relaxed text-center mb-5">
-          {DOCTOR_PROFILE.bio}
-        </p>
-
-        {/* Credentials Accordion */}
-        <div className="mb-8">
-          <button
-            type="button"
-            onClick={() => setShowCredentials(!showCredentials)}
-            className="w-full bg-[#FAF7EE] rounded-2xl p-3.5 flex items-center justify-between border border-[#D4AF37]/35 active:scale-[0.98] transition-transform cursor-pointer shadow-2xs"
-          >
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-white border border-[#D4AF37]/30 flex items-center justify-center text-[#84631E]">
-                <GraduationCap className="w-4 h-4" />
-              </div>
-              <span className="text-xs font-black text-stone-800">
-                Formación Académica y Certificaciones
-              </span>
-            </div>
-            <motion.div
-              animate={{ rotate: showCredentials ? 180 : 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <ChevronDown className="w-4 h-4 text-[#84631E]" />
-            </motion.div>
-          </button>
 
           <AnimatePresence>
-            {showCredentials && (
+            {isExpanded && (
               <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: 'auto', opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                className="overflow-hidden"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.35, ease: 'easeInOut' }}
+                className="overflow-hidden space-y-4 pt-3"
               >
-                <div className="p-3.5 space-y-2.5 bg-white border border-[#D4AF37]/20 rounded-b-2xl -mt-1 pt-4 text-xs">
-                  {DOCTOR_PROFILE.credentials.map((cred, idx) => (
-                    <div key={idx} className="flex items-start gap-2 text-stone-700 leading-tight">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] mt-1 shrink-0" />
-                      <span>{cred}</span>
+                {/* Philosophy Quote (Desplegado solo al dar Ver más) */}
+                <div className="bg-[#FAF9F5] rounded-2xl p-4 border border-[#D4AF37]/30 relative shadow-2xs">
+                  <span className="absolute -top-3 left-4 text-3xl text-[#D4AF37] font-serif leading-none bg-[#FAF9F5] px-1">
+                    “
+                  </span>
+                  <p className="text-xs italic text-stone-700 leading-relaxed mt-1 text-justify">
+                    {DOCTOR_PROFILE.philosophy}
+                  </p>
+                </div>
+
+                {/* Formación Académica y Certificaciones (Desplegado) */}
+                <div className="bg-[#FAF7EE]/70 rounded-2xl p-4 border border-[#D4AF37]/35 shadow-2xs">
+                  <div className="flex items-center gap-2.5 pb-2.5 mb-2.5 border-b border-[#D4AF37]/20">
+                    <div className="w-8 h-8 rounded-xl bg-white border border-[#D4AF37]/30 flex items-center justify-center text-[#84631E] shrink-0">
+                      <GraduationCap className="w-4 h-4" />
                     </div>
-                  ))}
+                    <h4 className="text-xs font-black text-stone-900">
+                      Formación Académica y Certificaciones
+                    </h4>
+                  </div>
+                  <div className="space-y-2 text-xs">
+                    {DOCTOR_PROFILE.credentials.map((cred, idx) => (
+                      <div key={idx} className="flex items-start gap-2 text-stone-700 leading-tight">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] mt-1 shrink-0" />
+                        <span>{cred}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
+
+          {/* Botón Ver más / Ver menos */}
+          <div className="text-center mt-3 mb-6">
+            <button
+              type="button"
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#FAF7EE] hover:bg-[#F3ECCE] border border-[#D4AF37]/45 text-[#84631E] font-bold text-xs uppercase tracking-wider shadow-2xs active:scale-95 transition-all cursor-pointer"
+            >
+              <span>{isExpanded ? 'Ver menos' : 'Ver más'}</span>
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`} />
+            </button>
+          </div>
         </div>
 
         {/* Infrastructure & Biosecurity Showcase */}
         <div className="pt-2">
-          <h3 className="text-lg font-black text-[#0D0D0D] tracking-tight mb-3 text-center">
-            Instalaciones y Bioseguridad
+          <h3 className="text-lg xs:text-xl font-black tracking-tight mb-3 text-center text-stone-900">
+            Instalaciones y{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#C5A059] to-[#84631E]">
+              Bioseguridad
+            </span>
           </h3>
 
           <div className="grid grid-cols-2 gap-2.5 mb-4">

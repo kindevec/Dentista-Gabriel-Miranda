@@ -33,9 +33,9 @@ export const MobileTopBar: React.FC<MobileTopBarProps> = ({ onOpenBooking }) => 
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.94 }}
           onClick={handleBooking}
-          className="flex items-center gap-1.5 px-3.5 py-2 min-h-[40px] rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] hover:from-[#C5A059] hover:to-[#84631E] text-[#0D0D0D] font-black text-xs uppercase tracking-wider shadow-sm shadow-[#D4AF37]/25 border border-[#D4AF37]/50 cursor-pointer active:opacity-90 transition-all duration-300 shrink-0"
+          className="flex items-center gap-1 px-2.5 py-1.5 min-h-[32px] rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] hover:from-[#C5A059] hover:to-[#84631E] text-[#0D0D0D] font-black text-[10.5px] uppercase tracking-wider shadow-sm shadow-[#D4AF37]/25 border border-[#D4AF37]/50 cursor-pointer active:opacity-90 transition-all duration-300 shrink-0"
         >
-          <Calendar className="w-3.5 h-3.5 text-[#0D0D0D]" />
+          <Calendar className="w-3 h-3 text-[#0D0D0D]" />
           <span>Agendar Cita</span>
         </motion.button>
       </div>

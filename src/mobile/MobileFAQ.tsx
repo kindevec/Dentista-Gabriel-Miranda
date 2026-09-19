@@ -16,8 +16,11 @@ export const MobileFAQ: React.FC = () => {
       <div className="max-w-md mx-auto">
         {/* Header */}
         <div className="text-center mb-6">
-          <h2 className="text-2xl xs:text-3xl font-black text-[#0D0D0D] tracking-tight leading-tight">
-            Dudas Clínicas Habituales
+          <h2 className="text-2xl xs:text-3xl font-black tracking-tight leading-tight text-stone-900">
+            Preguntas{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#C5A059] to-[#84631E]">
+              Frecuentes
+            </span>
           </h2>
           <p className="text-xs text-stone-500 mt-1">
             Respuestas claras y honestas sobre tus tratamientos y atención odontológica.

@@ -161,9 +161,9 @@ export const EmergencyBannerSection: React.FC<EmergencyBannerSectionProps> = ({ 
         </motion.div>
       </div>
 
-      {/* Bottom Organic Wave Transition into Doctor Profile Section (Masks background & photo) */}
+      {/* Bottom Organic Wave Transition into FAQ Section (Masks background & photo) */}
       <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none">
-        <CurvedSectionDivider position="bottom" fillColor="#FAF9F5" variant="wave1" />
+        <CurvedSectionDivider position="bottom" fillColor="#FFFFFF" variant="wave1" />
       </div>
     </section>
   );

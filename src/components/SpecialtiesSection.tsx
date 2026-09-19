@@ -147,7 +147,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
         >
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
-            Servicios <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#84631E]">Básicos & Clínicos</span>
+            Servicios <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#84631E]">Básicos Odontológicos</span>
           </h2>
           <p className="text-sm sm:text-base text-stone-600 max-w-xl mx-auto">
             Tratamientos preventivos y restauradores con mínima invasión, calidez y tecnología de vanguardia.

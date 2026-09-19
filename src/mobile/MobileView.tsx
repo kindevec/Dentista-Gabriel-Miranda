@@ -53,8 +53,8 @@ export const MobileView: React.FC = () => {
       { id: 'inicio', navKey: 'inicio' },
       { id: 'servicios', navKey: 'servicios' },
       { id: 'especialidades', navKey: 'especialidades' },
-      { id: 'urgencias', navKey: 'especialidades' },
       { id: 'nosotros', navKey: 'nosotros' },
+      { id: 'urgencias', navKey: 'nosotros' },
       { id: 'preguntas', navKey: 'nosotros' },
       { id: 'contacto', navKey: 'contacto' },
     ];
@@ -132,11 +132,11 @@ export const MobileView: React.FC = () => {
         {/* Clinical Specialties Accordion */}
         <MobileSpecialties onSelectSpecialty={handleSelectSpecialtyForBooking} />
 
-        {/* 24/7 Priority Emergency Banner */}
-        <MobileEmergency onOpenEmergency={handleOpenEmergency} />
-
         {/* Dr. Gabriel Miranda Profile & Clinic Infrastructure */}
         <MobileDoctorProfile onOpenBooking={handleOpenBooking} />
+
+        {/* 24/7 Priority Emergency Banner (Justo antes de FAQ) */}
+        <MobileEmergency onOpenEmergency={handleOpenEmergency} />
 
         {/* FAQ Accordion */}
         <MobileFAQ />

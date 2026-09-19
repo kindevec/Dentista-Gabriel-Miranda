@@ -21,8 +21,8 @@ export const DesktopView: React.FC = () => {
       { id: 'inicio', navKey: 'inicio' },
       { id: 'servicios', navKey: 'servicios' },
       { id: 'especialidades', navKey: 'especialidades' },
-      { id: 'urgencias', navKey: 'servicios' },
       { id: 'nosotros', navKey: 'nosotros' },
+      { id: 'urgencias', navKey: 'nosotros' },
       { id: 'preguntas', navKey: 'nosotros' },
       { id: 'contacto', navKey: 'contacto' },
     ];
@@ -88,13 +88,13 @@ export const DesktopView: React.FC = () => {
           onSelectSpecialtyForBooking={handleOpenBookingWithSpecialty}
         />
 
-        {/* 4. Sección de Urgencias Odontológicas 24/7 */}
+        {/* 4. Perfil del Dr. Gabriel Miranda, Infraestructura y Bioseguridad */}
+        <DoctorProfileSection />
+
+        {/* 5. Sección de Urgencias Odontológicas 24/7 (Justo antes de FAQ) */}
         <EmergencyBannerSection
           onOpenEmergency={handleOpenEmergency}
         />
-
-        {/* 5. Perfil del Dr. Gabriel Miranda, Infraestructura y Bioseguridad */}
-        <DoctorProfileSection />
 
         {/* 6. Preguntas Frecuentes Interactivas */}
         <FaqSection />

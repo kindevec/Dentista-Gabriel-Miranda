@@ -2,14 +2,13 @@ import React from 'react';
 import { motion } from 'motion/react';
 import {
   DOCTOR_NAME,
-  DOCTOR_SENESCYT,
   createWhatsAppLink,
   GENERAL_WA_MESSAGE,
 } from '../data/clinicData';
 import {
+  OfficialWhatsAppLogo,
   OfficialInstagramLogo,
   OfficialFacebookLogo,
-  WhatsAppIcon,
 } from './OfficialSocialLogos';
 
 interface FooterProps {
@@ -52,11 +51,11 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
         </svg>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4">
         {/* ========================================================
             FILA SUPERIOR: Logo Oficial a la izquierda + Redes Sociales arriba a la derecha
            ======================================================== */}
-        <div className="flex items-center justify-between gap-3 pb-3.5 border-b border-white/10">
+        <div className="flex items-center justify-between gap-3">
           {/* Logo Oficial con Aura y Flotación */}
           <motion.a
             href="#inicio"
@@ -113,17 +112,17 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
           </motion.a>
 
           {/* Iconos de Redes Sociales arriba a la derecha */}
-          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
             <motion.a
               href={createWhatsAppLink(GENERAL_WA_MESSAGE)}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp Oficial"
-              whileHover={{ scale: 1.12, y: -1 }}
+              whileHover={{ scale: 1.15, y: -1 }}
               whileTap={{ scale: 0.95 }}
-              className="w-7.5 h-7.5 sm:w-8.5 sm:h-8.5 rounded-lg bg-gradient-to-tr from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] hover:from-[#FFF2B2] hover:via-[#D4AF37] hover:to-[#AA7C11] flex items-center justify-center text-[#0D0D0D] shadow-[0_0_10px_rgba(212,175,55,0.35)] transition-all cursor-pointer"
+              className="inline-flex items-center justify-center transition-transform cursor-pointer drop-shadow-[0_2px_8px_rgba(37,211,102,0.3)] hover:drop-shadow-[0_0_12px_rgba(37,211,102,0.6)]"
             >
-              <WhatsAppIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" />
+              <OfficialWhatsAppLogo className="w-7 h-7 sm:w-8 sm:h-8" />
             </motion.a>
 
             <motion.a
@@ -131,11 +130,11 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram Oficial"
-              whileHover={{ scale: 1.12, y: -1 }}
+              whileHover={{ scale: 1.15, y: -1 }}
               whileTap={{ scale: 0.95 }}
-              className="w-7.5 h-7.5 sm:w-8.5 sm:h-8.5 rounded-lg bg-gradient-to-tr from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] hover:from-[#FFF2B2] hover:via-[#D4AF37] hover:to-[#AA7C11] flex items-center justify-center text-[#0D0D0D] shadow-[0_0_10px_rgba(212,175,55,0.35)] transition-all cursor-pointer"
+              className="inline-flex items-center justify-center transition-transform cursor-pointer drop-shadow-[0_2px_8px_rgba(225,48,108,0.3)] hover:drop-shadow-[0_0_12px_rgba(225,48,108,0.6)]"
             >
-              <OfficialInstagramLogo className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <OfficialInstagramLogo className="w-7 h-7 sm:w-8 sm:h-8" />
             </motion.a>
 
             <motion.a
@@ -143,11 +142,11 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook Oficial"
-              whileHover={{ scale: 1.12, y: -1 }}
+              whileHover={{ scale: 1.15, y: -1 }}
               whileTap={{ scale: 0.95 }}
-              className="w-7.5 h-7.5 sm:w-8.5 sm:h-8.5 rounded-lg bg-gradient-to-tr from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] hover:from-[#FFF2B2] hover:via-[#D4AF37] hover:to-[#AA7C11] flex items-center justify-center text-[#0D0D0D] shadow-[0_0_10px_rgba(212,175,55,0.35)] transition-all cursor-pointer"
+              className="inline-flex items-center justify-center transition-transform cursor-pointer drop-shadow-[0_2px_8px_rgba(24,119,242,0.3)] hover:drop-shadow-[0_0_12px_rgba(24,119,242,0.6)]"
             >
-              <OfficialFacebookLogo className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <OfficialFacebookLogo className="w-7 h-7 sm:w-8 sm:h-8" />
             </motion.a>
           </div>
         </div>
@@ -155,7 +154,7 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
         {/* ========================================================
             FILA INTERMEDIA: Descripción y Enlaces de Navegación Rápida
            ======================================================== */}
-        <div className="py-3.5 flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left">
           <p className="text-[11px] sm:text-xs text-stone-400 font-medium leading-relaxed max-w-md">
             Odontología especializada de alta estética y rehabilitación oral con el {DOCTOR_NAME}.
           </p>
@@ -205,14 +204,12 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
         </div>
 
         {/* ========================================================
-            FILA INFERIOR: Legal, SENESCYT y Firma Oficial KINDEV
+            FILA INFERIOR: Legal y Firma Oficial KINDEV
            ======================================================== */}
-        <div className="pt-3 border-t border-white/10 text-[10.5px] sm:text-xs text-stone-400 flex flex-col sm:flex-row items-center justify-between gap-2.5 font-medium">
-          {/* Copyright y SENESCYT */}
+        <div className="text-[10.5px] sm:text-xs text-stone-400 flex flex-col sm:flex-row items-center justify-between gap-2.5 font-medium">
+          {/* Copyright */}
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-2.5 gap-y-1 text-center sm:text-left">
-            <span>© {currentYear} Miranda Dental Studio.</span>
-            <span className="hidden xs:inline text-stone-600">|</span>
-            <span>Reg. SENESCYT: {DOCTOR_SENESCYT}</span>
+            <span>© {currentYear} Miranda Dental Studio. Todos los derechos reservados.</span>
           </div>
 
           {/* Firma Oficial KINDEV con Aura y Micro-rotación */}

@@ -90,8 +90,11 @@ export const MobileContact: React.FC<MobileContactProps> = ({
       <div className="w-full mx-auto">
         {/* Section Header */}
         <div className="text-center mb-5 px-2">
-          <h2 className="text-2xl xs:text-3xl font-black text-[#0D0D0D] tracking-tight leading-tight">
-            Agenda tu Consulta
+          <h2 className="text-2xl xs:text-3xl font-black tracking-tight leading-tight text-stone-900">
+            Agenda tu{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#C5A059] to-[#84631E]">
+              Consulta
+            </span>
           </h2>
         </div>
 

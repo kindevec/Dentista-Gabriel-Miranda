@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Clock, Check, ChevronLeft, ChevronRight } from 'lucide-react';
 import { SPECIALTIES_DATA, createWhatsAppLink } from '../data/clinicData';
@@ -11,29 +11,67 @@ interface MobileServicesProps {
 export const MobileServices: React.FC<MobileServicesProps> = ({ onSelectService }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isNavVisible, setIsNavVisible] = useState(false);
+  const navTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const touchStartXRef = useRef(0);
+
+  const showNavTemporarily = () => {
+    setIsNavVisible(true);
+    if (navTimerRef.current) clearTimeout(navTimerRef.current);
+    navTimerRef.current = setTimeout(() => {
+      setIsNavVisible(false);
+    }, 2000);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (navTimerRef.current) clearTimeout(navTimerRef.current);
+    };
+  }, []);
 
   const scrollToIndex = (index: number) => {
     if (scrollRef.current) {
+      const targetIndex = ((index % SPECIALTIES_DATA.length) + SPECIALTIES_DATA.length) % SPECIALTIES_DATA.length;
       const cardWidth = scrollRef.current.offsetWidth;
       scrollRef.current.scrollTo({
-        left: index * cardWidth,
+        left: targetIndex * cardWidth,
         behavior: 'smooth',
       });
-      setActiveIndex(index);
+      setActiveIndex(targetIndex);
     }
   };
 
   const handlePrev = () => {
-    const nextIndex = Math.max(0, activeIndex - 1);
+    showNavTemporarily();
+    const nextIndex = activeIndex === 0 ? SPECIALTIES_DATA.length - 1 : activeIndex - 1;
     scrollToIndex(nextIndex);
   };
 
   const handleNext = () => {
-    const nextIndex = Math.min(SPECIALTIES_DATA.length - 1, activeIndex + 1);
+    showNavTemporarily();
+    const nextIndex = (activeIndex + 1) % SPECIALTIES_DATA.length;
     scrollToIndex(nextIndex);
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.touches[0].clientX;
+    showNavTemporarily();
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const deltaX = e.changedTouches[0].clientX - touchStartXRef.current;
+    if (deltaX < -50 && activeIndex === SPECIALTIES_DATA.length - 1) {
+      // Swiped left at the last item -> wrap to first
+      scrollToIndex(0);
+    } else if (deltaX > 50 && activeIndex === 0) {
+      // Swiped right at the first item -> wrap to last
+      scrollToIndex(SPECIALTIES_DATA.length - 1);
+    }
+    showNavTemporarily();
+  };
+
   const handleScroll = () => {
+    showNavTemporarily();
     if (scrollRef.current) {
       const scrollLeft = scrollRef.current.scrollLeft;
       const cardWidth = scrollRef.current.offsetWidth;
@@ -47,11 +85,14 @@ export const MobileServices: React.FC<MobileServicesProps> = ({ onSelectService 
   };
 
   return (
-    <section id="servicios" className="pt-6 pb-8 bg-[#FAF9F5] overflow-hidden relative">
+    <section id="servicios" className="pt-5 pb-3 bg-[#FAF9F5] overflow-hidden relative">
       {/* Header Section */}
       <div className="px-4 mb-6 max-w-sm mx-auto text-center">
-        <h2 className="text-2xl xs:text-3xl font-black text-[#0D0D0D] tracking-tight leading-tight">
-          Servicios Odontológicos
+        <h2 className="text-2xl xs:text-3xl font-black tracking-tight leading-tight text-stone-900">
+          Servicios{' '}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#C5A059] to-[#84631E]">
+            Odontológicos
+          </span>
         </h2>
         <p className="text-xs text-stone-500 mt-1 max-w-xs mx-auto">
           Atención preventiva y restauradora sin dolor con tecnología de vanguardia.
@@ -60,34 +101,41 @@ export const MobileServices: React.FC<MobileServicesProps> = ({ onSelectService 
 
       {/* Carousel Container with Side Navigation Controls */}
       <div className="relative w-full max-w-sm mx-auto px-4">
-        {/* Left Arrow Flanking the Carousel */}
-        {activeIndex > 0 && (
-          <button
-            type="button"
-            onClick={handlePrev}
-            aria-label="Servicio anterior"
-            className="absolute left-1 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/95 border border-[#D4AF37]/35 text-[#84631E] shadow-md flex items-center justify-center cursor-pointer active:scale-90 transition-transform"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-        )}
+        {/* Left Arrow Flanking the Carousel (Bucle Infinito + Translúcido) */}
+        <button
+          type="button"
+          onClick={handlePrev}
+          aria-label="Servicio anterior"
+          className={`absolute left-1 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/90 border border-[#D4AF37]/40 text-[#84631E] flex items-center justify-center cursor-pointer active:scale-90 transition-all duration-500 backdrop-blur-xs ${
+            isNavVisible
+              ? 'opacity-95 shadow-md scale-100'
+              : 'opacity-25 hover:opacity-95 active:opacity-100 shadow-none scale-95'
+          }`}
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
 
-        {/* Right Arrow Flanking the Carousel */}
-        {activeIndex < SPECIALTIES_DATA.length - 1 && (
-          <button
-            type="button"
-            onClick={handleNext}
-            aria-label="Siguiente servicio"
-            className="absolute right-1 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/95 border border-[#D4AF37]/35 text-[#84631E] shadow-md flex items-center justify-center cursor-pointer active:scale-90 transition-transform"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
-        )}
+        {/* Right Arrow Flanking the Carousel (Bucle Infinito + Translúcido) */}
+        <button
+          type="button"
+          onClick={handleNext}
+          aria-label="Siguiente servicio"
+          className={`absolute right-1 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/90 border border-[#D4AF37]/40 text-[#84631E] flex items-center justify-center cursor-pointer active:scale-90 transition-all duration-500 backdrop-blur-xs ${
+            isNavVisible
+              ? 'opacity-95 shadow-md scale-100'
+              : 'opacity-25 hover:opacity-95 active:opacity-100 shadow-none scale-95'
+          }`}
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
 
         {/* Horizontal Scroll Track */}
         <div
           ref={scrollRef}
           onScroll={handleScroll}
+          onTouchStart={handleTouchStart}
+          onTouchMove={showNavTemporarily}
+          onTouchEnd={handleTouchEnd}
           className="flex overflow-x-auto snap-x snap-mandatory rounded-3xl pb-2 pt-1 [&::-webkit-scrollbar]:hidden"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
@@ -105,9 +153,6 @@ export const MobileServices: React.FC<MobileServicesProps> = ({ onSelectService 
                     loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-700 hover:scale-108 active:scale-105"
                   />
-                  <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-black text-[#84631E] border border-[#D4AF37]/30 shadow-xs">
-                    {service.badge || 'Servicio Básico'}
-                  </div>
                   <div className="absolute bottom-3 right-3 bg-[#0D0D0D]/75 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-bold text-white flex items-center gap-1">
                     <Clock className="w-3 h-3 text-[#D4AF37]" />
                     <span>{service.estimatedTime}</span>
@@ -159,14 +204,14 @@ export const MobileServices: React.FC<MobileServicesProps> = ({ onSelectService 
         </div>
 
         {/* Carousel Pagination Dots */}
-        <div className="flex justify-center items-center gap-1 mt-3">
+        <div className="flex justify-center items-center gap-1 mt-1.5">
           {SPECIALTIES_DATA.map((_, idx) => (
             <button
               key={idx}
               type="button"
               onClick={() => scrollToIndex(idx)}
               aria-label={`Ir al servicio ${idx + 1}`}
-              className="min-w-[32px] min-h-[44px] flex items-center justify-center cursor-pointer p-1"
+              className="min-w-[28px] h-6 flex items-center justify-center cursor-pointer p-0.5"
             >
               <span
                 className={`transition-all duration-300 block ${
