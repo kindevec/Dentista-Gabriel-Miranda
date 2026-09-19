@@ -185,7 +185,7 @@ export const SOCIAL_NETWORKS: SocialNetwork[] = [
     iconType: "facebook",
     color: "#1877F2",
     bgColor: "bg-blue-50 border-blue-200 text-[#1877F2]",
-    description: "Comunidad de pacientes y testimonios sobre nuestros tratamientos dentales en Quito.",
+    description: "Comunidad de pacientes y testimonios sobre nuestros tratamientos dentales en La Maná.",
     actionText: "Visitar Facebook",
     url: "https://facebook.com/odontologiagabrielmiranda",
     waMessage: "Hola Dr. Gabriel Miranda, vi su página oficial de Facebook y deseo una cita.",

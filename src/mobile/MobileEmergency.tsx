@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { CreditCard, Clock, AlertTriangle } from 'lucide-react';
-import { DOCTOR_NAME, createWhatsAppLink, EMERGENCY_WA_MESSAGE } from '../data/clinicData';
+import { CreditCard, Clock, ShieldCheck, ArrowRight } from 'lucide-react';
+import { DOCTOR_NAME, createWhatsAppLink, GENERAL_WA_MESSAGE } from '../data/clinicData';
 import { WhatsAppIcon } from '../components/OfficialSocialLogos';
 import { CurvedSectionDivider } from '../components/CurvedSectionDivider';
 
@@ -9,14 +9,7 @@ interface MobileEmergencyProps {
   onOpenEmergency?: () => void;
 }
 
-export const MobileEmergency: React.FC<MobileEmergencyProps> = ({ onOpenEmergency }) => {
-  const handleEmergencyClick = (e: React.MouseEvent) => {
-    if (onOpenEmergency) {
-      e.preventDefault();
-      onOpenEmergency();
-    }
-  };
-
+export const MobileEmergency: React.FC<MobileEmergencyProps> = () => {
   return (
     <section id="urgencias" className="bg-[#0D0D0D] relative overflow-hidden py-16 px-4 text-white">
       {/* Top Organic Wave Transition from PC */}
@@ -40,58 +33,54 @@ export const MobileEmergency: React.FC<MobileEmergencyProps> = ({ onOpenEmergenc
       <div className="relative z-10 max-w-sm mx-auto my-1">
         {/* Title */}
         <h2 className="text-2xl xs:text-3xl font-black text-white tracking-tight leading-tight mb-2">
-          ¿Urgencia Dental<br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-rose-400 to-[#D4AF37]">
-            en Quito?
+          Consulta de Valoración<br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F3E5AB] via-[#D4AF37] to-[#C5A059]">
+            Médica por solo $15
           </span>
         </h2>
         <p className="text-xs text-stone-300 leading-relaxed mb-6">
-          Alivio inmediato del dolor agudo, fracturas dentales e infecciones con atención de máxima prioridad.
+          Diagnóstico clínico completo con el <strong className="text-white font-bold">{DOCTOR_NAME}</strong>, fotografías dentales y radiografías por solo $15. Crédito directo disponible de $400 a $2,000.
         </p>
 
         {/* Bullet Benefits List */}
         <div className="space-y-2.5 mb-6">
-          <div className="flex items-start gap-3 p-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
-            <motion.div
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-              className="w-9 h-9 rounded-xl bg-red-500/20 border border-red-500/30 flex items-center justify-center shrink-0"
-            >
-              <AlertTriangle className="w-4 h-4 text-red-400" />
-            </motion.div>
+          <div className="flex items-start gap-3 p-3 rounded-2xl bg-white/5 border border-[#D4AF37]/25 backdrop-blur-md">
+            <div className="w-9 h-9 rounded-xl bg-[#D4AF37]/15 border border-[#D4AF37]/35 flex items-center justify-center shrink-0 text-[#D4AF37]">
+              <ShieldCheck className="w-4 h-4" />
+            </div>
             <div>
-              <h3 className="text-xs font-black text-white leading-tight">
-                Alivio Inmediato del Dolor
+              <h3 className="text-xs font-black text-[#F3E5AB] leading-tight">
+                1. Diagnóstico $15
               </h3>
-              <p className="text-[11px] text-stone-400 leading-tight mt-0.5">
-                Diagnóstico integral $15 con fotos clínicas y rayos X.
+              <p className="text-[11px] text-stone-300 leading-tight mt-0.5">
+                Clínico, fotos y rayos X de alta definición.
               </p>
             </div>
           </div>
 
-          <div className="flex items-start gap-3 p-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
-            <div className="w-9 h-9 rounded-xl bg-[#D4AF37]/20 border border-[#D4AF37]/30 flex items-center justify-center shrink-0">
-              <CreditCard className="w-4 h-4 text-[#D4AF37]" />
+          <div className="flex items-start gap-3 p-3 rounded-2xl bg-white/5 border border-[#D4AF37]/25 backdrop-blur-md">
+            <div className="w-9 h-9 rounded-xl bg-[#D4AF37]/15 border border-[#D4AF37]/35 flex items-center justify-center shrink-0 text-[#D4AF37]">
+              <CreditCard className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="text-xs font-black text-white leading-tight">
-                Crédito Directo Inmediato
+              <h3 className="text-xs font-black text-[#F3E5AB] leading-tight">
+                2. Crédito Directo
               </h3>
-              <p className="text-[11px] text-stone-400 leading-tight mt-0.5">
+              <p className="text-[11px] text-stone-300 leading-tight mt-0.5">
                 Financiamiento directo de $400 a $2,000 sin demoras.
               </p>
             </div>
           </div>
 
-          <div className="flex items-start gap-3 p-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
-            <div className="w-9 h-9 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center shrink-0">
-              <Clock className="w-4 h-4 text-white" />
+          <div className="flex items-start gap-3 p-3 rounded-2xl bg-white/5 border border-[#D4AF37]/25 backdrop-blur-md">
+            <div className="w-9 h-9 rounded-xl bg-[#D4AF37]/15 border border-[#D4AF37]/35 flex items-center justify-center shrink-0 text-[#D4AF37]">
+              <Clock className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="text-xs font-black text-white leading-tight">
-                Horario Extendido & Domingos
+              <h3 className="text-xs font-black text-[#F3E5AB] leading-tight">
+                3. Lun a Dom
               </h3>
-              <p className="text-[11px] text-stone-400 leading-tight mt-0.5">
+              <p className="text-[11px] text-stone-300 leading-tight mt-0.5">
                 Lun-Sáb: 09:00 - 19:00 | Domingo: 09:00 - 14:00
               </p>
             </div>
@@ -102,14 +91,14 @@ export const MobileEmergency: React.FC<MobileEmergencyProps> = ({ onOpenEmergenc
         <motion.a
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.95 }}
-          href={createWhatsAppLink(EMERGENCY_WA_MESSAGE)}
-          onClick={handleEmergencyClick}
+          href={createWhatsAppLink(GENERAL_WA_MESSAGE)}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full py-4 px-4 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#1EBE5D] hover:from-[#1EBE5D] hover:to-[#179B4B] text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer transition-all duration-300 group shadow-lg shadow-emerald-500/30 animate-halo-whatsapp"
+          className="w-full py-4 px-4 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] hover:from-[#C5A059] hover:to-[#84631E] text-[#0B0B0B] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer transition-all duration-300 group shadow-xl shadow-amber-950/30 border border-[#D4AF37]/60"
         >
-          <WhatsAppIcon className="w-4.5 h-4.5 fill-current group-hover:scale-110 transition-transform" />
-          <span>Contactar Urgencia por WhatsApp</span>
+          <WhatsAppIcon className="w-4 h-4 text-[#0B0B0B]" />
+          <span>Reservar Valoración de $15 por WhatsApp</span>
+          <ArrowRight className="w-3.5 h-3.5 text-[#0B0B0B]" />
         </motion.a>
       </div>
 

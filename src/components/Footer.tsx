@@ -155,10 +155,6 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
             FILA INTERMEDIA: Descripción y Enlaces de Navegación Rápida
            ======================================================== */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left">
-          <p className="text-[11px] sm:text-xs text-stone-400 font-medium leading-relaxed max-w-md">
-            Odontología especializada de alta estética y rehabilitación oral con el {DOCTOR_NAME}.
-          </p>
-
           {/* Enlaces de Navegación Rápida */}
           <nav className="flex flex-wrap items-center justify-center gap-x-3.5 sm:gap-x-4.5 gap-y-1.5 text-[11px] sm:text-xs font-medium text-stone-300">
             <button
