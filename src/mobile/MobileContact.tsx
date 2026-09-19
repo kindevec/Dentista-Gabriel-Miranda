@@ -12,6 +12,11 @@ import {
 } from 'lucide-react';
 import {
   CLINIC_ADDRESS,
+  CLINIC_CITY,
+  CLINIC_REFERENCE,
+  CLINIC_MAPS_URL,
+  CLINIC_WAZE_URL,
+  CLINIC_MAP_EMBED_URL,
   CLINIC_HOURS,
   CLINIC_PHONE_DISPLAY,
   CLINIC_EMAIL,
@@ -253,9 +258,12 @@ export const MobileContact: React.FC<MobileContactProps> = ({
               <MapPin className="w-4 h-4 text-[#84631E]" />
             </div>
             <div>
-              <h4 className="text-xs font-bold text-stone-900">Dirección</h4>
+              <h4 className="text-xs font-bold text-stone-900">Dirección Exacta</h4>
               <p className="text-[11px] text-stone-500 leading-tight mt-0.5">
                 {CLINIC_ADDRESS}
+              </p>
+              <p className="text-[10px] font-semibold text-[#84631E] mt-0.5">
+                {CLINIC_CITY} • {CLINIC_REFERENCE}
               </p>
             </div>
           </div>
@@ -320,26 +328,52 @@ export const MobileContact: React.FC<MobileContactProps> = ({
           })}
         </div>
 
-        {/* Location Map Preview */}
-        <a
-          href="https://maps.google.com/?q=-0.170669,-78.472535"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block relative rounded-2xl overflow-hidden border border-[#D4AF37]/30 shadow-xs group"
-        >
-          <img
-            src="/clinic/ubicacion-mapa.webp"
-            alt="Ubicación de la clínica en Google Maps"
-            loading="lazy"
-            className="w-full h-36 object-cover group-hover:scale-105 transition-transform duration-300"
-          />
-          <div className="absolute inset-0 bg-stone-900/30 flex items-center justify-center">
-            <div className="px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-md text-stone-900 text-xs font-bold flex items-center gap-1.5 shadow-sm">
-              <ExternalLink className="w-3.5 h-3.5 text-[#84631E]" />
-              <span>Abrir en Google Maps</span>
+        {/* Live Interactive Map Full Container */}
+        <div className="bg-white rounded-3xl border border-stone-200/90 shadow-sm overflow-hidden w-full flex flex-col text-left">
+          {/* Header Bar */}
+          <div className="px-4 py-3 bg-white border-b border-stone-200/80 flex items-center justify-between shrink-0">
+            <span className="text-xs font-bold text-stone-900 flex items-center gap-1.5">
+              <MapPin className="w-3.5 h-3.5 text-[#84631E]" />
+              <span>Ubicación Exacta • Junto a IntegralMedic</span>
+            </span>
+            <div className="flex items-center gap-2">
+              <a
+                href={CLINIC_MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] font-semibold text-[#84631E] hover:underline inline-flex items-center gap-1 cursor-pointer"
+              >
+                <span>Google Maps</span>
+                <ExternalLink className="w-2.5 h-2.5" />
+              </a>
+              <span className="text-stone-300">•</span>
+              <a
+                href={CLINIC_WAZE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] font-semibold text-stone-600 hover:underline inline-flex items-center gap-1 cursor-pointer"
+              >
+                <span>Waze</span>
+                <ExternalLink className="w-2.5 h-2.5" />
+              </a>
             </div>
           </div>
-        </a>
+
+          {/* Full-bleed Map Embed */}
+          <div className="w-full h-64 relative bg-stone-100">
+            <iframe
+              src={CLINIC_MAP_EMBED_URL}
+              width="100%"
+              height="100%"
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Ubicación Exacta Google Maps - Miranda Dental Studio La Maná"
+              className="w-full h-full"
+              style={{ border: 0 }}
+            />
+          </div>
+        </div>
       </div>
     </section>
   );

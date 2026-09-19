@@ -1,6 +1,6 @@
 import React from 'react';
 import { Logo } from '../components/Logo';
-import { DOCTOR_NAME, DOCTOR_SENESCYT, CLINIC_CITY } from '../data/clinicData';
+import { DOCTOR_NAME, DOCTOR_SENESCYT } from '../data/clinicData';
 
 export const MobileFooter: React.FC = () => {
   const handleScroll = (id: string) => {
@@ -74,10 +74,12 @@ export const MobileFooter: React.FC = () => {
         <div className="w-16 h-px bg-[#D4AF37]/30 my-4" />
 
         {/* Professional Registry & Legal */}
-        <div className="space-y-1 text-[11px] text-stone-500">
+        <div className="space-y-1.5 text-[11px] text-stone-500">
           <p>Registro Profesional SENESCYT: {DOCTOR_SENESCYT}</p>
-          <p>© {new Date().getFullYear()} Miranda Dental Studio. {CLINIC_CITY}.</p>
-          <p className="text-[10px] text-stone-600">Diseñado con Estándar Élite Kindev S.A.S.</p>
+          <p>© {new Date().getFullYear()} Miranda Dental Studio. Todos los derechos reservados.</p>
+          <p className="text-xs text-stone-400 pt-1">
+            Desarrollado por <strong className="text-[#D4AF37] font-semibold">Kindev SAS</strong>
+          </p>
         </div>
       </div>
     </footer>

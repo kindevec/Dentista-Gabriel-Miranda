@@ -172,7 +172,7 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                       type="button"
                       onClick={() => handleChipClick(idx)}
                       className={cn(
-                        'relative flex items-center gap-3 w-full px-4 py-2.5 rounded-2xl transition-all duration-300 text-left group cursor-pointer select-none',
+                        'relative flex items-center gap-3 w-full px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl transition-all duration-300 text-left group cursor-pointer select-none',
                         isActive
                           ? 'bg-gradient-to-r from-[#FAF7EE] via-white to-[#F8F3E5] border-2 border-[#D4AF37] shadow-[0_8px_25px_-6px_rgba(212,175,55,0.3)] z-10 scale-[1.01]'
                           : 'bg-white/80 hover:bg-white border border-stone-200/80 hover:border-[#D4AF37]/50 shadow-2xs hover:shadow-xs scale-100'
@@ -185,16 +185,6 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                           className="absolute -left-1 top-2 bottom-2 w-1.5 rounded-full bg-gradient-to-b from-[#D4AF37] to-[#84631E] shadow-[0_0_10px_rgba(212,175,55,0.7)]"
                         />
                       )}
-
-                      {/* Number Index */}
-                      <span
-                        className={cn(
-                          'font-mono text-xs font-black transition-colors shrink-0',
-                          isActive ? 'text-[#84631E]' : 'text-stone-400 group-hover:text-stone-600'
-                        )}
-                      >
-                        {String(idx + 1).padStart(2, '0')}
-                      </span>
 
                       {/* 3D Embossed Icon */}
                       <div
@@ -209,18 +199,18 @@ export const SpecialtiesSection: React.FC<SpecialtiesSectionProps> = ({
                       </div>
 
                       {/* Title & Timing */}
-                      <div className="flex flex-col min-w-0 flex-1">
+                      <div className="flex flex-col min-w-0 flex-1 justify-center">
                         <span
                           className={cn(
-                            'text-sm font-extrabold tracking-tight truncate transition-colors',
-                            isActive ? 'text-[#0D0D0D]' : 'text-stone-700 group-hover:text-[#0D0D0D]'
+                            'text-[15px] sm:text-base font-black tracking-tight truncate transition-colors leading-snug',
+                            isActive ? 'text-[#0D0D0D]' : 'text-stone-800 group-hover:text-[#0D0D0D]'
                           )}
                         >
                           {spec.title}
                         </span>
                         <span
                           className={cn(
-                            'text-[11px] truncate font-semibold transition-colors',
+                            'text-xs truncate font-medium transition-colors leading-tight',
                             isActive ? 'text-[#AA7C11] font-bold' : 'text-stone-400'
                           )}
                         >

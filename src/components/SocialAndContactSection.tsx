@@ -7,6 +7,10 @@ import {
   CLINIC_ADDRESS,
   CLINIC_CITY,
   CLINIC_HOURS,
+  CLINIC_REFERENCE,
+  CLINIC_MAPS_URL,
+  CLINIC_WAZE_URL,
+  CLINIC_MAP_EMBED_URL,
   SPECIALTIES_DATA,
   DOCTOR_NAME,
   createWhatsAppLink,
@@ -323,9 +327,9 @@ export const SocialAndContactSection: React.FC<SocialAndContactSectionProps> = (
                     <MapPin className="w-4 h-4 text-[#84631E]" />
                   </div>
                   <div>
-                    <h4 className="text-[11px] font-bold text-stone-400 uppercase tracking-wider">Dirección</h4>
+                    <h4 className="text-[11px] font-bold text-stone-400 uppercase tracking-wider">Dirección Exacta</h4>
                     <p className="text-sm font-bold text-[#0D0D0D] leading-snug">{CLINIC_ADDRESS}</p>
-                    <p className="text-xs font-semibold text-[#84631E] mt-0.5">{CLINIC_CITY}</p>
+                    <p className="text-xs font-semibold text-[#84631E] mt-0.5">{CLINIC_CITY} • {CLINIC_REFERENCE}</p>
                   </div>
                 </div>
 
@@ -384,32 +388,50 @@ export const SocialAndContactSection: React.FC<SocialAndContactSectionProps> = (
               </div>
             </div>
 
-            {/* Single Organic Window for Google Maps Location */}
-            <div className="rounded-[2.2rem] overflow-hidden shadow-lg border border-stone-200/80 relative group h-56 sm:h-64">
-              <img
-                src="/clinic/ubicacion-mapa.webp"
-                alt="Mapa Miranda Dental Studio"
-                width={800}
-                height={500}
-                loading="lazy"
-                decoding="async"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/90 via-[#0B0B0B]/60 to-transparent flex flex-col items-center justify-end p-6 text-center text-white">
-                <MapPin className="w-7 h-7 text-[#D4AF37] mb-1 animate-bounce" />
-                <p className="text-sm font-black">Miranda Dental Studio</p>
-                <p className="text-xs text-stone-200 mb-3.5 font-medium">Av. 19 de Mayo y Velasco Ibarra (Planta Baja)</p>
-                <motion.a
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  href="https://maps.google.com/?q=Av.+19+de+Mayo+y+Velasco+Ibarra,+Quito"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-5 py-2.5 rounded-full bg-white text-[#0B0B0B] text-xs font-black shadow-md hover:bg-[#FAF7EE] transition-all flex items-center gap-1.5 cursor-pointer border border-[#D4AF37]/40"
-                >
-                  <span>Abrir en Google Maps</span>
-                  <ExternalLink className="w-3.5 h-3.5 text-[#84631E]" />
-                </motion.a>
+            {/* Live Interactive Map Full Container */}
+            <div className="bg-white rounded-2xl sm:rounded-3xl border border-stone-200/90 shadow-sm overflow-hidden w-full flex flex-col">
+              {/* Header Bar */}
+              <div className="px-4 sm:px-5 py-3 sm:py-3.5 bg-white border-b border-stone-200/80 flex items-center justify-between shrink-0">
+                <span className="text-xs font-bold text-stone-900 flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-[#84631E]" />
+                  <span>Ubicación Exacta • Junto a IntegralMedic</span>
+                </span>
+                <div className="flex items-center gap-2">
+                  <a
+                    href={CLINIC_MAPS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[11px] font-semibold text-[#84631E] hover:underline inline-flex items-center gap-1 cursor-pointer"
+                  >
+                    <span>Google Maps</span>
+                    <ExternalLink className="w-2.5 h-2.5" />
+                  </a>
+                  <span className="text-stone-300">•</span>
+                  <a
+                    href={CLINIC_WAZE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[11px] font-semibold text-stone-600 hover:underline inline-flex items-center gap-1 cursor-pointer"
+                  >
+                    <span>Waze</span>
+                    <ExternalLink className="w-2.5 h-2.5" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Full-bleed Map Embed */}
+              <div className="w-full h-72 sm:h-80 lg:h-88 relative bg-stone-100">
+                <iframe
+                  src={CLINIC_MAP_EMBED_URL}
+                  width="100%"
+                  height="100%"
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Ubicación Exacta Google Maps - Miranda Dental Studio La Maná"
+                  className="w-full h-full"
+                  style={{ border: 0 }}
+                />
               </div>
             </div>
           </motion.div>

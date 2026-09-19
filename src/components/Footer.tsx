@@ -25,7 +25,7 @@ export const Footer: React.FC = () => {
             </div>
 
             <p className="text-xs text-stone-300 leading-relaxed max-w-md pt-1 text-justify">
-              Miranda Dental Studio — Odontología especializada basada en la excelencia clínica, la tecnología y la atención humana. Creadores de sonrisas funcionales, estéticas y naturales en Quito.
+              Miranda Dental Studio — Odontología especializada basada en la excelencia clínica, la tecnología y la atención humana. Creadores de sonrisas funcionales, estéticas y naturales en La Maná.
             </p>
           </div>
 
@@ -47,7 +47,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <a href="#especialidades" className="hover:text-[#D4AF37] transition-colors">
-                  Especialidades Médicas
+                  Especialidades Odontológicas
                 </a>
               </li>
               <li>
@@ -125,15 +125,20 @@ export const Footer: React.FC = () => {
 
         </div>
 
-        {/* Bottom Bar: Copyright & Back to Top */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-400">
-          <div>
-            © {currentYear} <strong>Miranda Dental Studio</strong>. Todos los derechos reservados. Dr. Gabriel Miranda.
+        {/* Bottom Bar: Copyright, Address, Credits & Back to Top */}
+        <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-stone-400">
+          <div className="space-y-1 text-center md:text-left">
+            <div>
+              © {currentYear} <strong>Miranda Dental Studio</strong>. Todos los derechos reservados. Dr. Gabriel Miranda.
+            </div>
+            <div className="text-[11px] text-stone-400">
+              Desarrollado por <strong className="text-[#D4AF37] font-semibold">Kindev SAS</strong>
+            </div>
           </div>
 
           <div className="flex items-center gap-6">
-            <span className="text-[11px] text-stone-500">
-              Quito, Ecuador • Consultas de Lunes a Domingo
+            <span className="text-[11px] text-stone-500 hidden lg:inline">
+              Consultas de Lunes a Domingo
             </span>
 
             <button

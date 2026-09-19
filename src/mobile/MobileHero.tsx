@@ -2,16 +2,12 @@ import React from 'react';
 import { motion } from 'motion/react';
 import {
   Calendar,
-  CreditCard,
-  Clock,
   Sparkles,
-  ArrowRight,
-  ShieldCheck
+  ArrowRight
 } from 'lucide-react';
 import {
   createWhatsAppLink,
   BOOKING_WA_MESSAGE,
-  DOCTOR_NAME,
   CLINIC_HOURS
 } from '../data/clinicData';
 
@@ -64,7 +60,7 @@ export const MobileHero: React.FC<MobileHeroProps> = ({
         >
           <Sparkles className="w-3.5 h-3.5 text-[#84631E]" />
           <span className="text-[11px] font-black uppercase tracking-wider text-[#84631E]">
-            Odontología de Autor • Quito
+            Odontología de Autor • La Maná
           </span>
         </motion.div>
 
@@ -75,94 +71,52 @@ export const MobileHero: React.FC<MobileHeroProps> = ({
           transition={{ duration: 0.55, delay: 0.08 }}
           className="text-[2.25rem] xs:text-[2.5rem] font-black text-[#0D0D0D] tracking-tight leading-[1.12] mb-3"
         >
-          Tu Sonrisa,<br />
+          El arte de<br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C5A059] via-[#D4AF37] to-[#84631E]">
-            Nuestra Especialidad
+            sonreír con confianza
           </span>
         </motion.h1>
 
-        {/* Concise Clinical Subtitle */}
+        {/* Clinical Subtitle */}
         <motion.p
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.15 }}
-          className="text-xs xs:text-sm text-stone-600 font-normal leading-relaxed max-w-xs mb-5"
+          className="text-xs xs:text-sm text-stone-600 font-normal leading-relaxed max-w-xs mb-5 text-justify"
         >
-          Rehabilitación oral, diseño de sonrisa y precisión digital con el <strong>{DOCTOR_NAME}</strong>.
+          Dar el paso hacia una nueva sonrisa es fácil cuando estás con el experto indicado. El Dr. Gabriel Miranda te guiará con maestría clínica y empatía hacia resultados naturales y duraderos. Descubre una odontología pensada exclusivamente para ti.
         </motion.p>
 
-        {/* 3D Tooth Interactive Sculpture */}
+        {/* Doctor Photo with Golden Halos & Pedestal Box */}
         <motion.div
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="relative flex items-center justify-center w-full my-2 h-64 xs:h-72"
+          className="relative flex flex-col items-center justify-center w-full my-3 max-w-[280px]"
         >
-          {/* Animated concentric decorative rings */}
-          <motion.div
-            animate={{ scale: [0.9, 1.05, 0.9], opacity: [0.2, 0.45, 0.2] }}
-            transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute w-44 h-44 rounded-full border-2 border-[#D4AF37]/35 pointer-events-none"
-          />
-          <motion.div
-            animate={{ scale: [1.02, 0.92, 1.02], opacity: [0.15, 0.3, 0.15] }}
-            transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-            className="absolute w-56 h-56 rounded-full border border-[#D4AF37]/20 pointer-events-none"
-          />
-
-          {/* Floating Tooth Image */}
-          <motion.div
-            animate={{ y: [-6, 6, -6] }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-            className="relative z-10 w-48 xs:w-56 aspect-square flex items-center justify-center"
-          >
+          <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#D4AF37]/25 to-transparent blur-2xl -z-10" />
+          
+          <div className="relative z-10 w-full flex justify-center -mb-5">
             <img
-              src="/hero-3d-tooth.webp"
-              alt="Escultura dental 3D"
-              width={260}
-              height={260}
+              alt="Dr. Gabriel Miranda - Odontólogo Especialista"
+              width={420}
+              height={500}
+              className="w-full h-auto max-h-[320px] object-contain object-bottom drop-shadow-[0_20px_35px_rgba(132,99,30,0.18)]"
               loading="eager"
               fetchPriority="high"
-              className="w-full h-full object-contain filter drop-shadow-[0_20px_35px_rgba(180,140,50,0.28)]"
+              decoding="async"
+              src="/dr-gabriel-miranda.webp"
             />
-          </motion.div>
-        </motion.div>
-
-        {/* High-Value Feature Badges */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="grid grid-cols-3 gap-2 w-full my-4"
-        >
-          <div className="flex flex-col items-center justify-center bg-white/95 border border-[#D4AF37]/25 rounded-2xl p-2.5 shadow-xs">
-            <ShieldCheck className="w-4 h-4 text-[#84631E] mb-1" />
-            <span className="text-[11.5px] font-black text-[#0D0D0D] leading-tight">
-              Valoración $15
-            </span>
-            <span className="text-[9.5px] text-stone-500 font-medium leading-none mt-0.5">
-              Fotos + Rayos X
-            </span>
           </div>
 
-          <div className="flex flex-col items-center justify-center bg-white/95 border border-[#D4AF37]/25 rounded-2xl p-2.5 shadow-xs">
-            <CreditCard className="w-4 h-4 text-[#84631E] mb-1" />
-            <span className="text-[11.5px] font-black text-[#0D0D0D] leading-tight">
-              Crédito Directo
-            </span>
-            <span className="text-[9.5px] text-stone-500 font-medium leading-none mt-0.5">
-              $400 a $2,000
-            </span>
-          </div>
-
-          <div className="flex flex-col items-center justify-center bg-white/95 border border-[#D4AF37]/25 rounded-2xl p-2.5 shadow-xs">
-            <Clock className="w-4 h-4 text-[#84631E] mb-1" />
-            <span className="text-[11.5px] font-black text-[#0D0D0D] leading-tight">
-              Lun a Dom
-            </span>
-            <span className="text-[9.5px] text-stone-500 font-medium leading-none mt-0.5">
-              9am a 7pm
-            </span>
+          {/* Cajita de Autor Doradita y Redondeada en la parte inferior */}
+          <div className="relative z-20 w-[92%] bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] border border-[#D4AF37]/70 rounded-3xl sm:rounded-full py-2.5 px-4 shadow-xl shadow-amber-950/20 text-center">
+            <h3 className="text-sm font-black text-[#0B0B0B] tracking-tight leading-tight">
+              Dr. Gabriel Miranda
+            </h3>
+            <p className="text-[10px] font-bold text-[#42310B] uppercase tracking-wider mt-0.5">
+              Rehabilitación Oral y Estética
+            </p>
           </div>
         </motion.div>
 
@@ -179,7 +133,7 @@ export const MobileHero: React.FC<MobileHeroProps> = ({
             className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] text-[#0D0D0D] font-black text-sm uppercase tracking-wider shadow-lg shadow-[#D4AF37]/25 flex items-center justify-center gap-2 border border-[#D4AF37]/50 cursor-pointer"
           >
             <Calendar className="w-4 h-4 text-[#0D0D0D]" />
-            <span>Agendar Valoración $15</span>
+            <span>Agendar Cita</span>
             <ArrowRight className="w-4 h-4 text-[#0D0D0D]" />
           </motion.button>
 
@@ -193,10 +147,11 @@ export const MobileHero: React.FC<MobileHeroProps> = ({
           </motion.button>
         </motion.div>
 
-        {/* Operating hours footer reminder */}
-        <p className="text-[11px] text-stone-400 mt-4">
-          {CLINIC_HOURS}
-        </p>
+        {/* Operating hours & location */}
+        <div className="space-y-1 text-center text-[11px] text-stone-500 mt-4">
+          <p>{CLINIC_HOURS}</p>
+          <p className="font-semibold text-stone-700">Av. 19 de Mayo (Ruta E30) y Velasco Ibarra • Edif. Color Gris, PB (Junto a IntegralMedic)</p>
+        </div>
       </div>
     </section>
   );

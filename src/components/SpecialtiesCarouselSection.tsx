@@ -5,7 +5,6 @@ import {
   ChevronRight,
   Check,
   Clock,
-  Sparkles,
   ArrowRight,
   ArrowDown,
   RotateCw,
@@ -255,7 +254,7 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
           className="max-w-3xl mb-8 sm:mb-10 space-y-3"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
-            Especialidades <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#C5A059] to-[#84631E]">Médicas</span>
+            Especialidades <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#C5A059] to-[#84631E]">Odontológicas</span>
           </h2>
           
           <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
@@ -345,8 +344,8 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
                       }`}
                       onClick={(e) => toggleCardFlip(spec.id, e)}
                     >
-                      <div className="w-full h-full rounded-[2.5rem] overflow-hidden bg-stone-900 border border-[#D4AF37]/40 shadow-xl shadow-amber-950/10 flex flex-col justify-between group cursor-pointer relative select-none">
-                        {/* Full-Bleed Large Cinematic Image (WebP local) */}
+                      <div className="w-full h-full rounded-[2.5rem] overflow-hidden bg-stone-900 border border-[#D4AF37]/40 shadow-xl shadow-amber-950/10 flex flex-col justify-end group cursor-pointer relative select-none">
+                        {/* Full-Bleed Large Cinematic Image (WebP local, 100% nítida y clara) */}
                         <img
                           src={spec.image}
                           alt={spec.title}
@@ -355,31 +354,30 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
                           draggable={false}
                           loading="lazy"
                           decoding="async"
-                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out brightness-[0.85] pointer-events-none select-none"
+                          className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out pointer-events-none select-none"
                         />
 
-                        {/* Gradiente Oscuro y Cálido para Legibilidad Total */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/95 via-[#0B0B0B]/40 to-black/20 pointer-events-none" />
+                        {/* Degradado Sutil Únicamente Inferior: la mitad superior queda 100% libre, nítida y clara */}
+                        <div className="absolute inset-x-0 bottom-0 h-[58%] bg-gradient-to-t from-[#0B0B0B] via-[#0B0B0B]/80 via-40% to-transparent pointer-events-none" />
 
-                        {/* Espacio Superior: Badge de Especialidad */}
-                        <div className="relative z-10 p-5 sm:p-6 flex items-center justify-between pointer-events-none">
-                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-[#F3E5AB] text-[10.5px] font-bold tracking-wider uppercase shadow-xs">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-                            {spec.badge || spec.category}
-                          </span>
-                        </div>
+                        {/* Información Inferior con Altura Uniforme en todas las tarjetas */}
+                        <div className="relative z-10 p-6 sm:p-7 flex flex-col justify-end h-[220px] sm:h-[225px] shrink-0">
+                          {/* Título alineado con altura uniforme para todas las tarjetas */}
+                          <div className="h-[3.6rem] flex items-end mb-2">
+                            <h3 className="text-2xl sm:text-[1.6rem] font-black text-white leading-tight drop-shadow-md line-clamp-2">
+                              {spec.title}
+                            </h3>
+                          </div>
 
-                        {/* Información Inferior con Botón Interactivo */}
-                        <div className="relative z-10 p-6 sm:p-7 space-y-3">
-                          <h3 className="text-2xl sm:text-[1.65rem] font-black text-white leading-tight drop-shadow-md">
-                            {spec.title}
-                          </h3>
-                          <p className="text-xs sm:text-[13px] text-stone-200/95 line-clamp-2 leading-relaxed font-medium">
-                            {spec.tagline}
-                          </p>
+                          {/* Tagline alineado con altura uniforme */}
+                          <div className="h-[2.4rem] flex items-start mb-3">
+                            <p className="text-xs sm:text-[13px] text-stone-200/95 line-clamp-2 leading-relaxed font-medium">
+                              {spec.tagline}
+                            </p>
+                          </div>
 
                           {/* Botón de Transformación 3D */}
-                          <div className="pt-2">
+                          <div>
                             <button
                               type="button"
                               onClick={(e) => toggleCardFlip(spec.id, e)}
@@ -403,67 +401,62 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
                         WebkitBackfaceVisibility: 'hidden',
                         transform: 'rotateY(180deg)',
                       }}
-                      className={`absolute inset-0 w-full h-full rounded-[2.5rem] transition-opacity duration-300 ${
+                      className={`absolute inset-0 w-full h-full rounded-[2.5rem] transition-opacity duration-300 cursor-pointer ${
                         isFlipped ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
                       }`}
+                      onClick={(e) => toggleCardFlip(spec.id, e)}
                     >
                       <div className="w-full h-full rounded-[2.5rem] overflow-hidden bg-gradient-to-b from-white via-[#FAF9F6] to-[#F7F4EA] border-2 border-[#D4AF37]/50 shadow-2xl shadow-amber-950/15 p-6 sm:p-7 flex flex-col justify-between relative select-none">
-                        {/* Contenido Clínico Esencial */}
-                        <div className="flex flex-col justify-between flex-1 min-h-0 space-y-3">
-                          {/* Barra Superior con Badge y Botón Volver */}
-                          <div className="flex items-center justify-between pb-2 border-b border-stone-200/60 shrink-0">
-                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/40 text-[#84631E] text-[10px] font-extrabold uppercase tracking-wider">
-                              <Sparkles className="w-3 h-3 text-[#D4AF37]" />
-                              {spec.badge || spec.category}
+                        {/* Cabecera Superior: Categoría y Título Grande */}
+                        <div className="space-y-2 shrink-0">
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="text-[10px] sm:text-[10.5px] font-black uppercase tracking-widest px-3 py-1 rounded-full bg-[#FAF7EE] text-[#84631E] border border-[#D4AF37]/35 shadow-2xs">
+                              {spec.category}
                             </span>
-                            <button
-                              type="button"
-                              onClick={(e) => toggleCardFlip(spec.id, e)}
-                              aria-label="Volver a la portada"
-                              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 hover:bg-[#FAF7EE] text-stone-700 hover:text-[#84631E] border border-stone-200 hover:border-[#D4AF37]/60 text-[11px] font-bold transition-all cursor-pointer active:scale-95 shadow-2xs group/volver"
-                            >
-                              <RotateCw className="w-3.5 h-3.5 text-[#84631E] group-hover/volver:-rotate-180 transition-transform duration-500" />
-                              <span>Volver</span>
-                              <X className="w-3 h-3 text-stone-400 group-hover/volver:text-[#84631E]" />
-                            </button>
+                            <div className="flex items-center gap-1.5 text-[11px] font-semibold text-stone-400 group-hover:text-[#84631E] transition-colors">
+                              <RotateCw className="w-3.5 h-3.5 text-[#84631E]" />
+                              <span className="hidden xs:inline text-[10px] uppercase tracking-wider text-stone-400">Toca para volver</span>
+                            </div>
                           </div>
 
-                          {/* Título & Resumen Clínico Directo */}
-                          <div className="space-y-1 shrink-0">
-                            <h4 className="text-xl sm:text-[1.3rem] font-black text-[#0D0D0D] tracking-tight leading-snug">
-                              {spec.title}
-                            </h4>
-                            <p className="text-xs sm:text-[12.5px] text-stone-600 leading-relaxed">
-                              {spec.summary}
-                            </p>
-                          </div>
+                          <h3 className="text-2xl sm:text-[1.75rem] font-black text-[#0D0D0D] tracking-tight leading-tight">
+                            {spec.title}
+                          </h3>
+                        </div>
 
-                          {/* Puntos Clave Esenciales (3 items concisos) */}
-                          <div className="space-y-1.5 pt-2 border-t border-stone-200/60 shrink-0">
-                            <span className="text-[10px] font-black uppercase tracking-wider text-stone-400 block">
+                        {/* Contenido Clínico Esencial: Letras más grandes, resumido, sin box-in-box */}
+                        <div className="flex-1 flex flex-col justify-center space-y-4 py-2 min-h-0">
+                          {/* Resumen Clínico Directo y Legible */}
+                          <p className="text-sm sm:text-[15px] text-stone-700 font-medium leading-relaxed">
+                            {spec.summary}
+                          </p>
+
+                          {/* Puntos Clave Esenciales (Sin contenedor box-in-box) */}
+                          <div className="space-y-2">
+                            <span className="text-[11px] font-black uppercase tracking-wider text-stone-400 block">
                               Qué incluye el tratamiento:
                             </span>
-                            <ul className="space-y-1.5">
+                            <ul className="space-y-2">
                               {spec.features.slice(0, 3).map((feat, fIdx) => (
-                                <li key={fIdx} className="flex items-center gap-2 text-xs text-stone-700 font-medium">
+                                <li key={fIdx} className="flex items-center gap-2.5 text-xs sm:text-[13.5px] text-stone-800 font-semibold">
                                   <div className="w-4 h-4 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/50 text-[#84631E] flex items-center justify-center shrink-0 shadow-2xs">
                                     <Check className="w-2.5 h-2.5 stroke-[3]" />
                                   </div>
-                                  <span className="leading-tight truncate">{feat}</span>
+                                  <span className="leading-tight">{feat}</span>
                                 </li>
                               ))}
                             </ul>
                           </div>
 
-                          {/* Tiempo Clínico Estimado */}
-                          <div className="flex items-center gap-2 text-[11px] text-stone-500 bg-white/80 border border-stone-200/70 rounded-xl px-3 py-2 shrink-0">
-                            <Clock className="w-3.5 h-3.5 text-[#84631E] shrink-0" />
-                            <span className="truncate"><strong>Tiempo estimado:</strong> {spec.estimatedDuration}</span>
+                          {/* Tiempo Clínico Estimado (Inline limpio, sin caja redundante) */}
+                          <div className="flex items-center gap-2 text-xs sm:text-[12.5px] text-stone-600 font-medium pt-1">
+                            <Clock className="w-4 h-4 text-[#84631E] shrink-0" />
+                            <span><strong className="text-stone-800 font-bold">Tiempo estimado:</strong> {spec.estimatedDuration}</span>
                           </div>
                         </div>
 
-                        {/* Botón de Consulta Único (WhatsApp) */}
-                        <div className="pt-3 border-t border-stone-200/60 shrink-0">
+                        {/* Botón de Consulta Único (WhatsApp) - Intacto */}
+                        <div className="pt-2 shrink-0">
                           <a
                             href={createWhatsAppLink(spec.waMessage)}
                             target="_blank"

@@ -21,7 +21,7 @@ export const CLINICAL_SPECIALTIES: DetailedClinicalSpecialty[] = [
     category: "Residencia Univ. Hemisferios",
     badge: "Prótesis & Coronas",
     tagline: "Prótesis totales o parciales, coronas, coronas sobre implantes.",
-    summary: "Reconstrucción anatómica y masticatoria integral con prótesis totales o parciales, coronas de alta resistencia y coronas sobre implantes.",
+    summary: "Reconstrucción dental y funcional integral mediante prótesis estéticas de alta resistencia y coronas sobre implantes.",
     image: "/specialties/rehabilitacion-oral.webp",
     features: [
       "Prótesis totales o parciales",
@@ -38,7 +38,7 @@ export const CLINICAL_SPECIALTIES: DetailedClinicalSpecialty[] = [
     category: "Diplomado en Perú",
     badge: "Carillas & Microabrasión",
     tagline: "Carillas directas o indirectas, Microabrasión (Para pacientes con fluorosis).",
-    summary: "Diseño de sonrisa de autor: carillas directas o indirectas para perfeccionar forma y color, y microabrasión especializada para pacientes con fluorosis.",
+    summary: "Diseño de sonrisa de autor con carillas de alta precisión y microabrasión para corregir fluorosis o manchas.",
     image: "/specialties/estetica-dental.webp",
     features: [
       "Carillas directas o indirectas",
@@ -51,11 +51,11 @@ export const CLINICAL_SPECIALTIES: DetailedClinicalSpecialty[] = [
   },
   {
     id: "endodoncia",
-    title: "Endodoncia o Tratamiento de Conductos",
+    title: "Endodoncia",
     category: "Diplomado CPO Brasil",
     badge: "Tratamiento de Conductos",
     tagline: "Endodoncia o tratamiento de conductos mecanizado y rotatorio.",
-    summary: "Alivio definitivo del dolor pulpar y erradicación de infecciones mediante limas rotatorias de alta precisión para salvar tu diente natural.",
+    summary: "Alivio inmediato del dolor y eliminación de infecciones con instrumental rotatorio para salvar tu diente natural.",
     image: "/specialties/endodoncia.webp",
     features: [
       "Tratamiento de conductos mecanizado y rotatorio",
@@ -64,7 +64,7 @@ export const CLINICAL_SPECIALTIES: DetailedClinicalSpecialty[] = [
     ],
     patientTarget: "Dolor agudo, caries profundas o infección en el nervio dental.",
     estimatedDuration: "1 sesión de 45 a 60 minutos.",
-    waMessage: `¡Urgencia! Hola ${DOCTOR_NAME}, presento dolor y requiero Endodoncia / Tratamiento de conductos.`
+    waMessage: `¡Urgencia! Hola ${DOCTOR_NAME}, presento dolor y requiero Endodoncia.`
   },
   {
     id: "implantologia",
@@ -72,7 +72,7 @@ export const CLINICAL_SPECIALTIES: DetailedClinicalSpecialty[] = [
     category: "Especialidad Implanto-Asistida",
     badge: "Titanio Oseointegrado",
     tagline: "Implantes dentales de titanio para reponer piezas fijas y definitivas.",
-    summary: "Colocación de implantes dentales de titanio biocompatible que devuelven la firmeza, estabilidad y función masticatoria natural de por vida.",
+    summary: "Implantes dentales de titanio biocompatible que devuelven la función masticatoria, estabilidad y estética de por vida.",
     image: "/specialties/implantologia.webp",
     features: [
       "Implantes dentales de titanio oseointegrado",
@@ -89,7 +89,7 @@ export const CLINICAL_SPECIALTIES: DetailedClinicalSpecialty[] = [
     category: "Cirugía Oral Menor",
     badge: "Terceros Molares",
     tagline: "Extracción quirúrgica de terceros molares (muelas del juicio).",
-    summary: "Extracción segura, rápida y sin dolor de terceros molares (muelas del juicio) impactadas o retenidas, previniendo apiñamientos e infecciones.",
+    summary: "Extracción rápida, segura y sin dolor de muelas del juicio impactadas, previniendo apiñamiento e infecciones.",
     image: "/specialties/cirugia-oral.webp",
     features: [
       "Extracción de terceros molares (muelas del juicio)",
@@ -106,7 +106,7 @@ export const CLINICAL_SPECIALTIES: DetailedClinicalSpecialty[] = [
     category: "Alineación & Oclusión",
     badge: "Brackets Autoligado & Estéticos",
     tagline: "Brackets convencionales, autoligado, estéticos.",
-    summary: "Alineación dental integral y corrección de la mordida mediante brackets convencionales, sistemas de autoligado pasivo y brackets estéticos de alta discreción.",
+    summary: "Alineación y corrección de la mordida mediante brackets convencionales, sistemas de autoligado y brackets estéticos.",
     image: "/specialties/ortodoncia.webp",
     features: [
       "Brackets convencionales",
@@ -124,7 +124,7 @@ export const CLINICAL_SPECIALTIES: DetailedClinicalSpecialty[] = [
     category: "Certificación SMILE & HOF 2026",
     badge: "Botox, Hialurónico & Bichectomía",
     tagline: "Bichectomía, Ácido Hialurónico, Botox.",
-    summary: "Procedimientos médico-estéticos faciales para estilizar mejillas (bichectomía), atenuar bruxismo y líneas de expresión (Botox) y perfilar labios (ácido hialurónico).",
+    summary: "Procedimientos médico-estéticos para estilizar mejillas (bichectomía), atenuar bruxismo con Botox y perfilar labios.",
     image: "/specialties/armonizacion-facial.webp",
     features: [
       "Bichectomía (definición de mejillas)",
@@ -141,7 +141,7 @@ export const CLINICAL_SPECIALTIES: DetailedClinicalSpecialty[] = [
     category: "Salud Periodontal",
     badge: "Gingivectomía & Salud Gingival",
     tagline: "Gingivectomía, retartrajes, frenectomía.",
-    summary: "Cuidado clínico de encías y tejidos de soporte: gingivectomía para corregir la sonrisa gingival, retartrajes (detartraje y profilaxis profunda de sarro) y frenectomías funcionales.",
+    summary: "Cuidado especializado de encías: gingivectomía estética, eliminación profunda de sarro y cirugías conservadoras.",
     image: "/specialties/periodoncia.webp",
     features: [
       "Gingivectomía (diseño y nivelación de encías)",
