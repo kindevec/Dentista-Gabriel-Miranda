@@ -19,7 +19,6 @@ import {
   CLINIC_HOURS,
   CLINIC_PHONE_DISPLAY,
   CLINIC_EMAIL,
-  SOCIAL_NETWORKS,
   createWhatsAppLink,
   DOCTOR_NAME,
   VALUATION_PRICE
@@ -30,9 +29,6 @@ import {
   LuxuryTimeSelect
 } from '../components/ui/LuxuryFormControls';
 import {
-  OfficialWhatsAppLogo,
-  OfficialInstagramLogo,
-  OfficialFacebookLogo,
   WhatsAppIcon
 } from '../components/OfficialSocialLogos';
 import { cn } from '../lib/utils';
@@ -255,30 +251,6 @@ export const MobileContact: React.FC<MobileContactProps> = ({
               </motion.button>
             </form>
           )}
-        </div>
-
-        {/* Official Social Channels - Justo después de Agendar Consulta y antes de los datos clínicos */}
-        <div className="flex items-center justify-center gap-3 mb-6">
-          {SOCIAL_NETWORKS.map((social) => {
-            let IconComponent = OfficialWhatsAppLogo;
-            if (social.id === 'instagram') IconComponent = OfficialInstagramLogo;
-            if (social.id === 'facebook') IconComponent = OfficialFacebookLogo;
-
-            return (
-              <motion.a
-                key={social.id}
-                whileHover={{ scale: 1.12, y: -2 }}
-                whileTap={{ scale: 0.9 }}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.name}
-                className="w-12 h-12 rounded-2xl bg-white border border-[#D4AF37]/30 shadow-xs hover:shadow-md hover:border-[#D4AF37]/60 flex items-center justify-center cursor-pointer hover:bg-[#FAF7EE] transition-all duration-300"
-              >
-                <IconComponent size={24} />
-              </motion.a>
-            );
-          })}
         </div>
 
         {/* Operating & Clinic Details Card */}
