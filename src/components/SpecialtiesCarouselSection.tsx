@@ -406,19 +406,9 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
                       onClick={(e) => toggleCardFlip(spec.id, e)}
                     >
                       <div className="w-full h-full rounded-[2.5rem] overflow-hidden bg-gradient-to-b from-white via-[#FAF9F6] to-[#F7F4EA] border-2 border-[#D4AF37]/50 shadow-2xl shadow-amber-950/15 p-6 sm:p-7 flex flex-col justify-between relative select-none">
-                        {/* Cabecera Superior: Categoría y Título Grande */}
-                        <div className="space-y-2 shrink-0">
-                          <div className="flex items-center justify-between gap-2">
-                            <span className="text-[10px] sm:text-[10.5px] font-black uppercase tracking-widest px-3 py-1 rounded-full bg-[#FAF7EE] text-[#84631E] border border-[#D4AF37]/35 shadow-2xs">
-                              {spec.category}
-                            </span>
-                            <div className="flex items-center gap-1.5 text-[11px] font-semibold text-stone-400 group-hover:text-[#84631E] transition-colors">
-                              <RotateCw className="w-3.5 h-3.5 text-[#84631E]" />
-                              <span className="hidden xs:inline text-[10px] uppercase tracking-wider text-stone-400">Toca para volver</span>
-                            </div>
-                          </div>
-
-                          <h3 className="text-2xl sm:text-[1.75rem] font-black text-[#0D0D0D] tracking-tight leading-tight">
+                        {/* Cabecera Superior: Título Protagónico Grande en Negro y Dorado */}
+                        <div className="shrink-0 pt-1">
+                          <h3 className="text-2xl sm:text-3xl lg:text-[2rem] font-black tracking-tight leading-tight text-transparent bg-clip-text bg-gradient-to-r from-[#0D0D0D] via-[#74541B] to-[#C5A059]">
                             {spec.title}
                           </h3>
                         </div>
