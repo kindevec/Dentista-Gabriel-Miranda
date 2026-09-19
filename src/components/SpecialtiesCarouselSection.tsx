@@ -426,21 +426,21 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
                           </h3>
                         </div>
 
-                        {/* Contenido Clínico Esencial: Letras más grandes, resumido, sin box-in-box */}
+                        {/* Contenido Clínico Esencial: Letras en color negro para máxima legibilidad sobre la textura */}
                         <div className="flex-1 flex flex-col justify-center space-y-4 py-2 min-h-0 relative z-10">
-                          {/* Resumen Clínico Directo y Legible */}
-                          <p className="text-sm sm:text-[15px] text-stone-700 font-medium leading-relaxed">
+                          {/* Resumen Clínico Directo y Legible en Negro */}
+                          <p className="text-sm sm:text-[15px] text-[#0D0D0D] font-medium leading-relaxed">
                             {spec.summary}
                           </p>
 
-                          {/* Puntos Clave Esenciales (Sin contenedor box-in-box) */}
+                          {/* Puntos Clave Esenciales */}
                           <div className="space-y-2">
-                            <span className="text-[11px] font-black uppercase tracking-wider text-stone-400 block">
+                            <span className="text-[11px] font-black uppercase tracking-wider text-[#0D0D0D] block">
                               Qué incluye el tratamiento:
                             </span>
                             <ul className="space-y-2">
                               {spec.features.slice(0, 3).map((feat, fIdx) => (
-                                <li key={fIdx} className="flex items-center gap-2.5 text-xs sm:text-[13.5px] text-stone-800 font-semibold">
+                                <li key={fIdx} className="flex items-center gap-2.5 text-xs sm:text-[13.5px] text-[#0D0D0D] font-semibold">
                                   <div className="w-4 h-4 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/50 text-[#84631E] flex items-center justify-center shrink-0 shadow-2xs">
                                     <Check className="w-2.5 h-2.5 stroke-[3]" />
                                   </div>
@@ -450,10 +450,10 @@ export const SpecialtiesCarouselSection: React.FC<SpecialtiesCarouselSectionProp
                             </ul>
                           </div>
 
-                          {/* Tiempo Clínico Estimado (Inline limpio, sin caja redundante) */}
-                          <div className="flex items-center gap-2 text-xs sm:text-[12.5px] text-stone-600 font-medium pt-1">
+                          {/* Tiempo Clínico Estimado en Negro */}
+                          <div className="flex items-center gap-2 text-xs sm:text-[12.5px] text-[#0D0D0D] font-medium pt-1">
                             <Clock className="w-4 h-4 text-[#84631E] shrink-0" />
-                            <span><strong className="text-stone-800 font-bold">Tiempo estimado:</strong> {spec.estimatedDuration}</span>
+                            <span><strong className="text-[#0D0D0D] font-bold">Tiempo estimado:</strong> {spec.estimatedDuration}</span>
                           </div>
                         </div>
 

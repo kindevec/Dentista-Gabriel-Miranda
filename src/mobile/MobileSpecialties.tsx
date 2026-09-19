@@ -286,21 +286,21 @@ export const MobileSpecialties: React.FC<MobileSpecialtiesProps> = ({ onSelectSp
                         </button>
                       </div>
 
-                      {/* Contenido Clínico con Tipografía Grande y Espaciado Armónico */}
+                      {/* Contenido Clínico con Tipografía en Color Negro para Máxima Legibilidad */}
                       <div className="flex-1 flex flex-col justify-evenly py-2 min-h-0 space-y-3 relative z-10">
-                        {/* Resumen Clínico Directo y Legible */}
-                        <p className="text-sm xs:text-[15px] text-stone-700 font-medium leading-relaxed">
+                        {/* Resumen Clínico Directo y Legible en Negro */}
+                        <p className="text-sm xs:text-[15px] text-[#0D0D0D] font-medium leading-relaxed">
                           {spec.summary}
                         </p>
 
-                        {/* Qué incluye el tratamiento */}
+                        {/* Qué incluye el tratamiento en Negro */}
                         <div className="space-y-2">
-                          <span className="text-xs font-black uppercase tracking-wider text-[#84631E] block">
+                          <span className="text-xs font-black uppercase tracking-wider text-[#0D0D0D] block">
                             Qué incluye el tratamiento:
                           </span>
                           <ul className="space-y-2">
                             {spec.features.slice(0, 3).map((feat, fIdx) => (
-                              <li key={fIdx} className="flex items-center gap-2.5 text-[13px] xs:text-sm text-stone-800 font-bold">
+                              <li key={fIdx} className="flex items-center gap-2.5 text-[13px] xs:text-sm text-[#0D0D0D] font-bold">
                                 <div className="w-5 h-5 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/60 text-[#84631E] flex items-center justify-center shrink-0 shadow-xs">
                                   <Check className="w-3 h-3 stroke-[3]" />
                                 </div>
@@ -310,10 +310,10 @@ export const MobileSpecialties: React.FC<MobileSpecialtiesProps> = ({ onSelectSp
                           </ul>
                         </div>
 
-                        {/* Tiempo Clínico Estimado */}
-                        <div className="flex items-center gap-2 text-xs xs:text-[13px] text-stone-600 font-medium px-3 py-2 rounded-xl bg-amber-50/40 border border-[#D4AF37]/25">
+                        {/* Tiempo Clínico Estimado en Negro */}
+                        <div className="flex items-center gap-2 text-xs xs:text-[13px] text-[#0D0D0D] font-medium px-3 py-2 rounded-xl bg-amber-50/50 border border-[#D4AF37]/30">
                           <Clock className="w-4 h-4 text-[#84631E] shrink-0" />
-                          <span><strong className="text-stone-900 font-bold">Tiempo estimado:</strong> {spec.estimatedDuration}</span>
+                          <span><strong className="text-[#0D0D0D] font-bold">Tiempo estimado:</strong> {spec.estimatedDuration}</span>
                         </div>
                       </div>
 
