@@ -257,6 +257,30 @@ export const MobileContact: React.FC<MobileContactProps> = ({
           )}
         </div>
 
+        {/* Official Social Channels - Justo después de Agendar Consulta y antes de los datos clínicos */}
+        <div className="flex items-center justify-center gap-3 mb-6">
+          {SOCIAL_NETWORKS.map((social) => {
+            let IconComponent = OfficialWhatsAppLogo;
+            if (social.id === 'instagram') IconComponent = OfficialInstagramLogo;
+            if (social.id === 'facebook') IconComponent = OfficialFacebookLogo;
+
+            return (
+              <motion.a
+                key={social.id}
+                whileHover={{ scale: 1.12, y: -2 }}
+                whileTap={{ scale: 0.9 }}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.name}
+                className="w-12 h-12 rounded-2xl bg-white border border-[#D4AF37]/30 shadow-xs hover:shadow-md hover:border-[#D4AF37]/60 flex items-center justify-center cursor-pointer hover:bg-[#FAF7EE] transition-all duration-300"
+              >
+                <IconComponent size={24} />
+              </motion.a>
+            );
+          })}
+        </div>
+
         {/* Operating & Clinic Details Card */}
         <div className="bg-white rounded-3xl p-4 border border-stone-200/80 shadow-xs mb-6 space-y-3">
           <div className="flex items-start gap-3">
@@ -309,30 +333,6 @@ export const MobileContact: React.FC<MobileContactProps> = ({
               </p>
             </div>
           </div>
-        </div>
-
-        {/* Official Social Channels */}
-        <div className="flex items-center justify-center gap-3 mb-6">
-          {SOCIAL_NETWORKS.map((social) => {
-            let IconComponent = OfficialWhatsAppLogo;
-            if (social.id === 'instagram') IconComponent = OfficialInstagramLogo;
-            if (social.id === 'facebook') IconComponent = OfficialFacebookLogo;
-
-            return (
-              <motion.a
-                key={social.id}
-                whileHover={{ scale: 1.12, y: -2 }}
-                whileTap={{ scale: 0.9 }}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.name}
-                className="w-12 h-12 rounded-2xl bg-white border border-[#D4AF37]/30 shadow-xs hover:shadow-md hover:border-[#D4AF37]/60 flex items-center justify-center cursor-pointer hover:bg-[#FAF7EE] transition-all duration-300"
-              >
-                <IconComponent size={24} />
-              </motion.a>
-            );
-          })}
         </div>
 
         {/* Live Interactive Map Full Container */}
