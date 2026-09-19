@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MobileTopBar } from './MobileTopBar';
 import { MobileHero } from './MobileHero';
 import { MobileServices } from './MobileServices';
@@ -14,6 +14,38 @@ import { createWhatsAppLink, EMERGENCY_WA_MESSAGE } from '../data/clinicData';
 export const MobileView: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('inicio');
   const [preselectedSpecialty, setPreselectedSpecialty] = useState<string>('consulta-valoracion');
+  const isProgrammaticScrollRef = useRef<boolean>(false);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Navigate smoothly with header offset and lock scrollspy during animation
+  const handleNavigateToSection = (sectionId: string) => {
+    setActiveSection(sectionId);
+    isProgrammaticScrollRef.current = true;
+
+    if (scrollTimeoutRef.current) {
+      clearTimeout(scrollTimeoutRef.current);
+    }
+
+    if (sectionId === 'inicio') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const navOffset = 60; // Compensates sticky MobileTopBar
+        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = Math.max(0, elementPosition - navOffset);
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
+      }
+    }
+
+    // Release lock once the smooth scroll has finished
+    scrollTimeoutRef.current = setTimeout(() => {
+      isProgrammaticScrollRef.current = false;
+    }, 850);
+  };
 
   // Mobile-Optimized ScrollSpy
   useEffect(() => {
@@ -30,11 +62,21 @@ export const MobileView: React.FC = () => {
     let isTicking = false;
 
     const handleScroll = () => {
+      // If user just clicked a nav button, don't let intermediate scroll events revert activeSection
+      if (isProgrammaticScrollRef.current) return;
       if (isTicking) return;
       isTicking = true;
 
       window.requestAnimationFrame(() => {
-        const scrollPosition = window.scrollY + 180;
+        // Special case: if near bottom of page, highlight 'contacto'
+        const isNearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 80;
+        if (isNearBottom) {
+          setActiveSection('contacto');
+          isTicking = false;
+          return;
+        }
+
+        const scrollPosition = window.scrollY + 160;
         for (let i = sectionMap.length - 1; i >= 0; i--) {
           const item = sectionMap[i];
           const element = document.getElementById(item.id);
@@ -52,15 +94,14 @@ export const MobileView: React.FC = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+    };
   }, []);
 
   const handleOpenBooking = () => {
-    setActiveSection('contacto');
-    const el = document.getElementById('contacto');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    handleNavigateToSection('contacto');
   };
 
   const handleSelectSpecialtyForBooking = (specialtyId: string) => {
@@ -75,7 +116,7 @@ export const MobileView: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#FAF9F5] text-stone-800 font-sans antialiased selection:bg-[#D4AF37]/25 selection:text-[#84631E] overflow-x-hidden relative">
       {/* 1. Mobile Compact Glassmorphism Header */}
-      <MobileTopBar onOpenEmergency={handleOpenEmergency} />
+      <MobileTopBar onOpenBooking={handleOpenBooking} onOpenEmergency={handleOpenEmergency} />
 
       {/* 2. Main Mobile Content */}
       <main className="w-full">
@@ -111,6 +152,7 @@ export const MobileView: React.FC = () => {
       <MobileBottomNav
         activeSection={activeSection}
         setActiveSection={setActiveSection}
+        onNavigate={handleNavigateToSection}
         onOpenBooking={handleOpenBooking}
       />
     </div>

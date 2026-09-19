@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   SOCIAL_NETWORKS,
@@ -41,6 +41,8 @@ import {
   TREATMENT_OPTIONS
 } from './ui/LuxuryFormControls';
 
+import { useBookingFormState } from '../hooks/useBookingFormState';
+
 interface SocialAndContactSectionProps {
   preselectedSpecialty?: string;
 }
@@ -48,24 +50,16 @@ interface SocialAndContactSectionProps {
 export const SocialAndContactSection: React.FC<SocialAndContactSectionProps> = ({
   preselectedSpecialty = 'rehabilitacion-oral',
 }) => {
-  const [formData, setFormData] = useState({
-    patientName: '',
-    phone: '',
-    email: '',
-    specialtyId: preselectedSpecialty,
-    preferredDate: '',
-    preferredTime: 'Mañana (09:00 - 12:00)',
-    notes: '',
-    isEmergency: false,
-  });
-
+  const { formData, updateForm } = useBookingFormState(preselectedSpecialty);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  useEffect(() => {
-    if (preselectedSpecialty) {
-      setFormData((prev) => ({ ...prev, specialtyId: preselectedSpecialty }));
+  const setFormData = (next: React.SetStateAction<typeof formData>) => {
+    if (typeof next === 'function') {
+      updateForm(next(formData));
+    } else {
+      updateForm(next);
     }
-  }, [preselectedSpecialty]);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

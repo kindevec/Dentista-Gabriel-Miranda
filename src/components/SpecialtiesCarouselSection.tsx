@@ -7,8 +7,7 @@ import {
   Clock,
   ArrowRight,
   ArrowDown,
-  RotateCw,
-  X
+  RotateCw
 } from 'lucide-react';
 import { WhatsAppIcon } from './OfficialSocialLogos';
 import { createWhatsAppLink } from '../data/clinicData';

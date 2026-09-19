@@ -7,11 +7,6 @@ import {
   MapPin,
   CreditCard
 } from 'lucide-react';
-import {
-  createWhatsAppLink,
-  BOOKING_WA_MESSAGE,
-  CLINIC_HOURS
-} from '../data/clinicData';
 import { OrganicDentalRibbon } from './OrganicDentalRibbon';
 
 interface HeroSectionProps {
@@ -126,9 +121,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 {/* Halo dorado sutil detrás del diente */}
                 <div className="absolute inset-4 bg-gradient-to-tr from-[#D4AF37]/20 via-[#F3E5AB]/10 to-transparent rounded-full blur-2xl pointer-events-none -z-10" />
                 <motion.div
-                  animate={{ y: [-5, 5, -5] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-                  className="w-full h-full flex items-center justify-center relative z-10"
+                  animate={{
+                    y: [-5, 5, -5],
+                    rotate: [0, 360],
+                  }}
+                  transition={{
+                    y: { duration: 3, repeat: Infinity, ease: 'easeInOut' },
+                    rotate: { duration: 6, repeat: Infinity, ease: 'linear' },
+                  }}
+                  className="w-full h-full flex items-center justify-center relative z-10 transform-gpu"
                 >
                   <img
                     alt="Escultura dental 3D de alta estética"

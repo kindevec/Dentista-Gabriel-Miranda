@@ -5,7 +5,6 @@ import {
   Check,
   Users,
   Clock,
-  Sparkles,
   Calendar
 } from 'lucide-react';
 import { CLINICAL_SPECIALTIES } from '../data/clinicalSpecialtiesData';
@@ -30,15 +29,9 @@ export const MobileSpecialties: React.FC<MobileSpecialtiesProps> = ({ onSelectSp
   };
 
   return (
-    <section id="especialidades" className="py-14 px-4 bg-white relative">
+    <section id="especialidades" className="pt-6 pb-10 px-4 bg-white relative">
       {/* Header */}
       <div className="max-w-sm mx-auto text-center mb-6">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/35 shadow-2xs mb-2">
-          <Sparkles className="w-3.5 h-3.5 text-[#84631E]" />
-          <span className="text-[10.5px] font-black uppercase tracking-wider text-[#84631E]">
-            Especialidades de Autor
-          </span>
-        </div>
         <h2 className="text-2xl xs:text-3xl font-black text-[#0D0D0D] tracking-tight leading-tight">
           Especialidades Clínicas
         </h2>
@@ -65,27 +58,22 @@ export const MobileSpecialties: React.FC<MobileSpecialtiesProps> = ({ onSelectSp
               <button
                 type="button"
                 onClick={() => toggleSpecialty(specialty.id)}
-                className="w-full flex items-center justify-between p-3.5 gap-3 text-left cursor-pointer active:bg-amber-50/30 transition-colors"
+                className="w-full flex items-center justify-between p-3.5 gap-3 text-left cursor-pointer active:bg-amber-50/40 transition-colors group"
               >
-                <div className="relative w-14 h-14 rounded-xl overflow-hidden shrink-0 border border-[#D4AF37]/25 bg-stone-100">
+                <div className="relative w-14 h-14 rounded-xl overflow-hidden shrink-0 border border-[#D4AF37]/25 bg-stone-100 group-hover:border-[#D4AF37]/60 transition-colors">
                   <img
                     src={specialty.image}
                     alt={specialty.title}
                     loading="lazy"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-1.5 flex-wrap">
-                    <span className="text-[9.5px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#FAF7EE] text-[#84631E] border border-[#D4AF37]/30">
-                      {specialty.category}
-                    </span>
-                  </div>
-                  <h3 className="font-extrabold text-sm xs:text-base text-[#0D0D0D] mt-0.5 truncate">
+                  <h3 className="font-extrabold text-sm xs:text-base text-[#0D0D0D] truncate group-hover:text-[#84631E] transition-colors">
                     {specialty.title}
                   </h3>
-                  <p className="text-[11px] text-stone-500 truncate">
+                  <p className="text-[11px] text-stone-500 truncate mt-0.5">
                     {specialty.tagline}
                   </p>
                 </div>
@@ -93,7 +81,7 @@ export const MobileSpecialties: React.FC<MobileSpecialtiesProps> = ({ onSelectSp
                 <div className="shrink-0 text-[#84631E] pl-1">
                   <ChevronDown
                     className={`w-4.5 h-4.5 transition-transform duration-300 ${
-                      isOpen ? 'rotate-180 text-[#84631E]' : 'text-stone-400'
+                      isOpen ? 'rotate-180 text-[#84631E]' : 'text-stone-400 group-hover:text-[#84631E]'
                     }`}
                   />
                 </div>
@@ -119,7 +107,7 @@ export const MobileSpecialties: React.FC<MobileSpecialtiesProps> = ({ onSelectSp
                       <div className="space-y-1.5 my-3">
                         {specialty.features.map((feature, idx) => (
                           <div key={idx} className="flex items-start gap-2">
-                            <div className="w-4 h-4 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/40 text-[#84631E] flex items-center justify-center shrink-0 mt-0.5">
+                            <div className="w-4 h-4 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/40 text-[#84631E] flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
                               <Check className="w-2.5 h-2.5 stroke-[3]" />
                             </div>
                             <span className="text-xs text-stone-700 font-medium leading-tight">
@@ -141,13 +129,14 @@ export const MobileSpecialties: React.FC<MobileSpecialtiesProps> = ({ onSelectSp
                         </div>
                       </div>
 
-                      {/* CTA Booking Button */}
+                      {/* CTA Booking Button with PC micro-interactions */}
                       <motion.button
-                        whileTap={{ scale: 0.96 }}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.95 }}
                         onClick={() => handleBooking(specialty.id, specialty.waMessage)}
-                        className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] text-[#0D0D0D] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm cursor-pointer border border-[#D4AF37]/40"
+                        className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] hover:from-[#C5A059] hover:to-[#84631E] text-[#0D0D0D] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm shadow-[#D4AF37]/20 cursor-pointer border border-[#D4AF37]/45 transition-all group active:opacity-95"
                       >
-                        <Calendar className="w-3.5 h-3.5 text-[#0D0D0D]" />
+                        <Calendar className="w-3.5 h-3.5 text-[#0D0D0D] group-hover:scale-110 transition-transform" />
                         <span>Agendar Valoración $15</span>
                       </motion.button>
                     </div>

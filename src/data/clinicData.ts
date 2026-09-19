@@ -129,20 +129,26 @@ export const DOCTOR_PROFILE: DoctorProfile = {
 export const FAQ_DATA: FaqItem[] = [
   {
     id: "faq-1",
-    question: "¿Qué incluye la consulta de valoración de $15?",
-    answer: "La consulta de valoración de $15 es integral: incluye diagnóstico clínico minucioso con el Dr. Gabriel Miranda, registro fotográfico de tu sonrisa y radiografías dentales diagnósticas. Además, recibirás tu plan de tratamiento personalizado con presupuesto claro y opciones de financiamiento.",
+    question: "¿Qué incluye la primera valoración?",
+    answer: "Diagnóstico clínico integral, fotos HD, radiografías digitales y tu plan de tratamiento personalizado.",
     category: "general"
   },
   {
     id: "faq-2",
-    question: "¿Cómo funciona el Crédito Directo y formas de pago?",
-    answer: "Aceptamos efectivo, transferencias bancarias y todas las tarjetas de crédito y débito. Adicionalmente, contamos con nuestro Crédito Directo Dental propio para tratamientos desde $400 hasta $2,000 sin trámites engorrosos ni intermediarios.",
-    category: "pagos"
+    question: "¿Los tratamientos causan dolor?",
+    answer: "No. Aplicamos técnicas guiadas de mínima invasión para que cada procedimiento sea totalmente cómodo e indoloro.",
+    category: "general"
   },
   {
     id: "faq-3",
-    question: "¿Los tratamientos causan dolor o molestias?",
-    answer: "No. En Miranda Dental Studio aplicamos técnicas de anestesia guiada, odontología de mínima invasión y enfoque biológico respetuoso para que cada procedimiento sea completamente confortable, indoloro y sin estrés.",
+    question: "¿Cómo garantizan la bioseguridad?",
+    answer: "Esterilización hospitalaria con autoclave de grado médico e instrumental individual sellado para cada paciente.",
+    category: "tratamientos"
+  },
+  {
+    id: "faq-4",
+    question: "¿Cuánto dura la consulta?",
+    answer: "Dura entre 30 y 40 minutos. No requieres traer exámenes previos; realizamos todo en la clínica.",
     category: "general"
   }
 ];

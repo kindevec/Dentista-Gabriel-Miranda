@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ChevronDown, HelpCircle, MessageSquare } from 'lucide-react';
-import { FAQ_DATA, createWhatsAppLink, GENERAL_WA_MESSAGE } from '../data/clinicData';
+import { ChevronDown } from 'lucide-react';
+import { FAQ_DATA, createWhatsAppLink } from '../data/clinicData';
+import { WhatsAppIcon } from '../components/OfficialSocialLogos';
 
 export const MobileFAQ: React.FC = () => {
   const [openId, setOpenId] = useState<string>('faq-1');
@@ -11,21 +12,15 @@ export const MobileFAQ: React.FC = () => {
   };
 
   return (
-    <section id="preguntas" className="py-14 px-4 bg-[#FAF9F5] relative">
+    <section id="preguntas" className="pt-6 pb-6 px-4 bg-[#FAF9F5] relative">
       <div className="max-w-md mx-auto">
         {/* Header */}
         <div className="text-center mb-6">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/35 shadow-2xs mb-2">
-            <HelpCircle className="w-3.5 h-3.5 text-[#84631E]" />
-            <span className="text-[10.5px] font-black uppercase tracking-wider text-[#84631E]">
-              Preguntas Frecuentes
-            </span>
-          </div>
           <h2 className="text-2xl xs:text-3xl font-black text-[#0D0D0D] tracking-tight leading-tight">
             Dudas Clínicas Habituales
           </h2>
           <p className="text-xs text-stone-500 mt-1">
-            Respuestas claras y honestas sobre tus tratamientos y formas de pago.
+            Respuestas claras y honestas sobre tus tratamientos y atención odontológica.
           </p>
         </div>
 
@@ -81,12 +76,12 @@ export const MobileFAQ: React.FC = () => {
         {/* Support WhatsApp Prompt */}
         <div className="text-center">
           <a
-            href={createWhatsAppLink(GENERAL_WA_MESSAGE)}
+            href={createWhatsAppLink("Hola Dr. Gabriel Miranda, tengo una consulta sobre sus tratamientos odontológicos.")}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-xs font-semibold text-stone-600 hover:text-[#84631E] transition-colors"
           >
-            <MessageSquare className="w-4 h-4 text-[#D4AF37]" />
+            <WhatsAppIcon className="w-4 h-4 fill-current text-[#25D366]" />
             <span>¿Tienes otra consulta? <strong className="text-[#84631E]">Escríbenos por WhatsApp</strong></span>
           </a>
         </div>

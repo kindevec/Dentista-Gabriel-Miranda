@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import {
   MapPin,
@@ -7,7 +7,6 @@ import {
   Mail,
   AlertTriangle,
   CheckCircle2,
-  Calendar,
   ExternalLink
 } from 'lucide-react';
 import {
@@ -37,6 +36,7 @@ import {
   WhatsAppIcon
 } from '../components/OfficialSocialLogos';
 import { cn } from '../lib/utils';
+import { useBookingFormState } from '../hooks/useBookingFormState';
 
 interface MobileContactProps {
   preselectedSpecialty?: string;
@@ -45,21 +45,28 @@ interface MobileContactProps {
 export const MobileContact: React.FC<MobileContactProps> = ({
   preselectedSpecialty = 'consulta-valoracion',
 }) => {
-  const [patientName, setPatientName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [specialty, setSpecialty] = useState(preselectedSpecialty);
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('Mañana (09:00 - 12:00)');
-  const [notes, setNotes] = useState('');
-  const [isEmergency, setIsEmergency] = useState(false);
+  const { formData, updateField } = useBookingFormState(preselectedSpecialty);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  useEffect(() => {
-    if (preselectedSpecialty) {
-      setSpecialty(preselectedSpecialty);
-    }
-  }, [preselectedSpecialty]);
+  const {
+    patientName,
+    phone,
+    email,
+    specialtyId: specialty,
+    preferredDate: date,
+    preferredTime: time,
+    notes,
+    isEmergency,
+  } = formData;
+
+  const setPatientName = (val: string) => updateField('patientName', val);
+  const setPhone = (val: string) => updateField('phone', val);
+  const setEmail = (val: string) => updateField('email', val);
+  const setSpecialty = (val: string) => updateField('specialtyId', val);
+  const setDate = (val: string) => updateField('preferredDate', val);
+  const setTime = (val: string) => updateField('preferredTime', val);
+  const setNotes = (val: string) => updateField('notes', val);
+  const setIsEmergency = (val: boolean) => updateField('isEmergency', val);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -79,26 +86,17 @@ export const MobileContact: React.FC<MobileContactProps> = ({
   };
 
   return (
-    <section id="contacto" className="py-14 px-4 bg-[#FAF9F5] relative">
-      <div className="max-w-md mx-auto">
+    <section id="contacto" className="pt-6 pb-12 px-2 xs:px-3 bg-[#FAF9F5] relative">
+      <div className="w-full mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-6">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/35 shadow-2xs mb-2">
-            <Calendar className="w-3.5 h-3.5 text-[#84631E]" />
-            <span className="text-[10.5px] font-black uppercase tracking-wider text-[#84631E]">
-              Agendamiento & Ubicación
-            </span>
-          </div>
+        <div className="text-center mb-5 px-2">
           <h2 className="text-2xl xs:text-3xl font-black text-[#0D0D0D] tracking-tight leading-tight">
             Agenda tu Consulta
           </h2>
-          <p className="text-xs text-stone-500 mt-1">
-            Valoración clínica integral con fotos HD y rayos X por solo <strong>${VALUATION_PRICE}</strong>.
-          </p>
         </div>
 
-        {/* Main Booking Form Card */}
-        <div className="bg-white rounded-3xl p-5 border border-[#D4AF37]/30 shadow-md mb-8">
+        {/* Main Booking Form Card - Ancho completo de pantalla */}
+        <div className="w-full bg-white rounded-2xl xs:rounded-3xl p-4 xs:p-5 sm:p-6 border border-[#D4AF37]/30 shadow-md mb-6">
           {isSubmitted ? (
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -129,7 +127,7 @@ export const MobileContact: React.FC<MobileContactProps> = ({
                   placeholder="Ej. María Pérez"
                   value={patientName}
                   onChange={(e) => setPatientName(e.target.value)}
-                  className="w-full px-3.5 py-3 rounded-xl border border-stone-200 text-xs bg-stone-50/40 text-stone-800 focus:bg-white focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
+                  className="w-full px-3.5 py-3 min-h-[44px] rounded-xl border border-stone-200 text-xs bg-stone-50/40 text-stone-800 focus:bg-white focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
                 />
               </div>
 
@@ -145,7 +143,7 @@ export const MobileContact: React.FC<MobileContactProps> = ({
                   placeholder="099 123 4567"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="w-full px-3.5 py-3 rounded-xl border border-stone-200 text-xs bg-stone-50/40 text-stone-800 focus:bg-white focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
+                  className="w-full px-3.5 py-3 min-h-[44px] rounded-xl border border-stone-200 text-xs bg-stone-50/40 text-stone-800 focus:bg-white focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
                 />
               </div>
 
@@ -160,7 +158,7 @@ export const MobileContact: React.FC<MobileContactProps> = ({
                   placeholder="tu.correo@ejemplo.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3.5 py-3 rounded-xl border border-stone-200 text-xs bg-stone-50/40 text-stone-800 focus:bg-white focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
+                  className="w-full px-3.5 py-3 min-h-[44px] rounded-xl border border-stone-200 text-xs bg-stone-50/40 text-stone-800 focus:bg-white focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
                 />
               </div>
 
@@ -176,7 +174,7 @@ export const MobileContact: React.FC<MobileContactProps> = ({
               </div>
 
               {/* Date & Time Selectors */}
-              <div className="grid grid-cols-1 xs:grid-cols-2 gap-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-[11px] font-bold text-stone-700 mb-1">
                     Fecha Deseada
@@ -208,18 +206,22 @@ export const MobileContact: React.FC<MobileContactProps> = ({
                 <button
                   type="button"
                   onClick={() => setIsEmergency(!isEmergency)}
-                  className={cn(
-                    'w-10 h-6 rounded-full transition-colors relative flex items-center cursor-pointer',
-                    isEmergency ? 'bg-red-500' : 'bg-stone-300'
-                  )}
+                  className="min-w-[44px] min-h-[44px] p-2.5 -mr-2.5 flex items-center justify-center cursor-pointer focus:outline-none"
                   aria-label="Alternar urgencia"
                 >
                   <div
                     className={cn(
-                      'w-4 h-4 rounded-full bg-white absolute top-1 shadow-sm transition-transform duration-200',
-                      isEmergency ? 'translate-x-5' : 'translate-x-1'
+                      'w-10 h-6 rounded-full transition-colors relative flex items-center',
+                      isEmergency ? 'bg-red-500' : 'bg-stone-300'
                     )}
-                  />
+                  >
+                    <div
+                      className={cn(
+                        'w-4 h-4 rounded-full bg-white absolute top-1 shadow-sm transition-transform duration-200',
+                        isEmergency ? 'translate-x-5' : 'translate-x-1'
+                      )}
+                    />
+                  </div>
                 </button>
               </div>
 
@@ -238,14 +240,15 @@ export const MobileContact: React.FC<MobileContactProps> = ({
                 />
               </div>
 
-              {/* Submit Button */}
+              {/* Submit Button with PC Animations */}
               <motion.button
-                whileTap={{ scale: 0.96 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.95 }}
                 type="submit"
-                className="w-full py-4 px-4 rounded-2xl bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] text-[#0D0D0D] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-[#D4AF37]/25 border border-[#D4AF37]/45 cursor-pointer mt-2"
+                className="w-full py-4 px-4 rounded-2xl bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] hover:from-[#C5A059] hover:to-[#84631E] text-[#0D0D0D] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-[#D4AF37]/25 border border-[#D4AF37]/45 cursor-pointer mt-2 transition-all duration-300 group active:opacity-95"
               >
-                <WhatsAppIcon className="w-4 h-4 fill-current" />
-                <span>Confirmar y Enviar por WhatsApp</span>
+                <WhatsAppIcon className="w-4 h-4 fill-current group-hover:scale-110 transition-transform" />
+                <span>Agendar por WhatsApp</span>
               </motion.button>
             </form>
           )}
@@ -315,12 +318,13 @@ export const MobileContact: React.FC<MobileContactProps> = ({
             return (
               <motion.a
                 key={social.id}
+                whileHover={{ scale: 1.12, y: -2 }}
                 whileTap={{ scale: 0.9 }}
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.name}
-                className="w-12 h-12 rounded-2xl bg-white border border-[#D4AF37]/30 shadow-xs flex items-center justify-center cursor-pointer hover:bg-[#FAF7EE] transition-colors"
+                className="w-12 h-12 rounded-2xl bg-white border border-[#D4AF37]/30 shadow-xs hover:shadow-md hover:border-[#D4AF37]/60 flex items-center justify-center cursor-pointer hover:bg-[#FAF7EE] transition-all duration-300"
               >
                 <IconComponent size={24} />
               </motion.a>

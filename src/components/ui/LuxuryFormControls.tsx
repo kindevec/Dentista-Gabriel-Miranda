@@ -162,7 +162,7 @@ export const LuxuryTreatmentSelect: React.FC<LuxuryTreatmentSelectProps> = ({
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         className={cn(
-          'w-full px-4 py-3 sm:py-3.5 rounded-2xl bg-white border text-left flex items-center justify-between gap-3 transition-all duration-200 outline-none cursor-pointer shadow-xs',
+          'w-full px-4 py-3 sm:py-3.5 rounded-2xl bg-white border text-left flex items-center justify-between gap-3 transition-all duration-200 outline-none cursor-pointer shadow-xs focus-visible:ring-3 focus-visible:ring-[#D4AF37]/30 focus-visible:border-[#D4AF37]',
           isOpen
             ? 'border-[#D4AF37] ring-3 ring-[#D4AF37]/20 shadow-md'
             : 'border-stone-300 hover:border-[#D4AF37]/70 hover:shadow-sm'
@@ -438,7 +438,7 @@ export const LuxuryTimeSelect: React.FC<LuxuryTimeSelectProps> = ({
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         className={cn(
-          'w-full px-4 py-3 sm:py-3.5 rounded-2xl bg-white border text-left flex items-center justify-between gap-3 transition-all duration-200 outline-none cursor-pointer shadow-xs',
+          'w-full px-4 py-3 sm:py-3.5 rounded-2xl bg-white border text-left flex items-center justify-between gap-3 transition-all duration-200 outline-none cursor-pointer shadow-xs focus-visible:ring-3 focus-visible:ring-[#D4AF37]/30 focus-visible:border-[#D4AF37]',
           isOpen
             ? 'border-[#D4AF37] ring-3 ring-[#D4AF37]/20 shadow-md'
             : 'border-stone-300 hover:border-[#D4AF37]/70 hover:shadow-sm'
@@ -484,7 +484,7 @@ export const LuxuryTimeSelect: React.FC<LuxuryTimeSelectProps> = ({
             exit={{ opacity: 0, y: -4, scale: 0.99 }}
             transition={{ duration: 0.18, ease: 'easeOut' }}
             role="listbox"
-            className="absolute top-full left-0 right-0 mt-2 z-50 rounded-2xl bg-white/98 backdrop-blur-xl border border-[#D4AF37]/45 shadow-[0_18px_40px_-8px_rgba(132,99,30,0.22)] overflow-hidden p-1.5 space-y-1"
+            className="absolute top-full left-0 right-0 sm:left-auto sm:right-0 sm:w-[320px] max-w-[calc(100vw-2rem)] mt-2 z-50 rounded-2xl bg-white/98 backdrop-blur-xl border border-[#D4AF37]/45 shadow-[0_18px_40px_-8px_rgba(132,99,30,0.22)] overflow-hidden p-1.5 space-y-1"
           >
             {TIME_SLOT_OPTIONS.map((slot) => {
               const isSelected = slot.id === value;
@@ -709,7 +709,7 @@ export const LuxuryDatePicker: React.FC<LuxuryDatePickerProps> = ({
         aria-haspopup="dialog"
         aria-expanded={isOpen}
         className={cn(
-          'w-full px-4 py-3 sm:py-3.5 rounded-2xl bg-white border text-left flex items-center justify-between gap-3 transition-all duration-200 outline-none cursor-pointer shadow-xs',
+          'w-full px-4 py-3 sm:py-3.5 rounded-2xl bg-white border text-left flex items-center justify-between gap-3 transition-all duration-200 outline-none cursor-pointer shadow-xs focus-visible:ring-3 focus-visible:ring-[#D4AF37]/30 focus-visible:border-[#D4AF37]',
           isOpen
             ? 'border-[#D4AF37] ring-3 ring-[#D4AF37]/20 shadow-md'
             : 'border-stone-300 hover:border-[#D4AF37]/70 hover:shadow-sm'
@@ -780,7 +780,7 @@ export const LuxuryDatePicker: React.FC<LuxuryDatePickerProps> = ({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -4, scale: 0.99 }}
             transition={{ duration: 0.18, ease: 'easeOut' }}
-            className="absolute top-full left-0 right-0 sm:right-auto sm:w-[340px] mt-2 z-50 rounded-2xl bg-white/98 backdrop-blur-xl border border-[#D4AF37]/45 shadow-[0_18px_40px_-8px_rgba(132,99,30,0.22)] p-3.5 space-y-3"
+            className="absolute top-full left-0 right-0 sm:right-auto sm:w-[340px] max-w-[calc(100vw-2rem)] mt-2 z-50 rounded-2xl bg-white/98 backdrop-blur-xl border border-[#D4AF37]/45 shadow-[0_18px_40px_-8px_rgba(132,99,30,0.22)] p-3.5 space-y-3"
           >
             {/* Cabecera del Mes y Navegación */}
             <div className="flex items-center justify-between px-1">

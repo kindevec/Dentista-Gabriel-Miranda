@@ -6,8 +6,7 @@ import {
   MapPin,
   ShieldCheck,
   Cpu,
-  Calendar,
-  Award
+  Calendar
 } from 'lucide-react';
 import {
   DOCTOR_PROFILE,
@@ -15,6 +14,7 @@ import {
   createWhatsAppLink,
   BOOKING_WA_MESSAGE
 } from '../data/clinicData';
+import { OrganicDentalRibbon } from '../components/OrganicDentalRibbon';
 
 interface MobileDoctorProfileProps {
   onOpenBooking?: () => void;
@@ -37,16 +37,13 @@ export const MobileDoctorProfile: React.FC<MobileDoctorProfileProps> = ({ onOpen
   };
 
   return (
-    <section id="nosotros" className="py-14 px-4 bg-white relative">
-      <div className="max-w-md mx-auto">
-        {/* Header Tag */}
+    <section id="nosotros" className="pt-10 pb-6 px-4 bg-white relative overflow-hidden">
+      {/* Subtle Floating 3D Curved Ribbon in Gold from PC */}
+      <OrganicDentalRibbon className="absolute top-1/4 -left-16 w-80 opacity-25 pointer-events-none" variant="gold" />
+
+      <div className="max-w-md mx-auto relative z-10">
+        {/* Header */}
         <div className="text-center mb-6">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FAF7EE] border border-[#D4AF37]/35 shadow-2xs mb-2">
-            <Award className="w-3.5 h-3.5 text-[#84631E]" />
-            <span className="text-[10.5px] font-black uppercase tracking-wider text-[#84631E]">
-              Dirección Médica
-            </span>
-          </div>
           <h2 className="text-2xl xs:text-3xl font-black text-[#0D0D0D] tracking-tight leading-tight">
             {DOCTOR_NAME}
           </h2>
@@ -55,15 +52,36 @@ export const MobileDoctorProfile: React.FC<MobileDoctorProfileProps> = ({ onOpen
           </p>
         </div>
 
-        {/* Doctor Photo with Golden Halos */}
-        <div className="relative w-44 h-44 mx-auto mb-6">
-          <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#D4AF37]/30 to-[#FAF7EE] blur-xl -z-10" />
-          <img
-            src="/dr-gabriel-miranda.webp"
-            alt={DOCTOR_NAME}
-            loading="lazy"
-            className="w-full h-full rounded-full object-cover object-top ring-4 ring-[#D4AF37]/40 ring-offset-4 ring-offset-white shadow-lg"
+        {/* Doctor Photo with Golden Halos & Pulsing Ring from PC */}
+        <div className="relative w-44 h-44 mx-auto mb-6 flex items-center justify-center">
+          {/* Subtle Golden Ring Pulse from PC */}
+          <motion.div
+            animate={{
+              scale: [0.95, 1.08, 0.95],
+              opacity: [0.25, 0.5, 0.25],
+            }}
+            transition={{
+              repeat: Infinity,
+              duration: 4.5,
+              ease: 'easeInOut',
+            }}
+            className="absolute inset-0 rounded-full border-2 border-[#D4AF37]/40 pointer-events-none"
           />
+
+          <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#D4AF37]/35 via-[#F3E5AB]/20 to-transparent blur-xl -z-10" />
+
+          <motion.div
+            animate={{ y: [-3, 3, -3] }}
+            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+            className="w-full h-full"
+          >
+            <img
+              src="/dr-gabriel-miranda.webp"
+              alt={DOCTOR_NAME}
+              loading="lazy"
+              className="w-full h-full rounded-full object-cover object-top ring-4 ring-[#D4AF37]/50 ring-offset-4 ring-offset-white shadow-xl transition-transform duration-500 hover:scale-105 active:scale-98"
+            />
+          </motion.div>
         </div>
 
         {/* Philosophy Quote */}
@@ -132,27 +150,27 @@ export const MobileDoctorProfile: React.FC<MobileDoctorProfileProps> = ({ onOpen
           </h3>
 
           <div className="grid grid-cols-2 gap-2.5 mb-4">
-            <div className="rounded-2xl overflow-hidden border border-[#D4AF37]/25 aspect-square bg-stone-100 shadow-2xs">
+            <div className="rounded-2xl overflow-hidden border border-[#D4AF37]/25 aspect-square bg-stone-100 shadow-2xs group">
               <img
                 src="/clinic/consultorio.webp"
                 alt="Consultorio Odontológico"
                 loading="lazy"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 active:scale-105"
               />
             </div>
-            <div className="rounded-2xl overflow-hidden border border-[#D4AF37]/25 aspect-square bg-stone-100 shadow-2xs">
+            <div className="rounded-2xl overflow-hidden border border-[#D4AF37]/25 aspect-square bg-stone-100 shadow-2xs group">
               <img
                 src="/clinic/bioseguridad.webp"
                 alt="Bioseguridad Certificada"
                 loading="lazy"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 active:scale-105"
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <div className="bg-[#FAF9F5] rounded-xl p-3 flex items-start gap-2.5 border border-stone-100">
-              <div className="w-8 h-8 rounded-lg bg-[#FAF7EE] border border-[#D4AF37]/35 flex items-center justify-center shrink-0">
+            <div className="bg-[#FAF9F5] rounded-xl p-3 flex items-start gap-2.5 border border-stone-100 hover:border-[#D4AF37]/30 transition-colors">
+              <div className="w-8 h-8 rounded-lg bg-[#FAF7EE] border border-[#D4AF37]/35 flex items-center justify-center shrink-0 shadow-2xs">
                 <MapPin className="w-4 h-4 text-[#84631E]" />
               </div>
               <div>
@@ -165,8 +183,8 @@ export const MobileDoctorProfile: React.FC<MobileDoctorProfileProps> = ({ onOpen
               </div>
             </div>
 
-            <div className="bg-[#FAF9F5] rounded-xl p-3 flex items-start gap-2.5 border border-stone-100">
-              <div className="w-8 h-8 rounded-lg bg-[#FAF7EE] border border-[#D4AF37]/35 flex items-center justify-center shrink-0">
+            <div className="bg-[#FAF9F5] rounded-xl p-3 flex items-start gap-2.5 border border-stone-100 hover:border-[#D4AF37]/30 transition-colors">
+              <div className="w-8 h-8 rounded-lg bg-[#FAF7EE] border border-[#D4AF37]/35 flex items-center justify-center shrink-0 shadow-2xs">
                 <ShieldCheck className="w-4 h-4 text-[#84631E]" />
               </div>
               <div>
@@ -179,8 +197,8 @@ export const MobileDoctorProfile: React.FC<MobileDoctorProfileProps> = ({ onOpen
               </div>
             </div>
 
-            <div className="bg-[#FAF9F5] rounded-xl p-3 flex items-start gap-2.5 border border-stone-100">
-              <div className="w-8 h-8 rounded-lg bg-[#FAF7EE] border border-[#D4AF37]/35 flex items-center justify-center shrink-0">
+            <div className="bg-[#FAF9F5] rounded-xl p-3 flex items-start gap-2.5 border border-stone-100 hover:border-[#D4AF37]/30 transition-colors">
+              <div className="w-8 h-8 rounded-lg bg-[#FAF7EE] border border-[#D4AF37]/35 flex items-center justify-center shrink-0 shadow-2xs">
                 <Cpu className="w-4 h-4 text-[#84631E]" />
               </div>
               <div>
@@ -195,14 +213,15 @@ export const MobileDoctorProfile: React.FC<MobileDoctorProfileProps> = ({ onOpen
           </div>
         </div>
 
-        {/* CTA Button */}
+        {/* CTA Button with PC Hover / Tap micro-interaction */}
         <motion.button
-          whileTap={{ scale: 0.96 }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.95 }}
           onClick={handleBooking}
-          className="w-full mt-6 py-4 px-4 rounded-2xl bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] text-[#0D0D0D] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md cursor-pointer border border-[#D4AF37]/45"
+          className="w-full mt-6 py-4 px-4 rounded-2xl bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] hover:from-[#C5A059] hover:to-[#84631E] text-[#0D0D0D] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md shadow-[#D4AF37]/25 cursor-pointer border border-[#D4AF37]/45 transition-all group active:opacity-95"
         >
-          <Calendar className="w-4 h-4 text-[#0D0D0D]" />
-          <span>Agendar Consulta con Dr. Miranda</span>
+          <Calendar className="w-4 h-4 text-[#0D0D0D] group-hover:scale-110 transition-transform" />
+          <span>Agendar Consulta</span>
         </motion.button>
       </div>
     </section>

@@ -50,7 +50,7 @@ export const FaqSection: React.FC = () => {
             Resolvemos tus Dudas sobre Tratamientos y Consultas
           </h2>
           <p className="text-sm sm:text-base text-stone-600 max-w-2xl mx-auto">
-            Respuestas directas sobre valoraciones, opciones de financiamiento y confort clínico en Miranda Dental Studio.
+            Respuestas directas sobre valoraciones, procedimientos clínicos y confort en Miranda Dental Studio.
           </p>
         </motion.div>
 
